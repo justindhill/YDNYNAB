@@ -1,3 +1,6 @@
 target 'YDNYNAB' do
-  pod 'SnapKit'
+    platform :macos, "10.12"
+    use_frameworks!
+    pod 'SnapKit'
+    pod 'RealmSwift'
 end

@@ -81,10 +81,6 @@ class StackedSelectionView: NSView {
     }
     
     func updateHoverState(with event: NSEvent) {
-        guard let windowContentView = self.window?.contentView else {
-            return
-        }
-        
         self.items.forEach { item in
             let mouseLocation = self.convert(event.locationInWindow, from: nil)
             let mouseInItem = item.frame.contains(mouseLocation)
