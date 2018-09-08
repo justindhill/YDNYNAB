@@ -8,6 +8,10 @@
 
 import AppKit
 
+MenuBar.shared.populate()
+NSApplication.shared.mainMenu = MenuBar.shared.rootMenu
+
 let appDelegate = AppDelegate()
+
 NSApplication.shared.delegate = appDelegate
 NSApplication.shared.run()

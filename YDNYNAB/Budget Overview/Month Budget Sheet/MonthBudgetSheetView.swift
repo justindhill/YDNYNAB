@@ -22,10 +22,10 @@ class MonthBudgetSheetView: NSView {
         self.addSubview(self.totalsView)
         self.addSubview(self.detailsTableScrollView)
         self.detailsTableScrollView.hasVerticalScroller = true
-        self.detailsTableScrollView.hasHorizontalScroller = true
         self.detailsTableScrollView.documentView = self.detailsTableView
         self.detailsTableScrollView.postsBoundsChangedNotifications = true
-        self.detailsTableView.usesAlternatingRowBackgroundColors = true
+        self.detailsTableView.allowsColumnResizing = false
+        self.detailsTableView.allowsColumnReordering = false
         
         self.summaryView.snp.makeConstraints { (summaryView) in
             summaryView.left.equalTo(self).offset(10)

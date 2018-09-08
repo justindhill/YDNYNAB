@@ -8,12 +8,12 @@
 
 import Cocoa
 
-class MonthBudgetSheetViewController: NSViewController, NSTableViewDelegate {
+class MonthBudgetSheetViewController: NSViewController {
     
-    private enum Constant {
-        static let budgetedColumnIdentifier = "YDNMonthBudgetSheetViewBudgetedColumnIdentifier"
-        static let outflowsColumnIdentifier = "YDNMonthBudgetSheetViewOutflowsColumnIdentifier"
-        static let balanceColumnIdentifier = "YDNMonthBudgetSheetViewBalanceColumnIdentifier"
+    enum Constant {
+        static let budgetedColumnIdentifier = NSUserInterfaceItemIdentifier(rawValue: "YDNMonthBudgetSheetViewBudgetedColumnIdentifier")
+        static let outflowsColumnIdentifier = NSUserInterfaceItemIdentifier(rawValue: "YDNMonthBudgetSheetViewOutflowsColumnIdentifier")
+        static let balanceColumnIdentifier = NSUserInterfaceItemIdentifier(rawValue: "YDNMonthBudgetSheetViewBalanceColumnIdentifier")
     }
     
     let tableDataSource = MonthBudgetTableDataSource()
@@ -28,21 +28,21 @@ class MonthBudgetSheetViewController: NSViewController, NSTableViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.budgetSheetView.detailsTableView.delegate = self
+        self.budgetSheetView.detailsTableView.delegate = self.tableDataSource
         self.budgetSheetView.detailsTableView.dataSource = self.tableDataSource
         self.addColumnsTo(table: self.budgetSheetView.detailsTableView)
     }
     
     func addColumnsTo(table: NSTableView) {
-        let budgeted = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: Constant.budgetedColumnIdentifier))
+        let budgeted = NSTableColumn(identifier: Constant.budgetedColumnIdentifier)
         budgeted.title = "Budgeted"
         table.addTableColumn(budgeted)
         
-        let outflows = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: Constant.outflowsColumnIdentifier))
+        let outflows = NSTableColumn(identifier: Constant.outflowsColumnIdentifier)
         outflows.title = "Outflows"
         table.addTableColumn(outflows)
         
-        let balance = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: Constant.balanceColumnIdentifier))
+        let balance = NSTableColumn(identifier: Constant.balanceColumnIdentifier)
         balance.title = "Balance"
         table.addTableColumn(balance)
     }

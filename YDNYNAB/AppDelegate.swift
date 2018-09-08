@@ -14,15 +14,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         self.window = NSWindow(contentRect: self.calculateInitialWindowFrame(), styleMask: [.closable, .miniaturizable, .resizable, .titled], backing: .buffered, defer: false)
+        self.window.title = "YDNYNAB"
         self.window.contentViewController = MainSplitViewController(nibName: nil, bundle: nil)
         self.window.setFrame(self.calculateInitialWindowFrame(), display: true)
-        self.window.makeKeyAndOrderFront(self)
+        self.window.makeKeyAndOrderFront(self)        
     }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
-    
     func calculateInitialWindowFrame() -> CGRect {
         guard let screen = NSScreen.main else {
             return .zero

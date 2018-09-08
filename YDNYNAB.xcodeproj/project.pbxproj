@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A864D59795C6440CE8FF6B7 /* libPods-YDNYNAB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A03A481695C019EA3257E5CF /* libPods-YDNYNAB.a */; };
+		6923BFC52CAC63724D8457D5 /* Pods_YDNYNAB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078860FB70C8F716E3E6E899 /* Pods_YDNYNAB.framework */; };
 		D051057A213B5C3F008133B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0510579213B5C3F008133B5 /* AppDelegate.swift */; };
 		D051057C213B5C40008133B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D051057B213B5C40008133B5 /* Assets.xcassets */; };
 		D0510588213B6230008133B5 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0510587213B6230008133B5 /* MainSplitViewController.swift */; };
@@ -26,12 +26,21 @@
 		D0CE3BE9213F7B7500798CF5 /* MonthBudgetSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE8213F7B7500798CF5 /* MonthBudgetSheetViewController.swift */; };
 		D0CE3BEB213F7B8200798CF5 /* MonthBudgetSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BEA213F7B8200798CF5 /* MonthBudgetSheetView.swift */; };
 		D0CE3BED213F7C4A00798CF5 /* MonthBudgetSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BEC213F7C4A00798CF5 /* MonthBudgetSummaryView.swift */; };
+		D0E4E3CD21433671006B4F6E /* BudgetMasterCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3CC21433671006B4F6E /* BudgetMasterCategory.swift */; };
+		D0E4E3CF214336B7006B4F6E /* BudgetSubcategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3CE214336B7006B4F6E /* BudgetSubcategory.swift */; };
+		D0E4E3D1214336F1006B4F6E /* BudgetLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3D0214336F1006B4F6E /* BudgetLine.swift */; };
+		D0E4E3D3214349A7006B4F6E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3D2214349A7006B4F6E /* Account.swift */; };
+		D0E4E3D521434A59006B4F6E /* Payee.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3D421434A59006B4F6E /* Payee.swift */; };
+		D0E4E3D721434A67006B4F6E /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3D621434A67006B4F6E /* Transaction.swift */; };
+		D0E4E3D9214355BC006B4F6E /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3D8214355BC006B4F6E /* MenuBar.swift */; };
+		D0E4E3DB214369FC006B4F6E /* MonthBudgetCurrencyTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3DA214369FC006B4F6E /* MonthBudgetCurrencyTableCellView.swift */; };
+		D0E4E3DD21439151006B4F6E /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3DC21439151006B4F6E /* NSView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		078860FB70C8F716E3E6E899 /* Pods_YDNYNAB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YDNYNAB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34DB1D342522377318465EF7 /* Pods-YDNYNAB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.debug.xcconfig"; sourceTree = "<group>"; };
 		6DF949C21C6A4EC6C6C3EA70 /* Pods-YDNYNAB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.release.xcconfig"; path = "Pods/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.release.xcconfig"; sourceTree = "<group>"; };
-		A03A481695C019EA3257E5CF /* libPods-YDNYNAB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YDNYNAB.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0510576213B5C3F008133B5 /* YDNYNAB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YDNYNAB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0510579213B5C3F008133B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D051057B213B5C40008133B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,6 +62,15 @@
 		D0CE3BE8213F7B7500798CF5 /* MonthBudgetSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthBudgetSheetViewController.swift; sourceTree = "<group>"; };
 		D0CE3BEA213F7B8200798CF5 /* MonthBudgetSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthBudgetSheetView.swift; sourceTree = "<group>"; };
 		D0CE3BEC213F7C4A00798CF5 /* MonthBudgetSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthBudgetSummaryView.swift; sourceTree = "<group>"; };
+		D0E4E3CC21433671006B4F6E /* BudgetMasterCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetMasterCategory.swift; sourceTree = "<group>"; };
+		D0E4E3CE214336B7006B4F6E /* BudgetSubcategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetSubcategory.swift; sourceTree = "<group>"; };
+		D0E4E3D0214336F1006B4F6E /* BudgetLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetLine.swift; sourceTree = "<group>"; };
+		D0E4E3D2214349A7006B4F6E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		D0E4E3D421434A59006B4F6E /* Payee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payee.swift; sourceTree = "<group>"; };
+		D0E4E3D621434A67006B4F6E /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		D0E4E3D8214355BC006B4F6E /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		D0E4E3DA214369FC006B4F6E /* MonthBudgetCurrencyTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthBudgetCurrencyTableCellView.swift; sourceTree = "<group>"; };
+		D0E4E3DC21439151006B4F6E /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A864D59795C6440CE8FF6B7 /* libPods-YDNYNAB.a in Frameworks */,
+				6923BFC52CAC63724D8457D5 /* Pods_YDNYNAB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,7 +97,7 @@
 		94963C0B5AA62B593FDE4C83 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A03A481695C019EA3257E5CF /* libPods-YDNYNAB.a */,
+				078860FB70C8F716E3E6E899 /* Pods_YDNYNAB.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -106,11 +124,13 @@
 		D0510578213B5C3F008133B5 /* YDNYNAB */ = {
 			isa = PBXGroup;
 			children = (
+				D0E4E3CB21433640006B4F6E /* Model */,
 				D06C648C21432C87000EF618 /* YNAB Importer */,
 				D0CE3BDC213C2F5300798CF5 /* Sidebar */,
 				D0CE3BE6213F7B4200798CF5 /* Budget Overview */,
 				D0CE3BDF213C375E00798CF5 /* Extensions */,
 				D0510579213B5C3F008133B5 /* AppDelegate.swift */,
+				D0E4E3D8214355BC006B4F6E /* MenuBar.swift */,
 				D0510587213B6230008133B5 /* MainSplitViewController.swift */,
 				D06C648521421004000EF618 /* MainSplitViewControllerView.swift */,
 			);
@@ -150,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				D0CE3BE0213C376A00798CF5 /* NSTextView+Extensions.swift */,
+				D0E4E3DC21439151006B4F6E /* NSView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -173,8 +194,22 @@
 				D0CE3BEC213F7C4A00798CF5 /* MonthBudgetSummaryView.swift */,
 				D06C648721421BF9000EF618 /* MonthBudgetTableDataSource.swift */,
 				D06C648921421D0F000EF618 /* MonthBudgetTableRowView.swift */,
+				D0E4E3DA214369FC006B4F6E /* MonthBudgetCurrencyTableCellView.swift */,
 			);
 			path = "Month Budget Sheet";
+			sourceTree = "<group>";
+		};
+		D0E4E3CB21433640006B4F6E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0E4E3CC21433671006B4F6E /* BudgetMasterCategory.swift */,
+				D0E4E3CE214336B7006B4F6E /* BudgetSubcategory.swift */,
+				D0E4E3D0214336F1006B4F6E /* BudgetLine.swift */,
+				D0E4E3D2214349A7006B4F6E /* Account.swift */,
+				D0E4E3D421434A59006B4F6E /* Payee.swift */,
+				D0E4E3D621434A67006B4F6E /* Transaction.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +223,7 @@
 				D0510572213B5C3F008133B5 /* Sources */,
 				D0510573213B5C3F008133B5 /* Frameworks */,
 				D0510574213B5C3F008133B5 /* Resources */,
+				4F4340B26546741418ABCDFD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -244,20 +280,38 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		54C44CD245DAE68EFEA621E9 /* [CP] Check Pods Manifest.lock */ = {
+		4F4340B26546741418ABCDFD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		54C44CD245DAE68EFEA621E9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-YDNYNAB-checkManifestLockResult.txt",
 			);
@@ -275,8 +329,10 @@
 			files = (
 				D0CE3BEB213F7B8200798CF5 /* MonthBudgetSheetView.swift in Sources */,
 				D0CE3BE3213F6B7B00798CF5 /* BudgetOverviewView.swift in Sources */,
+				D0E4E3D9214355BC006B4F6E /* MenuBar.swift in Sources */,
 				D0510588213B6230008133B5 /* MainSplitViewController.swift in Sources */,
 				D0CE3BE5213F728C00798CF5 /* main.swift in Sources */,
+				D0E4E3DB214369FC006B4F6E /* MonthBudgetCurrencyTableCellView.swift in Sources */,
 				D051058A213B6A34008133B5 /* BudgetOverviewViewController.swift in Sources */,
 				D06C648421420667000EF618 /* MonthBudgetTotalsView.swift in Sources */,
 				D06C648821421BF9000EF618 /* MonthBudgetTableDataSource.swift in Sources */,
@@ -286,10 +342,17 @@
 				D06C648E21432CC9000EF618 /* YNABBudgetImporter.swift in Sources */,
 				D0CE3BDE213C359300798CF5 /* StackedSelectionView.swift in Sources */,
 				D06C648621421004000EF618 /* MainSplitViewControllerView.swift in Sources */,
+				D0E4E3CD21433671006B4F6E /* BudgetMasterCategory.swift in Sources */,
+				D0E4E3D721434A67006B4F6E /* Transaction.swift in Sources */,
+				D0E4E3D521434A59006B4F6E /* Payee.swift in Sources */,
+				D0E4E3CF214336B7006B4F6E /* BudgetSubcategory.swift in Sources */,
 				D0CE3BED213F7C4A00798CF5 /* MonthBudgetSummaryView.swift in Sources */,
 				D0510590213B6CAB008133B5 /* SidebarViewController.swift in Sources */,
+				D0E4E3D1214336F1006B4F6E /* BudgetLine.swift in Sources */,
 				D0CE3BE1213C376A00798CF5 /* NSTextView+Extensions.swift in Sources */,
+				D0E4E3DD21439151006B4F6E /* NSView+Extensions.swift in Sources */,
 				D06C649021432CD3000EF618 /* YNABTransactionImporter.swift in Sources */,
+				D0E4E3D3214349A7006B4F6E /* Account.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
