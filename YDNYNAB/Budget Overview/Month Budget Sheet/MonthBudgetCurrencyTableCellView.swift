@@ -15,13 +15,15 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
     required init?(coder decoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
-        self.currencyTextField.alignment = .right
+        currencyTextField.cell?.truncatesLastVisibleLine = true
+        currencyTextField.cell?.lineBreakMode = .byTruncatingTail
+        
         self.addSubview(self.currencyTextField)
-    }
-    
-    override func layout() {
-        super.layout()
-        self.currencyTextField.frame = self.bounds
+        self.currencyTextField.snp.makeConstraints({ currencyTextField in
+            currencyTextField.left.equalTo(self)
+            currencyTextField.right.equalTo(self)
+            currencyTextField.centerY.equalTo(self)
+        })
     }
 
 }

@@ -11,4 +11,6 @@ import RealmSwift
 class BudgetSubCategory: Object {
     @objc dynamic var id: String = UUID().uuidString
     @objc dynamic var name: String = ""
+    @objc dynamic var masterCategory: BudgetMasterCategory?
+    let budgetLines = LinkingObjects(fromType: BudgetLine.self, property: "subCategory")
 }

@@ -25,7 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return .zero
         }
         
-        let initialWindowWidth: CGFloat = 1000
+        let initialWindowWidth: CGFloat = 1200
         let initialWindowHeight: CGFloat = 700
         let initialWindowX = (screen.frame.size.width - initialWindowWidth) / 2
         let initialWindowY = (screen.frame.size.height - initialWindowHeight) / 2

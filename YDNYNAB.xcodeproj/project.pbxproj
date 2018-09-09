@@ -35,6 +35,11 @@
 		D0E4E3D9214355BC006B4F6E /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3D8214355BC006B4F6E /* MenuBar.swift */; };
 		D0E4E3DB214369FC006B4F6E /* MonthBudgetCurrencyTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3DA214369FC006B4F6E /* MonthBudgetCurrencyTableCellView.swift */; };
 		D0E4E3DD21439151006B4F6E /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3DC21439151006B4F6E /* NSView+Extensions.swift */; };
+		D0E4E3DF21445853006B4F6E /* DraggableSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3DE21445853006B4F6E /* DraggableSeparatorView.swift */; };
+		D0E4E3E2214459B7006B4F6E /* BudgetCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3E1214459B7006B4F6E /* BudgetCategoriesViewController.swift */; };
+		D0E4E3E4214459C6006B4F6E /* BudgetCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3E3214459C6006B4F6E /* BudgetCategoriesView.swift */; };
+		D0E4E3E6214469A8006B4F6E /* BudgetCategoriesViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3E5214469A8006B4F6E /* BudgetCategoriesViewDataSource.swift */; };
+		D0E4E3E9214587D2006B4F6E /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3E8214587D2006B4F6E /* DateUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +76,11 @@
 		D0E4E3D8214355BC006B4F6E /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		D0E4E3DA214369FC006B4F6E /* MonthBudgetCurrencyTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthBudgetCurrencyTableCellView.swift; sourceTree = "<group>"; };
 		D0E4E3DC21439151006B4F6E /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
+		D0E4E3DE21445853006B4F6E /* DraggableSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableSeparatorView.swift; sourceTree = "<group>"; };
+		D0E4E3E1214459B7006B4F6E /* BudgetCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCategoriesViewController.swift; sourceTree = "<group>"; };
+		D0E4E3E3214459C6006B4F6E /* BudgetCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCategoriesView.swift; sourceTree = "<group>"; };
+		D0E4E3E5214469A8006B4F6E /* BudgetCategoriesViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCategoriesViewDataSource.swift; sourceTree = "<group>"; };
+		D0E4E3E8214587D2006B4F6E /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +138,7 @@
 				D06C648C21432C87000EF618 /* YNAB Importer */,
 				D0CE3BDC213C2F5300798CF5 /* Sidebar */,
 				D0CE3BE6213F7B4200798CF5 /* Budget Overview */,
+				D0E4E3E7214587C6006B4F6E /* Utils */,
 				D0CE3BDF213C375E00798CF5 /* Extensions */,
 				D0510579213B5C3F008133B5 /* AppDelegate.swift */,
 				D0E4E3D8214355BC006B4F6E /* MenuBar.swift */,
@@ -178,14 +189,16 @@
 		D0CE3BE6213F7B4200798CF5 /* Budget Overview */ = {
 			isa = PBXGroup;
 			children = (
-				D0CE3BE7213F7B5700798CF5 /* Month Budget Sheet */,
-				D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */,
+				D0E4E3E02144597D006B4F6E /* Budget categories pane */,
+				D0CE3BE7213F7B5700798CF5 /* Month budget sheet */,
+				D0E4E3DE21445853006B4F6E /* DraggableSeparatorView.swift */,
 				D0510589213B6A34008133B5 /* BudgetOverviewViewController.swift */,
+				D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */,
 			);
 			path = "Budget Overview";
 			sourceTree = "<group>";
 		};
-		D0CE3BE7213F7B5700798CF5 /* Month Budget Sheet */ = {
+		D0CE3BE7213F7B5700798CF5 /* Month budget sheet */ = {
 			isa = PBXGroup;
 			children = (
 				D0CE3BE8213F7B7500798CF5 /* MonthBudgetSheetViewController.swift */,
@@ -196,7 +209,7 @@
 				D06C648921421D0F000EF618 /* MonthBudgetTableRowView.swift */,
 				D0E4E3DA214369FC006B4F6E /* MonthBudgetCurrencyTableCellView.swift */,
 			);
-			path = "Month Budget Sheet";
+			path = "Month budget sheet";
 			sourceTree = "<group>";
 		};
 		D0E4E3CB21433640006B4F6E /* Model */ = {
@@ -210,6 +223,24 @@
 				D0E4E3D621434A67006B4F6E /* Transaction.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D0E4E3E02144597D006B4F6E /* Budget categories pane */ = {
+			isa = PBXGroup;
+			children = (
+				D0E4E3E1214459B7006B4F6E /* BudgetCategoriesViewController.swift */,
+				D0E4E3E3214459C6006B4F6E /* BudgetCategoriesView.swift */,
+				D0E4E3E5214469A8006B4F6E /* BudgetCategoriesViewDataSource.swift */,
+			);
+			path = "Budget categories pane";
+			sourceTree = "<group>";
+		};
+		D0E4E3E7214587C6006B4F6E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D0E4E3E8214587D2006B4F6E /* DateUtils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,20 +359,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0CE3BEB213F7B8200798CF5 /* MonthBudgetSheetView.swift in Sources */,
+				D0E4E3E4214459C6006B4F6E /* BudgetCategoriesView.swift in Sources */,
 				D0CE3BE3213F6B7B00798CF5 /* BudgetOverviewView.swift in Sources */,
 				D0E4E3D9214355BC006B4F6E /* MenuBar.swift in Sources */,
+				D0E4E3E2214459B7006B4F6E /* BudgetCategoriesViewController.swift in Sources */,
 				D0510588213B6230008133B5 /* MainSplitViewController.swift in Sources */,
 				D0CE3BE5213F728C00798CF5 /* main.swift in Sources */,
 				D0E4E3DB214369FC006B4F6E /* MonthBudgetCurrencyTableCellView.swift in Sources */,
 				D051058A213B6A34008133B5 /* BudgetOverviewViewController.swift in Sources */,
+				D0E4E3E9214587D2006B4F6E /* DateUtils.swift in Sources */,
 				D06C648421420667000EF618 /* MonthBudgetTotalsView.swift in Sources */,
 				D06C648821421BF9000EF618 /* MonthBudgetTableDataSource.swift in Sources */,
 				D0CE3BE9213F7B7500798CF5 /* MonthBudgetSheetViewController.swift in Sources */,
 				D06C648A21421D0F000EF618 /* MonthBudgetTableRowView.swift in Sources */,
 				D051057A213B5C3F008133B5 /* AppDelegate.swift in Sources */,
 				D06C648E21432CC9000EF618 /* YNABBudgetImporter.swift in Sources */,
+				D0E4E3DF21445853006B4F6E /* DraggableSeparatorView.swift in Sources */,
 				D0CE3BDE213C359300798CF5 /* StackedSelectionView.swift in Sources */,
 				D06C648621421004000EF618 /* MainSplitViewControllerView.swift in Sources */,
+				D0E4E3E6214469A8006B4F6E /* BudgetCategoriesViewDataSource.swift in Sources */,
 				D0E4E3CD21433671006B4F6E /* BudgetMasterCategory.swift in Sources */,
 				D0E4E3D721434A67006B4F6E /* Transaction.swift in Sources */,
 				D0E4E3D521434A59006B4F6E /* Payee.swift in Sources */,

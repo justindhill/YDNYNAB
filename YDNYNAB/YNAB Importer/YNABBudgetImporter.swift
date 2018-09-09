@@ -86,7 +86,7 @@ class YNABBudgetImporter {
                         } else {
                             subCategory = realm.create(BudgetSubCategory.self)
                             subCategory.name = stringValue
-                            lineMasterCategory?.subcategories.append(subCategory)
+                            subCategory.masterCategory = lineMasterCategory
                             subCategories[stringValue] = subCategory
                         }
                         budgetLine.subCategory = subCategory

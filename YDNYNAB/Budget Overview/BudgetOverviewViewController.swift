@@ -18,15 +18,20 @@ class BudgetOverviewViewController: NSViewController {
         return self.view as! BudgetOverviewView
     }
     
+    var scrollViews = [NSScrollView]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.budgetOverviewView.monthBudgetSheets.forEach { monthBudgetSheet in
+        self.scrollViews.append(self.budgetOverviewView.categoryList.budgetCategoriesView.scrollView)
+        self.scrollViews.append(contentsOf: self.budgetOverviewView.monthBudgetSheets.map { $0.budgetSheetView.detailsTableScrollView })
+        self.scrollViews.forEach { scrollView in
+            scrollView.postsBoundsChangedNotifications = true
             NotificationCenter.default.addObserver(
                 self, selector:
                 #selector(scrollViewBoundsDidChange(_:)),
                 name: NSView.boundsDidChangeNotification,
-                object: monthBudgetSheet.budgetSheetView.detailsTableScrollView.contentView)
+                object: scrollView.contentView)
         }
     }
     
@@ -35,11 +40,10 @@ class BudgetOverviewViewController: NSViewController {
             return
         }
         
-        self.budgetOverviewView.monthBudgetSheets.forEach { monthBudgetSheet in
-            let candidate = monthBudgetSheet.budgetSheetView.detailsTableScrollView.contentView
-            if let candidateScrollView = candidate.superview as? NSScrollView, candidate != contentView {
-                candidate.scroll(to: contentView.bounds.origin)
-                candidateScrollView.reflectScrolledClipView(candidate)
+        self.scrollViews.forEach { candidate in
+            if candidate.contentView != contentView {
+                candidate.contentView.scroll(to: contentView.bounds.origin)
+                candidate.reflectScrolledClipView(candidate.contentView)
             }
         }
     }

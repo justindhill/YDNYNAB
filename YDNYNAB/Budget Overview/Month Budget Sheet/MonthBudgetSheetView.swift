@@ -10,6 +10,11 @@ import Cocoa
 
 class MonthBudgetSheetView: NSView {
 
+    enum Constant {
+        static let summaryViewHeight: CGFloat = 125
+        static let totalsViewHeight: CGFloat = 50
+    }
+
     let summaryView = MonthBudgetSummaryView()
     let totalsView = MonthBudgetTotalsView()
     let detailsTableView = NSTableView()
@@ -23,29 +28,28 @@ class MonthBudgetSheetView: NSView {
         self.addSubview(self.detailsTableScrollView)
         self.detailsTableScrollView.hasVerticalScroller = true
         self.detailsTableScrollView.documentView = self.detailsTableView
-        self.detailsTableScrollView.postsBoundsChangedNotifications = true
         self.detailsTableView.allowsColumnResizing = false
         self.detailsTableView.allowsColumnReordering = false
         
         self.summaryView.snp.makeConstraints { (summaryView) in
-            summaryView.left.equalTo(self).offset(10)
-            summaryView.right.equalTo(self).offset(-10)
-            summaryView.top.equalTo(self).offset(10)
-            summaryView.height.equalTo(125)
+            summaryView.left.equalTo(self)
+            summaryView.right.equalTo(self)
+            summaryView.top.equalTo(self)
+            summaryView.height.equalTo(Constant.summaryViewHeight)
         }
         
         self.totalsView.snp.makeConstraints { (totalsView) in
-            totalsView.left.equalTo(self).offset(10)
-            totalsView.right.equalTo(self).offset(-10)
-            totalsView.top.equalTo(self.summaryView.snp.bottom).offset(10)
-            totalsView.height.equalTo(50)
+            totalsView.left.equalTo(self)
+            totalsView.right.equalTo(self)
+            totalsView.top.equalTo(self.summaryView.snp.bottom)
+            totalsView.height.equalTo(Constant.totalsViewHeight)
         }
         
         self.detailsTableScrollView.snp.makeConstraints { (detailsTableScrollView) in
-            detailsTableScrollView.left.equalTo(self).offset(10)
-            detailsTableScrollView.right.equalTo(self).offset(-10)
-            detailsTableScrollView.top.equalTo(self.totalsView.snp.bottom).offset(10)
-            detailsTableScrollView.bottom.equalTo(self).offset(-10)
+            detailsTableScrollView.left.equalTo(self)
+            detailsTableScrollView.right.equalTo(self)
+            detailsTableScrollView.top.equalTo(self.totalsView.snp.bottom)
+            detailsTableScrollView.bottom.equalTo(self)
         }
     }
     
