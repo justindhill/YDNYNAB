@@ -17,7 +17,7 @@ class MonthBudgetSheetView: NSView {
 
     let summaryView = MonthBudgetSummaryView()
     let totalsView = MonthBudgetTotalsView()
-    let detailsTableView = NSTableView()
+    let outlineView = NSOutlineView()
     let detailsTableScrollView = NSScrollView()
     
     required init?(coder decoder: NSCoder) { fatalError("Not implemented") }
@@ -27,9 +27,11 @@ class MonthBudgetSheetView: NSView {
         self.addSubview(self.totalsView)
         self.addSubview(self.detailsTableScrollView)
         self.detailsTableScrollView.hasVerticalScroller = true
-        self.detailsTableScrollView.documentView = self.detailsTableView
-        self.detailsTableView.allowsColumnResizing = false
-        self.detailsTableView.allowsColumnReordering = false
+        self.detailsTableScrollView.documentView = self.outlineView
+        self.outlineView.allowsColumnResizing = false
+        self.outlineView.allowsColumnReordering = false
+        self.outlineView.floatsGroupRows = false
+        self.outlineView.stronglyReferencesItems = true
         
         self.summaryView.snp.makeConstraints { (summaryView) in
             summaryView.left.equalTo(self)
@@ -59,8 +61,8 @@ class MonthBudgetSheetView: NSView {
         let documentVisibleWidth = self.detailsTableScrollView.documentVisibleRect.size.width
         let actualVisibleWidth = documentVisibleWidth - scrollerWidth
         
-        self.detailsTableView.tableColumns.forEach { (column) in
-            column.width = actualVisibleWidth / CGFloat(self.detailsTableView.numberOfColumns)
+        self.outlineView.tableColumns.forEach { (column) in
+            column.width = actualVisibleWidth / CGFloat(self.outlineView.numberOfColumns)
         }
     }
     

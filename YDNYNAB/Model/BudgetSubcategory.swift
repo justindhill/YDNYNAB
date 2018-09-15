@@ -13,4 +13,5 @@ class BudgetSubCategory: Object {
     @objc dynamic var name: String = ""
     @objc dynamic var masterCategory: BudgetMasterCategory?
     let budgetLines = LinkingObjects(fromType: BudgetLine.self, property: "subCategory")
+    @objc dynamic var isHidden: Bool = false
 }

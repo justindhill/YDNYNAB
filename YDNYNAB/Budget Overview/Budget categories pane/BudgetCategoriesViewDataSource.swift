@@ -8,7 +8,7 @@
 
 import RealmSwift
 
-class BudgetCategoriesViewDataSource: NSObject, NSOutlineViewDelegate, NSOutlineViewDataSource {//NSTableViewDataSource, NSTableViewDelegate {
+class BudgetCategoriesViewDataSource: NSObject, NSOutlineViewDataSource {//NSTableViewDataSource, NSTableViewDelegate {
     
     var resultSet: Results<BudgetMasterCategory>?
     
@@ -52,76 +52,5 @@ class BudgetCategoriesViewDataSource: NSObject, NSOutlineViewDelegate, NSOutline
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         return (item is BudgetMasterCategory)
     }
-    
-    func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {
-        let rowView = MonthBudgetTableRowView(row: 0)
-        if item is BudgetMasterCategory {
-            rowView.backgroundColor = NSColor.systemBlue.withAlphaComponent(0.25)
-        }
-        
-        return rowView
-    }
-    
-    func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        let cellView = MonthBudgetCurrencyTableCellView()
-        if let item = item as? BudgetMasterCategory {
-            cellView.currencyTextField.stringValue = item.name
-            cellView.currencyTextField.font = NSFont.boldSystemFont(ofSize: 12)
-
-        } else if let item = item as? BudgetSubCategory {
-            cellView.currencyTextField.stringValue = item.name
-            cellView.currencyTextField.font = NSFont.systemFont(ofSize: 12)
-        }
-
-        return cellView
-    }
-    
-    func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
-        return item is BudgetMasterCategory
-    }
-    
-    func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
-        if item is BudgetMasterCategory {
-            return 28
-        } else {
-            return 22
-        }
-    }
-    
-    func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
-        return false
-    }
 
 }
-    
-//    func numberOfRows(in tableView: NSTableView) -> Int {
-//        return self.resultSet?.count ?? 0
-//    }
-//
-//    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-//        guard let resultSet = self.resultSet else {
-//            return nil
-//        }
-//
-//        let subCategory = resultSet[row]
-//
-//        let cellView = NSTextField(labelWithString: subCategory.name)
-//        cellView.cell?.truncatesLastVisibleLine = true
-//        cellView.cell?.lineBreakMode = .byTruncatingTail
-//
-//        return cellView
-//    }
-//
-//    func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-//    }
-//
-//    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-//        return false
-//    }
-//
-//    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-//        return 25
-//    }
-//
-//}
-

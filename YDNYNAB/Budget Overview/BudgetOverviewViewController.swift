@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class BudgetOverviewViewController: NSViewController {
+class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewControllerDelegate {
     
     override func loadView() {
         self.view = BudgetOverviewView()
@@ -22,6 +22,8 @@ class BudgetOverviewViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.budgetOverviewView.categoryList.delegate = self
         
         self.scrollViews.append(self.budgetOverviewView.categoryList.budgetCategoriesView.scrollView)
         self.scrollViews.append(contentsOf: self.budgetOverviewView.monthBudgetSheets.map { $0.budgetSheetView.detailsTableScrollView })
@@ -46,6 +48,14 @@ class BudgetOverviewViewController: NSViewController {
                 candidate.reflectScrolledClipView(candidate.contentView)
             }
         }
+    }
+    
+    func budgetCategoriesViewController(_ viewController: BudgetCategoriesViewController, willExpandRow row: Int) {
+        self.budgetOverviewView.monthBudgetSheets.forEach({ $0.expand(row: row) })
+    }
+    
+    func budgetCategoriesViewController(_ viewController: BudgetCategoriesViewController, willCollapseRow row: Int) {
+        self.budgetOverviewView.monthBudgetSheets.forEach({ $0.collapse(row: row) })
     }
     
 }

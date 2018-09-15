@@ -56,10 +56,8 @@ class MonthBudgetSummaryView: NSView {
         
         self.addSubview(self.dateStackView)
         self.dateStackView.snp.makeConstraints { (dateStackView) in
-//            dateStackView.edges.equalTo(self)
             dateStackView.left.equalTo(self).offset(Constant.padding)
             dateStackView.top.equalTo(self).offset(Constant.padding)
-//            dateStackView.width.equalTo(Constant.dateStackWidth)
         }
         
         self.addSubview(self.dateSeparator)

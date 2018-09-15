@@ -69,27 +69,64 @@ class YNABBudgetImporter {
                     case .month:
                         budgetLine.month = self.dateFormatter.date(from: stringValue) ?? Date()
                     case .masterCategory:
-                        let masterCategory: BudgetMasterCategory
-                        if let existingCategory = masterCategories[stringValue] {
-                            masterCategory = existingCategory
-                        } else {
-                            masterCategory = realm.create(BudgetMasterCategory.self)
-                            masterCategory.name = stringValue
-                            masterCategories[stringValue] = masterCategory
+                        if stringValue != "Hidden Categories" {
+                            let masterCategory: BudgetMasterCategory
+                            if let existingCategory = masterCategories[stringValue] {
+                                masterCategory = existingCategory
+                            } else {
+                                masterCategory = realm.create(BudgetMasterCategory.self)
+                                masterCategory.name = stringValue
+                                masterCategories[stringValue] = masterCategory
+                            }
+                            lineMasterCategory = masterCategory
+                            budgetLine.masterCategory = masterCategory
                         }
-                        lineMasterCategory = masterCategory
-                        budgetLine.masterCategory = masterCategory
                     case .subCategory:
-                        let subCategory: BudgetSubCategory
-                        if let existingCategory = subCategories[stringValue] {
-                            subCategory = existingCategory
+                        if budgetLine.masterCategory == nil {
+                            // hidden category
+                            let categoryInfo = stringValue.split(separator: "`").map({$0.trimmingCharacters(in: CharacterSet([" "]))})
+                            guard categoryInfo.count >= 2 else {
+                                return
+                            }
+                            let masterCategoryName = categoryInfo[0]
+                            let subCategoryName = categoryInfo[1]
+                            
+                            let masterCategory: BudgetMasterCategory
+                            if let existingCategory = masterCategories[masterCategoryName] {
+                                masterCategory = existingCategory
+                            } else {
+                                masterCategory = realm.create(BudgetMasterCategory.self)
+                                masterCategory.name = masterCategoryName
+                                masterCategories[masterCategoryName] = masterCategory
+                            }
+                            lineMasterCategory = masterCategory
+                            budgetLine.masterCategory = masterCategory
+                            
+                            let subCategory: BudgetSubCategory
+                            if let existingCategory = subCategories[subCategoryName] {
+                                subCategory = existingCategory
+                            } else {
+                                subCategory = realm.create(BudgetSubCategory.self)
+                                subCategory.name = subCategoryName
+                                subCategory.masterCategory = masterCategory
+                                subCategory.isHidden = true
+                                subCategories[subCategoryName] = subCategory
+                            }
+                            budgetLine.subCategory = subCategory
+                            
                         } else {
-                            subCategory = realm.create(BudgetSubCategory.self)
-                            subCategory.name = stringValue
-                            subCategory.masterCategory = lineMasterCategory
-                            subCategories[stringValue] = subCategory
+                            // regular category
+                            let subCategory: BudgetSubCategory
+                            if let existingCategory = subCategories[stringValue] {
+                                subCategory = existingCategory
+                            } else {
+                                subCategory = realm.create(BudgetSubCategory.self)
+                                subCategory.name = stringValue
+                                subCategory.masterCategory = lineMasterCategory
+                                subCategories[stringValue] = subCategory
+                            }
+                            budgetLine.subCategory = subCategory
                         }
-                        budgetLine.subCategory = subCategory
                     case .budgeted:
                         budgetLine.budgeted.value = self.currencyFormatter.number(from: stringValue)?.doubleValue
                     case .outflows:
