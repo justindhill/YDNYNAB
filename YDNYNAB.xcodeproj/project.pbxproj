@@ -45,6 +45,7 @@
 		D0E4E3F0214DA15F006B4F6E /* NSTableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3EF214DA15F006B4F6E /* NSTableView+Extensions.swift */; };
 		D0E4E3F2214DA22A006B4F6E /* AllTransactionsRegisterViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F1214DA22A006B4F6E /* AllTransactionsRegisterViewDataSource.swift */; };
 		D0E4E3F4214DA93F006B4F6E /* RegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F3214DA93F006B4F6E /* RegisterCell.swift */; };
+		D0E4E3F6214EFBD5006B4F6E /* YDNOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F5214EFBD5006B4F6E /* YDNOutlineView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,7 @@
 		D0E4E3EF214DA15F006B4F6E /* NSTableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTableView+Extensions.swift"; sourceTree = "<group>"; };
 		D0E4E3F1214DA22A006B4F6E /* AllTransactionsRegisterViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransactionsRegisterViewDataSource.swift; sourceTree = "<group>"; };
 		D0E4E3F3214DA93F006B4F6E /* RegisterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCell.swift; sourceTree = "<group>"; };
+		D0E4E3F5214EFBD5006B4F6E /* YDNOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNOutlineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 				D0CE3BDF213C375E00798CF5 /* Extensions */,
 				D0510579213B5C3F008133B5 /* AppDelegate.swift */,
 				D0E4E3D8214355BC006B4F6E /* MenuBar.swift */,
+				D0E4E3F5214EFBD5006B4F6E /* YDNOutlineView.swift */,
 				D0510587213B6230008133B5 /* MainSplitViewController.swift */,
 				D06C648521421004000EF618 /* MainSplitViewControllerView.swift */,
 			);
@@ -409,6 +412,7 @@
 				D0E4E3F0214DA15F006B4F6E /* NSTableView+Extensions.swift in Sources */,
 				D0E4E3F4214DA93F006B4F6E /* RegisterCell.swift in Sources */,
 				D0E4E3CF214336B7006B4F6E /* BudgetSubcategory.swift in Sources */,
+				D0E4E3F6214EFBD5006B4F6E /* YDNOutlineView.swift in Sources */,
 				D0CE3BED213F7C4A00798CF5 /* MonthBudgetSummaryView.swift in Sources */,
 				D0510590213B6CAB008133B5 /* SidebarViewController.swift in Sources */,
 				D0E4E3D1214336F1006B4F6E /* BudgetLine.swift in Sources */,

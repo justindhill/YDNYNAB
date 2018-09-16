@@ -17,7 +17,7 @@ class BudgetCategoriesView: NSView {
             BudgetOverviewView.Constant.padding
     }
     
-    let outlineView = NSOutlineView()
+    let outlineView = YDNOutlineView()
     let scrollView = NSScrollView()
     
     required init?(coder decoder: NSCoder) { fatalError("Not implemented") }

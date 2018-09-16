@@ -17,7 +17,7 @@ class MonthBudgetSheetView: NSView {
 
     let summaryView = MonthBudgetSummaryView()
     let totalsView = MonthBudgetTotalsView()
-    let outlineView = NSOutlineView()
+    let outlineView = YDNOutlineView()
     let detailsTableScrollView = NSScrollView()
     
     required init?(coder decoder: NSCoder) { fatalError("Not implemented") }
@@ -31,7 +31,7 @@ class MonthBudgetSheetView: NSView {
         self.outlineView.allowsColumnResizing = false
         self.outlineView.allowsColumnReordering = false
         self.outlineView.floatsGroupRows = false
-        self.outlineView.stronglyReferencesItems = true
+        self.outlineView.showsDisclosureIndicator = false
         
         self.summaryView.snp.makeConstraints { (summaryView) in
             summaryView.left.equalTo(self)

@@ -112,7 +112,7 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
     }
     
     func outlineView(_ outlineView: NSOutlineView, shouldShowOutlineCellForItem item: Any) -> Bool {
-        return false
+        return true
     }
     
     // MARK: - Utils
