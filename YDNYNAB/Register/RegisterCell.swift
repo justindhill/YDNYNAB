@@ -41,22 +41,29 @@ class RegisterCell: NSTableCellView {
         }
     }
     
-    let textLayer = CATextLayer()
+    lazy var textLayer: CATextLayer = {
+        let textLayer = CATextLayer()
+        
+        let font = NSFont.systemFont(ofSize: 13)
+        
+        textLayer.font = font
+        textLayer.fontSize = font.pointSize
+        textLayer.anchorPoint = CGPoint(x: 0, y: 0)
+        textLayer.foregroundColor = NSColor.black.cgColor
+        textLayer.truncationMode = kCATruncationEnd
+        textLayer.frame.size.height = NSString(string: "a").size(withAttributes: [.font: font]).height
+        textLayer.actions = [
+            "contents": NSNull()
+        ]
+        
+        return textLayer
+    }()
     
     required init?(coder decoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         
         self.wantsLayer = true
-        
-        let font = NSFont.systemFont(ofSize: 13)
-        
-        self.textLayer.font = font
-        self.textLayer.fontSize = font.pointSize
-        self.textLayer.anchorPoint = CGPoint(x: 0, y: 0)
-        self.textLayer.foregroundColor = NSColor.black.cgColor
-        self.textLayer.truncationMode = kCATruncationEnd
-        self.textLayer.frame.size.height = NSString(string: "a").size(withAttributes: [.font: font]).height
         self.layer?.addSublayer(self.textLayer)
     }
     
@@ -79,16 +86,16 @@ class RegisterCell: NSTableCellView {
     }
     
     func updateAppearance() {
-        DispatchQueue.main.async {
-            CATransaction.begin()
-            CATransaction.setDisableActions(true)
-            if self.backgroundStyle == .dark {
-                self.textLayer.foregroundColor = NSColor.white.cgColor
-            } else if self.backgroundStyle == .light {
-                self.textLayer.foregroundColor = NSColor.black.cgColor
-            }
-            CATransaction.commit()
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        
+        if self.backgroundStyle == .dark {
+            self.textLayer.foregroundColor = NSColor.white.cgColor
+        } else if self.backgroundStyle == .light {
+            self.textLayer.foregroundColor = NSColor.black.cgColor
         }
+        
+        CATransaction.commit()
     }
     
 }
