@@ -46,13 +46,27 @@ class RegisterViewController: NSViewController, NSTableViewDelegate {
     func addColumnsToTableView() {
         let tableView = self.registerView.tableView
         
-        tableView.addTableColumn(withTitle: "Account", identifier: ColumnIdentifier.account.userInterfaceIdentifier)
-        tableView.addTableColumn(withTitle: "Date", identifier: ColumnIdentifier.date.userInterfaceIdentifier)
-        tableView.addTableColumn(withTitle: "Payee", identifier: ColumnIdentifier.payee.userInterfaceIdentifier, resizingOptions: .autoresizingMask)
-        tableView.addTableColumn(withTitle: "Category", identifier: ColumnIdentifier.category.userInterfaceIdentifier, resizingOptions: .autoresizingMask)
-        tableView.addTableColumn(withTitle: "Memo", identifier: ColumnIdentifier.memo.userInterfaceIdentifier, resizingOptions: .autoresizingMask)
-        tableView.addTableColumn(withTitle: "Inflow", identifier: ColumnIdentifier.inflow.userInterfaceIdentifier)
-        tableView.addTableColumn(withTitle: "Outflow", identifier: ColumnIdentifier.outflow.userInterfaceIdentifier)
+        tableView.addTableColumn(withTitle: "Account",
+                                 identifier: ColumnIdentifier.account.userInterfaceIdentifier,
+                                 initialWidth: 140)
+        tableView.addTableColumn(withTitle: "Date",
+                                 identifier: ColumnIdentifier.date.userInterfaceIdentifier,
+                                 initialWidth: 70)
+        tableView.addTableColumn(withTitle: "Payee",
+                                 identifier: ColumnIdentifier.payee.userInterfaceIdentifier,
+                                 resizingOptions: .autoresizingMask)
+        tableView.addTableColumn(withTitle: "Category",
+                                 identifier: ColumnIdentifier.category.userInterfaceIdentifier,
+                                 resizingOptions: .autoresizingMask)
+        tableView.addTableColumn(withTitle: "Memo",
+                                 identifier: ColumnIdentifier.memo.userInterfaceIdentifier,
+                                 resizingOptions: .autoresizingMask)
+        tableView.addTableColumn(withTitle: "Inflow",
+                                 identifier: ColumnIdentifier.inflow.userInterfaceIdentifier,
+                                 initialWidth: 70)
+        tableView.addTableColumn(withTitle: "Outflow",
+                                 identifier: ColumnIdentifier.outflow.userInterfaceIdentifier,
+                                 initialWidth: 70)
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
