@@ -8,7 +8,11 @@
 
 import Cocoa
 
-class StackedSelectionView: NSView {
+protocol StackedSelectionViewDelegate: class {
+    func stackedSelectionView(_ stackedSelectionView: StackedSelectionView, selectionDidChange: StackedSelectionView.SelectableItem)
+}
+
+class StackedSelectionView: NSControl {
     
     enum Constant {
         static let itemSelectedColor = NSColor.black
@@ -16,23 +20,30 @@ class StackedSelectionView: NSView {
         static let itemLeadingTextOffset: CGFloat = 40
     }
     
+    weak var delegate: StackedSelectionViewDelegate?
+    var selectedIndex: Int = 0
+    
     typealias Item = NSView
     class SelectableItem: Item {
         let titleLabel = NSTextField(labelWithString: "")
         let title: String
+        var selectionIdentifier: Any
         
         required init?(coder decoder: NSCoder) { fatalError("Not implemented") }
-        init(title: String) {
+        init(title: String, selectionIdentifier: Any) {
             self.title = title
+            self.selectionIdentifier = selectionIdentifier
             super.init(frame: .zero)
             
             self.titleLabel.stringValue = title
+            self.titleLabel.textColor = NSColor.black
             
             self.addSubview(self.titleLabel)
             self.titleLabel.snp.makeConstraints {
                 $0.edges.equalTo(self).inset(5)
             }
         }
+        
     }
     
     lazy var stackView: NSStackView = {
@@ -60,6 +71,9 @@ class StackedSelectionView: NSView {
     func updateItems() {
         self.stackView.arrangedSubviews.forEach({ $0.removeFromSuperview() })
         self.items.forEach { item in
+            if item.gestureRecognizers.count == 0 {
+                item.addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(itemWasClicked(_:))))
+            }
             self.stackView.addArrangedSubview(item)
             item.snp.makeConstraints { $0.width.equalTo(self.stackView) }
         }
@@ -86,6 +100,12 @@ class StackedSelectionView: NSView {
             let mouseInItem = item.frame.contains(mouseLocation)
             item.layer?.backgroundColor = (mouseInItem ? Constant.itemHighlightedColor : NSColor.clear).cgColor
             
+        }
+    }
+    
+    @objc private func itemWasClicked(_ gestureRecognizer: NSClickGestureRecognizer) {
+        if let clickedItem = gestureRecognizer.view as? SelectableItem {
+            self.delegate?.stackedSelectionView(self, selectionDidChange: clickedItem)
         }
     }
     

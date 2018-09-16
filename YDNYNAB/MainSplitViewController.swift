@@ -8,10 +8,13 @@
 
 import Cocoa
 
-class MainSplitViewController: NSSplitViewController {
+class MainSplitViewController: NSSplitViewController, SidebarViewControllerDelegate {
     
     let sidebarViewController = SidebarViewController()
     let contentViewController = BudgetOverviewViewController()
+    lazy var allTransactionsRegister = RegisterViewController()
+    lazy var sidebarItem = NSSplitViewItem(sidebarWithViewController: self.sidebarViewController)
+
     
     override func loadView() {
         self.splitView = NSSplitView()
@@ -33,18 +36,29 @@ class MainSplitViewController: NSSplitViewController {
         
         self.view.wantsLayer = true
         
+        self.sidebarViewController.delegate = self
         self.sidebarViewController.view.wantsLayer = true
         self.contentViewController.view.wantsLayer = true
         
-        let sidebarItem = NSSplitViewItem(sidebarWithViewController: self.sidebarViewController)
         sidebarItem.minimumThickness = 250
         sidebarItem.maximumThickness = 250
         sidebarItem.canCollapse = false
         let contentItem = NSSplitViewItem(viewController: self.contentViewController)
         
-        self.addSplitViewItem(sidebarItem)
-        self.addSplitViewItem(contentItem)
+        self.splitViewItems = [sidebarItem, contentItem]
+    }
+    
+    func sidebarViewController(_ sidebarViewController: SidebarViewController, selectionDidChange selection: SidebarViewController.SelectionIdentifier) {
+        let contentItem: NSSplitViewItem
+
+        switch selection {
+        case .budget:
+            contentItem = NSSplitViewItem(viewController: self.contentViewController)
+        case .allTransactions:
+            contentItem = NSSplitViewItem(viewController: self.allTransactionsRegister)
+        }
         
+        self.splitViewItems = [self.sidebarItem, contentItem]
     }
     
 }

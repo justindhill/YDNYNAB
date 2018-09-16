@@ -9,18 +9,33 @@
 import Cocoa
 import SnapKit
 
-class SidebarViewController: NSViewController {
+protocol SidebarViewControllerDelegate: class {
+    func sidebarViewController(_ sidebarViewController: SidebarViewController,
+                               selectionDidChange: SidebarViewController.SelectionIdentifier)
+}
+
+class SidebarViewController: NSViewController, StackedSelectionViewDelegate {
+        
+    enum SelectionIdentifier {
+        case budget
+//        case reports
+        case allTransactions
+//        case account(account: Account)
+    }
     
     enum Constant {
         static let contentInset: CGFloat = 20
     }
     
-    lazy var modeSelector: StackedSelectionView = {
+    weak var delegate: SidebarViewControllerDelegate?
+    
+    private lazy var modeSelector: StackedSelectionView = {
         let selectionView = StackedSelectionView()
+        selectionView.delegate = self
         selectionView.items = [
-            StackedSelectionView.SelectableItem(title: "Budget"),
-            StackedSelectionView.SelectableItem(title: "Reports"),
-            StackedSelectionView.SelectableItem(title: "All Accounts")
+            StackedSelectionView.SelectableItem(title: "Budget", selectionIdentifier: SelectionIdentifier.budget),
+            StackedSelectionView.SelectableItem(title: "Reports", selectionIdentifier: SelectionIdentifier.budget),
+            StackedSelectionView.SelectableItem(title: "All Accounts", selectionIdentifier: SelectionIdentifier.allTransactions)
         ]
         
         return selectionView
@@ -45,6 +60,12 @@ class SidebarViewController: NSViewController {
         }
         
         self.visualEffectView.material = .sidebar
+    }
+    
+    func stackedSelectionView(_ stackedSelectionView: StackedSelectionView, selectionDidChange selection: StackedSelectionView.SelectableItem) {
+        if let selectionIdentifier = selection.selectionIdentifier as? SelectionIdentifier {
+            self.delegate?.sidebarViewController(self, selectionDidChange: selectionIdentifier)
+        }
     }
 
 }

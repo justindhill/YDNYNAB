@@ -12,6 +12,7 @@ class MonthBudgetTableRowView: NSTableRowView {
     
     private enum Constant {
         static let rowNumberKey = "MonthBudgetTableRowViewRowNumberKey"
+        static let highlightedBackgroundColor = NSColor(white: 0.95, alpha: 1)
     }
     
     let row: Int
@@ -38,7 +39,7 @@ class MonthBudgetTableRowView: NSTableRowView {
     
     @objc private func didReceiveMouseEnteredNotification(_ note: Notification) {
         if let row = note.userInfo?[Constant.rowNumberKey] as? Int, row == self.row {
-            self.backgroundColor = .lightGray
+            self.backgroundColor = Constant.highlightedBackgroundColor
         }
 
     }

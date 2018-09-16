@@ -48,12 +48,12 @@ class BudgetCategoriesViewController: NSViewController, NSOutlineViewDelegate {
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         let cellView = MonthBudgetCurrencyTableCellView()
         if let item = item as? BudgetMasterCategory {
-            cellView.currencyTextField.stringValue = item.name
-            cellView.currencyTextField.font = NSFont.boldSystemFont(ofSize: 12)
+            cellView.text = item.name
+            cellView.font = NSFont.boldSystemFont(ofSize: 13)
             
         } else if let item = item as? BudgetSubCategory {
-            cellView.currencyTextField.stringValue = item.name
-            cellView.currencyTextField.font = NSFont.systemFont(ofSize: 12)
+            cellView.text = item.name
+            cellView.font = NSFont.systemFont(ofSize: 13)
         }
         
         return cellView

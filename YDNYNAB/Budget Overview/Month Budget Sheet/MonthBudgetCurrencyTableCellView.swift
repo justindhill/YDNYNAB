@@ -10,20 +10,80 @@ import Cocoa
 
 class MonthBudgetCurrencyTableCellView: NSTableCellView {
     
-    let currencyTextField = NSTextField(labelWithString: "")
+    enum Constant {
+        static let reuseIdentifier = NSUserInterfaceItemIdentifier(rawValue: "MonthBudgetCurrencyTableCellView")
+    }
+    
+    var font: NSFont = NSFont.systemFont(ofSize: 13) {
+        didSet {
+            self.currencyTextLayer.font = font
+            self.currencyTextLayer.fontSize = font.pointSize
+        }
+    }
+    
+    var text: String? {
+        didSet {
+            self.currencyTextLayer.string = text
+        }
+    }
+    
+    var alignment: NSTextAlignment = .left {
+        didSet {
+            switch alignment {
+            case .left:
+                self.currencyTextLayer.alignmentMode = kCAAlignmentLeft
+            case .center:
+                self.currencyTextLayer.alignmentMode = kCAAlignmentCenter
+            case .right:
+                self.currencyTextLayer.alignmentMode = kCAAlignmentRight
+            case .justified:
+                self.currencyTextLayer.alignmentMode = kCAAlignmentJustified
+            case .natural:
+                self.currencyTextLayer.alignmentMode = kCAAlignmentNatural
+            }
+        }
+    }
+    
+    private lazy var currencyTextLayer: CATextLayer = {
+        let layer = CATextLayer()
+        
+        let font = NSFont.systemFont(ofSize: 13)
+        layer.font = font
+        layer.fontSize = font.pointSize
+        layer.foregroundColor = NSColor.black.cgColor
+        layer.truncationMode = kCATruncationEnd
+        layer.frame.size.height = NSString(string: "a").size(withAttributes: [.font: font]).height
+        layer.anchorPoint = .zero
+        
+        return layer
+    }()
     
     required init?(coder decoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
-        currencyTextField.cell?.truncatesLastVisibleLine = true
-        currencyTextField.cell?.lineBreakMode = .byTruncatingTail
+        self.wantsLayer = true
+        self.identifier = Constant.reuseIdentifier
         
-        self.addSubview(self.currencyTextField)
-        self.currencyTextField.snp.makeConstraints({ currencyTextField in
-            currencyTextField.left.equalTo(self)
-            currencyTextField.right.equalTo(self)
-            currencyTextField.centerY.equalTo(self)
-        })
+        self.layer?.addSublayer(self.currencyTextLayer)
+    }
+    
+    override func layout() {
+        super.layout()
+        
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        let newTextLayerFrame = NSRect(
+            x: 0,
+            y: (self.frame.size.height - self.currencyTextLayer.frame.size.height) / 2,
+            width: self.frame.size.width,
+            height: self.currencyTextLayer.frame.size.height)
+        self.currencyTextLayer.frame = newTextLayerFrame.insetBy(dx: 3, dy: 0)
+        CATransaction.commit()
+    }
+    
+    override func viewDidChangeBackingProperties() {
+        super.viewDidChangeBackingProperties()
+        self.currencyTextLayer.contentsScale = self.window?.screen?.backingScaleFactor ?? 1
     }
 
 }

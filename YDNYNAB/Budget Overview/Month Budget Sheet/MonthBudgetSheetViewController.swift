@@ -36,22 +36,24 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
         super.viewDidLoad()
         self.budgetSheetView.outlineView.delegate = self
         self.budgetSheetView.outlineView.dataSource = self.tableDataSource
-        self.addColumnsTo(table: self.budgetSheetView.outlineView)
+        self.addColumnsToOutlineView()
         self.budgetSheetView.outlineView.expandItem(nil, expandChildren: true)
     }
     
-    func addColumnsTo(table: NSTableView) {
+    func addColumnsToOutlineView() {
+        let outlineView = self.budgetSheetView.outlineView
+        
         let budgeted = NSTableColumn(identifier: Constant.budgetedColumnIdentifier)
         budgeted.title = "Budgeted"
-        table.addTableColumn(budgeted)
+        outlineView.addTableColumn(budgeted)
         
         let outflows = NSTableColumn(identifier: Constant.outflowsColumnIdentifier)
         outflows.title = "Outflows"
-        table.addTableColumn(outflows)
+        outlineView.addTableColumn(outflows)
         
         let balance = NSTableColumn(identifier: Constant.balanceColumnIdentifier)
         balance.title = "Balance"
-        table.addTableColumn(balance)
+        outlineView.addTableColumn(balance)
     }
     
     // MARK: - NSOutlineViewDelegate
@@ -60,19 +62,25 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
             return nil
         }
         
-        let cellView = MonthBudgetCurrencyTableCellView()
-        cellView.currencyTextField.cell?.alignment = .right
+        let reuseIdentifier = MonthBudgetCurrencyTableCellView.Constant.reuseIdentifier
+        let cellView: MonthBudgetCurrencyTableCellView
+        if let existingView = outlineView.makeView(withIdentifier: reuseIdentifier, owner: self) as? MonthBudgetCurrencyTableCellView {
+            cellView = existingView
+        } else {
+            cellView = MonthBudgetCurrencyTableCellView()
+        }
+        
+        cellView.alignment = .right
         if tableColumn.identifier == MonthBudgetSheetViewController.Constant.budgetedColumnIdentifier {
             if let budgetedValue = item.budgeted.value, let numberString = self.currencyFormatter.string(from: NSNumber(value: budgetedValue)) {
-                cellView.currencyTextField.stringValue = numberString
-                cellView.currencyTextField.isEditable = true
+                cellView.text = numberString
             }
         } else if tableColumn.identifier == MonthBudgetSheetViewController.Constant.outflowsColumnIdentifier {
             if let outflowsValue = item.outflows.value, let numberString = self.currencyFormatter.string(from: NSNumber(value: outflowsValue)) {
-                cellView.currencyTextField.stringValue = numberString
+                cellView.text = numberString
             }
         } else if tableColumn.identifier == MonthBudgetSheetViewController.Constant.balanceColumnIdentifier {
-            cellView.currencyTextField.stringValue = ""
+            cellView.text = ""
         }
         
         return cellView

@@ -40,6 +40,11 @@
 		D0E4E3E4214459C6006B4F6E /* BudgetCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3E3214459C6006B4F6E /* BudgetCategoriesView.swift */; };
 		D0E4E3E6214469A8006B4F6E /* BudgetCategoriesViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3E5214469A8006B4F6E /* BudgetCategoriesViewDataSource.swift */; };
 		D0E4E3E9214587D2006B4F6E /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3E8214587D2006B4F6E /* DateUtils.swift */; };
+		D0E4E3EC214D935F006B4F6E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3EB214D935F006B4F6E /* RegisterViewController.swift */; };
+		D0E4E3EE214D9D5A006B4F6E /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3ED214D9D5A006B4F6E /* RegisterView.swift */; };
+		D0E4E3F0214DA15F006B4F6E /* NSTableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3EF214DA15F006B4F6E /* NSTableView+Extensions.swift */; };
+		D0E4E3F2214DA22A006B4F6E /* AllTransactionsRegisterViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F1214DA22A006B4F6E /* AllTransactionsRegisterViewDataSource.swift */; };
+		D0E4E3F4214DA93F006B4F6E /* RegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F3214DA93F006B4F6E /* RegisterCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +86,11 @@
 		D0E4E3E3214459C6006B4F6E /* BudgetCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCategoriesView.swift; sourceTree = "<group>"; };
 		D0E4E3E5214469A8006B4F6E /* BudgetCategoriesViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCategoriesViewDataSource.swift; sourceTree = "<group>"; };
 		D0E4E3E8214587D2006B4F6E /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
+		D0E4E3EB214D935F006B4F6E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		D0E4E3ED214D9D5A006B4F6E /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		D0E4E3EF214DA15F006B4F6E /* NSTableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTableView+Extensions.swift"; sourceTree = "<group>"; };
+		D0E4E3F1214DA22A006B4F6E /* AllTransactionsRegisterViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransactionsRegisterViewDataSource.swift; sourceTree = "<group>"; };
+		D0E4E3F3214DA93F006B4F6E /* RegisterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +148,7 @@
 				D06C648C21432C87000EF618 /* YNAB Importer */,
 				D0CE3BDC213C2F5300798CF5 /* Sidebar */,
 				D0CE3BE6213F7B4200798CF5 /* Budget Overview */,
+				D0E4E3EA214D933D006B4F6E /* Register */,
 				D0E4E3E7214587C6006B4F6E /* Utils */,
 				D0CE3BDF213C375E00798CF5 /* Extensions */,
 				D0510579213B5C3F008133B5 /* AppDelegate.swift */,
@@ -182,6 +193,7 @@
 			children = (
 				D0CE3BE0213C376A00798CF5 /* NSTextView+Extensions.swift */,
 				D0E4E3DC21439151006B4F6E /* NSView+Extensions.swift */,
+				D0E4E3EF214DA15F006B4F6E /* NSTableView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -241,6 +253,17 @@
 				D0E4E3E8214587D2006B4F6E /* DateUtils.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		D0E4E3EA214D933D006B4F6E /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				D0E4E3ED214D9D5A006B4F6E /* RegisterView.swift */,
+				D0E4E3EB214D935F006B4F6E /* RegisterViewController.swift */,
+				D0E4E3F1214DA22A006B4F6E /* AllTransactionsRegisterViewDataSource.swift */,
+				D0E4E3F3214DA93F006B4F6E /* RegisterCell.swift */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,6 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0E4E3EE214D9D5A006B4F6E /* RegisterView.swift in Sources */,
 				D0CE3BEB213F7B8200798CF5 /* MonthBudgetSheetView.swift in Sources */,
 				D0E4E3E4214459C6006B4F6E /* BudgetCategoriesView.swift in Sources */,
 				D0CE3BE3213F6B7B00798CF5 /* BudgetOverviewView.swift in Sources */,
@@ -371,6 +395,7 @@
 				D06C648421420667000EF618 /* MonthBudgetTotalsView.swift in Sources */,
 				D06C648821421BF9000EF618 /* MonthBudgetTableDataSource.swift in Sources */,
 				D0CE3BE9213F7B7500798CF5 /* MonthBudgetSheetViewController.swift in Sources */,
+				D0E4E3F2214DA22A006B4F6E /* AllTransactionsRegisterViewDataSource.swift in Sources */,
 				D06C648A21421D0F000EF618 /* MonthBudgetTableRowView.swift in Sources */,
 				D051057A213B5C3F008133B5 /* AppDelegate.swift in Sources */,
 				D06C648E21432CC9000EF618 /* YNABBudgetImporter.swift in Sources */,
@@ -381,10 +406,13 @@
 				D0E4E3CD21433671006B4F6E /* BudgetMasterCategory.swift in Sources */,
 				D0E4E3D721434A67006B4F6E /* Transaction.swift in Sources */,
 				D0E4E3D521434A59006B4F6E /* Payee.swift in Sources */,
+				D0E4E3F0214DA15F006B4F6E /* NSTableView+Extensions.swift in Sources */,
+				D0E4E3F4214DA93F006B4F6E /* RegisterCell.swift in Sources */,
 				D0E4E3CF214336B7006B4F6E /* BudgetSubcategory.swift in Sources */,
 				D0CE3BED213F7C4A00798CF5 /* MonthBudgetSummaryView.swift in Sources */,
 				D0510590213B6CAB008133B5 /* SidebarViewController.swift in Sources */,
 				D0E4E3D1214336F1006B4F6E /* BudgetLine.swift in Sources */,
+				D0E4E3EC214D935F006B4F6E /* RegisterViewController.swift in Sources */,
 				D0CE3BE1213C376A00798CF5 /* NSTextView+Extensions.swift in Sources */,
 				D0E4E3DD21439151006B4F6E /* NSView+Extensions.swift in Sources */,
 				D06C649021432CD3000EF618 /* YNABTransactionImporter.swift in Sources */,
