@@ -20,7 +20,6 @@
 		D06C648E21432CC9000EF618 /* YNABBudgetImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648D21432CC9000EF618 /* YNABBudgetImporter.swift */; };
 		D06C649021432CD3000EF618 /* YNABTransactionImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648F21432CD3000EF618 /* YNABTransactionImporter.swift */; };
 		D0CE3BDE213C359300798CF5 /* StackedSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BDD213C359300798CF5 /* StackedSelectionView.swift */; };
-		D0CE3BE1213C376A00798CF5 /* NSTextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE0213C376A00798CF5 /* NSTextView+Extensions.swift */; };
 		D0CE3BE3213F6B7B00798CF5 /* BudgetOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */; };
 		D0CE3BE5213F728C00798CF5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE4213F728C00798CF5 /* main.swift */; };
 		D0CE3BE9213F7B7500798CF5 /* MonthBudgetSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE8213F7B7500798CF5 /* MonthBudgetSheetViewController.swift */; };
@@ -67,7 +66,6 @@
 		D06C648D21432CC9000EF618 /* YNABBudgetImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YNABBudgetImporter.swift; sourceTree = "<group>"; };
 		D06C648F21432CD3000EF618 /* YNABTransactionImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YNABTransactionImporter.swift; sourceTree = "<group>"; };
 		D0CE3BDD213C359300798CF5 /* StackedSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedSelectionView.swift; sourceTree = "<group>"; };
-		D0CE3BE0213C376A00798CF5 /* NSTextView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextView+Extensions.swift"; sourceTree = "<group>"; };
 		D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetOverviewView.swift; sourceTree = "<group>"; };
 		D0CE3BE4213F728C00798CF5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D0CE3BE8213F7B7500798CF5 /* MonthBudgetSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthBudgetSheetViewController.swift; sourceTree = "<group>"; };
@@ -194,7 +192,6 @@
 		D0CE3BDF213C375E00798CF5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D0CE3BE0213C376A00798CF5 /* NSTextView+Extensions.swift */,
 				D0E4E3DC21439151006B4F6E /* NSView+Extensions.swift */,
 				D0E4E3EF214DA15F006B4F6E /* NSTableView+Extensions.swift */,
 			);
@@ -417,7 +414,6 @@
 				D0510590213B6CAB008133B5 /* SidebarViewController.swift in Sources */,
 				D0E4E3D1214336F1006B4F6E /* BudgetLine.swift in Sources */,
 				D0E4E3EC214D935F006B4F6E /* RegisterViewController.swift in Sources */,
-				D0CE3BE1213C376A00798CF5 /* NSTextView+Extensions.swift in Sources */,
 				D0E4E3DD21439151006B4F6E /* NSView+Extensions.swift in Sources */,
 				D06C649021432CD3000EF618 /* YNABTransactionImporter.swift in Sources */,
 				D0E4E3D3214349A7006B4F6E /* Account.swift in Sources */,

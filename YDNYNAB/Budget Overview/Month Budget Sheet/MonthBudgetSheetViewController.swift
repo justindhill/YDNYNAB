@@ -74,10 +74,13 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
         if tableColumn.identifier == MonthBudgetSheetViewController.Constant.budgetedColumnIdentifier {
             if let budgetedValue = item.budgeted.value, let numberString = self.currencyFormatter.string(from: NSNumber(value: budgetedValue)) {
                 cellView.text = numberString
+                cellView.mouseoverCursor = .iBeam
             }
         } else if tableColumn.identifier == MonthBudgetSheetViewController.Constant.outflowsColumnIdentifier {
             if let outflowsValue = item.outflows.value, let numberString = self.currencyFormatter.string(from: NSNumber(value: outflowsValue)) {
                 cellView.text = numberString
+                cellView.mouseoverCursor = .pointingHand
+                cellView.underlinesTextOnMouseover = true
             }
         } else if tableColumn.identifier == MonthBudgetSheetViewController.Constant.balanceColumnIdentifier {
             cellView.text = ""

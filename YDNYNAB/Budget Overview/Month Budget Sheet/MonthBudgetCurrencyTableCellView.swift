@@ -13,6 +13,9 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
     enum Constant {
         static let reuseIdentifier = NSUserInterfaceItemIdentifier(rawValue: "MonthBudgetCurrencyTableCellView")
     }
+        
+    var mouseoverCursor: NSCursor? = nil
+    var underlinesTextOnMouseover: Bool = false
     
     var font: NSFont = NSFont.systemFont(ofSize: 13) {
         didSet {
@@ -54,6 +57,9 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
         layer.truncationMode = kCATruncationEnd
         layer.frame.size.height = NSString(string: "a").size(withAttributes: [.font: font]).height
         layer.anchorPoint = .zero
+        layer.actions = [
+            "contents": NSNull()
+        ]
         
         return layer
     }()
@@ -84,6 +90,35 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
     override func viewDidChangeBackingProperties() {
         super.viewDidChangeBackingProperties()
         self.currencyTextLayer.contentsScale = self.window?.screen?.backingScaleFactor ?? 1
+    }
+    
+    override func mouseEntered(with event: NSEvent) {
+        self.mouseoverCursor?.set()
+        
+        if let text = self.text, self.underlinesTextOnMouseover {
+            self.currencyTextLayer.string = NSAttributedString(
+                string: text,
+                attributes: [
+                    .font: self.font,
+                    .foregroundColor: NSColor.black,
+                    .underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+                    .underlineColor: NSColor.black
+                ]
+            )
+        }
+    }
+    
+    override func mouseExited(with event: NSEvent) {
+        NSCursor.arrow.set()
+        
+        if self.underlinesTextOnMouseover {
+            self.currencyTextLayer.string = self.text
+        }
+    }
+    
+    override func updateTrackingAreas() {
+        super.updateTrackingAreas()
+        self.tracksMouseMovement = true
     }
 
 }
