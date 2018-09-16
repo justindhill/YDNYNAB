@@ -3,5 +3,4 @@ target 'YDNYNAB' do
     use_frameworks!
     pod 'SnapKit'
     pod 'RealmSwift'
-    pod 'Reveal-SDK'
 end
