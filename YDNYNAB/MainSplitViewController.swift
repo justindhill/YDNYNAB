@@ -14,6 +14,8 @@ class MainSplitViewController: NSSplitViewController, SidebarViewControllerDeleg
     let contentViewController = BudgetOverviewViewController()
     lazy var allTransactionsRegister = RegisterViewController()
     lazy var sidebarItem = NSSplitViewItem(sidebarWithViewController: self.sidebarViewController)
+    
+    private var lastSelection: SidebarViewController.SelectionIdentifier = .budget
 
     
     override func loadView() {
@@ -49,8 +51,14 @@ class MainSplitViewController: NSSplitViewController, SidebarViewControllerDeleg
     }
     
     func sidebarViewController(_ sidebarViewController: SidebarViewController, selectionDidChange selection: SidebarViewController.SelectionIdentifier) {
+        
+        if selection == self.lastSelection {
+            return
+        }
+        
+        self.lastSelection = selection
+        
         let contentItem: NSSplitViewItem
-
         switch selection {
         case .budget:
             contentItem = NSSplitViewItem(viewController: self.contentViewController)
