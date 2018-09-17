@@ -45,6 +45,8 @@
 		D0E4E3F2214DA22A006B4F6E /* AllTransactionsRegisterViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F1214DA22A006B4F6E /* AllTransactionsRegisterViewDataSource.swift */; };
 		D0E4E3F4214DA93F006B4F6E /* RegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F3214DA93F006B4F6E /* RegisterCell.swift */; };
 		D0E4E3F6214EFBD5006B4F6E /* YDNOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F5214EFBD5006B4F6E /* YDNOutlineView.swift */; };
+		D0E4E3F8214F0A71006B4F6E /* NSTableCellView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F7214F0A71006B4F6E /* NSTableCellView+Extensions.swift */; };
+		D0E4E3FA214F13AC006B4F6E /* RegisterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F9214F13AC006B4F6E /* RegisterRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +93,8 @@
 		D0E4E3F1214DA22A006B4F6E /* AllTransactionsRegisterViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransactionsRegisterViewDataSource.swift; sourceTree = "<group>"; };
 		D0E4E3F3214DA93F006B4F6E /* RegisterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCell.swift; sourceTree = "<group>"; };
 		D0E4E3F5214EFBD5006B4F6E /* YDNOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNOutlineView.swift; sourceTree = "<group>"; };
+		D0E4E3F7214F0A71006B4F6E /* NSTableCellView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTableCellView+Extensions.swift"; sourceTree = "<group>"; };
+		D0E4E3F9214F13AC006B4F6E /* RegisterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +198,7 @@
 			children = (
 				D0E4E3DC21439151006B4F6E /* NSView+Extensions.swift */,
 				D0E4E3EF214DA15F006B4F6E /* NSTableView+Extensions.swift */,
+				D0E4E3F7214F0A71006B4F6E /* NSTableCellView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 				D0E4E3EB214D935F006B4F6E /* RegisterViewController.swift */,
 				D0E4E3F1214DA22A006B4F6E /* AllTransactionsRegisterViewDataSource.swift */,
 				D0E4E3F3214DA93F006B4F6E /* RegisterCell.swift */,
+				D0E4E3F9214F13AC006B4F6E /* RegisterRowView.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -384,6 +390,7 @@
 				D0E4E3EE214D9D5A006B4F6E /* RegisterView.swift in Sources */,
 				D0CE3BEB213F7B8200798CF5 /* MonthBudgetSheetView.swift in Sources */,
 				D0E4E3E4214459C6006B4F6E /* BudgetCategoriesView.swift in Sources */,
+				D0E4E3F8214F0A71006B4F6E /* NSTableCellView+Extensions.swift in Sources */,
 				D0CE3BE3213F6B7B00798CF5 /* BudgetOverviewView.swift in Sources */,
 				D0E4E3D9214355BC006B4F6E /* MenuBar.swift in Sources */,
 				D0E4E3E2214459B7006B4F6E /* BudgetCategoriesViewController.swift in Sources */,
@@ -404,6 +411,7 @@
 				D06C648621421004000EF618 /* MainSplitViewControllerView.swift in Sources */,
 				D0E4E3E6214469A8006B4F6E /* BudgetCategoriesViewDataSource.swift in Sources */,
 				D0E4E3CD21433671006B4F6E /* BudgetMasterCategory.swift in Sources */,
+				D0E4E3FA214F13AC006B4F6E /* RegisterRowView.swift in Sources */,
 				D0E4E3D721434A67006B4F6E /* Transaction.swift in Sources */,
 				D0E4E3D521434A59006B4F6E /* Payee.swift in Sources */,
 				D0E4E3F0214DA15F006B4F6E /* NSTableView+Extensions.swift in Sources */,

@@ -10,17 +10,42 @@ import Cocoa
 
 class RegisterCell: NSTableCellView {
     
-    override var backgroundStyle: NSView.BackgroundStyle {
+    enum Constant {
+        static let collapsedHeight: CGFloat = RegisterRowView.Constant.collapsedHeight
+        static let expandedHeight: CGFloat = RegisterRowView.Constant.expandedHeight
+    }
+    
+//    override var backgroundStyle: NSView.BackgroundStyle {
+//        didSet {
+//            if backgroundStyle != oldValue {
+//                self.updateAppearance()
+//            }
+//        }
+//    }
+    
+    var isEditable: Bool = false {
         didSet {
-            if backgroundStyle != oldValue {
-                self.updateAppearance()
-            }
+            self.needsLayout = true
         }
     }
+    
+    override var isFlipped: Bool {
+        return true
+    }
+    
+    private let font = NSFont.systemFont(ofSize: 13)
+    
+    private var inputTextField: NSTextField? = nil
 
     var text: String? {
         didSet {
-            self.textLayer.string = text
+            if self.isEditable {
+                if let text = text {
+                    self.inputTextField?.stringValue = text
+                }
+            } else {
+                self.textLayer.string = text
+            }
         }
     }
     
@@ -44,16 +69,15 @@ class RegisterCell: NSTableCellView {
     lazy var textLayer: CATextLayer = {
         let textLayer = CATextLayer()
         
-        let font = NSFont.systemFont(ofSize: 13)
-        
-        textLayer.font = font
+        textLayer.font = self.font
         textLayer.fontSize = font.pointSize
         textLayer.anchorPoint = CGPoint(x: 0, y: 0)
         textLayer.foregroundColor = NSColor.black.cgColor
         textLayer.truncationMode = kCATruncationEnd
         textLayer.frame.size.height = NSString(string: "a").size(withAttributes: [.font: font]).height
         textLayer.actions = [
-            "contents": NSNull()
+            "contents": NSNull(),
+            "hidden": NSNull()
         ]
         
         return textLayer
@@ -64,20 +88,43 @@ class RegisterCell: NSTableCellView {
         super.init(frame: frameRect)
         
         self.wantsLayer = true
+        self.layer?.isGeometryFlipped = true
         self.layer?.addSublayer(self.textLayer)
     }
     
     override func layout() {
         super.layout()
         
-        
-        let newFrame = NSRect(
+        var newFrame = NSRect(
             x: 0,
-            y: (self.frame.size.height - self.textLayer.frame.size.height) / 2,
+            y: (Constant.collapsedHeight - self.textLayer.frame.size.height) / 2,
             width: self.bounds.size.width,
             height: self.textLayer.frame.size.height)
+        newFrame = newFrame.insetBy(dx: 3, dy: 0)
         
-        self.textLayer.frame = newFrame.insetBy(dx: 3, dy: 0)
+        if self.isEditable {
+            let inputTextField: NSTextField
+            if let existingTextField = self.inputTextField {
+                inputTextField = existingTextField
+            } else {
+                inputTextField = self.configureNewTextField()
+                self.inputTextField = inputTextField
+                self.addSubview(inputTextField)
+            }
+            
+            if let text = self.text {
+                inputTextField.stringValue = text
+            }
+            
+            self.textLayer.isHidden = true
+            inputTextField.frame = newFrame
+        } else {
+            self.inputTextField?.removeFromSuperview()
+            self.inputTextField = nil
+            self.textLayer.isHidden = false
+            self.textLayer.frame = newFrame
+        }
+
     }
     
     override func viewDidChangeBackingProperties() {
@@ -96,6 +143,20 @@ class RegisterCell: NSTableCellView {
         }
         
         CATransaction.commit()
+    }
+    
+    func configureNewTextField() -> NSTextField {
+        let textField = NSTextField()
+        textField.isBordered = false
+        textField.isBezeled = false
+        textField.textColor = NSColor.black
+        textField.backgroundColor = NSColor.white
+        textField.font = self.font
+        textField.alignment = self.alignment
+        textField.cell?.truncatesLastVisibleLine = true
+        textField.cell?.lineBreakMode = .byTruncatingTail
+        
+        return textField
     }
     
 }

@@ -33,6 +33,8 @@ class RegisterViewController: NSViewController, NSTableViewDelegate {
     }
     
     let dataSource = AllTransactionsRegisterViewDataSource()
+    
+    var focusedRow: Int? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +71,10 @@ class RegisterViewController: NSViewController, NSTableViewDelegate {
                                  initialWidth: 70)
     }
     
+    func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+        return RegisterRowView()
+    }
+    
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let tableColumn = tableColumn else {
             return nil
@@ -90,8 +96,31 @@ class RegisterViewController: NSViewController, NSTableViewDelegate {
         return view
     }
     
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        let newSelectedRow = self.registerView.tableView.selectedRow
+        var rows = IndexSet(integer: newSelectedRow)
+        
+        if let focusedRow = self.focusedRow {
+            let rowView = self.registerView.tableView.rowView(atRow: focusedRow, makeIfNecessary: false) as? RegisterRowView
+            rowView?.isEditing = false
+
+            rows.insert(focusedRow)
+        }
+        
+        let newSelectedRowView = self.registerView.tableView.rowView(atRow: newSelectedRow, makeIfNecessary: false) as? RegisterRowView
+        newSelectedRowView?.isEditing = true
+        
+        self.focusedRow = self.registerView.tableView.selectedRow
+        self.registerView.tableView.noteHeightOfRows(withIndexesChanged: rows)
+    }
+    
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 25
+        if row == self.registerView.tableView.selectedRow {
+            return RegisterRowView.Constant.expandedHeight
+        } else {
+            return RegisterRowView.Constant.collapsedHeight
+        }
     }
     
     func textAlignment(forColumnIdentifier columnIdentifier: ColumnIdentifier) -> NSTextAlignment {
