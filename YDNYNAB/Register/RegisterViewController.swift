@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class RegisterViewController: NSViewController, NSTableViewDelegate {
+class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRowViewDelegate {
     
     enum ColumnIdentifier: String {
         case account = "YDNMonthRegisterViewAccountColumnIdentifier"
@@ -72,7 +72,10 @@ class RegisterViewController: NSViewController, NSTableViewDelegate {
     }
     
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-        return RegisterRowView()
+        let rowView = RegisterRowView()
+        rowView.delegate = self
+        
+        return rowView
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -99,19 +102,23 @@ class RegisterViewController: NSViewController, NSTableViewDelegate {
     
     func tableViewSelectionDidChange(_ notification: Notification) {
         let newSelectedRow = self.registerView.tableView.selectedRow
-        var rows = IndexSet(integer: newSelectedRow)
+        var rows = IndexSet()
         
         if let focusedRow = self.focusedRow {
             let rowView = self.registerView.tableView.rowView(atRow: focusedRow, makeIfNecessary: false) as? RegisterRowView
             rowView?.isEditing = false
-
             rows.insert(focusedRow)
         }
         
-        let newSelectedRowView = self.registerView.tableView.rowView(atRow: newSelectedRow, makeIfNecessary: false) as? RegisterRowView
-        newSelectedRowView?.isEditing = true
+        if newSelectedRow >= 0 {
+            let newSelectedRowView = self.registerView.tableView.rowView(atRow: newSelectedRow, makeIfNecessary: false) as? RegisterRowView
+            newSelectedRowView?.isEditing = true
+            rows.insert(newSelectedRow)
+            self.focusedRow = self.registerView.tableView.selectedRow
+        } else {
+            self.focusedRow = nil
+        }
         
-        self.focusedRow = self.registerView.tableView.selectedRow
         self.registerView.tableView.noteHeightOfRows(withIndexesChanged: rows)
     }
     
@@ -130,6 +137,23 @@ class RegisterViewController: NSViewController, NSTableViewDelegate {
         default:
             return .left
         }
+    }
+    
+    // MARK: - RegisterRowViewDelegate
+    func registerRowViewDidClickDone(_ rowView: RegisterRowView) {
+        guard let focusedRow = self.focusedRow else {
+            return
+        }
+        
+        self.registerView.tableView.deselectRow(focusedRow)
+    }
+    
+    func registerRowViewDidClickCancel(_ rowView: RegisterRowView) {
+        guard let focusedRow = self.focusedRow else {
+            return
+        }
+        
+        self.registerView.tableView.deselectRow(focusedRow)
     }
     
 }

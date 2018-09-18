@@ -30,8 +30,8 @@ class MenuBar: NSObject {
     private func populateFileMenu() {
         let fileMenu = self.addMenu(named: "File")
         self.addItem(named: "Import YNAB Data", keyEquivalent: "", to: fileMenu) {
-            let _ = YNABBudgetImporter(csvFileUrl: URL(fileURLWithPath: "/Users/justin/Dropbox/budget.csv"))
-            let _ = YNABTransactionImporter(csvFileUrl: URL(fileURLWithPath: "/Users/justin/Dropbox/transactions.csv"))
+            let _ = YNABBudgetImporter(csvFileUrl: URL(fileURLWithPath: "/Users/justin/Desktop/budget.csv"))
+            let _ = YNABTransactionImporter(csvFileUrl: URL(fileURLWithPath: "/Users/justin/Desktop/transactions.csv"))
         }
     }
     

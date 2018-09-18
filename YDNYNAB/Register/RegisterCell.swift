@@ -53,15 +53,15 @@ class RegisterCell: NSTableCellView {
         didSet {
             switch alignment {
             case .left:
-                self.textLayer.alignmentMode = kCAAlignmentLeft
+                self.textLayer.alignmentMode = .left
             case .center:
-                self.textLayer.alignmentMode = kCAAlignmentCenter
+                self.textLayer.alignmentMode = .center
             case .right:
-                self.textLayer.alignmentMode = kCAAlignmentRight
+                self.textLayer.alignmentMode = .right
             case .justified:
-                self.textLayer.alignmentMode = kCAAlignmentJustified
+                self.textLayer.alignmentMode = .justified
             case .natural:
-                self.textLayer.alignmentMode = kCAAlignmentNatural
+                self.textLayer.alignmentMode = .natural
             }
         }
     }
@@ -72,8 +72,7 @@ class RegisterCell: NSTableCellView {
         textLayer.font = self.font
         textLayer.fontSize = font.pointSize
         textLayer.anchorPoint = CGPoint(x: 0, y: 0)
-        textLayer.foregroundColor = NSColor.black.cgColor
-        textLayer.truncationMode = kCATruncationEnd
+        textLayer.truncationMode = .end
         textLayer.frame.size.height = NSString(string: "a").size(withAttributes: [.font: font]).height
         textLayer.actions = [
             "contents": NSNull(),
@@ -94,6 +93,9 @@ class RegisterCell: NSTableCellView {
     
     override func layout() {
         super.layout()
+        
+        self.inputTextField?.textColor = Theme.Color.text
+        self.textLayer.foregroundColor = Theme.Color.text.cgColor
         
         var newFrame = NSRect(
             x: 0,
@@ -132,6 +134,10 @@ class RegisterCell: NSTableCellView {
         self.textLayer.contentsScale = self.window?.screen?.backingScaleFactor ?? 1
     }
     
+    func beginEditing() {
+        self.window?.makeFirstResponder(self.inputTextField)
+    }
+    
     func updateAppearance() {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
@@ -139,7 +145,7 @@ class RegisterCell: NSTableCellView {
         if self.backgroundStyle == .dark {
             self.textLayer.foregroundColor = NSColor.white.cgColor
         } else if self.backgroundStyle == .light {
-            self.textLayer.foregroundColor = NSColor.black.cgColor
+            self.textLayer.foregroundColor = Theme.Color.text.cgColor
         }
         
         CATransaction.commit()
@@ -149,8 +155,8 @@ class RegisterCell: NSTableCellView {
         let textField = NSTextField()
         textField.isBordered = false
         textField.isBezeled = false
-        textField.textColor = NSColor.black
-        textField.backgroundColor = NSColor.white
+        textField.textColor = Theme.Color.text
+        textField.backgroundColor = NSColor.textBackgroundColor
         textField.font = self.font
         textField.alignment = self.alignment
         textField.cell?.truncatesLastVisibleLine = true

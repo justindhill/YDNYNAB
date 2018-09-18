@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6923BFC52CAC63724D8457D5 /* Pods_YDNYNAB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078860FB70C8F716E3E6E899 /* Pods_YDNYNAB.framework */; };
+		12F93AD13E332F4909EBBC15 /* Pods_YDNYNAB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DFDDD400B8EF8D02A606A2 /* Pods_YDNYNAB.framework */; };
+		D04FB0E621509E41008880B7 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04FB0E521509E41008880B7 /* Theme.swift */; };
 		D051057A213B5C3F008133B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0510579213B5C3F008133B5 /* AppDelegate.swift */; };
 		D051057C213B5C40008133B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D051057B213B5C40008133B5 /* Assets.xcassets */; };
 		D0510588213B6230008133B5 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0510587213B6230008133B5 /* MainSplitViewController.swift */; };
@@ -50,9 +51,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		078860FB70C8F716E3E6E899 /* Pods_YDNYNAB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YDNYNAB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		34DB1D342522377318465EF7 /* Pods-YDNYNAB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.debug.xcconfig"; sourceTree = "<group>"; };
-		6DF949C21C6A4EC6C6C3EA70 /* Pods-YDNYNAB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.release.xcconfig"; path = "Pods/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.release.xcconfig"; sourceTree = "<group>"; };
+		373F56684FA28CD7D37ECB5F /* Pods-YDNYNAB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.release.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.release.xcconfig"; sourceTree = "<group>"; };
+		43DFDDD400B8EF8D02A606A2 /* Pods_YDNYNAB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YDNYNAB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D04FB0E521509E41008880B7 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		D0510576213B5C3F008133B5 /* YDNYNAB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YDNYNAB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0510579213B5C3F008133B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D051057B213B5C40008133B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -95,6 +96,7 @@
 		D0E4E3F5214EFBD5006B4F6E /* YDNOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNOutlineView.swift; sourceTree = "<group>"; };
 		D0E4E3F7214F0A71006B4F6E /* NSTableCellView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTableCellView+Extensions.swift"; sourceTree = "<group>"; };
 		D0E4E3F9214F13AC006B4F6E /* RegisterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRowView.swift; sourceTree = "<group>"; };
+		DEA211A51857BAB23CEA0513 /* Pods-YDNYNAB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.debug.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,26 +104,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6923BFC52CAC63724D8457D5 /* Pods_YDNYNAB.framework in Frameworks */,
+				12F93AD13E332F4909EBBC15 /* Pods_YDNYNAB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0759B1608C5E695D713A6E7B /* Pods */ = {
+		6D497F3165AF91A06EBC673B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				34DB1D342522377318465EF7 /* Pods-YDNYNAB.debug.xcconfig */,
-				6DF949C21C6A4EC6C6C3EA70 /* Pods-YDNYNAB.release.xcconfig */,
+				DEA211A51857BAB23CEA0513 /* Pods-YDNYNAB.debug.xcconfig */,
+				373F56684FA28CD7D37ECB5F /* Pods-YDNYNAB.release.xcconfig */,
 			);
-			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
-		94963C0B5AA62B593FDE4C83 /* Frameworks */ = {
+		CF4F54856648FF8521EF5EC7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				078860FB70C8F716E3E6E899 /* Pods_YDNYNAB.framework */,
+				43DFDDD400B8EF8D02A606A2 /* Pods_YDNYNAB.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -132,8 +134,8 @@
 				D0510578213B5C3F008133B5 /* YDNYNAB */,
 				D06C648B21432C69000EF618 /* Supporting */,
 				D0510577213B5C3F008133B5 /* Products */,
-				0759B1608C5E695D713A6E7B /* Pods */,
-				94963C0B5AA62B593FDE4C83 /* Frameworks */,
+				6D497F3165AF91A06EBC673B /* Pods */,
+				CF4F54856648FF8521EF5EC7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -256,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				D0E4E3E8214587D2006B4F6E /* DateUtils.swift */,
+				D04FB0E521509E41008880B7 /* Theme.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -279,11 +282,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0510584213B5C40008133B5 /* Build configuration list for PBXNativeTarget "YDNYNAB" */;
 			buildPhases = (
-				54C44CD245DAE68EFEA621E9 /* [CP] Check Pods Manifest.lock */,
+				7D9247CA2E786233AF3E40F8 /* [CP] Check Pods Manifest.lock */,
 				D0510572213B5C3F008133B5 /* Sources */,
 				D0510573213B5C3F008133B5 /* Frameworks */,
 				D0510574213B5C3F008133B5 /* Resources */,
-				4F4340B26546741418ABCDFD /* [CP] Embed Pods Frameworks */,
+				5CBC883533380C5CD2E64196 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -300,6 +303,7 @@
 		D051056E213B5C3F008133B5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = YDN;
 				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Justin Hill";
@@ -311,7 +315,7 @@
 				};
 			};
 			buildConfigurationList = D0510571213B5C3F008133B5 /* Build configuration list for PBXProject "YDNYNAB" */;
-			compatibilityVersion = "Xcode 8.0";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -340,18 +344,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4F4340B26546741418ABCDFD /* [CP] Embed Pods Frameworks */ = {
+		5CBC883533380C5CD2E64196 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -359,19 +367,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		54C44CD245DAE68EFEA621E9 /* [CP] Check Pods Manifest.lock */ = {
+		7D9247CA2E786233AF3E40F8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-YDNYNAB-checkManifestLockResult.txt",
 			);
@@ -417,6 +429,7 @@
 				D0E4E3F0214DA15F006B4F6E /* NSTableView+Extensions.swift in Sources */,
 				D0E4E3F4214DA93F006B4F6E /* RegisterCell.swift in Sources */,
 				D0E4E3CF214336B7006B4F6E /* BudgetSubcategory.swift in Sources */,
+				D04FB0E621509E41008880B7 /* Theme.swift in Sources */,
 				D0E4E3F6214EFBD5006B4F6E /* YDNOutlineView.swift in Sources */,
 				D0CE3BED213F7C4A00798CF5 /* MonthBudgetSummaryView.swift in Sources */,
 				D0510590213B6CAB008133B5 /* SidebarViewController.swift in Sources */,
@@ -541,13 +554,14 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
 		D0510585213B5C40008133B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34DB1D342522377318465EF7 /* Pods-YDNYNAB.debug.xcconfig */;
+			baseConfigurationReference = DEA211A51857BAB23CEA0513 /* Pods-YDNYNAB.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "${SRCROOT}/Supporting/YDNYNAB.entitlements";
@@ -555,7 +569,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = N3MXL5AYEW;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinhill.YDNYNAB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -565,7 +582,7 @@
 		};
 		D0510586213B5C40008133B5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6DF949C21C6A4EC6C6C3EA70 /* Pods-YDNYNAB.release.xcconfig */;
+			baseConfigurationReference = 373F56684FA28CD7D37ECB5F /* Pods-YDNYNAB.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "${SRCROOT}/Supporting/YDNYNAB.entitlements";
@@ -573,7 +590,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = N3MXL5AYEW;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinhill.YDNYNAB;
 				PRODUCT_NAME = "$(TARGET_NAME)";

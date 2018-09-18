@@ -89,13 +89,8 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
         return cellView
     }
     
-    func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {
-        let rowView = MonthBudgetTableRowView(row: outlineView.row(forItem: item))
-        if item is BudgetMasterCategory {
-            rowView.backgroundColor = NSColor.systemBlue.withAlphaComponent(0.25)
-        }
-        
-        return rowView
+    func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {       
+        return MonthBudgetTableRowView(row: outlineView.row(forItem: item))
     }
     
     func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {

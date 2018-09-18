@@ -34,15 +34,15 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
         didSet {
             switch alignment {
             case .left:
-                self.currencyTextLayer.alignmentMode = kCAAlignmentLeft
+                self.currencyTextLayer.alignmentMode = .left
             case .center:
-                self.currencyTextLayer.alignmentMode = kCAAlignmentCenter
+                self.currencyTextLayer.alignmentMode = .center
             case .right:
-                self.currencyTextLayer.alignmentMode = kCAAlignmentRight
+                self.currencyTextLayer.alignmentMode = .right
             case .justified:
-                self.currencyTextLayer.alignmentMode = kCAAlignmentJustified
+                self.currencyTextLayer.alignmentMode = .justified
             case .natural:
-                self.currencyTextLayer.alignmentMode = kCAAlignmentNatural
+                self.currencyTextLayer.alignmentMode = .natural
             }
         }
     }
@@ -53,8 +53,7 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
         let font = NSFont.systemFont(ofSize: 13)
         layer.font = font
         layer.fontSize = font.pointSize
-        layer.foregroundColor = NSColor.black.cgColor
-        layer.truncationMode = kCATruncationEnd
+        layer.truncationMode = .end
         layer.frame.size.height = NSString(string: "a").size(withAttributes: [.font: font]).height
         layer.anchorPoint = .zero
         layer.actions = [
@@ -76,11 +75,13 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
     override func layout() {
         super.layout()
         
+        self.currencyTextLayer.foregroundColor = Theme.Color.text.cgColor
+        
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         let newTextLayerFrame = NSRect(
             x: 0,
-            y: (self.frame.size.height - self.currencyTextLayer.frame.size.height) / 2,
+            y: ceil((self.frame.size.height - self.currencyTextLayer.frame.size.height) / 2),
             width: self.frame.size.width,
             height: self.currencyTextLayer.frame.size.height)
         self.currencyTextLayer.frame = newTextLayerFrame.insetBy(dx: 3, dy: 0)
@@ -100,9 +101,9 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
                 string: text,
                 attributes: [
                     .font: self.font,
-                    .foregroundColor: NSColor.black,
-                    .underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
-                    .underlineColor: NSColor.black
+                    .foregroundColor: Theme.Color.text,
+                    .underlineStyle: NSUnderlineStyle.single.rawValue,
+                    .underlineColor: Theme.Color.text
                 ]
             )
         }

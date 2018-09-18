@@ -12,11 +12,9 @@ protocol StackedSelectionViewDelegate: class {
     func stackedSelectionView(_ stackedSelectionView: StackedSelectionView, selectionDidChange: StackedSelectionView.SelectableItem)
 }
 
-class StackedSelectionView: NSControl {
+class StackedSelectionView: NSView {
     
     enum Constant {
-        static let itemSelectedColor = NSColor.black
-        static let itemHighlightedColor = Constant.itemSelectedColor.withAlphaComponent(0.35)
         static let itemLeadingTextOffset: CGFloat = 40
     }
     
@@ -36,12 +34,16 @@ class StackedSelectionView: NSControl {
             super.init(frame: .zero)
             
             self.titleLabel.stringValue = title
-            self.titleLabel.textColor = NSColor.black
             
             self.addSubview(self.titleLabel)
             self.titleLabel.snp.makeConstraints {
                 $0.edges.equalTo(self).inset(5)
             }
+        }
+        
+        override func layout() {
+            super.layout()
+            self.titleLabel.textColor = Theme.Color.text
         }
         
     }
@@ -98,7 +100,7 @@ class StackedSelectionView: NSControl {
         self.items.forEach { item in
             let mouseLocation = self.convert(event.locationInWindow, from: nil)
             let mouseInItem = item.frame.contains(mouseLocation)
-            item.layer?.backgroundColor = (mouseInItem ? Constant.itemHighlightedColor : NSColor.clear).cgColor
+            item.layer?.backgroundColor = (mouseInItem ? Theme.Color.rowBackgroundHoverColor : NSColor.clear).cgColor
             
         }
     }

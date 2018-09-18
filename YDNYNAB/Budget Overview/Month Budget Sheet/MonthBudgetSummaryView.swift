@@ -41,7 +41,7 @@ class MonthBudgetSummaryView: NSView {
     let dateSeparator: NSView = {
         let view = NSView()
         view.wantsLayer = true
-        view.layer?.backgroundColor = NSColor.black.withAlphaComponent(0.75).cgColor
+        view.layer?.backgroundColor = Theme.Color.text.withAlphaComponent(0.75).cgColor
         return view
     }()
 
@@ -51,7 +51,7 @@ class MonthBudgetSummaryView: NSView {
         self.wantsLayer = true
         self.layer?.backgroundColor = NSColor.lightGray.cgColor
         
-        self.layer?.borderColor = NSColor.black.withAlphaComponent(0.75).cgColor
+        self.layer?.borderColor = Theme.Color.text.withAlphaComponent(0.75).cgColor
         self.layer?.borderWidth = 1
         
         self.addSubview(self.dateStackView)

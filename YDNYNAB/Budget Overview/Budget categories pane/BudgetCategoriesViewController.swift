@@ -68,12 +68,7 @@ class BudgetCategoriesViewController: NSViewController, NSOutlineViewDelegate {
     }
     
     func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {
-        let rowView = MonthBudgetTableRowView(row: outlineView.row(forItem: item))
-        if item is BudgetMasterCategory {
-            rowView.backgroundColor = NSColor.systemBlue.withAlphaComponent(0.25)
-        }
-        
-        return rowView
+        return MonthBudgetTableRowView(row: outlineView.row(forItem: item))
     }
     
     func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
