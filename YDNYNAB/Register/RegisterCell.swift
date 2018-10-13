@@ -38,6 +38,7 @@ class RegisterCell: NSTableCellView {
             } else {
                 self.textLayer.string = text
             }
+            self.toolTip = text
         }
     }
     

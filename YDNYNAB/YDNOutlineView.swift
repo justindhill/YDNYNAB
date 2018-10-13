@@ -22,14 +22,17 @@ class YDNOutlineView: NSOutlineView {
     }
     
     override func mouseEntered(with event: NSEvent) {
+        super.mouseEntered(with: event)
         self.updateHoveredView(with: event)
     }
     
     override func mouseExited(with event: NSEvent) {
+        super.mouseExited(with: event)
         self.updateHoveredView(with: event)
     }
     
     override func mouseMoved(with event: NSEvent) {
+        super.mouseMoved(with: event)
         self.updateHoveredView(with: event)
     }
     

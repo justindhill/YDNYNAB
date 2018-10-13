@@ -133,7 +133,6 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
         return view
     }
     
-    
     func tableViewSelectionDidChange(_ notification: Notification) {
         let newSelectedRow = self.registerView.tableView.selectedRow
         var rows = IndexSet()
