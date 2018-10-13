@@ -45,7 +45,7 @@ class AllTransactionsRegisterViewDataSource: NSObject, NSTableViewDataSource {
     // MARK: - RegisterViewController
     func text(forColumn columnIdentifier: RegisterViewController.ColumnIdentifier, row: Int) -> String? {
         guard let transaction = self.resultSet?[row] else {
-                return nil
+            return nil
         }
         
         switch columnIdentifier {
@@ -65,6 +65,32 @@ class AllTransactionsRegisterViewDataSource: NSObject, NSTableViewDataSource {
             return self.currencyStringForRealmOptionalDouble(transaction.inflow)
         case .outflow:
             return self.currencyStringForRealmOptionalDouble(transaction.outflow)
+        }
+    }
+    
+    func updateTransaction(forRow row: Int, inTableView tableView: NSTableView, withRowView rowView: NSTableRowView) throws {
+        try Realm().write {
+            guard let txn = self.resultSet?[row] else {
+                throw NSError(domain: "", code: 0, userInfo: nil)
+            }
+            
+            try RegisterViewController.ColumnIdentifier.allCases.forEach { columnIdentifier in
+                let columnIndex = tableView.column(withIdentifier: columnIdentifier.userInterfaceIdentifier)
+                guard let cellView = rowView.view(atColumn: columnIndex) as? RegisterCell else {
+                        throw NSError(domain: "", code: 0, userInfo: nil)
+                }
+                
+                switch columnIdentifier {
+                case .memo:
+                    txn.memo = cellView.inputTextField.stringValue
+                case .inflow:
+                    txn.inflow.value = cellView.inputTextField.doubleValue
+                case .outflow:
+                    txn.outflow.value = self.currencyFormatter.number(from: cellView.inputTextField.stringValue)?.doubleValue
+                default:
+                    break
+                }
+            }
         }
     }
     

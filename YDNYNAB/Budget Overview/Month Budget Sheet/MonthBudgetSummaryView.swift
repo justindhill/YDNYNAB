@@ -69,4 +69,9 @@ class MonthBudgetSummaryView: NSView {
         }
     }
     
+    func updateForMonth(month: MonthBudgetSheetViewController.MonthYear) {
+        self.monthLabel.stringValue = DateUtils.threeLetterAbbreviation(forMonth: month.month)
+        self.yearLabel.stringValue = "\(month.year)"
+    }
+    
 }

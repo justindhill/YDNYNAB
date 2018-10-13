@@ -10,7 +10,7 @@ import Cocoa
 
 class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRowViewDelegate {
     
-    enum ColumnIdentifier: String {
+    enum ColumnIdentifier: String, CaseIterable {
         case account = "YDNMonthRegisterViewAccountColumnIdentifier"
         case date = "YDNMonthRegisterViewDateColumnIdentifier"
         case payee = "YDNMonthRegisterViewAccountPayeeIdentifier"
@@ -140,9 +140,19 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
     }
     
     // MARK: - RegisterRowViewDelegate
-    func registerRowViewDidClickDone(_ rowView: RegisterRowView) {
+    func registerRowViewDidCommitChanges(_ rowView: RegisterRowView) {
         guard let focusedRow = self.focusedRow else {
             return
+        }
+        
+        let row = self.registerView.tableView.row(for: rowView)
+        if row != -1 {
+            do {
+                try self.dataSource.updateTransaction(forRow: row, inTableView: self.registerView.tableView, withRowView: rowView)
+                self.registerView.tableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(0..<ColumnIdentifier.allCases.count))
+            } catch {
+                Toaster.shared.enqueueDefaultErrorToast()
+            }
         }
         
         self.registerView.tableView.deselectRow(focusedRow)

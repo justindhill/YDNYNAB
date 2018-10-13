@@ -9,11 +9,11 @@
 import Cocoa
 
 protocol RegisterRowViewDelegate: class {
-    func registerRowViewDidClickDone(_ rowView: RegisterRowView)
+    func registerRowViewDidCommitChanges(_ rowView: RegisterRowView)
     func registerRowViewDidClickCancel(_ rowView: RegisterRowView)
 }
 
-class RegisterRowView: NSTableRowView {
+class RegisterRowView: NSTableRowView, YDNTextFieldDelegate {
     
     private var doneButton: NSButton?
     private var cancelButton: NSButton?
@@ -31,18 +31,13 @@ class RegisterRowView: NSTableRowView {
         static let expandedHeight: CGFloat = 56
     }
     
-    private var columnViews: [NSView] {
-        return stride(from: 0, to: self.numberOfColumns, by: 1).compactMap { self.view(atColumn: $0) as? NSView }
-    }
+    private lazy var columnViews: [RegisterCell] = {
+        return stride(from: 0, to: self.numberOfColumns, by: 1).compactMap { self.view(atColumn: $0) as? RegisterCell }
+    }()
     
     func updateEditingState() {
         self.selectionHighlightStyle = .sourceList
         if self.isEditing && self.doneButton == nil {
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(textFieldDidEndEditing(_:)),
-                                                   name: NSControl.textDidEndEditingNotification,
-                                                   object: nil)
-            
             let doneButton = NSButton(title: "Done", target: self, action: #selector(commitChanges))
             self.doneButton = doneButton
             
@@ -68,15 +63,13 @@ class RegisterRowView: NSTableRowView {
             }
             
             editingAreaBackground.snp.makeConstraints { editingAreaBackground in
-                editingAreaBackground.left.equalTo(self).offset(1)
-                editingAreaBackground.right.equalTo(self).offset(-1)
+                editingAreaBackground.left.equalTo(self)
+                editingAreaBackground.right.equalTo(self)
                 editingAreaBackground.top.equalTo(self).offset(1)
                 editingAreaBackground.height.equalTo(Constant.collapsedHeight)
             }
             
         } else if !self.isEditing && self.doneButton != nil {
-            NotificationCenter.default.removeObserver(self)
-            
             self.doneButton?.removeFromSuperview()
             self.doneButton = nil
             self.cancelButton?.removeFromSuperview()
@@ -88,14 +81,35 @@ class RegisterRowView: NSTableRowView {
         for i in 0..<self.numberOfColumns {
             if let columnView = self.view(atColumn: i) as? RegisterCell {
                 columnView.isEditable = self.isEditing
+                columnView.inputTextField.focusDelegate = self.isEditing ? self : nil
             }
         }
+        
     }
     
     override func layout() {
         super.layout()
         
         self.editingAreaBackground?.layer?.backgroundColor = NSColor.textBackgroundColor.cgColor
+    }
+    
+    func findRegisterCellContaining(view: NSView) -> (Int, RegisterCell)? {
+        guard let superview = view.superview else {
+            return nil
+        }
+        
+        let columnViews = self.columnViews
+        let textViewOrigin = superview.convert(view.frame.origin, to: self)
+        
+        let originatingColumnViewIndex = columnViews.firstIndex { (view) -> Bool in
+            return view.frame.contains(textViewOrigin)
+        }
+        
+        if let originatingColumnViewIndex = originatingColumnViewIndex {
+                return (originatingColumnViewIndex, columnViews[originatingColumnViewIndex])
+        }
+        
+        return nil
     }
     
     func findBottomCellView() -> NSView? {
@@ -108,33 +122,27 @@ class RegisterRowView: NSTableRowView {
         return nil
     }
     
-    @objc private func textFieldDidEndEditing(_ notification: Notification) {
-        guard let textView = notification.userInfo?["NSFieldEditor"] as? NSView,
-            let textViewSuperview = textView.superview,
-            let textMovementRawValue = notification.userInfo?["NSTextMovement"] as? Int,
-            let textMovement = NSTextMovement(rawValue: textMovementRawValue) else {
-                return
+    func textFieldDidFocus(_ textField: YDNTextField) {
+        print("\(textField.stringValue) focus")
+        DispatchQueue.main.async {
+            textField.currentEditor()?.selectAll(self)
         }
-        
-        let columnViews = self.columnViews
-        let textViewOrigin = textViewSuperview.convert(textView.frame.origin, to: self)
-        
-        let originatingColumnViewIndex = columnViews.firstIndex { (view) -> Bool in
-            return view.frame.contains(textViewOrigin)
-        }
-        
-        if let originatingColumnViewIndex = originatingColumnViewIndex {
+    }
+    
+    func textFieldDidBlur(_ textField: YDNTextField, dueTo movement: NSTextMovement) {
+        print("\(textField.stringValue) blur")
+        if let originatingColumnViewIndex = self.findRegisterCellContaining(view: textField)?.0 {
             DispatchQueue.main.async {
-                switch textMovement {
+                switch movement {
                 case .tab:
-                    let index = min(originatingColumnViewIndex + 1, columnViews.count - 1)
-                    let cellView = columnViews[index] as? RegisterCell
-                    cellView?.beginEditing()
+                    let index = min(originatingColumnViewIndex + 1, self.columnViews.count - 1)
+                    let cellView = self.columnViews[index]
+                    cellView.beginEditing()
                     
                 case .backtab:
                     let index = max(originatingColumnViewIndex - 1, 0)
-                    let cellView = columnViews[index] as? RegisterCell
-                    cellView?.beginEditing()
+                    let cellView = self.columnViews[index]
+                    cellView.beginEditing()
                 case .return:
                     self.commitChanges()
                 default:
@@ -145,7 +153,7 @@ class RegisterRowView: NSTableRowView {
     }
     
     @objc func commitChanges() {
-        self.delegate?.registerRowViewDidClickDone(self)
+        self.delegate?.registerRowViewDidCommitChanges(self)
     }
     
     @objc func cancelButtonClicked() {

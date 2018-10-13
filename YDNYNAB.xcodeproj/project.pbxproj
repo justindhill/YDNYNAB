@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		12F93AD13E332F4909EBBC15 /* Pods_YDNYNAB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DFDDD400B8EF8D02A606A2 /* Pods_YDNYNAB.framework */; };
 		D04FB0E621509E41008880B7 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04FB0E521509E41008880B7 /* Theme.swift */; };
+		D04FB0E92151F2BC008880B7 /* YDNTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04FB0E82151F2BC008880B7 /* YDNTextField.swift */; };
+		D04FB0EB215DC069008880B7 /* Toaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04FB0EA215DC069008880B7 /* Toaster.swift */; };
 		D051057A213B5C3F008133B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0510579213B5C3F008133B5 /* AppDelegate.swift */; };
 		D051057C213B5C40008133B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D051057B213B5C40008133B5 /* Assets.xcassets */; };
 		D0510588213B6230008133B5 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0510587213B6230008133B5 /* MainSplitViewController.swift */; };
@@ -54,6 +56,8 @@
 		373F56684FA28CD7D37ECB5F /* Pods-YDNYNAB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.release.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.release.xcconfig"; sourceTree = "<group>"; };
 		43DFDDD400B8EF8D02A606A2 /* Pods_YDNYNAB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YDNYNAB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D04FB0E521509E41008880B7 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		D04FB0E82151F2BC008880B7 /* YDNTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNTextField.swift; sourceTree = "<group>"; };
+		D04FB0EA215DC069008880B7 /* Toaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toaster.swift; sourceTree = "<group>"; };
 		D0510576213B5C3F008133B5 /* YDNYNAB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YDNYNAB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0510579213B5C3F008133B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D051057B213B5C40008133B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -128,6 +132,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D04FB0E72151F2A0008880B7 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				D04FB0E82151F2BC008880B7 /* YDNTextField.swift */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
 		D051056D213B5C3F008133B5 = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +168,7 @@
 				D0CE3BE6213F7B4200798CF5 /* Budget Overview */,
 				D0E4E3EA214D933D006B4F6E /* Register */,
 				D0E4E3E7214587C6006B4F6E /* Utils */,
+				D04FB0E72151F2A0008880B7 /* Controls */,
 				D0CE3BDF213C375E00798CF5 /* Extensions */,
 				D0510579213B5C3F008133B5 /* AppDelegate.swift */,
 				D0E4E3D8214355BC006B4F6E /* MenuBar.swift */,
@@ -259,6 +272,7 @@
 			children = (
 				D0E4E3E8214587D2006B4F6E /* DateUtils.swift */,
 				D04FB0E521509E41008880B7 /* Theme.swift */,
+				D04FB0EA215DC069008880B7 /* Toaster.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -432,8 +446,10 @@
 				D04FB0E621509E41008880B7 /* Theme.swift in Sources */,
 				D0E4E3F6214EFBD5006B4F6E /* YDNOutlineView.swift in Sources */,
 				D0CE3BED213F7C4A00798CF5 /* MonthBudgetSummaryView.swift in Sources */,
+				D04FB0E92151F2BC008880B7 /* YDNTextField.swift in Sources */,
 				D0510590213B6CAB008133B5 /* SidebarViewController.swift in Sources */,
 				D0E4E3D1214336F1006B4F6E /* BudgetLine.swift in Sources */,
+				D04FB0EB215DC069008880B7 /* Toaster.swift in Sources */,
 				D0E4E3EC214D935F006B4F6E /* RegisterViewController.swift in Sources */,
 				D0E4E3DD21439151006B4F6E /* NSView+Extensions.swift in Sources */,
 				D06C649021432CD3000EF618 /* YNABTransactionImporter.swift in Sources */,

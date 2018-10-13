@@ -10,13 +10,20 @@ import Cocoa
 
 class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
     
+    typealias MonthYear = (month: Int, year: Int)
+    static let MonthYearZero = MonthYear(month: 0, year: 0)
+    
     enum Constant {
         static let budgetedColumnIdentifier = NSUserInterfaceItemIdentifier(rawValue: "YDNMonthBudgetSheetViewBudgetedColumnIdentifier")
         static let outflowsColumnIdentifier = NSUserInterfaceItemIdentifier(rawValue: "YDNMonthBudgetSheetViewOutflowsColumnIdentifier")
         static let balanceColumnIdentifier = NSUserInterfaceItemIdentifier(rawValue: "YDNMonthBudgetSheetViewBalanceColumnIdentifier")
     }
     
-    let tableDataSource = MonthBudgetTableDataSource()
+    var tableDataSource = MonthBudgetTableDataSource(month: 0, year: 0)
+    
+    var month: MonthYear = MonthBudgetSheetViewController.MonthYearZero {
+        didSet { self.updateForMonth(month: month) }
+    }
     
     override func loadView() {
         self.view = MonthBudgetSheetView()
@@ -35,8 +42,15 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.budgetSheetView.outlineView.delegate = self
-        self.budgetSheetView.outlineView.dataSource = self.tableDataSource
         self.addColumnsToOutlineView()
+    }
+    
+    func updateForMonth(month: MonthYear) {
+        self.budgetSheetView.summaryView.updateForMonth(month: month)
+        
+        self.tableDataSource = MonthBudgetTableDataSource(month: month.month, year: month.year)
+        self.budgetSheetView.outlineView.dataSource = self.tableDataSource
+        self.budgetSheetView.outlineView.reloadData()
         self.budgetSheetView.outlineView.expandItem(nil, expandChildren: true)
     }
     

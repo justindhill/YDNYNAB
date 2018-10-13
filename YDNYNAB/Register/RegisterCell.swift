@@ -15,14 +15,6 @@ class RegisterCell: NSTableCellView {
         static let expandedHeight: CGFloat = RegisterRowView.Constant.expandedHeight
     }
     
-//    override var backgroundStyle: NSView.BackgroundStyle {
-//        didSet {
-//            if backgroundStyle != oldValue {
-//                self.updateAppearance()
-//            }
-//        }
-//    }
-    
     var isEditable: Bool = false {
         didSet {
             self.needsLayout = true
@@ -35,13 +27,13 @@ class RegisterCell: NSTableCellView {
     
     private let font = NSFont.systemFont(ofSize: 13)
     
-    private var inputTextField: NSTextField? = nil
+    private(set) lazy var inputTextField: YDNTextField = self.configureNewTextField()
 
     var text: String? {
         didSet {
             if self.isEditable {
                 if let text = text {
-                    self.inputTextField?.stringValue = text
+                    self.inputTextField.stringValue = text
                 }
             } else {
                 self.textLayer.string = text
@@ -94,7 +86,7 @@ class RegisterCell: NSTableCellView {
     override func layout() {
         super.layout()
         
-        self.inputTextField?.textColor = Theme.Color.text
+        self.inputTextField.textColor = Theme.Color.text
         self.textLayer.foregroundColor = Theme.Color.text.cgColor
         
         var newFrame = NSRect(
@@ -105,13 +97,8 @@ class RegisterCell: NSTableCellView {
         newFrame = newFrame.insetBy(dx: 3, dy: 0)
         
         if self.isEditable {
-            let inputTextField: NSTextField
-            if let existingTextField = self.inputTextField {
-                inputTextField = existingTextField
-            } else {
-                inputTextField = self.configureNewTextField()
-                self.inputTextField = inputTextField
-                self.addSubview(inputTextField)
+            if self.inputTextField.superview == nil {
+                self.addSubview(self.inputTextField)
             }
             
             if let text = self.text {
@@ -121,8 +108,7 @@ class RegisterCell: NSTableCellView {
             self.textLayer.isHidden = true
             inputTextField.frame = newFrame
         } else {
-            self.inputTextField?.removeFromSuperview()
-            self.inputTextField = nil
+            self.inputTextField.removeFromSuperview()
             self.textLayer.isHidden = false
             self.textLayer.frame = newFrame
         }
@@ -151,8 +137,8 @@ class RegisterCell: NSTableCellView {
         CATransaction.commit()
     }
     
-    func configureNewTextField() -> NSTextField {
-        let textField = NSTextField()
+    func configureNewTextField() -> YDNTextField {
+        let textField = YDNTextField()
         textField.isBordered = false
         textField.isBezeled = false
         textField.textColor = Theme.Color.text
@@ -161,6 +147,7 @@ class RegisterCell: NSTableCellView {
         textField.alignment = self.alignment
         textField.cell?.truncatesLastVisibleLine = true
         textField.cell?.lineBreakMode = .byTruncatingTail
+        textField.focusRingType = .none
         
         return textField
     }

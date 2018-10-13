@@ -20,10 +20,16 @@ class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewContro
     
     var scrollViews = [NSScrollView]()
     
+    var offsetFromCurrentMonth: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.budgetOverviewView.categoryList.delegate = self
+        self.budgetOverviewView.backButton.target = self
+        self.budgetOverviewView.backButton.action = #selector(backButtonClicked)
+        self.budgetOverviewView.forwardButton.target = self
+        self.budgetOverviewView.forwardButton.action = #selector(forwardButtonClicked)
         
         self.scrollViews.append(self.budgetOverviewView.categoryList.budgetCategoriesView.scrollView)
         self.scrollViews.append(contentsOf: self.budgetOverviewView.monthBudgetSheets.map { $0.budgetSheetView.detailsTableScrollView })
@@ -35,6 +41,8 @@ class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewContro
                 name: NSView.boundsDidChangeNotification,
                 object: scrollView.contentView)
         }
+        
+        self.refreshData()
     }
     
     @objc func scrollViewBoundsDidChange(_ note: Notification) {
@@ -58,4 +66,28 @@ class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewContro
         self.budgetOverviewView.monthBudgetSheets.forEach({ $0.collapse(row: row) })
     }
     
+    @objc func backButtonClicked() {
+        self.offsetFromCurrentMonth -= 1
+        self.refreshData()
+    }
+    
+    @objc func forwardButtonClicked() {
+        self.offsetFromCurrentMonth += 1
+        self.refreshData()
+    }
+    
+    func refreshData() {
+        let currentDate = Date()
+        self.budgetOverviewView.monthBudgetSheets.enumerated().forEach { (i, budgetSheetViewController) in
+            let resolvedMonthOffset = i + self.offsetFromCurrentMonth - 1
+            guard let date = Calendar.current.date(byAdding: DateComponents(month: resolvedMonthOffset), to: currentDate, wrappingComponents: false) else {
+                assertionFailure("Couldn't create a date")
+                return
+            }
+            
+            let month = Calendar.current.component(.month, from: date)
+            let year = Calendar.current.component(.year, from: date)
+            budgetSheetViewController.month = MonthBudgetSheetViewController.MonthYear(month: month, year: year)
+        }
+    }
 }

@@ -15,9 +15,16 @@ class MonthBudgetTableDataSource: NSObject, NSOutlineViewDataSource {
     var budgetLineQueries: [String: Results<BudgetLine>] = [:]
     var stupidMap: [Int: BudgetMasterCategory] = [:]
     
+    let month: Int
+    let year: Int
+    
     required init?(coder decoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    required override init() {
+    init(month: Int, year: Int) {
+        self.month = month
+        self.year = year
+        
         super.init()
+        
         let sortDescriptors = [
             SortDescriptor(keyPath: "name", ascending: true)
         ]
@@ -65,7 +72,7 @@ class MonthBudgetTableDataSource: NSObject, NSOutlineViewDataSource {
             var resultSet: Results<BudgetLine>?
             if let cachedResults = self.budgetLineQueries[subcategory.id] {
                 resultSet = cachedResults
-            } else if let freshResults = try? Realm().objects(BudgetLine.self).filter("subCategory = %@ AND month = %@", subcategory, DateUtils.date(withMonth: 1, year: 2018)) {
+            } else if let freshResults = try? Realm().objects(BudgetLine.self).filter("subCategory = %@ AND month = %@", subcategory, DateUtils.date(withMonth: self.month, year: self.year)) {
                 self.budgetLineQueries[subcategory.id] = freshResults
                 resultSet = freshResults
             }
