@@ -93,21 +93,16 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
         self.currencyTextLayer.contentsScale = self.window?.screen?.backingScaleFactor ?? 1
     }
     
-    override func mouseEntered(with event: NSEvent) {
-        self.enterHoverState()
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.underlinesTextOnMouseover = false
+        self.mouseoverCursor = nil
+        self.currencyTextLayer.string = nil
     }
-    
-    override func mouseMoved(with event: NSEvent) {
-        self.enterHoverState()
-    }
-    
-    override func mouseExited(with event: NSEvent) {
-        NSCursor.arrow.set()
-        
-        if self.underlinesTextOnMouseover {
-            self.currencyTextLayer.string = self.text
-        }
-    }
+
+}
+
+extension MonthBudgetCurrencyTableCellView: Hoverable {
     
     func enterHoverState() {
         self.mouseoverCursor?.set()
@@ -125,16 +120,11 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
         }
     }
     
-    override func updateTrackingAreas() {
-        super.updateTrackingAreas()
-        self.tracksMouseMovement = true
+    func leaveHoverState() {
+        NSCursor.arrow.set()
+        
+        if self.underlinesTextOnMouseover {
+            self.currencyTextLayer.string = self.text
+        }
     }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.underlinesTextOnMouseover = false
-        self.mouseoverCursor = nil
-        self.currencyTextLayer.string = nil
-    }
-
 }

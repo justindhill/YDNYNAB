@@ -23,6 +23,7 @@
 		D06C648E21432CC9000EF618 /* YNABBudgetImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648D21432CC9000EF618 /* YNABBudgetImporter.swift */; };
 		D06C649021432CD3000EF618 /* YNABTransactionImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648F21432CD3000EF618 /* YNABTransactionImporter.swift */; };
 		D0AA34372172693200E8A973 /* RegisterViewDataSourceFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA34362172693200E8A973 /* RegisterViewDataSourceFilter.swift */; };
+		D0AA343A21727BC100E8A973 /* Hoverable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA343921727BC100E8A973 /* Hoverable.swift */; };
 		D0CE3BDE213C359300798CF5 /* StackedSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BDD213C359300798CF5 /* StackedSelectionView.swift */; };
 		D0CE3BE3213F6B7B00798CF5 /* BudgetOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */; };
 		D0CE3BE5213F728C00798CF5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE4213F728C00798CF5 /* main.swift */; };
@@ -74,6 +75,7 @@
 		D06C648D21432CC9000EF618 /* YNABBudgetImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YNABBudgetImporter.swift; sourceTree = "<group>"; };
 		D06C648F21432CD3000EF618 /* YNABTransactionImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YNABTransactionImporter.swift; sourceTree = "<group>"; };
 		D0AA34362172693200E8A973 /* RegisterViewDataSourceFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewDataSourceFilter.swift; sourceTree = "<group>"; };
+		D0AA343921727BC100E8A973 /* Hoverable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hoverable.swift; sourceTree = "<group>"; };
 		D0CE3BDD213C359300798CF5 /* StackedSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedSelectionView.swift; sourceTree = "<group>"; };
 		D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetOverviewView.swift; sourceTree = "<group>"; };
 		D0CE3BE4213F728C00798CF5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 		D0510578213B5C3F008133B5 /* YDNYNAB */ = {
 			isa = PBXGroup;
 			children = (
+				D0AA343821727BAD00E8A973 /* Protocols */,
 				D0E4E3CB21433640006B4F6E /* Model */,
 				D06C648C21432C87000EF618 /* YNAB Importer */,
 				D0CE3BDC213C2F5300798CF5 /* Sidebar */,
@@ -199,6 +202,14 @@
 				D06C648F21432CD3000EF618 /* YNABTransactionImporter.swift */,
 			);
 			path = "YNAB Importer";
+			sourceTree = "<group>";
+		};
+		D0AA343821727BAD00E8A973 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D0AA343921727BC100E8A973 /* Hoverable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		D0CE3BDC213C2F5300798CF5 /* Sidebar */ = {
@@ -456,6 +467,7 @@
 				D04FB0EB215DC069008880B7 /* Toaster.swift in Sources */,
 				D0E4E3EC214D935F006B4F6E /* RegisterViewController.swift in Sources */,
 				D0E4E3DD21439151006B4F6E /* NSView+Extensions.swift in Sources */,
+				D0AA343A21727BC100E8A973 /* Hoverable.swift in Sources */,
 				D06C649021432CD3000EF618 /* YNABTransactionImporter.swift in Sources */,
 				D0E4E3D3214349A7006B4F6E /* Account.swift in Sources */,
 			);
