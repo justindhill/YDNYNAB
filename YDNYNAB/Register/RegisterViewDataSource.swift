@@ -22,7 +22,9 @@ class RegisterViewDataSource: NSObject, NSTableViewDataSource {
     
     lazy var currencyFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
         
         return formatter
     }()
