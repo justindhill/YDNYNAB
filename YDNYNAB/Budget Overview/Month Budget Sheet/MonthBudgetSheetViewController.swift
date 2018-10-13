@@ -118,7 +118,9 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
                 }
             }
         } else if tableColumn.identifier == MonthBudgetSheetViewController.Constant.balanceColumnIdentifier {
-            cellView.text = ""
+            if let numberString = self.currencyFormatter.string(from: NSNumber(value: item.categoryBalance)) {
+                cellView.text = numberString
+            }
         }
         
         return cellView
