@@ -10,6 +10,11 @@ import Cocoa
 
 class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRowViewDelegate {
     
+    enum Mode {
+        case popover
+        case full
+    }
+    
     enum ColumnIdentifier: String, CaseIterable {
         case account = "YDNMonthRegisterViewAccountColumnIdentifier"
         case date = "YDNMonthRegisterViewDateColumnIdentifier"
@@ -32,10 +37,20 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
         return self.view as! RegisterView
     }
     
-    let dataSource = AllTransactionsRegisterViewDataSource()
+    let dataSource = RegisterViewDataSource()
     
+    let mode: Mode
     var focusedRow: Int? = nil
-
+    
+    init(mode: Mode) {
+        self.mode = mode
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addColumnsToTableView()
@@ -48,27 +63,46 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
     func addColumnsToTableView() {
         let tableView = self.registerView.tableView
         
-        tableView.addTableColumn(withTitle: "Account",
-                                 identifier: ColumnIdentifier.account.userInterfaceIdentifier,
-                                 initialWidth: 140)
-        tableView.addTableColumn(withTitle: "Date",
-                                 identifier: ColumnIdentifier.date.userInterfaceIdentifier,
-                                 initialWidth: 70)
-        tableView.addTableColumn(withTitle: "Payee",
-                                 identifier: ColumnIdentifier.payee.userInterfaceIdentifier,
-                                 resizingOptions: .autoresizingMask)
-        tableView.addTableColumn(withTitle: "Category",
-                                 identifier: ColumnIdentifier.category.userInterfaceIdentifier,
-                                 resizingOptions: .autoresizingMask)
-        tableView.addTableColumn(withTitle: "Memo",
-                                 identifier: ColumnIdentifier.memo.userInterfaceIdentifier,
-                                 resizingOptions: .autoresizingMask)
-        tableView.addTableColumn(withTitle: "Inflow",
-                                 identifier: ColumnIdentifier.inflow.userInterfaceIdentifier,
-                                 initialWidth: 70)
-        tableView.addTableColumn(withTitle: "Outflow",
-                                 identifier: ColumnIdentifier.outflow.userInterfaceIdentifier,
-                                 initialWidth: 70)
+        switch self.mode {
+        case .full:
+            tableView.addTableColumn(withTitle: "Account",
+                                     identifier: ColumnIdentifier.account.userInterfaceIdentifier,
+                                     initialWidth: 140)
+            tableView.addTableColumn(withTitle: "Date",
+                                     identifier: ColumnIdentifier.date.userInterfaceIdentifier,
+                                     initialWidth: 70)
+            tableView.addTableColumn(withTitle: "Payee",
+                                     identifier: ColumnIdentifier.payee.userInterfaceIdentifier,
+                                     resizingOptions: .autoresizingMask)
+            tableView.addTableColumn(withTitle: "Category",
+                                     identifier: ColumnIdentifier.category.userInterfaceIdentifier,
+                                     resizingOptions: .autoresizingMask)
+            tableView.addTableColumn(withTitle: "Memo",
+                                     identifier: ColumnIdentifier.memo.userInterfaceIdentifier,
+                                     resizingOptions: .autoresizingMask)
+            tableView.addTableColumn(withTitle: "Inflow",
+                                     identifier: ColumnIdentifier.inflow.userInterfaceIdentifier,
+                                     initialWidth: 70)
+            tableView.addTableColumn(withTitle: "Outflow",
+                                     identifier: ColumnIdentifier.outflow.userInterfaceIdentifier,
+                                     initialWidth: 70)
+        case .popover:
+            tableView.addTableColumn(withTitle: "Date",
+                                     identifier: ColumnIdentifier.date.userInterfaceIdentifier,
+                                     initialWidth: 70)
+            tableView.addTableColumn(withTitle: "Account",
+                                     identifier: ColumnIdentifier.account.userInterfaceIdentifier,
+                                     resizingOptions: .autoresizingMask)
+            tableView.addTableColumn(withTitle: "Payee",
+                                     identifier: ColumnIdentifier.payee.userInterfaceIdentifier,
+                                     resizingOptions: .autoresizingMask)
+            tableView.addTableColumn(withTitle: "Memo",
+                                     identifier: ColumnIdentifier.memo.userInterfaceIdentifier,
+                                     resizingOptions: .autoresizingMask)
+            tableView.addTableColumn(withTitle: "Outflow",
+                                     identifier: ColumnIdentifier.outflow.userInterfaceIdentifier,
+                                     resizingOptions: .autoresizingMask)
+        }
     }
     
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {

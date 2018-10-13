@@ -1,5 +1,5 @@
 //
-//  AllTransactionsRegisterViewDataSource.swift
+//  RegisterViewDataSource.swift
 //  YDNYNAB
 //
 //  Created by Justin Hill on 9/15/18.
@@ -8,15 +8,16 @@
 
 import RealmSwift
 
-class AllTransactionsRegisterViewDataSource: NSObject, NSTableViewDataSource {
+class RegisterViewDataSource: NSObject, NSTableViewDataSource {
     
     var resultSet: Results<Transaction>?
+    var filter: Filter? {
+        didSet { self.updateResultSet() }
+    }
     
     override init() {
         super.init()
-        self.resultSet = try? Realm()
-            .objects(Transaction.self)
-            .sorted(by: [SortDescriptor(keyPath: "date", ascending: false)])
+        self.updateResultSet()
     }
     
     lazy var currencyFormatter: NumberFormatter = {
@@ -32,6 +33,18 @@ class AllTransactionsRegisterViewDataSource: NSObject, NSTableViewDataSource {
         
         return formatter
     }()
+    
+    func updateResultSet() {
+        var resultSet = try? Realm().objects(Transaction.self)
+        
+        if let filter = self.filter {
+            resultSet = resultSet?.filter(filter.filterPredicate)
+        }
+        
+        resultSet = resultSet?.sorted(by: [SortDescriptor(keyPath: "date", ascending: false)])
+        
+        self.resultSet = resultSet
+    }
     
     // MARK: - NSTableViewDataSource
     func numberOfRows(in tableView: NSTableView) -> Int {

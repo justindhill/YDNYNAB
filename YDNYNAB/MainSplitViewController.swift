@@ -12,7 +12,7 @@ class MainSplitViewController: NSSplitViewController, SidebarViewControllerDeleg
     
     let sidebarViewController = SidebarViewController()
     let contentViewController = BudgetOverviewViewController()
-    lazy var allTransactionsRegister = RegisterViewController()
+    lazy var allTransactionsRegister = RegisterViewController(mode: .full)
     lazy var sidebarItem = NSSplitViewItem(sidebarWithViewController: self.sidebarViewController)
     
     private var lastSelection: SidebarViewController.SelectionIdentifier = .budget

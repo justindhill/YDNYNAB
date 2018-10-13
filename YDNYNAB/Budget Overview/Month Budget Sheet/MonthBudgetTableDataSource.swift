@@ -75,6 +75,8 @@ class MonthBudgetTableDataSource: NSObject, NSOutlineViewDataSource {
             } else if let freshResults = try? Realm().objects(BudgetLine.self).filter("subCategory = %@ AND month = %@", subcategory, DateUtils.date(withMonth: self.month, year: self.year)) {
                 self.budgetLineQueries[subcategory.id] = freshResults
                 resultSet = freshResults
+            } else {
+                return NSObject()
             }
             
             if let resultSet = resultSet,

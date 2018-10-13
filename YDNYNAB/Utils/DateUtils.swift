@@ -36,4 +36,19 @@ class DateUtils: NSObject {
         
         return date
     }
+    
+    class func startAndEndDate(ofMonth month: Int, year: Int) -> (Date, Date) {
+        let startDateComponents = DateComponents(calendar: Calendar.current, year: year, month: month, day: 1)
+        guard let startDate = startDateComponents.date else {
+            fatalError("Somehow this month and year don't produce a valid date.")
+        }
+        
+        guard let endDate = Calendar.current.date(byAdding: DateComponents(month: 1, day: -1),
+                                                  to: startDate,
+                                                  wrappingComponents: false) else {
+            fatalError("Couldn't produce the end date from the given start date")
+        }
+        
+        return (startDate, endDate)
+    }
 }

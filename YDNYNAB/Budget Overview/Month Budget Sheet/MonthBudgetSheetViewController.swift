@@ -19,6 +19,8 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
         static let balanceColumnIdentifier = NSUserInterfaceItemIdentifier(rawValue: "YDNMonthBudgetSheetViewBalanceColumnIdentifier")
     }
     
+    private var currentRegisterPopover: NSPopover?
+    
     var tableDataSource = MonthBudgetTableDataSource(month: 0, year: 0)
     
     var month: MonthYear = MonthBudgetSheetViewController.MonthYearZero {
@@ -43,6 +45,9 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
         super.viewDidLoad()
         self.budgetSheetView.outlineView.delegate = self
         self.addColumnsToOutlineView()
+        
+        self.budgetSheetView.outlineView.target = self
+        self.budgetSheetView.outlineView.action = #selector(clickAction)
     }
     
     func updateForMonth(month: MonthYear) {
@@ -72,10 +77,6 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
     
     // MARK: - NSOutlineViewDelegate
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        guard let item = item as? BudgetLine, let tableColumn = tableColumn else {
-            return nil
-        }
-        
         let reuseIdentifier = MonthBudgetCurrencyTableCellView.Constant.reuseIdentifier
         let cellView: MonthBudgetCurrencyTableCellView
         if let existingView = outlineView.makeView(withIdentifier: reuseIdentifier, owner: self) as? MonthBudgetCurrencyTableCellView {
@@ -85,16 +86,33 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
         }
         
         cellView.alignment = .right
+        
+        guard let tableColumn = tableColumn else {
+            return cellView
+        }
+        
+        if tableColumn.identifier == MonthBudgetSheetViewController.Constant.budgetedColumnIdentifier {
+            cellView.mouseoverCursor = .iBeam
+        } else if tableColumn.identifier == MonthBudgetSheetViewController.Constant.outflowsColumnIdentifier {
+            cellView.mouseoverCursor = .pointingHand
+            cellView.underlinesTextOnMouseover = true
+        }
+        
+        guard let item = item as? BudgetLine else {
+            return cellView
+        }
+        
         if tableColumn.identifier == MonthBudgetSheetViewController.Constant.budgetedColumnIdentifier {
             if let budgetedValue = item.budgeted.value, let numberString = self.currencyFormatter.string(from: NSNumber(value: budgetedValue)) {
-                cellView.text = numberString
-                cellView.mouseoverCursor = .iBeam
+                if budgetedValue > 0 {
+                    cellView.text = numberString
+                }
             }
         } else if tableColumn.identifier == MonthBudgetSheetViewController.Constant.outflowsColumnIdentifier {
-            if let outflowsValue = item.outflows.value, let numberString = self.currencyFormatter.string(from: NSNumber(value: outflowsValue)) {
-                cellView.text = numberString
-                cellView.mouseoverCursor = .pointingHand
-                cellView.underlinesTextOnMouseover = true
+            if let outflowsValue = item.outflows.value, let numberString = self.currencyFormatter.string(from: NSNumber(value: -outflowsValue)) {
+                if outflowsValue > 0 {
+                    cellView.text = numberString
+                }
             }
         } else if tableColumn.identifier == MonthBudgetSheetViewController.Constant.balanceColumnIdentifier {
             cellView.text = ""
@@ -140,4 +158,30 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
         }
     }
     
+    @objc func clickAction() {
+        if let popover = self.currentRegisterPopover {
+            popover.performClose(self)
+            self.currentRegisterPopover = nil
+        }
+        
+        let outlineView = self.budgetSheetView.outlineView
+        let clickedCell = outlineView.view(atColumn: outlineView.clickedColumn, row: outlineView.clickedRow, makeIfNecessary: false)
+        let column = outlineView.tableColumns[outlineView.clickedColumn]
+        let subcategory = (outlineView.item(atRow: outlineView.clickedRow) as? BudgetLine)?.subCategory
+        
+        if let clickedCell = clickedCell, let subcategory = subcategory, column.identifier == Constant.outflowsColumnIdentifier {
+            let (startDate, endDate) = DateUtils.startAndEndDate(ofMonth: self.month.month, year: self.month.year)
+            let filter = RegisterViewDataSource.Filter(startDate: startDate, endDate: endDate, subcategory: subcategory)
+            
+            let register = RegisterViewController(mode: .popover)
+            register.dataSource.filter = filter
+            
+            let popover = NSPopover()
+            popover.contentViewController = register
+            popover.contentSize = CGSize(width: 400, height: 200)
+            popover.animates = true
+            popover.show(relativeTo: clickedCell.bounds, of: clickedCell, preferredEdge: .maxY)
+            self.currentRegisterPopover = popover
+        }
+    }
 }
