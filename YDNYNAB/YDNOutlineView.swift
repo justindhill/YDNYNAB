@@ -37,6 +37,11 @@ class YDNOutlineView: NSOutlineView {
         let locationInSelf = self.convert(event.locationInWindow, from: nil)
         let row = self.row(at: locationInSelf)
         let column = self.column(at: locationInSelf)
+        
+        guard row >= 0 && column >= 0 else {
+            return
+        }
+        
         let view = self.view(atColumn: column, row: row, makeIfNecessary: false)
         
         if let view = view as? Hoverable {

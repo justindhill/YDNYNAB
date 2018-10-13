@@ -165,6 +165,11 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
         }
         
         let outlineView = self.budgetSheetView.outlineView
+        
+        if outlineView.clickedColumn < 0 {
+            return
+        }
+        
         let clickedCell = outlineView.view(atColumn: outlineView.clickedColumn, row: outlineView.clickedRow, makeIfNecessary: false)
         let column = outlineView.tableColumns[outlineView.clickedColumn]
         let subcategory = (outlineView.item(atRow: outlineView.clickedRow) as? BudgetLine)?.subCategory
