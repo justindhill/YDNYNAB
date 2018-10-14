@@ -6,19 +6,19 @@
 //  Copyright © 2018 Justin Hill. All rights reserved.
 //
 
-import RealmSwift
+import GRDB
 
-class Transaction: Object {
-    @objc dynamic var id: String = UUID().uuidString
-    @objc dynamic var account: Account?
-    @objc dynamic var flag: String?
-    @objc dynamic var checkNumber: String?
-    @objc dynamic var date: Date = Date()
-    @objc dynamic var payee: Payee?
-    @objc dynamic var masterCategory: BudgetMasterCategory?
-    @objc dynamic var subCategory: BudgetSubCategory?
-    @objc dynamic var memo: String?
-    let outflow = RealmOptional<Double>()
-    let inflow = RealmOptional<Double>()
-    @objc dynamic var cleared: Bool = false
+class Transaction: Record {
+    var id: String = UUID().uuidString
+    var account: Account?
+    var flag: String?
+    var checkNumber: String?
+    var date: Date = Date()
+    var payee: Payee?
+    var masterCategory: BudgetMasterCategory?
+    var subCategory: BudgetSubCategory?
+    var memo: String?
+    let outflow: Double = 0
+    let inflow: Double = 0
+    var cleared: Bool = false
 }

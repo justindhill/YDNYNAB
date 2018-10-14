@@ -6,13 +6,13 @@
 //  Copyright © 2018 Justin Hill. All rights reserved.
 //
 
-import RealmSwift
+import GRDB
 
-class BudgetSubCategory: Object {
-    @objc dynamic var id: String = UUID().uuidString
-    @objc dynamic var name: String = ""
-    @objc dynamic var sortOrder: Int = -1
-    @objc dynamic var masterCategory: BudgetMasterCategory?
-    let budgetLines = LinkingObjects(fromType: BudgetLine.self, property: "subCategory")
-    @objc dynamic var isHidden: Bool = false
+class BudgetSubCategory: Record {
+    var id: String = UUID().uuidString
+    var name: String = ""
+    var sortOrder: Int = -1
+    var masterCategory: BudgetMasterCategory?
+//    let budgetLines = LinkingObjects(fromType: BudgetLine.self, property: "subCategory")
+    var isHidden: Bool = false
 }

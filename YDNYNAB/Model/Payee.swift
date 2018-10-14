@@ -6,11 +6,11 @@
 //  Copyright © 2018 Justin Hill. All rights reserved.
 //
 
-import RealmSwift
+import GRDB
 
-class Payee: Object {
-    @objc dynamic var id: String = UUID().uuidString
-    @objc dynamic var name: String = ""
-    @objc dynamic var defaultMasterCategory: BudgetMasterCategory?
-    @objc dynamic var defualtSubCategory: BudgetSubCategory?
+class Payee: Record {
+    var id: String = UUID().uuidString
+    var name: String = ""
+    var defaultMasterCategory: BudgetMasterCategory?
+    var defualtSubCategory: BudgetSubCategory?
 }

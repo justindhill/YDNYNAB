@@ -6,14 +6,14 @@
 //  Copyright © 2018 Justin Hill. All rights reserved.
 //
 
-import RealmSwift
+import GRDB
 
-class BudgetLine: Object {
-    @objc dynamic var id: String = UUID().uuidString
-    @objc dynamic var month: Date = Date()
-    @objc dynamic var masterCategory: BudgetMasterCategory?
-    @objc dynamic var subCategory: BudgetSubCategory?
-    let budgeted = RealmOptional<Double>()
-    let outflows = RealmOptional<Double>()
-    @objc dynamic var categoryBalance: Double = 0
+class BudgetLine: Record {
+    var id: String = UUID().uuidString
+    var month: Date = Date()
+    var masterCategory: BudgetMasterCategory?
+    var subCategory: BudgetSubCategory?
+    let budgeted: Double = 0
+    let outflows: Double = 0
+    var categoryBalance: Double = 0
 }

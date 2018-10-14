@@ -6,9 +6,9 @@
 //  Copyright © 2018 Justin Hill. All rights reserved.
 //
 
-import RealmSwift
+import GRDB
 
-class Account: Object {
+class Account: Record {
     @objc dynamic var id: String = UUID().uuidString
     @objc dynamic var name: String = ""
 }

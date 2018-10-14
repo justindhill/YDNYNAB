@@ -106,14 +106,14 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
         }
         
         if tableColumn.identifier == MonthBudgetSheetViewController.Constant.budgetedColumnIdentifier {
-            if let budgetedValue = item.budgeted.value, let numberString = self.currencyFormatter.string(from: NSNumber(value: budgetedValue)) {
-                if budgetedValue > 0 {
+            if let numberString = self.currencyFormatter.string(from: NSNumber(value: item.budgeted)) {
+                if item.budgeted > 0 {
                     cellView.text = numberString
                 }
             }
         } else if tableColumn.identifier == MonthBudgetSheetViewController.Constant.outflowsColumnIdentifier {
-            if let outflowsValue = item.outflows.value, let numberString = self.currencyFormatter.string(from: NSNumber(value: -outflowsValue)) {
-                if outflowsValue > 0 {
+            if let numberString = self.currencyFormatter.string(from: NSNumber(value: -item.outflows)) {
+                if item.outflows > 0 {
                     cellView.text = numberString
                 }
             }

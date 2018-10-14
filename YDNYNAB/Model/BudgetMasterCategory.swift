@@ -6,15 +6,15 @@
 //  Copyright © 2018 Justin Hill. All rights reserved.
 //
 
-import RealmSwift
+import GRDB
 
-class BudgetMasterCategory: Object {
-    @objc dynamic var id: String = UUID().uuidString
-    @objc dynamic var name: String = ""
-    @objc dynamic var sortOrder: Int = -1
-    let subcategories = LinkingObjects(fromType: BudgetSubCategory.self, property: "masterCategory")
+class BudgetMasterCategory: Record {
+    var id: String = UUID().uuidString
+    var name: String = ""
+    var sortOrder: Int = -1
+//    let subcategories = LinkingObjects(fromType: BudgetSubCategory.self, property: "masterCategory")
     
-    var visibleSubcategories: Results<BudgetSubCategory> {
-        return self.subcategories.filter("isHidden = %@", false)
-    }
+//    var visibleSubcategories: Results<BudgetSubCategory> {
+//        return self.subcategories.filter("isHidden = %@", false)
+//    }
 }

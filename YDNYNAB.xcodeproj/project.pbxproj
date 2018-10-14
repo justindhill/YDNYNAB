@@ -18,12 +18,14 @@
 		D0510590213B6CAB008133B5 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051058F213B6CAB008133B5 /* SidebarViewController.swift */; };
 		D06C648421420667000EF618 /* MonthBudgetTotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648321420667000EF618 /* MonthBudgetTotalsView.swift */; };
 		D06C648621421004000EF618 /* MainSplitViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648521421004000EF618 /* MainSplitViewControllerView.swift */; };
-		D06C648821421BF9000EF618 /* MonthBudgetTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648721421BF9000EF618 /* MonthBudgetTableDataSource.swift */; };
 		D06C648A21421D0F000EF618 /* MonthBudgetTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648921421D0F000EF618 /* MonthBudgetTableRowView.swift */; };
 		D06C648E21432CC9000EF618 /* YNABBudgetImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648D21432CC9000EF618 /* YNABBudgetImporter.swift */; };
-		D06C649021432CD3000EF618 /* YNABTransactionImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648F21432CD3000EF618 /* YNABTransactionImporter.swift */; };
-		D0AA34372172693200E8A973 /* RegisterViewDataSourceFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA34362172693200E8A973 /* RegisterViewDataSourceFilter.swift */; };
 		D0AA343A21727BC100E8A973 /* Hoverable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA343921727BC100E8A973 /* Hoverable.swift */; };
+		D0AA343E2173D2BC00E8A973 /* RegisterViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F1214DA22A006B4F6E /* RegisterViewDataSource.swift */; };
+		D0AA343F2173D32600E8A973 /* BudgetCategoriesViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3E5214469A8006B4F6E /* BudgetCategoriesViewDataSource.swift */; };
+		D0AA34402173D36900E8A973 /* MonthBudgetTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648721421BF9000EF618 /* MonthBudgetTableDataSource.swift */; };
+		D0AA34412173D3BF00E8A973 /* RegisterViewDataSourceFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA34362172693200E8A973 /* RegisterViewDataSourceFilter.swift */; };
+		D0AA34422173D43500E8A973 /* YNABTransactionImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648F21432CD3000EF618 /* YNABTransactionImporter.swift */; };
 		D0CE3BDE213C359300798CF5 /* StackedSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BDD213C359300798CF5 /* StackedSelectionView.swift */; };
 		D0CE3BE3213F6B7B00798CF5 /* BudgetOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */; };
 		D0CE3BE5213F728C00798CF5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE4213F728C00798CF5 /* main.swift */; };
@@ -42,12 +44,10 @@
 		D0E4E3DF21445853006B4F6E /* DraggableSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3DE21445853006B4F6E /* DraggableSeparatorView.swift */; };
 		D0E4E3E2214459B7006B4F6E /* BudgetCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3E1214459B7006B4F6E /* BudgetCategoriesViewController.swift */; };
 		D0E4E3E4214459C6006B4F6E /* BudgetCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3E3214459C6006B4F6E /* BudgetCategoriesView.swift */; };
-		D0E4E3E6214469A8006B4F6E /* BudgetCategoriesViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3E5214469A8006B4F6E /* BudgetCategoriesViewDataSource.swift */; };
 		D0E4E3E9214587D2006B4F6E /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3E8214587D2006B4F6E /* DateUtils.swift */; };
 		D0E4E3EC214D935F006B4F6E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3EB214D935F006B4F6E /* RegisterViewController.swift */; };
 		D0E4E3EE214D9D5A006B4F6E /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3ED214D9D5A006B4F6E /* RegisterView.swift */; };
 		D0E4E3F0214DA15F006B4F6E /* NSTableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3EF214DA15F006B4F6E /* NSTableView+Extensions.swift */; };
-		D0E4E3F2214DA22A006B4F6E /* RegisterViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F1214DA22A006B4F6E /* RegisterViewDataSource.swift */; };
 		D0E4E3F4214DA93F006B4F6E /* RegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F3214DA93F006B4F6E /* RegisterCell.swift */; };
 		D0E4E3F6214EFBD5006B4F6E /* YDNOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F5214EFBD5006B4F6E /* YDNOutlineView.swift */; };
 		D0E4E3F8214F0A71006B4F6E /* NSTableCellView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F7214F0A71006B4F6E /* NSTableCellView+Extensions.swift */; };
@@ -381,16 +381,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/GRDB.swift/GRDB.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,6 +428,7 @@
 				D0E4E3EE214D9D5A006B4F6E /* RegisterView.swift in Sources */,
 				D0CE3BEB213F7B8200798CF5 /* MonthBudgetSheetView.swift in Sources */,
 				D0E4E3E4214459C6006B4F6E /* BudgetCategoriesView.swift in Sources */,
+				D0AA343E2173D2BC00E8A973 /* RegisterViewDataSource.swift in Sources */,
 				D0E4E3F8214F0A71006B4F6E /* NSTableCellView+Extensions.swift in Sources */,
 				D0CE3BE3213F6B7B00798CF5 /* BudgetOverviewView.swift in Sources */,
 				D0E4E3D9214355BC006B4F6E /* MenuBar.swift in Sources */,
@@ -440,17 +439,15 @@
 				D051058A213B6A34008133B5 /* BudgetOverviewViewController.swift in Sources */,
 				D0E4E3E9214587D2006B4F6E /* DateUtils.swift in Sources */,
 				D06C648421420667000EF618 /* MonthBudgetTotalsView.swift in Sources */,
-				D06C648821421BF9000EF618 /* MonthBudgetTableDataSource.swift in Sources */,
 				D0CE3BE9213F7B7500798CF5 /* MonthBudgetSheetViewController.swift in Sources */,
-				D0E4E3F2214DA22A006B4F6E /* RegisterViewDataSource.swift in Sources */,
 				D06C648A21421D0F000EF618 /* MonthBudgetTableRowView.swift in Sources */,
 				D051057A213B5C3F008133B5 /* AppDelegate.swift in Sources */,
-				D0AA34372172693200E8A973 /* RegisterViewDataSourceFilter.swift in Sources */,
 				D06C648E21432CC9000EF618 /* YNABBudgetImporter.swift in Sources */,
+				D0AA34412173D3BF00E8A973 /* RegisterViewDataSourceFilter.swift in Sources */,
 				D0E4E3DF21445853006B4F6E /* DraggableSeparatorView.swift in Sources */,
 				D0CE3BDE213C359300798CF5 /* StackedSelectionView.swift in Sources */,
+				D0AA34422173D43500E8A973 /* YNABTransactionImporter.swift in Sources */,
 				D06C648621421004000EF618 /* MainSplitViewControllerView.swift in Sources */,
-				D0E4E3E6214469A8006B4F6E /* BudgetCategoriesViewDataSource.swift in Sources */,
 				D0E4E3CD21433671006B4F6E /* BudgetMasterCategory.swift in Sources */,
 				D0E4E3FA214F13AC006B4F6E /* RegisterRowView.swift in Sources */,
 				D0E4E3D721434A67006B4F6E /* Transaction.swift in Sources */,
@@ -459,6 +456,7 @@
 				D0E4E3F4214DA93F006B4F6E /* RegisterCell.swift in Sources */,
 				D0E4E3CF214336B7006B4F6E /* BudgetSubcategory.swift in Sources */,
 				D04FB0E621509E41008880B7 /* Theme.swift in Sources */,
+				D0AA34402173D36900E8A973 /* MonthBudgetTableDataSource.swift in Sources */,
 				D0E4E3F6214EFBD5006B4F6E /* YDNOutlineView.swift in Sources */,
 				D0CE3BED213F7C4A00798CF5 /* MonthBudgetSummaryView.swift in Sources */,
 				D04FB0E92151F2BC008880B7 /* YDNTextField.swift in Sources */,
@@ -468,7 +466,7 @@
 				D0E4E3EC214D935F006B4F6E /* RegisterViewController.swift in Sources */,
 				D0E4E3DD21439151006B4F6E /* NSView+Extensions.swift in Sources */,
 				D0AA343A21727BC100E8A973 /* Hoverable.swift in Sources */,
-				D06C649021432CD3000EF618 /* YNABTransactionImporter.swift in Sources */,
+				D0AA343F2173D32600E8A973 /* BudgetCategoriesViewDataSource.swift in Sources */,
 				D0E4E3D3214349A7006B4F6E /* Account.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

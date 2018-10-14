@@ -3,5 +3,6 @@ target 'YDNYNAB' do
     use_frameworks!
     inhibit_all_warnings!
     pod 'SnapKit'
-    pod 'RealmSwift'
+    # pod 'RealmSwift'
+    pod 'GRDB.swift'
 end
