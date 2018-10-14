@@ -25,7 +25,7 @@ class BudgetCategoriesViewDataSource: NSObject, NSOutlineViewDataSource {//NSTab
         if let resultSet = self.resultSet, item == nil {
             return resultSet.count
         } else if let item = item as? BudgetMasterCategory {
-            return item.subcategories.count
+            return item.visibleSubcategories.count
         }
         
         return 0
@@ -43,7 +43,7 @@ class BudgetCategoriesViewDataSource: NSObject, NSOutlineViewDataSource {//NSTab
         if item == nil {
             return resultSet[index]
         } else if let item = item as? BudgetMasterCategory {
-            return item.subcategories[index]
+            return item.visibleSubcategories[index]
         } else {
             return NSObject()
         }

@@ -55,6 +55,10 @@ class YNABBudgetImporter {
                     return
                 }
                 
+                if line.contains("Uncategorized Transactions") {
+                    return
+                }
+                
                 let budgetLine = realm.create(BudgetLine.self)
                 
                 var lineMasterCategory: BudgetMasterCategory?
@@ -76,6 +80,7 @@ class YNABBudgetImporter {
                             } else {
                                 masterCategory = realm.create(BudgetMasterCategory.self)
                                 masterCategory.name = stringValue
+                                masterCategory.sortOrder = masterCategories.count
                                 masterCategories[stringValue] = masterCategory
                             }
                             lineMasterCategory = masterCategory
@@ -97,6 +102,7 @@ class YNABBudgetImporter {
                             } else {
                                 masterCategory = realm.create(BudgetMasterCategory.self)
                                 masterCategory.name = masterCategoryName
+                                masterCategory.sortOrder = masterCategories.count
                                 masterCategories[masterCategoryName] = masterCategory
                             }
                             lineMasterCategory = masterCategory
@@ -110,6 +116,7 @@ class YNABBudgetImporter {
                                 subCategory.name = subCategoryName
                                 subCategory.masterCategory = masterCategory
                                 subCategory.isHidden = true
+                                subCategory.sortOrder = masterCategory.subcategories.count
                                 subCategories[subCategoryName] = subCategory
                             }
                             budgetLine.subCategory = subCategory
@@ -123,6 +130,7 @@ class YNABBudgetImporter {
                                 subCategory = realm.create(BudgetSubCategory.self)
                                 subCategory.name = stringValue
                                 subCategory.masterCategory = lineMasterCategory
+                                subCategory.sortOrder = lineMasterCategory?.subcategories.count ?? -1
                                 subCategories[stringValue] = subCategory
                             }
                             budgetLine.subCategory = subCategory

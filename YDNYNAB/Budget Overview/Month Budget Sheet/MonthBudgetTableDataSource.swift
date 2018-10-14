@@ -42,7 +42,7 @@ class MonthBudgetTableDataSource: NSObject, NSOutlineViewDataSource {
         if item == nil {
             return masterCategories.count
         } else if let item = item as? BudgetMasterCategory {
-            return item.subcategories.count
+            return item.visibleSubcategories.count
         }
         
         return 0
@@ -67,7 +67,7 @@ class MonthBudgetTableDataSource: NSObject, NSOutlineViewDataSource {
             }
 
         } else if let item = item as? BudgetMasterCategory {
-            let subcategory = item.subcategories[index]
+            let subcategory = item.visibleSubcategories[index]
             
             var resultSet: Results<BudgetLine>?
             if let cachedResults = self.budgetLineQueries[subcategory.id] {
