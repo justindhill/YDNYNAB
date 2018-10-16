@@ -111,7 +111,6 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
     
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
         if let rowView = tableView.makeView(withIdentifier: Constant.rowViewIdentifier, owner: self) as? NSTableRowView {
-            print("reuse row!")
             return rowView
         } else {
             let rowView = RegisterRowView()
