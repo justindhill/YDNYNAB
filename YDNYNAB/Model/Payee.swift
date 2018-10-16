@@ -8,9 +8,13 @@
 
 import GRDB
 
-class Payee: Record {
-    var id: String = UUID().uuidString
+class Payee: NSObject, Codable, FetchableRecord, PersistableRecord {
+    
+    func didInsert(with rowID: Int64, for column: String?) {
+        id = rowID
+    }
+    
+    var id: Int64?
     var name: String = ""
-    var defaultMasterCategory: BudgetMasterCategory?
-    var defualtSubCategory: BudgetSubCategory?
+    
 }

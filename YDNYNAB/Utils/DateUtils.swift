@@ -9,6 +9,12 @@
 import Cocoa
 
 class DateUtils: NSObject {
+    fileprivate static var yearMonthDayFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter
+    }()
+    
     class func threeLetterAbbreviation(forMonth month: Int) -> String {
         switch month {
         case 1: return "JAN"
@@ -35,6 +41,10 @@ class DateUtils: NSObject {
         }
         
         return date
+    }
+    
+    class func dateString(withMonth month: Int, year: Int) -> String {
+        return DateUtils.yearMonthDayFormatter.string(from: DateUtils.date(withMonth: month, year: year))
     }
     
     class func startAndEndDate(ofMonth month: Int, year: Int) -> (Date, Date) {

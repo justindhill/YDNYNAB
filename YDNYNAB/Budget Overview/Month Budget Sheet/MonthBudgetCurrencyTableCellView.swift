@@ -97,7 +97,7 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
         super.prepareForReuse()
         self.underlinesTextOnMouseover = false
         self.mouseoverCursor = nil
-        self.currencyTextLayer.string = nil
+        self.text = nil
     }
 
 }

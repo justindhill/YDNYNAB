@@ -11,47 +11,65 @@ import AppKit
 
 class BudgetCategoriesViewDataSource: NSObject, NSOutlineViewDataSource {
     
-//    var resultSet: Results<BudgetMasterCategory>?
-//
-//    required init?(coder decoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-//    required override init() {
-//        super.init()
-//
-//        resultSet = try? Realm()
-//            .objects(BudgetMasterCategory.self)
-//            .sorted(by: [SortDescriptor(keyPath: "name", ascending: true)])
-//    }
-//
-//    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-//        if let resultSet = self.resultSet, item == nil {
-//            return resultSet.count
-//        } else if let item = item as? BudgetMasterCategory {
-//            return item.visibleSubcategories.count
-//        }
-//
-//        return 0
-//    }
-//
-//    func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
-//        return nil
-//    }
-//
-//    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-//        guard let resultSet = resultSet else {
-//            fatalError()
-//        }
-//
-//        if item == nil {
-//            return resultSet[index]
-//        } else if let item = item as? BudgetMasterCategory {
-//            return item.visibleSubcategories[index]
-//        } else {
-//            return NSObject()
-//        }
-//    }
-//
-//    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-//        return (item is BudgetMasterCategory)
-//    }
+    var dbQueue: DatabaseQueue
+    
+    var masterCategories: [BudgetMasterCategory]?
+    var subCategories: [BudgetMasterCategory: [BudgetSubCategory]] = [:]
+
+    required init?(coder decoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init(dbQueue: DatabaseQueue) {
+        self.dbQueue = dbQueue
+
+        super.init()
+        
+        self.masterCategories = dbQueue.read { (db) -> [BudgetMasterCategory]? in
+            return try? BudgetMasterCategory.fetchAll(db)
+        }
+    }
+
+    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
+        if let resultSet = self.masterCategories, item == nil {
+            return resultSet.count
+        } else if let item = item as? BudgetMasterCategory {
+            return self.visibleSubcategories(forMasterCategory: item).count
+        }
+
+        return 0
+    }
+
+    func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
+        return nil
+    }
+
+    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+        guard let resultSet = masterCategories else {
+            fatalError()
+        }
+
+        if item == nil {
+            return resultSet[index]
+        } else if let item = item as? BudgetMasterCategory {
+            return self.visibleSubcategories(forMasterCategory: item)[index]
+        } else {
+            return NSObject()
+        }
+    }
+
+    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+        return (item is BudgetMasterCategory)
+    }
+    
+    func visibleSubcategories(forMasterCategory masterCategory: BudgetMasterCategory) -> [BudgetSubCategory] {
+        if let subCategories = self.subCategories[masterCategory] {
+            return subCategories
+        } else {
+            if let subCategories = self.dbQueue.read({ masterCategory.visibleSubcategories($0) }) {
+                self.subCategories[masterCategory] = subCategories
+                return subCategories
+            }
+        }
+        
+        return []
+    }
 
 }

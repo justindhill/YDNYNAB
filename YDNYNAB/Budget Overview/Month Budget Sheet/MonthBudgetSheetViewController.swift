@@ -21,7 +21,7 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
     
     private var currentRegisterPopover: NSPopover?
     
-    var tableDataSource = MonthBudgetTableDataSource(month: 0, year: 0)
+    var tableDataSource = MonthBudgetTableDataSource(month: 0, year: 0, dbQueue: YDNDatabase.defaultQueue)
     
     var month: MonthYear = MonthBudgetSheetViewController.MonthYearZero {
         didSet { self.updateForMonth(month: month) }
@@ -56,7 +56,7 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
     func updateForMonth(month: MonthYear) {
         self.budgetSheetView.summaryView.updateForMonth(month: month)
         
-        self.tableDataSource = MonthBudgetTableDataSource(month: month.month, year: month.year)
+        self.tableDataSource = MonthBudgetTableDataSource(month: month.month, year: month.year, dbQueue: YDNDatabase.defaultQueue)
         self.budgetSheetView.outlineView.dataSource = self.tableDataSource
         self.budgetSheetView.outlineView.reloadData()
         self.budgetSheetView.outlineView.expandItem(nil, expandChildren: true)
@@ -106,14 +106,14 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
         }
         
         if tableColumn.identifier == MonthBudgetSheetViewController.Constant.budgetedColumnIdentifier {
-            if let numberString = self.currencyFormatter.string(from: NSNumber(value: item.budgeted)) {
-                if item.budgeted > 0 {
+            if let budgeted = item.budgeted, let numberString = self.currencyFormatter.string(from: NSNumber(value: budgeted)) {
+                if budgeted > 0 {
                     cellView.text = numberString
                 }
             }
         } else if tableColumn.identifier == MonthBudgetSheetViewController.Constant.outflowsColumnIdentifier {
-            if let numberString = self.currencyFormatter.string(from: NSNumber(value: -item.outflows)) {
-                if item.outflows > 0 {
+            if let outflows = item.outflows, let numberString = self.currencyFormatter.string(from: NSNumber(value: -outflows)) {
+                if outflows > 0 {
                     cellView.text = numberString
                 }
             }
@@ -177,14 +177,14 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
         
         let clickedCell = outlineView.view(atColumn: outlineView.clickedColumn, row: outlineView.clickedRow, makeIfNecessary: false)
         let column = outlineView.tableColumns[outlineView.clickedColumn]
-        let subcategory = (outlineView.item(atRow: outlineView.clickedRow) as? BudgetLine)?.subCategory
+        let subcategory = (outlineView.item(atRow: outlineView.clickedRow) as? BudgetLine)?.subcategory
         
         if let clickedCell = clickedCell, let subcategory = subcategory, column.identifier == Constant.outflowsColumnIdentifier {
             let (startDate, endDate) = DateUtils.startAndEndDate(ofMonth: self.month.month, year: self.month.year)
-            let filter = RegisterViewDataSource.Filter(startDate: startDate, endDate: endDate, subcategory: subcategory)
+//            let filter = RegisterViewDataSource.Filter(startDate: startDate, endDate: endDate, subcategory: subcategory)
             
             let register = RegisterViewController(mode: .popover)
-            register.dataSource.filter = filter
+//            register.dataSource.filter = filter
             
             let popover = NSPopover()
             popover.contentViewController = register

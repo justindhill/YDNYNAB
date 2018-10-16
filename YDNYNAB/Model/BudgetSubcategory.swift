@@ -8,11 +8,16 @@
 
 import GRDB
 
-class BudgetSubCategory: Record {
-    var id: String = UUID().uuidString
+class BudgetSubCategory: NSObject, Codable, FetchableRecord, PersistableRecord {
+    
+    func didInsert(with rowID: Int64, for column: String?) {
+        id = rowID
+    }
+    
+    var id: Int64?
     var name: String = ""
     var sortOrder: Int = -1
-    var masterCategory: BudgetMasterCategory?
-//    let budgetLines = LinkingObjects(fromType: BudgetLine.self, property: "subCategory")
+    var masterCategory: Int64?
     var isHidden: Bool = false
+    
 }

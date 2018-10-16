@@ -8,7 +8,13 @@
 
 import GRDB
 
-class Account: Record {
-    @objc dynamic var id: String = UUID().uuidString
-    @objc dynamic var name: String = ""
+class Account: NSObject, Codable, FetchableRecord, PersistableRecord {
+    
+    func didInsert(with rowID: Int64, for column: String?) {
+        id = rowID
+    }
+    
+    var id: Int64?
+    var name: String = ""
+    
 }

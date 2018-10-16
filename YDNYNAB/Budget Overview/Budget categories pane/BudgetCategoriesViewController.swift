@@ -20,7 +20,7 @@ class BudgetCategoriesViewController: NSViewController, NSOutlineViewDelegate {
     }
     
     weak var delegate: BudgetCategoriesViewControllerDelegate?
-    let dataSource = BudgetCategoriesViewDataSource()
+    let dataSource = BudgetCategoriesViewDataSource(dbQueue: YDNDatabase.defaultQueue)
     
     var budgetCategoriesView: BudgetCategoriesView {
         return self.view as! BudgetCategoriesView

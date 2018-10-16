@@ -26,6 +26,9 @@
 		D0AA34402173D36900E8A973 /* MonthBudgetTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648721421BF9000EF618 /* MonthBudgetTableDataSource.swift */; };
 		D0AA34412173D3BF00E8A973 /* RegisterViewDataSourceFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA34362172693200E8A973 /* RegisterViewDataSourceFilter.swift */; };
 		D0AA34422173D43500E8A973 /* YNABTransactionImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648F21432CD3000EF618 /* YNABTransactionImporter.swift */; };
+		D0AA34452173D51900E8A973 /* YDNDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA34442173D51900E8A973 /* YDNDatabase.swift */; };
+		D0AA344A2175908A00E8A973 /* BudgetMasterCategory+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA34492175908A00E8A973 /* BudgetMasterCategory+Queries.swift */; };
+		D0AA344C2175A11000E8A973 /* BudgetSubCategory+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA344B2175A11000E8A973 /* BudgetSubCategory+Queries.swift */; };
 		D0CE3BDE213C359300798CF5 /* StackedSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BDD213C359300798CF5 /* StackedSelectionView.swift */; };
 		D0CE3BE3213F6B7B00798CF5 /* BudgetOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */; };
 		D0CE3BE5213F728C00798CF5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE4213F728C00798CF5 /* main.swift */; };
@@ -76,6 +79,9 @@
 		D06C648F21432CD3000EF618 /* YNABTransactionImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YNABTransactionImporter.swift; sourceTree = "<group>"; };
 		D0AA34362172693200E8A973 /* RegisterViewDataSourceFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewDataSourceFilter.swift; sourceTree = "<group>"; };
 		D0AA343921727BC100E8A973 /* Hoverable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hoverable.swift; sourceTree = "<group>"; };
+		D0AA34442173D51900E8A973 /* YDNDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNDatabase.swift; sourceTree = "<group>"; };
+		D0AA34492175908A00E8A973 /* BudgetMasterCategory+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BudgetMasterCategory+Queries.swift"; sourceTree = "<group>"; };
+		D0AA344B2175A11000E8A973 /* BudgetSubCategory+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BudgetSubCategory+Queries.swift"; sourceTree = "<group>"; };
 		D0CE3BDD213C359300798CF5 /* StackedSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedSelectionView.swift; sourceTree = "<group>"; };
 		D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetOverviewView.swift; sourceTree = "<group>"; };
 		D0CE3BE4213F728C00798CF5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -166,6 +172,7 @@
 		D0510578213B5C3F008133B5 /* YDNYNAB */ = {
 			isa = PBXGroup;
 			children = (
+				D0AA34432173D50C00E8A973 /* DB */,
 				D0AA343821727BAD00E8A973 /* Protocols */,
 				D0E4E3CB21433640006B4F6E /* Model */,
 				D06C648C21432C87000EF618 /* YNAB Importer */,
@@ -210,6 +217,24 @@
 				D0AA343921727BC100E8A973 /* Hoverable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D0AA34432173D50C00E8A973 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				D0AA34482175906F00E8A973 /* Queries */,
+				D0AA34442173D51900E8A973 /* YDNDatabase.swift */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		D0AA34482175906F00E8A973 /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				D0AA34492175908A00E8A973 /* BudgetMasterCategory+Queries.swift */,
+				D0AA344B2175A11000E8A973 /* BudgetSubCategory+Queries.swift */,
+			);
+			path = Queries;
 			sourceTree = "<group>";
 		};
 		D0CE3BDC213C2F5300798CF5 /* Sidebar */ = {
@@ -442,6 +467,7 @@
 				D0CE3BE9213F7B7500798CF5 /* MonthBudgetSheetViewController.swift in Sources */,
 				D06C648A21421D0F000EF618 /* MonthBudgetTableRowView.swift in Sources */,
 				D051057A213B5C3F008133B5 /* AppDelegate.swift in Sources */,
+				D0AA344A2175908A00E8A973 /* BudgetMasterCategory+Queries.swift in Sources */,
 				D06C648E21432CC9000EF618 /* YNABBudgetImporter.swift in Sources */,
 				D0AA34412173D3BF00E8A973 /* RegisterViewDataSourceFilter.swift in Sources */,
 				D0E4E3DF21445853006B4F6E /* DraggableSeparatorView.swift in Sources */,
@@ -454,6 +480,7 @@
 				D0E4E3D521434A59006B4F6E /* Payee.swift in Sources */,
 				D0E4E3F0214DA15F006B4F6E /* NSTableView+Extensions.swift in Sources */,
 				D0E4E3F4214DA93F006B4F6E /* RegisterCell.swift in Sources */,
+				D0AA34452173D51900E8A973 /* YDNDatabase.swift in Sources */,
 				D0E4E3CF214336B7006B4F6E /* BudgetSubcategory.swift in Sources */,
 				D04FB0E621509E41008880B7 /* Theme.swift in Sources */,
 				D0AA34402173D36900E8A973 /* MonthBudgetTableDataSource.swift in Sources */,
@@ -467,6 +494,7 @@
 				D0E4E3DD21439151006B4F6E /* NSView+Extensions.swift in Sources */,
 				D0AA343A21727BC100E8A973 /* Hoverable.swift in Sources */,
 				D0AA343F2173D32600E8A973 /* BudgetCategoriesViewDataSource.swift in Sources */,
+				D0AA344C2175A11000E8A973 /* BudgetSubCategory+Queries.swift in Sources */,
 				D0E4E3D3214349A7006B4F6E /* Account.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

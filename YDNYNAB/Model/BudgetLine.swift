@@ -8,12 +8,18 @@
 
 import GRDB
 
-class BudgetLine: Record {
-    var id: String = UUID().uuidString
+class BudgetLine: NSObject, Codable, FetchableRecord, PersistableRecord {
+    
+    func didInsert(with rowID: Int64, for column: String?) {
+        id = rowID
+    }
+    
+    var id: Int64?
     var month: Date = Date()
-    var masterCategory: BudgetMasterCategory?
-    var subCategory: BudgetSubCategory?
-    let budgeted: Double = 0
-    let outflows: Double = 0
+    var masterCategory: Int64?
+    var subcategory: Int64?
+    var budgeted: Double?
+    var outflows: Double?
     var categoryBalance: Double = 0
+    
 }

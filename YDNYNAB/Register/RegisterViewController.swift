@@ -10,6 +10,10 @@ import Cocoa
 
 class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRowViewDelegate {
     
+    enum Constant {
+        static let rowViewIdentifier = NSUserInterfaceItemIdentifier(rawValue: "rowViewIdentifier")
+    }
+    
     enum Mode {
         case popover
         case full
@@ -37,7 +41,7 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
         return self.view as! RegisterView
     }
     
-    let dataSource = RegisterViewDataSource()
+    let dataSource = RegisterViewDataSource(dbQueue: YDNDatabase.defaultQueue)
     
     let mode: Mode
     var focusedRow: Int? = nil
@@ -106,10 +110,16 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
     }
     
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-        let rowView = RegisterRowView()
-        rowView.delegate = self
-        
-        return rowView
+        if let rowView = tableView.makeView(withIdentifier: Constant.rowViewIdentifier, owner: self) as? NSTableRowView {
+            print("reuse row!")
+            return rowView
+        } else {
+            let rowView = RegisterRowView()
+            rowView.delegate = self
+            rowView.identifier = Constant.rowViewIdentifier
+            
+            return rowView
+        }
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
