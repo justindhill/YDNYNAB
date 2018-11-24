@@ -12,8 +12,8 @@ class BudgetCategoriesView: NSView {
     
     enum Constant {
         static let topOffset =
-            MonthBudgetSheetView.Constant.summaryViewHeight +
-            MonthBudgetSheetView.Constant.totalsViewHeight +
+            BudgetMonthSheetView.Constant.summaryViewHeight +
+            BudgetMonthSheetView.Constant.totalsViewHeight +
             BudgetOverviewView.Constant.padding
     }
     

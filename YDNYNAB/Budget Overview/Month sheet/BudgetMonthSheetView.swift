@@ -1,5 +1,5 @@
 //
-//  MonthBudgetSheetView.swift
+//  BudgetMonthSheetView.swift
 //  YDNYNAB
 //
 //  Created by Justin Hill on 9/4/18.
@@ -8,15 +8,15 @@
 
 import Cocoa
 
-class MonthBudgetSheetView: NSView {
+class BudgetMonthSheetView: NSView {
 
     enum Constant {
         static let summaryViewHeight: CGFloat = 125
         static let totalsViewHeight: CGFloat = 50
     }
 
-    let summaryView = MonthBudgetSummaryView()
-    let totalsView = MonthBudgetTotalsView()
+    let summaryView = BudgetMonthSummaryView()
+    let totalsView = BudgetMonthTotalsView()
     let outlineView = YDNOutlineView()
     let detailsTableScrollView = NSScrollView()
     

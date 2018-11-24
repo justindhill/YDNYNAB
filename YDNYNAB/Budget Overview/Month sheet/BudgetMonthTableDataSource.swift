@@ -1,5 +1,5 @@
 //
-//  MonthBudgetTableDataSource.swift
+//  BudgetMonthTableDataSource.swift
 //  YDNYNAB
 //
 //  Created by Justin Hill on 9/6/18.
@@ -9,7 +9,7 @@
 import AppKit
 import GRDB
 
-class MonthBudgetTableDataSource: NSObject, NSOutlineViewDataSource {
+class BudgetMonthTableDataSource: NSObject, NSOutlineViewDataSource {
     
     var masterCategories: [BudgetMasterCategory]?
     var budgetLines: [BudgetMasterCategory: [BudgetLine]] = [:]

@@ -23,10 +23,10 @@ class BudgetOverviewView: NSView {
     let backButton = NSButton(title: "Back", target: nil, action: nil)
     let forwardButton = NSButton(title: "Forward", target: nil, action: nil)
     
-    let monthBudgetSheets = [
-        MonthBudgetSheetViewController(),
-        MonthBudgetSheetViewController(),
-        MonthBudgetSheetViewController()
+    let budgetMonthSheets = [
+        BudgetMonthSheetViewController(),
+        BudgetMonthSheetViewController(),
+        BudgetMonthSheetViewController()
     ]
     
     var budgetSheetWidthConstraints = [LayoutConstraint]()
@@ -58,23 +58,23 @@ class BudgetOverviewView: NSView {
         }
         
         var lastSheet: NSViewController = self.categoryList
-        self.monthBudgetSheets.forEach({ monthBudgetSheet in
-            self.addSubview(monthBudgetSheet.view)
+        self.budgetMonthSheets.forEach({ budgetMonthSheet in
+            self.addSubview(budgetMonthSheet.view)
             
-            monthBudgetSheet.view.snp.makeConstraints({ (monthBudgetSheetMaker) in
-                if monthBudgetSheet != self.monthBudgetSheets.first {
-                    monthBudgetSheetMaker.width.equalTo(lastSheet.view)
+            budgetMonthSheet.view.snp.makeConstraints({ (budgetMonthSheetMaker) in
+                if budgetMonthSheet != self.budgetMonthSheets.first {
+                    budgetMonthSheetMaker.width.equalTo(lastSheet.view)
                 }
-                monthBudgetSheetMaker.top.equalTo(self).offset((2 * Constant.padding) + Constant.directionButtonHeight)
-                monthBudgetSheetMaker.left.equalTo(lastSheet.view.snp.right).offset(Constant.padding)
-                monthBudgetSheetMaker.bottom.equalTo(self).offset(-Constant.padding)
+                budgetMonthSheetMaker.top.equalTo(self).offset((2 * Constant.padding) + Constant.directionButtonHeight)
+                budgetMonthSheetMaker.left.equalTo(lastSheet.view.snp.right).offset(Constant.padding)
+                budgetMonthSheetMaker.bottom.equalTo(self).offset(-Constant.padding)
                 
-                if monthBudgetSheet == self.monthBudgetSheets.last {
-                    monthBudgetSheetMaker.right.equalTo(self).offset(-Constant.padding)
+                if budgetMonthSheet == self.budgetMonthSheets.last {
+                    budgetMonthSheetMaker.right.equalTo(self).offset(-Constant.padding)
                 }
             })
             
-            lastSheet = monthBudgetSheet
+            lastSheet = budgetMonthSheet
         })
     }
     

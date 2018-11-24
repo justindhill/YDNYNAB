@@ -1,5 +1,5 @@
 //
-//  MonthBudgetCurrencyTableCellView.swift
+//  BudgetMonthCurrencyTableCellView.swift
 //  YDNYNAB
 //
 //  Created by Justin Hill on 9/7/18.
@@ -8,10 +8,10 @@
 
 import Cocoa
 
-class MonthBudgetCurrencyTableCellView: NSTableCellView {
+class BudgetMonthCurrencyTableCellView: NSTableCellView {
     
     enum Constant {
-        static let reuseIdentifier = NSUserInterfaceItemIdentifier(rawValue: "MonthBudgetCurrencyTableCellView")
+        static let reuseIdentifier = NSUserInterfaceItemIdentifier(rawValue: "BudgetMonthCurrencyTableCellView")
     }
     
     let editingTextField = NSTextField.init(labelWithString: "")
@@ -80,7 +80,7 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
 
 }
 
-extension MonthBudgetCurrencyTableCellView: Hoverable {
+extension BudgetMonthCurrencyTableCellView: Hoverable {
     
     func enterHoverState() {
         self.mouseoverCursor?.set()

@@ -46,7 +46,7 @@ class BudgetCategoriesViewController: NSViewController, NSOutlineViewDelegate {
     }
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        let cellView = MonthBudgetCurrencyTableCellView()
+        let cellView = BudgetMonthCurrencyTableCellView()
         if let item = item as? BudgetMasterCategory {
             cellView.text = item.name
             cellView.font = NSFont.boldSystemFont(ofSize: 13)
@@ -68,7 +68,7 @@ class BudgetCategoriesViewController: NSViewController, NSOutlineViewDelegate {
     }
     
     func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {
-        return MonthBudgetTableRowView(row: outlineView.row(forItem: item))
+        return BudgetMonthTableRowView(row: outlineView.row(forItem: item))
     }
     
     func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {

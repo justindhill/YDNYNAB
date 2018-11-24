@@ -1,5 +1,5 @@
 //
-//  MonthBudgetTotalsView.swift
+//  BudgetMonthTotalsView.swift
 //  YDNYNAB
 //
 //  Created by Justin Hill on 9/6/18.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MonthBudgetTotalsView: NSView {
+class BudgetMonthTotalsView: NSView {
     
     required init?(coder decoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     override init(frame frameRect: NSRect) {

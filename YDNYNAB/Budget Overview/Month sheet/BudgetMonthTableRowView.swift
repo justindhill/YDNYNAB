@@ -1,5 +1,5 @@
 //
-//  MonthBudgetTableRowView.swift
+//  BudgetMonthTableRowView.swift
 //  YDNYNAB
 //
 //  Created by Justin Hill on 9/6/18.
@@ -8,10 +8,10 @@
 
 import Cocoa
 
-class MonthBudgetTableRowView: NSTableRowView {
+class BudgetMonthTableRowView: NSTableRowView {
     
     private enum Constant {
-        static let rowNumberKey = "MonthBudgetTableRowViewRowNumberKey"
+        static let rowNumberKey = "BudgetMonthTableRowViewRowNumberKey"
     }
     
     let row: Int
@@ -20,8 +20,8 @@ class MonthBudgetTableRowView: NSTableRowView {
     init(row: Int) {
         self.row = row
         super.init(frame: .zero)
-        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveMouseEnteredNotification(_:)), name: .monthBudgetTableRowViewMouseEntered, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveMouseExitedNotification(_:)), name: .monthBudgetTableRowViewMouseExited, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveMouseEnteredNotification(_:)), name: .budgetMonthTableRowViewMouseEntered, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveMouseExitedNotification(_:)), name: .budgetMonthTableRowViewMouseExited, object: nil)
     }
     
     override func updateTrackingAreas() {
@@ -29,11 +29,11 @@ class MonthBudgetTableRowView: NSTableRowView {
     }
     
     override func mouseEntered(with event: NSEvent) {
-        NotificationCenter.default.post(Notification(name: .monthBudgetTableRowViewMouseEntered, object: nil, userInfo: [Constant.rowNumberKey: self.row]))
+        NotificationCenter.default.post(Notification(name: .budgetMonthTableRowViewMouseEntered, object: nil, userInfo: [Constant.rowNumberKey: self.row]))
     }
     
     override func mouseExited(with event: NSEvent) {
-        NotificationCenter.default.post(Notification(name: .monthBudgetTableRowViewMouseExited, object: nil, userInfo: [Constant.rowNumberKey: self.row]))
+        NotificationCenter.default.post(Notification(name: .budgetMonthTableRowViewMouseExited, object: nil, userInfo: [Constant.rowNumberKey: self.row]))
     }
     
     @objc private func didReceiveMouseEnteredNotification(_ note: Notification) {
@@ -52,6 +52,6 @@ class MonthBudgetTableRowView: NSTableRowView {
 }
 
 fileprivate extension Notification.Name {
-    static let monthBudgetTableRowViewMouseEntered = Notification.Name(rawValue: "monthBudgetTableRowViewMouseEnteredNotification")
-    static let monthBudgetTableRowViewMouseExited = Notification.Name(rawValue: "monthBudgetTableRowViewMouseExitedNotification")
+    static let budgetMonthTableRowViewMouseEntered = Notification.Name(rawValue: "budgetMonthTableRowViewMouseEnteredNotification")
+    static let budgetMonthTableRowViewMouseExited = Notification.Name(rawValue: "budgetMonthTableRowViewMouseExitedNotification")
 }

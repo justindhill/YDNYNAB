@@ -1,5 +1,5 @@
 //
-//  MonthBudgetSummaryView.swift
+//  BudgetMonthSummaryView.swift
 //  YDNYNAB
 //
 //  Created by Justin Hill on 9/4/18.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MonthBudgetSummaryView: NSView {
+class BudgetMonthSummaryView: NSView {
     
     private enum Constant {
         static let dateStackWidth: CGFloat = 60
@@ -69,7 +69,7 @@ class MonthBudgetSummaryView: NSView {
         }
     }
     
-    func updateForMonth(month: MonthBudgetSheetViewController.MonthYear) {
+    func updateForMonth(month: BudgetMonthSheetViewController.MonthYear) {
         self.monthLabel.stringValue = DateUtils.threeLetterAbbreviation(forMonth: month.month)
         self.yearLabel.stringValue = "\(month.year)"
     }
