@@ -49,6 +49,7 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
         self.wantsLayer = true
         self.identifier = Constant.reuseIdentifier
         
+        self.editingTextField.focusRingType = .none
         self.editingTextField.sizeToFit()
         self.addSubview(self.editingTextField)
     }
@@ -71,6 +72,7 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.editable = false
         self.underlinesTextOnMouseover = false
         self.mouseoverCursor = nil
         self.text = nil
