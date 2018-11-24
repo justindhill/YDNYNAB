@@ -13,55 +13,35 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
     enum Constant {
         static let reuseIdentifier = NSUserInterfaceItemIdentifier(rawValue: "MonthBudgetCurrencyTableCellView")
     }
-        
+    
+    let editingTextField = NSTextField.init(labelWithString: "")
+    var editable: Bool = false {
+        didSet {
+            self.editingTextField.isEditable = editable
+            self.editingTextField.isSelectable = editable
+        }
+    }
+    
     var mouseoverCursor: NSCursor? = nil
     var underlinesTextOnMouseover: Bool = false
     
     var font: NSFont = NSFont.systemFont(ofSize: 13) {
         didSet {
-            self.currencyTextLayer.font = font
-            self.currencyTextLayer.fontSize = font.pointSize
+            self.editingTextField.font = font
         }
     }
     
     var text: String? {
         didSet {
-            self.currencyTextLayer.string = text
+            self.editingTextField.stringValue = text ?? ""
         }
     }
     
     var alignment: NSTextAlignment = .left {
         didSet {
-            switch alignment {
-            case .left:
-                self.currencyTextLayer.alignmentMode = .left
-            case .center:
-                self.currencyTextLayer.alignmentMode = .center
-            case .right:
-                self.currencyTextLayer.alignmentMode = .right
-            case .justified:
-                self.currencyTextLayer.alignmentMode = .justified
-            case .natural:
-                self.currencyTextLayer.alignmentMode = .natural
-            }
+            self.editingTextField.alignment = alignment
         }
     }
-    
-    private lazy var currencyTextLayer: CATextLayer = {
-        let layer = CATextLayer()
-        
-        let font = NSFont.systemFont(ofSize: 13)
-        layer.font = font
-        layer.fontSize = font.pointSize
-        layer.truncationMode = .end
-        layer.frame.size.height = NSString(string: "a").size(withAttributes: [.font: font]).height
-        layer.anchorPoint = .zero
-        layer.actions = [
-            "contents": NSNull()
-        ]
-        
-        return layer
-    }()
     
     required init?(coder decoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     override init(frame frameRect: NSRect) {
@@ -69,28 +49,24 @@ class MonthBudgetCurrencyTableCellView: NSTableCellView {
         self.wantsLayer = true
         self.identifier = Constant.reuseIdentifier
         
-        self.layer?.addSublayer(self.currencyTextLayer)
+        self.editingTextField.sizeToFit()
+        self.addSubview(self.editingTextField)
     }
     
     override func layout() {
         super.layout()
         
-        self.currencyTextLayer.foregroundColor = Theme.Color.text.cgColor
+        self.editingTextField.textColor = Theme.Color.text
         
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         let newTextLayerFrame = NSRect(
             x: 0,
-            y: ceil((self.frame.size.height - self.currencyTextLayer.frame.size.height) / 2),
+            y: ceil((self.frame.size.height - self.editingTextField.frame.size.height) / 2),
             width: self.frame.size.width,
-            height: self.currencyTextLayer.frame.size.height)
-        self.currencyTextLayer.frame = newTextLayerFrame.insetBy(dx: 3, dy: 0)
+            height: self.editingTextField.frame.size.height)
+        self.editingTextField.frame = newTextLayerFrame.insetBy(dx: 3, dy: 0)
         CATransaction.commit()
-    }
-    
-    override func viewDidChangeBackingProperties() {
-        super.viewDidChangeBackingProperties()
-        self.currencyTextLayer.contentsScale = self.window?.screen?.backingScaleFactor ?? 1
     }
     
     override func prepareForReuse() {
@@ -108,13 +84,16 @@ extension MonthBudgetCurrencyTableCellView: Hoverable {
         self.mouseoverCursor?.set()
         
         if let text = self.text, self.underlinesTextOnMouseover {
-            self.currencyTextLayer.string = NSAttributedString(
+            let para = NSMutableParagraphStyle()
+            para.alignment = self.alignment
+            self.editingTextField.attributedStringValue = NSAttributedString(
                 string: text,
                 attributes: [
                     .font: self.font,
                     .foregroundColor: Theme.Color.text,
                     .underlineStyle: NSUnderlineStyle.single.rawValue,
-                    .underlineColor: Theme.Color.text
+                    .underlineColor: Theme.Color.text,
+                    .paragraphStyle: para
                 ]
             )
         }
@@ -124,7 +103,7 @@ extension MonthBudgetCurrencyTableCellView: Hoverable {
         NSCursor.arrow.set()
         
         if self.underlinesTextOnMouseover {
-            self.currencyTextLayer.string = self.text
+            self.editingTextField.stringValue = self.text ?? ""
         }
     }
 }

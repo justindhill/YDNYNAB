@@ -96,6 +96,7 @@ class MonthBudgetSheetViewController: NSViewController, NSOutlineViewDelegate {
         
         if tableColumn.identifier == MonthBudgetSheetViewController.Constant.budgetedColumnIdentifier {
             cellView.mouseoverCursor = .iBeam
+            cellView.editable = true
         } else if tableColumn.identifier == MonthBudgetSheetViewController.Constant.outflowsColumnIdentifier {
             cellView.mouseoverCursor = .pointingHand
             cellView.underlinesTextOnMouseover = true
