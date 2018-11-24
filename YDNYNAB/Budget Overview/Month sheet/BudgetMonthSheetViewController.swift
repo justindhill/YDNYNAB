@@ -191,6 +191,7 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
             popover.contentViewController = register
             popover.contentSize = CGSize(width: 400, height: 200)
             popover.animates = true
+            popover.behavior = .transient
             popover.show(relativeTo: clickedCell.bounds, of: clickedCell, preferredEdge: .maxY)
             self.currentRegisterPopover = popover
         }
