@@ -22,28 +22,37 @@ class MenuBar: NSObject {
     
     private func populateMainMenu() {
         let mainMenu = self.addMenu(named: "YDNYNAB")
-        self.addItem(named: "About YDNYNAB", keyEquivalent: "", to: mainMenu) {
+        self.addItem(named: "About YDNYNAB", to: mainMenu) {
             print("About YDNYNAB")
+        }
+        self.addSeparator(to: mainMenu)
+        self.addItem(named: "Quit YDNYNAB", key: "q", keyModifier: [.command], to: mainMenu) {
+            NSApplication.shared.terminate(self)
         }
     }
     
     private func populateFileMenu() {
         let fileMenu = self.addMenu(named: "File")
-        self.addItem(named: "Create tables", keyEquivalent: "", to: fileMenu) {
+        self.addItem(named: "Create tables", to: fileMenu) {
             YDNDatabase.createTablesIfNeeded()
         }
         
-        self.addItem(named: "Import YNAB Data", keyEquivalent: "", to: fileMenu) {
+        self.addItem(named: "Import YNAB Data", to: fileMenu) {
             let _ = YNABBudgetImporter(csvFileUrl: URL(fileURLWithPath: "/Users/justin/Desktop/budget.csv"))
             let _ = YNABTransactionImporter(csvFileUrl: URL(fileURLWithPath: "/Users/justin/Desktop/transactions.csv"))
         }
     }
     
-    private func addItem(named name: String, keyEquivalent: String, to menu: NSMenu, block: @escaping () -> Void) {
-        let item = NSMenuItem(title: name, action: #selector(dispatchSelection(_:)), keyEquivalent: keyEquivalent)
+    private func addItem(named name: String, key: String = "", keyModifier: NSEvent.ModifierFlags = [], to menu: NSMenu, block: @escaping () -> Void) {
+        let item = NSMenuItem(title: name, action: #selector(dispatchSelection(_:)), keyEquivalent: key)
+        item.keyEquivalentModifierMask = keyModifier
         item.target = self
         self.itemBlocks[item] = block
         menu.addItem(item)
+    }
+    
+    private func addSeparator(to menu: NSMenu) {
+        menu.addItem(NSMenuItem.separator())
     }
     
     private func addMenu(named name: String) -> NSMenu {

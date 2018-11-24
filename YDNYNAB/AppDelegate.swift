@@ -13,7 +13,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        self.window = NSWindow(contentRect: self.calculateInitialWindowFrame(), styleMask: [.closable, .miniaturizable, .resizable, .titled], backing: .buffered, defer: false)
+        self.window = NSWindow(contentRect: self.calculateInitialWindowFrame(),
+                               styleMask: [.closable, .miniaturizable, .resizable, .titled],
+                               backing: .buffered,
+                               defer: false)
         self.window.title = "YDNYNAB"
         self.window.contentViewController = MainSplitViewController(nibName: nil, bundle: nil)
         self.window.setFrame(self.calculateInitialWindowFrame(), display: true)
@@ -36,6 +39,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         return initialWindowFrame
     }
+    
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return true
+    }
 
 }
-
