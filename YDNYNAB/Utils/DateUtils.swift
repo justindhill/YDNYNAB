@@ -43,6 +43,10 @@ class DateUtils: NSObject {
         return date
     }
     
+    class func dateString(withDate date: Date) -> String {
+        return DateUtils.yearMonthDayFormatter.string(from: date)
+    }
+    
     class func dateString(withMonth month: Int, year: Int) -> String {
         return DateUtils.yearMonthDayFormatter.string(from: DateUtils.date(withMonth: month, year: year))
     }

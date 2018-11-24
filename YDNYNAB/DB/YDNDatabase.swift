@@ -98,7 +98,7 @@ class YDNDatabase: NSObject {
                              onDelete: .setNull,
                              onUpdate: nil,
                              deferred: false)
-                t.column("subcategory", .integer)
+                t.column("subcategory", .integer).indexed()
                 t.foreignKey(["subcategory"],
                              references: BudgetSubCategory.databaseTableName,
                              columns: ["id"],

@@ -35,23 +35,24 @@ class RegisterViewDataSource: NSObject, NSTableViewDataSource {
         return formatter
     }()
 
-    lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-
-        return formatter
-    }()
-
     func updateResultSet() {
-        self.resultSet = self.dbQueue.read { try? Transaction.order(sql: "date(date) DESC").fetchAll($0) }
+        var queryString =
+            "SELECT `transaction`.*, budgetMasterCategory.name || ': ' || budgetSubCategory.name as categoryDisplayName, account.name as accountDisplayName, payee.name as payeeDisplayName " +
+            "FROM `transaction` " +
+            "LEFT JOIN account on `transaction`.account = account.id " +
+            "LEFT JOIN payee on `transaction`.payee = payee.id " +
+            "LEFT JOIN budgetSubCategory on `transaction`.subCategory = budgetSubCategory.id " +
+            "LEFT JOIN budgetMasterCategory on `transaction`.masterCategory = budgetMasterCategory.id "
 
-//        if let filter = self.filter {
-//            resultSet = resultSet?.filter(filter.filterPredicate)
-//        }
-//
-//        resultSet = resultSet?.sorted(by: [SortDescriptor(keyPath: "date", ascending: false)])
-
-//        self.resultSet = resultSet
+        var arguments: [Any] = []
+        if let (filterString, filterArguments) = self.filter?.components {
+            queryString += "\(filterString) "
+            arguments = filterArguments
+        }
+        
+        queryString += "ORDER BY date(`transaction`.date) DESC"
+        
+        self.resultSet = self.dbQueue.read { try! Transaction.fetchAll($0, queryString, arguments: StatementArguments(arguments)) }
     }
 
     // MARK: - NSTableViewDataSource
@@ -71,15 +72,16 @@ class RegisterViewDataSource: NSObject, NSTableViewDataSource {
 
         switch columnIdentifier {
         case .account:
-            return "\(transaction.account)"
+            return transaction.accountDisplayName
         case .date:
-            return self.dateFormatter.string(from: transaction.date)
+            return DateUtils.dateString(withDate: transaction.date)
         case .payee:
-            return "\(transaction.payee)"
+            return transaction.payeeDisplayName
         case .category:
-            let masterName = "\(transaction.masterCategory)"
-            let subName = "\(transaction.subCategory)"
-            return "\(masterName): \(subName)"
+            return transaction.categoryDisplayName
+//            let masterName = "\(transaction.masterCategory)"
+//            let subName = "\(transaction.subCategory)"
+//            return "\(masterName): \(subName)"
         case .memo:
             return transaction.memo
         case .inflow:

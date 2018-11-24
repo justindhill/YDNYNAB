@@ -37,4 +37,23 @@ class Transaction: NSObject, Codable, FetchableRecord, PersistableRecord {
     var inflow: Double?
     var cleared: Bool = false
     
+    func encode(to container: inout PersistenceContainer) {
+        container["id"] = id
+        container["account"] = account
+        container["flag"] = flag
+        container["checkNumber"] = checkNumber
+        container["date"] = date
+        container["payee"] = payee
+        container["masterCategory"] = masterCategory
+        container["subCategory"] = subCategory
+        container["memo"] = memo
+        container["outflow"] = outflow
+        container["inflow"] = inflow
+        container["cleared"] = cleared
+    }
+    
+    // from joins, not encoded
+    var accountDisplayName: String?
+    var payeeDisplayName: String?
+    var categoryDisplayName: String?
 }
