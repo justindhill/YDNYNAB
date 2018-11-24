@@ -8,17 +8,23 @@
 
 import Cocoa
 
+protocol BudgetMonthCurrencyTableCellViewKeyViewProvider {
+    func nextKeyView(for view: BudgetMonthCurrencyTableCellView) -> YDNTextField?
+    func previousKeyView(for view: BudgetMonthCurrencyTableCellView) -> YDNTextField?
+}
+
 class BudgetMonthCurrencyTableCellView: NSTableCellView {
     
     enum Constant {
         static let reuseIdentifier = NSUserInterfaceItemIdentifier(rawValue: "BudgetMonthCurrencyTableCellView")
     }
     
-    let editingTextField = NSTextField.init(labelWithString: "")
+    var keyViewProvider: BudgetMonthCurrencyTableCellViewKeyViewProvider?
+    
+    let editingTextField = YDNTextField.init(labelWithString: "")
     var editable: Bool = false {
         didSet {
-            self.editingTextField.isEditable = editable
-            self.editingTextField.isSelectable = editable
+            self.editingTextField.ydn_isEditable = editable
         }
     }
     
@@ -49,6 +55,7 @@ class BudgetMonthCurrencyTableCellView: NSTableCellView {
         self.wantsLayer = true
         self.identifier = Constant.reuseIdentifier
         
+        self.editingTextField.keyViewProvider = self
         self.editingTextField.focusRingType = .none
         self.editingTextField.sizeToFit()
         self.addSubview(self.editingTextField)
@@ -108,4 +115,16 @@ extension BudgetMonthCurrencyTableCellView: Hoverable {
             self.editingTextField.stringValue = self.text ?? ""
         }
     }
+}
+
+extension BudgetMonthCurrencyTableCellView: YDNTextFieldKeyViewProvider {
+    
+    func nextKeyView(for textField: YDNTextField) -> YDNTextField? {
+        return self.keyViewProvider?.nextKeyView(for: self)
+    }
+    
+    func previousKeyView(for textField: YDNTextField) -> YDNTextField? {
+        return self.keyViewProvider?.previousKeyView(for: self)
+    }
+    
 }

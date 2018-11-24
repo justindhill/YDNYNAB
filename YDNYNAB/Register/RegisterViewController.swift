@@ -74,7 +74,7 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
                                      initialWidth: 140)
             tableView.addTableColumn(withTitle: "Date",
                                      identifier: ColumnIdentifier.date.userInterfaceIdentifier,
-                                     initialWidth: 70)
+                                     initialWidth: 80)
             tableView.addTableColumn(withTitle: "Payee",
                                      identifier: ColumnIdentifier.payee.userInterfaceIdentifier,
                                      resizingOptions: .autoresizingMask)

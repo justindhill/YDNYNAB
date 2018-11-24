@@ -129,26 +129,26 @@ class RegisterRowView: NSTableRowView, YDNTextFieldDelegate {
         }
     }
     
-    func textFieldDidBlur(_ textField: YDNTextField, dueTo movement: NSTextMovement) {
-        print("\(textField.stringValue) blur")
+    func textFieldDidBlur(_ textField: YDNTextField, commit: Bool) {
+        print("\(textField.stringValue) blur - commit: \(commit)")
         if let originatingColumnViewIndex = self.findRegisterCellContaining(view: textField)?.0 {
-            DispatchQueue.main.async {
-                switch movement {
-                case .tab:
-                    let index = min(originatingColumnViewIndex + 1, self.columnViews.count - 1)
-                    let cellView = self.columnViews[index]
-                    cellView.beginEditing()
-                    
-                case .backtab:
-                    let index = max(originatingColumnViewIndex - 1, 0)
-                    let cellView = self.columnViews[index]
-                    cellView.beginEditing()
-                case .return:
-                    self.commitChanges()
-                default:
-                    break
-                }
-            }
+//            DispatchQueue.main.async {
+//                switch movement {
+//                case .tab:
+//                    let index = min(originatingColumnViewIndex + 1, self.columnViews.count - 1)
+//                    let cellView = self.columnViews[index]
+//                    cellView.beginEditing()
+//
+//                case .backtab:
+//                    let index = max(originatingColumnViewIndex - 1, 0)
+//                    let cellView = self.columnViews[index]
+//                    cellView.beginEditing()
+//                case .return:
+//                    self.commitChanges()
+//                default:
+//                    break
+//                }
+//            }
         }
     }
     

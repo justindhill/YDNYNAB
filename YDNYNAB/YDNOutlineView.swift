@@ -36,6 +36,11 @@ class YDNOutlineView: NSOutlineView {
         self.updateHoveredView(with: event)
     }
     
+    override func validateProposedFirstResponder(_ responder: NSResponder, for event: NSEvent?) -> Bool {
+        // let cells handle their own clicks
+        return true
+    }
+    
     func updateHoveredView(with event: NSEvent) {
         let locationInSelf = self.convert(event.locationInWindow, from: nil)
         let row = self.row(at: locationInSelf)
