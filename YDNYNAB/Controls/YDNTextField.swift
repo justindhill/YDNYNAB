@@ -37,13 +37,36 @@ class YDNTextField: NSTextField {
             }
         }
     }
+
+    var forwardMovements: [NSTextMovement] = [.tab, .return]
+    var committingMovements: [NSTextMovement] = [.tab, .backtab, .return]
+    var backwardMovements: [NSTextMovement] = [.backtab]
     
     weak var keyViewProvider: YDNTextFieldKeyViewProvider?
     weak var focusDelegate: YDNTextFieldDelegate?
     
     lazy private var clickRecognizer = NSClickGestureRecognizer(target: self, action: #selector(selectAllAndEdit))
     private var isFirstResponder: Bool = false
-    private var isFocused: Bool = false
+    
+    var initialFocusedValue: String?
+    private(set) var isFocused: Bool = false {
+        didSet {
+            if isFocused != oldValue {
+                if isFocused {
+                    self.removeGestureRecognizer(self.clickRecognizer)
+                    self.isEditable = true
+                    self.isSelectable = true
+                } else {
+                    self.isSelectable = false
+                    self.isEditable = false
+                    self.addGestureRecognizer(self.clickRecognizer)
+                }
+                
+//                print("\(self.stringValue) \(isFocused ? "focused" : "blurred")")
+                self.initialFocusedValue = isFocused ? self.stringValue : nil
+            }
+        }
+    }
     
     required init?(coder: NSCoder) { fatalError() }
     override init(frame frameRect: NSRect) {
@@ -57,17 +80,11 @@ class YDNTextField: NSTextField {
             return
         }
         
-        self.removeGestureRecognizer(self.clickRecognizer)
-        self.isEditable = true
-        self.isSelectable = true
         self.isFocused = true
-        print("\(self.stringValue) focused")
         self.selectText(self)
     }
 
     override func becomeFirstResponder() -> Bool {
-        print("\(self.stringValue) become first responder")
-
         let isFirstResponder = super.becomeFirstResponder()
         self.isFirstResponder = isFirstResponder
 
@@ -77,12 +94,9 @@ class YDNTextField: NSTextField {
     override func resignFirstResponder() -> Bool {
         let resign = super.resignFirstResponder()
 
-        if let editor = self.currentEditor() {
+        if self.currentEditor() != nil {
             self.isFocused = true
             self.focusDelegate?.textFieldDidFocus(self)
-            print("\(self.stringValue) focused")
-        } else {
-            print("\(self.stringValue) about to be a goner")
         }
 
         return resign
@@ -90,42 +104,32 @@ class YDNTextField: NSTextField {
 
     override func textDidEndEditing(_ notification: Notification) {
         super.textDidEndEditing(notification)
-        print("\(self.stringValue) text ended editing")
-        
-        self.isSelectable = false
-        self.isEditable = false
-        self.addGestureRecognizer(self.clickRecognizer)
 
         var textMovement: NSTextMovement = .other
         if let textMovementRawValue = notification.userInfo?["NSTextMovement"] as? Int {
             textMovement = NSTextMovement(rawValue: textMovementRawValue) ?? .other
         }
         
-        let commitMovements: [NSTextMovement] = [.return, .tab, .backtab]
-
-        print("\(self.stringValue) no longer focused")
+        if !self.committingMovements.contains(textMovement) {
+            self.stringValue = self.initialFocusedValue ?? ""
+        }
         self.isFocused = false
-        self.focusDelegate?.textFieldDidBlur(self, commit: (commitMovements.contains(textMovement)))
+        self.focusDelegate?.textFieldDidBlur(self, commit: (self.committingMovements.contains(textMovement)))
+//        print("blur committed? \(self.committingMovements.contains(textMovement))")
         
         if let keyViewProvider = self.keyViewProvider {
-            if textMovement == .tab {
+            if self.forwardMovements.contains(textMovement) {
                 let next = keyViewProvider.nextKeyView(for: self)
                 next?.selectAllAndEdit()
-            } else if textMovement == .backtab {
+            } else if self.backwardMovements.contains(textMovement) {
                 let previous = keyViewProvider.previousKeyView(for: self)
                 previous?.selectAllAndEdit()
             }
         }
     }
     
-    override func textShouldEndEditing(_ textObject: NSText) -> Bool {
-        print("should it end?")
-        return super.textShouldEndEditing(textObject)
-    }
-    
     override func doCommand(by selector: Selector) {
         if selector == #selector(cancelOperation(_:)) {
-            print("\(self.stringValue) no longer focused 1")
             self.isFocused = false
             self.focusDelegate?.textFieldDidBlur(self, commit: false)
         }
