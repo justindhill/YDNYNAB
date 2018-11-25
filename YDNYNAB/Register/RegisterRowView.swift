@@ -13,7 +13,7 @@ protocol RegisterRowViewDelegate: class {
     func registerRowViewDidClickCancel(_ rowView: RegisterRowView)
 }
 
-class RegisterRowView: NSTableRowView, YDNTextFieldDelegate {
+class RegisterRowView: NSTableRowView, YDNTextFieldDelegate, YDNTextFieldKeyViewProvider {
     
     private var doneButton: NSButton?
     private var cancelButton: NSButton?
@@ -82,6 +82,7 @@ class RegisterRowView: NSTableRowView, YDNTextFieldDelegate {
             if let columnView = self.view(atColumn: i) as? RegisterCell {
                 columnView.isEditable = self.isEditing
                 columnView.inputTextField.focusDelegate = self.isEditing ? self : nil
+                columnView.inputTextField.keyViewProvider = self.isEditing ? self : nil
             }
         }
         
@@ -123,33 +124,35 @@ class RegisterRowView: NSTableRowView, YDNTextFieldDelegate {
     }
     
     func textFieldDidFocus(_ textField: YDNTextField) {
-        print("\(textField.stringValue) focus")
-        DispatchQueue.main.async {
-            textField.currentEditor()?.selectAll(self)
-        }
+//        print("\(textField.stringValue) focus")
+//        DispatchQueue.main.async {
+//            textField.currentEditor()?.selectAll(self)
+//        }
     }
     
     func textFieldDidBlur(_ textField: YDNTextField, commit: Bool) {
-        print("\(textField.stringValue) blur - commit: \(commit)")
+//        print("\(textField.stringValue) blur - commit: \(commit)")
+
+    }
+    
+    func nextKeyView(for textField: YDNTextField) -> YDNTextField? {
         if let originatingColumnViewIndex = self.findRegisterCellContaining(view: textField)?.0 {
-//            DispatchQueue.main.async {
-//                switch movement {
-//                case .tab:
-//                    let index = min(originatingColumnViewIndex + 1, self.columnViews.count - 1)
-//                    let cellView = self.columnViews[index]
-//                    cellView.beginEditing()
-//
-//                case .backtab:
-//                    let index = max(originatingColumnViewIndex - 1, 0)
-//                    let cellView = self.columnViews[index]
-//                    cellView.beginEditing()
-//                case .return:
-//                    self.commitChanges()
-//                default:
-//                    break
-//                }
-//            }
+            let index = min(originatingColumnViewIndex + 1, self.columnViews.count - 1)
+            let cellView = self.columnViews[index]
+            return cellView.inputTextField
         }
+        
+        return nil
+    }
+    
+    func previousKeyView(for textField: YDNTextField) -> YDNTextField? {
+        if let originatingColumnViewIndex = self.findRegisterCellContaining(view: textField)?.0 {
+            let index = max(originatingColumnViewIndex - 1, 0)
+            let cellView = self.columnViews[index]
+            return cellView.inputTextField
+        }
+        
+        return nil
     }
     
     @objc func commitChanges() {

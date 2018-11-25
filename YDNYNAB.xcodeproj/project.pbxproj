@@ -29,6 +29,7 @@
 		D0AA34452173D51900E8A973 /* YDNDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA34442173D51900E8A973 /* YDNDatabase.swift */; };
 		D0AA344A2175908A00E8A973 /* BudgetMasterCategory+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA34492175908A00E8A973 /* BudgetMasterCategory+Queries.swift */; };
 		D0AA344C2175A11000E8A973 /* BudgetSubCategory+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA344B2175A11000E8A973 /* BudgetSubCategory+Queries.swift */; };
+		D0AD2DCF21AB1EA9009A62FA /* YDNTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AD2DCE21AB1EA9009A62FA /* YDNTableView.swift */; };
 		D0CE3BDE213C359300798CF5 /* StackedSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BDD213C359300798CF5 /* StackedSelectionView.swift */; };
 		D0CE3BE3213F6B7B00798CF5 /* BudgetOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */; };
 		D0CE3BE5213F728C00798CF5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE4213F728C00798CF5 /* main.swift */; };
@@ -82,6 +83,7 @@
 		D0AA34442173D51900E8A973 /* YDNDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNDatabase.swift; sourceTree = "<group>"; };
 		D0AA34492175908A00E8A973 /* BudgetMasterCategory+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BudgetMasterCategory+Queries.swift"; sourceTree = "<group>"; };
 		D0AA344B2175A11000E8A973 /* BudgetSubCategory+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BudgetSubCategory+Queries.swift"; sourceTree = "<group>"; };
+		D0AD2DCE21AB1EA9009A62FA /* YDNTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNTableView.swift; sourceTree = "<group>"; };
 		D0CE3BDD213C359300798CF5 /* StackedSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedSelectionView.swift; sourceTree = "<group>"; };
 		D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetOverviewView.swift; sourceTree = "<group>"; };
 		D0CE3BE4213F728C00798CF5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				D0510579213B5C3F008133B5 /* AppDelegate.swift */,
 				D0E4E3D8214355BC006B4F6E /* MenuBar.swift */,
 				D0E4E3F5214EFBD5006B4F6E /* YDNOutlineView.swift */,
+				D0AD2DCE21AB1EA9009A62FA /* YDNTableView.swift */,
 				D0510587213B6230008133B5 /* MainSplitViewController.swift */,
 				D06C648521421004000EF618 /* MainSplitViewControllerView.swift */,
 			);
@@ -468,6 +471,7 @@
 				D06C648A21421D0F000EF618 /* BudgetMonthTableRowView.swift in Sources */,
 				D051057A213B5C3F008133B5 /* AppDelegate.swift in Sources */,
 				D0AA344A2175908A00E8A973 /* BudgetMasterCategory+Queries.swift in Sources */,
+				D0AD2DCF21AB1EA9009A62FA /* YDNTableView.swift in Sources */,
 				D06C648E21432CC9000EF618 /* YNABBudgetImporter.swift in Sources */,
 				D0AA34412173D3BF00E8A973 /* RegisterViewDataSourceFilter.swift in Sources */,
 				D0E4E3DF21445853006B4F6E /* DraggableSeparatorView.swift in Sources */,

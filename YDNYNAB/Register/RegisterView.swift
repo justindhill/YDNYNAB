@@ -10,7 +10,7 @@ import Cocoa
 
 class RegisterView: NSView {
 
-    let tableView = NSTableView()
+    let tableView = YDNTableView()
     let tableScrollView = NSScrollView()
     
     required init?(coder decoder: NSCoder) { fatalError("Not implemented" )}
