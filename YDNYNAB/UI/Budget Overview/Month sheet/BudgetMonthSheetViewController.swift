@@ -10,18 +10,15 @@ import Cocoa
 
 class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
     
-    typealias MonthYear = (month: Int, year: Int)
-    static let MonthYearZero = MonthYear(month: 0, year: 0)
-    
     enum Constant {
         static let budgetedColumnIdentifier = NSUserInterfaceItemIdentifier(rawValue: "YDNBudgetMonthSheetViewBudgetedColumnIdentifier")
         static let outflowsColumnIdentifier = NSUserInterfaceItemIdentifier(rawValue: "YDNBudgetMonthSheetViewOutflowsColumnIdentifier")
         static let balanceColumnIdentifier = NSUserInterfaceItemIdentifier(rawValue: "YDNBudgetMonthSheetViewBalanceColumnIdentifier")
     }
 
-    var tableDataSource = BudgetMonthTableDataSource(month: 0, year: 0, dbQueue: YDNDatabase.defaultQueue)
+    var tableDataSource = BudgetMonthTableDataSource(monthYear: .zero, dbQueue: YDNDatabase.defaultQueue)
     
-    var month: MonthYear = BudgetMonthSheetViewController.MonthYearZero {
+    var month: MonthYear = .zero {
         didSet { self.updateForMonth(month: month) }
     }
     
@@ -43,7 +40,15 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
         
         return formatter
     }()
+    
+    let appContext: AppContext
 
+    required init?(coder: NSCoder) { fatalError("not implemented") }
+    init(appContext: AppContext) {
+        self.appContext = appContext
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.budgetSheetView.outlineView.delegate = self
@@ -56,7 +61,7 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
     func updateForMonth(month: MonthYear) {
         self.budgetSheetView.summaryView.updateForMonth(month: month)
         
-        self.tableDataSource = BudgetMonthTableDataSource(month: month.month, year: month.year, dbQueue: YDNDatabase.defaultQueue)
+        self.tableDataSource = BudgetMonthTableDataSource(monthYear: month, dbQueue: YDNDatabase.defaultQueue)
         self.budgetSheetView.outlineView.dataSource = self.tableDataSource
         self.budgetSheetView.outlineView.reloadData()
         self.budgetSheetView.outlineView.expandItem(nil, expandChildren: true)
@@ -91,6 +96,7 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
         } else {
             cellView = BudgetMonthCurrencyTableCellView()
             cellView.keyViewProvider = self.keyViewProvider
+            cellView.delegate = self
         }
         
         cellView.alignment = .right
@@ -194,8 +200,24 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
 
 extension BudgetMonthSheetViewController: BudgetMonthCurrencyTableCellViewDelegate {
     
-    func budgetCurrencyCell(_ cell: BudgetMonthCurrencyTableCellView, didCommitValue: Double?) {
+    func budgetCurrencyCell(_ cell: BudgetMonthCurrencyTableCellView, didCommitValue value: Double?) {
+        let row = self.budgetSheetView.outlineView.row(for: cell)
+        guard row != -1 else {
+            return
+        }
         
+        guard let budgetLine = self.budgetSheetView.outlineView.item(atRow: row) as? BudgetLine else {
+            print("Item at row \(row) is not a BudgetLine")
+            return
+        }
+        
+        budgetLine.budgeted = value
+        
+        do {
+            try self.appContext.budgetUpdater.updateBudgetLineAndRecalculateCategory(budgetLine)
+        } catch {
+            Toaster.shared.enqueueDefaultErrorToast()
+        }
     }
     
 }

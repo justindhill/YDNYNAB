@@ -14,7 +14,7 @@ protocol BudgetMonthCurrencyTableCellViewKeyViewProvider {
 }
 
 protocol BudgetMonthCurrencyTableCellViewDelegate {
-    func budgetCurrencyCell(_ cell: BudgetMonthCurrencyTableCellView, didCommitValue: Double?)
+    func budgetCurrencyCell(_ cell: BudgetMonthCurrencyTableCellView, didCommitValue value: Double?)
 }
 
 class BudgetMonthCurrencyTableCellView: NSTableCellView {

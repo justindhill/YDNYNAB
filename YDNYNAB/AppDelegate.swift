@@ -11,14 +11,16 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
+    var appContext: AppContext!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        self.appContext = AppContext()
         self.window = NSWindow(contentRect: self.calculateInitialWindowFrame(),
                                styleMask: [.closable, .miniaturizable, .resizable, .titled],
                                backing: .buffered,
                                defer: false)
         self.window.title = "YDNYNAB"
-        self.window.contentViewController = MainSplitViewController(nibName: nil, bundle: nil)
+        self.window.contentViewController = MainSplitViewController(appContext: self.appContext)
         self.window.setFrame(self.calculateInitialWindowFrame(), display: true)
         self.window.makeKeyAndOrderFront(self)        
     }

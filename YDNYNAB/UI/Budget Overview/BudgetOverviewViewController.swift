@@ -11,7 +11,7 @@ import Cocoa
 class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewControllerDelegate {
     
     override func loadView() {
-        self.view = BudgetOverviewView()
+        self.view = BudgetOverviewView(budgetMonthSheetViews: self.budgetMonthSheets.map { $0.view })
     }
     
     var budgetOverviewView: BudgetOverviewView {
@@ -21,6 +21,20 @@ class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewContro
     var scrollViews = [NSScrollView]()
     
     var offsetFromCurrentMonth: Int = 0
+    
+    lazy var budgetMonthSheets = [
+        BudgetMonthSheetViewController(appContext: self.appContext),
+        BudgetMonthSheetViewController(appContext: self.appContext),
+        BudgetMonthSheetViewController(appContext: self.appContext)
+    ]
+    
+    let appContext: AppContext
+    
+    required init?(coder: NSCoder) { fatalError("not implemented") }
+    init(appContext: AppContext) {
+        self.appContext = appContext
+        super.init(nibName: nil, bundle: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +46,7 @@ class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewContro
         self.budgetOverviewView.forwardButton.action = #selector(forwardButtonClicked)
         
         self.scrollViews.append(self.budgetOverviewView.categoryList.budgetCategoriesView.scrollView)
-        self.scrollViews.append(contentsOf: self.budgetOverviewView.budgetMonthSheets.map { $0.budgetSheetView.detailsTableScrollView })
+        self.scrollViews.append(contentsOf: self.budgetMonthSheets.map { $0.budgetSheetView.detailsTableScrollView })
         self.scrollViews.forEach { scrollView in
             scrollView.postsBoundsChangedNotifications = true
             NotificationCenter.default.addObserver(
@@ -41,6 +55,11 @@ class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewContro
                 name: NSView.boundsDidChangeNotification,
                 object: scrollView.contentView)
         }
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(budgetCategoryWasRecalculated(_:)),
+                                               name: .budgetCategoryWasRecalculated,
+                                               object: nil)
         
         self.refreshData()
     }
@@ -59,11 +78,11 @@ class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewContro
     }
     
     func budgetCategoriesViewController(_ viewController: BudgetCategoriesViewController, willExpandRow row: Int) {
-        self.budgetOverviewView.budgetMonthSheets.forEach({ $0.expand(row: row) })
+        self.budgetMonthSheets.forEach({ $0.expand(row: row) })
     }
     
     func budgetCategoriesViewController(_ viewController: BudgetCategoriesViewController, willCollapseRow row: Int) {
-        self.budgetOverviewView.budgetMonthSheets.forEach({ $0.collapse(row: row) })
+        self.budgetMonthSheets.forEach({ $0.collapse(row: row) })
     }
     
     @objc func backButtonClicked() {
@@ -76,9 +95,13 @@ class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewContro
         self.refreshData()
     }
     
+    @objc func budgetCategoryWasRecalculated(_ notification: Notification) {
+        self.refreshData()
+    }
+    
     func refreshData() {
         let currentDate = Date()
-        self.budgetOverviewView.budgetMonthSheets.enumerated().forEach { (i, budgetSheetViewController) in
+        self.budgetMonthSheets.enumerated().forEach { (i, budgetSheetViewController) in
             let resolvedMonthOffset = i + self.offsetFromCurrentMonth - 1
             guard let date = Calendar.current.date(byAdding: DateComponents(month: resolvedMonthOffset), to: currentDate, wrappingComponents: false) else {
                 assertionFailure("Couldn't create a date")
@@ -87,7 +110,7 @@ class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewContro
             
             let month = Calendar.current.component(.month, from: date)
             let year = Calendar.current.component(.year, from: date)
-            budgetSheetViewController.month = BudgetMonthSheetViewController.MonthYear(month: month, year: year)
+            budgetSheetViewController.month = MonthYear(month: month, year: year)
         }
     }
 }
