@@ -18,9 +18,7 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
         static let outflowsColumnIdentifier = NSUserInterfaceItemIdentifier(rawValue: "YDNBudgetMonthSheetViewOutflowsColumnIdentifier")
         static let balanceColumnIdentifier = NSUserInterfaceItemIdentifier(rawValue: "YDNBudgetMonthSheetViewBalanceColumnIdentifier")
     }
-    
-    private var currentRegisterPopover: NSPopover?
-    
+
     var tableDataSource = BudgetMonthTableDataSource(month: 0, year: 0, dbQueue: YDNDatabase.defaultQueue)
     
     var month: MonthYear = BudgetMonthSheetViewController.MonthYearZero {
@@ -34,6 +32,8 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
     var budgetSheetView: BudgetMonthSheetView {
         return self.view as! BudgetMonthSheetView
     }
+    
+    lazy var keyViewProvider: BudgetMonthSheetKeyViewProvider = BudgetMonthSheetKeyViewProvider(outlineView: self.budgetSheetView.outlineView)
     
     lazy var currencyFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -90,7 +90,7 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
             cellView = existingView
         } else {
             cellView = BudgetMonthCurrencyTableCellView()
-            cellView.keyViewProvider = self
+            cellView.keyViewProvider = self.keyViewProvider
         }
         
         cellView.alignment = .right
@@ -163,7 +163,7 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
         }
     }
     
-    @objc func clickAction() {        
+    @objc func clickAction() {
         let outlineView = self.budgetSheetView.outlineView
         
         if outlineView.clickedColumn < 0 {
@@ -187,61 +187,7 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
             popover.animates = true
             popover.behavior = .transient
             popover.show(relativeTo: clickedCell.bounds, of: clickedCell, preferredEdge: .maxY)
-            self.currentRegisterPopover = popover
         }
     }
     
-}
-
-extension BudgetMonthSheetViewController: BudgetMonthCurrencyTableCellViewKeyViewProvider {
-    func nextKeyView(for view: BudgetMonthCurrencyTableCellView) -> YDNTextField? {
-        guard let rowView = view.rowView as? BudgetMonthTableRowView else {
-            return nil
-        }
-        
-        let numberOfRows = self.budgetSheetView.outlineView.numberOfRows
-        let column = self.budgetSheetView.outlineView.column(for: view)
-        
-        var nextRow = rowView.row + 1
-        while 0..<numberOfRows ~= nextRow {
-            if let textField = self.textFieldForRow(row: nextRow, column: column) {
-                self.budgetSheetView.outlineView.scrollRowToVisible(nextRow)
-                return textField
-            }
-            nextRow += 1
-        }
-        
-        self.budgetSheetView.outlineView.scrollToBeginningOfDocument(self)
-        return self.textFieldForRow(row: 0, column: column)
-    }
-    
-    func previousKeyView(for view: BudgetMonthCurrencyTableCellView) -> YDNTextField? {
-        guard let rowView = view.rowView as? BudgetMonthTableRowView else {
-            return nil
-        }
-        
-        let numberOfRows = self.budgetSheetView.outlineView.numberOfRows
-        let column = self.budgetSheetView.outlineView.column(for: view)
-        
-        var previousRow = rowView.row - 1
-        while 0..<numberOfRows ~= previousRow {
-            if let textField = self.textFieldForRow(row: previousRow, column: column) {
-                self.budgetSheetView.outlineView.scrollRowToVisible(previousRow)
-                return textField
-            }
-            previousRow -= 1
-        }
-        
-        self.budgetSheetView.outlineView.scrollToEndOfDocument(self)
-        return self.textFieldForRow(row: numberOfRows - 1, column: column)
-    }
-    
-    func textFieldForRow(row: Int, column: Int) -> YDNTextField? {
-        let cell = self.budgetSheetView.outlineView.view(atColumn: column, row: row, makeIfNecessary: true)
-        if let cell = cell as? BudgetMonthCurrencyTableCellView {
-            return cell.editingTextField
-        }
-        
-        return nil
-    }
 }
