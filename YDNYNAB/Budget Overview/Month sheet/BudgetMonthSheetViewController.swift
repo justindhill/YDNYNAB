@@ -163,12 +163,7 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
         }
     }
     
-    @objc func clickAction() {
-        if let popover = self.currentRegisterPopover {
-            popover.performClose(self)
-            self.currentRegisterPopover = nil
-        }
-        
+    @objc func clickAction() {        
         let outlineView = self.budgetSheetView.outlineView
         
         if outlineView.clickedColumn < 0 {
