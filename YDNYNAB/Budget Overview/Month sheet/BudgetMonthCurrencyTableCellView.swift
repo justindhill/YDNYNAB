@@ -13,6 +13,10 @@ protocol BudgetMonthCurrencyTableCellViewKeyViewProvider {
     func previousKeyView(for view: BudgetMonthCurrencyTableCellView) -> YDNTextField?
 }
 
+protocol BudgetMonthCurrencyTableCellViewDelegate {
+    func budgetCurrencyCell(_ cell: BudgetMonthCurrencyTableCellView, didCommitValue: Double?)
+}
+
 class BudgetMonthCurrencyTableCellView: NSTableCellView {
     
     enum Constant {
@@ -20,6 +24,16 @@ class BudgetMonthCurrencyTableCellView: NSTableCellView {
     }
     
     var keyViewProvider: BudgetMonthCurrencyTableCellViewKeyViewProvider?
+    var delegate: BudgetMonthCurrencyTableCellViewDelegate?
+    
+    lazy private var decimalNumberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        
+        return formatter
+    }()
     
     let editingTextField = YDNTextField.init(labelWithString: "")
     var editable: Bool = false {
@@ -55,6 +69,7 @@ class BudgetMonthCurrencyTableCellView: NSTableCellView {
         self.wantsLayer = true
         self.identifier = Constant.reuseIdentifier
         
+        self.editingTextField.focusDelegate = self
         self.editingTextField.keyViewProvider = self
         self.editingTextField.focusRingType = .none
         self.editingTextField.sizeToFit()
@@ -115,6 +130,31 @@ extension BudgetMonthCurrencyTableCellView: Hoverable {
             self.editingTextField.stringValue = self.text ?? ""
         }
     }
+}
+
+extension BudgetMonthCurrencyTableCellView: YDNTextFieldDelegate {
+    
+    func textFieldDidFocus(_ textField: YDNTextField) {} // do nothing
+    
+    func textFieldDidBlur(_ textField: YDNTextField, commit: Bool) {
+        if !commit {
+            return
+        }
+        
+        let nonNumeric = CharacterSet.decimalDigits.inverted
+        let trimmedString = textField.stringValue.trimmingCharacters(in: nonNumeric)
+        
+        guard let parsedNumber = self.decimalNumberFormatter.number(from: trimmedString),
+            let formattedString = self.decimalNumberFormatter.string(from: parsedNumber) else {
+                textField.stringValue = ""
+                self.delegate?.budgetCurrencyCell(self, didCommitValue: nil)
+                return
+        }
+        
+        textField.stringValue = formattedString
+        self.delegate?.budgetCurrencyCell(self, didCommitValue: parsedNumber.doubleValue)
+    }
+    
 }
 
 extension BudgetMonthCurrencyTableCellView: YDNTextFieldKeyViewProvider {

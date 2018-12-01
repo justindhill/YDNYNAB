@@ -102,18 +102,16 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
         if tableColumn.identifier == BudgetMonthSheetViewController.Constant.budgetedColumnIdentifier {
             cellView.mouseoverCursor = .iBeam
             cellView.editable = true
-        } else if tableColumn.identifier == BudgetMonthSheetViewController.Constant.outflowsColumnIdentifier {
-            cellView.mouseoverCursor = .pointingHand
-            cellView.underlinesTextOnMouseover = true
-        }
-        
-        if tableColumn.identifier == BudgetMonthSheetViewController.Constant.budgetedColumnIdentifier {
+            
             if let budgeted = item.budgeted, let numberString = self.currencyFormatter.string(from: NSNumber(value: budgeted)) {
                 if budgeted > 0 {
                     cellView.text = numberString
                 }
             }
         } else if tableColumn.identifier == BudgetMonthSheetViewController.Constant.outflowsColumnIdentifier {
+            cellView.mouseoverCursor = .pointingHand
+            cellView.underlinesTextOnMouseover = true
+            
             if let outflows = item.outflows, let numberString = self.currencyFormatter.string(from: NSNumber(value: -outflows)) {
                 if outflows > 0 {
                     cellView.text = numberString
