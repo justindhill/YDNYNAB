@@ -191,3 +191,11 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
     }
     
 }
+
+extension BudgetMonthSheetViewController: BudgetMonthCurrencyTableCellViewDelegate {
+    
+    func budgetCurrencyCell(_ cell: BudgetMonthCurrencyTableCellView, didCommitValue: Double?) {
+        
+    }
+    
+}

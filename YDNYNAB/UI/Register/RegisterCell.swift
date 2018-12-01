@@ -149,6 +149,7 @@ class RegisterCell: NSTableCellView {
         textField.cell?.truncatesLastVisibleLine = true
         textField.cell?.lineBreakMode = .byTruncatingTail
         textField.focusRingType = .none
+        textField.forwardMovements = [.tab]
         textField.ydn_isEditable = true
         
         return textField

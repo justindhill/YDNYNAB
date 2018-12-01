@@ -56,6 +56,7 @@
 		D0E4E3F6214EFBD5006B4F6E /* YDNOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F5214EFBD5006B4F6E /* YDNOutlineView.swift */; };
 		D0E4E3F8214F0A71006B4F6E /* NSTableCellView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F7214F0A71006B4F6E /* NSTableCellView+Extensions.swift */; };
 		D0E4E3FA214F13AC006B4F6E /* RegisterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F9214F13AC006B4F6E /* RegisterRowView.swift */; };
+		D0F8F5DD21B31C6300D92316 /* BudgetMonthSheetKeyViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8F5DC21B31C6300D92316 /* BudgetMonthSheetKeyViewProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +113,7 @@
 		D0E4E3F5214EFBD5006B4F6E /* YDNOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNOutlineView.swift; sourceTree = "<group>"; };
 		D0E4E3F7214F0A71006B4F6E /* NSTableCellView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTableCellView+Extensions.swift"; sourceTree = "<group>"; };
 		D0E4E3F9214F13AC006B4F6E /* RegisterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRowView.swift; sourceTree = "<group>"; };
+		D0F8F5DC21B31C6300D92316 /* BudgetMonthSheetKeyViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetMonthSheetKeyViewProvider.swift; sourceTree = "<group>"; };
 		DEA211A51857BAB23CEA0513 /* Pods-YDNYNAB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.debug.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,21 +177,11 @@
 			isa = PBXGroup;
 			children = (
 				D0AA34432173D50C00E8A973 /* DB */,
-				D0AA343821727BAD00E8A973 /* Protocols */,
+				D0F8F5DE21B31DD600D92316 /* UI */,
 				D0E4E3CB21433640006B4F6E /* Model */,
-				D06C648C21432C87000EF618 /* YNAB Importer */,
-				D0CE3BDC213C2F5300798CF5 /* Sidebar */,
-				D0CE3BE6213F7B4200798CF5 /* Budget Overview */,
-				D0E4E3EA214D933D006B4F6E /* Register */,
 				D0E4E3E7214587C6006B4F6E /* Utils */,
-				D04FB0E72151F2A0008880B7 /* Controls */,
-				D0CE3BDF213C375E00798CF5 /* Extensions */,
 				D0510579213B5C3F008133B5 /* AppDelegate.swift */,
 				D0E4E3D8214355BC006B4F6E /* MenuBar.swift */,
-				D0E4E3F5214EFBD5006B4F6E /* YDNOutlineView.swift */,
-				D0AD2DCE21AB1EA9009A62FA /* YDNTableView.swift */,
-				D0510587213B6230008133B5 /* MainSplitViewController.swift */,
-				D06C648521421004000EF618 /* MainSplitViewControllerView.swift */,
 			);
 			path = YDNYNAB;
 			sourceTree = "<group>";
@@ -225,6 +217,7 @@
 		D0AA34432173D50C00E8A973 /* DB */ = {
 			isa = PBXGroup;
 			children = (
+				D06C648C21432C87000EF618 /* YNAB Importer */,
 				D0AA34482175906F00E8A973 /* Queries */,
 				D0AA34442173D51900E8A973 /* YDNDatabase.swift */,
 			);
@@ -275,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				D0CE3BE8213F7B7500798CF5 /* BudgetMonthSheetViewController.swift */,
+				D0F8F5DC21B31C6300D92316 /* BudgetMonthSheetKeyViewProvider.swift */,
 				D0CE3BEA213F7B8200798CF5 /* BudgetMonthSheetView.swift */,
 				D06C648321420667000EF618 /* BudgetMonthTotalsView.swift */,
 				D0CE3BEC213F7C4A00798CF5 /* BudgetMonthSummaryView.swift */,
@@ -329,6 +323,23 @@
 				D0E4E3F9214F13AC006B4F6E /* RegisterRowView.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		D0F8F5DE21B31DD600D92316 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D04FB0E72151F2A0008880B7 /* Controls */,
+				D0E4E3EA214D933D006B4F6E /* Register */,
+				D0CE3BE6213F7B4200798CF5 /* Budget Overview */,
+				D0CE3BDC213C2F5300798CF5 /* Sidebar */,
+				D0AA343821727BAD00E8A973 /* Protocols */,
+				D0CE3BDF213C375E00798CF5 /* Extensions */,
+				D0E4E3F5214EFBD5006B4F6E /* YDNOutlineView.swift */,
+				D0AD2DCE21AB1EA9009A62FA /* YDNTableView.swift */,
+				D0510587213B6230008133B5 /* MainSplitViewController.swift */,
+				D06C648521421004000EF618 /* MainSplitViewControllerView.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -478,6 +489,7 @@
 				D0CE3BDE213C359300798CF5 /* StackedSelectionView.swift in Sources */,
 				D0AA34422173D43500E8A973 /* YNABTransactionImporter.swift in Sources */,
 				D06C648621421004000EF618 /* MainSplitViewControllerView.swift in Sources */,
+				D0F8F5DD21B31C6300D92316 /* BudgetMonthSheetKeyViewProvider.swift in Sources */,
 				D0E4E3CD21433671006B4F6E /* BudgetMasterCategory.swift in Sources */,
 				D0E4E3FA214F13AC006B4F6E /* RegisterRowView.swift in Sources */,
 				D0E4E3D721434A67006B4F6E /* Transaction.swift in Sources */,

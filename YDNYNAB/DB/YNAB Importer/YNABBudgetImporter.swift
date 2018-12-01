@@ -47,7 +47,7 @@ class YNABBudgetImporter {
         var masterCategories: [String: BudgetMasterCategory] = [:]
         var subCategories: [String: BudgetSubCategory] = [:]
         
-        try! dbQueue.write { db in
+        dbQueue.write { db in
             var skipLine = true
             try! fileContents.split(separator: "\n").forEach { (line) in
                 if skipLine {
