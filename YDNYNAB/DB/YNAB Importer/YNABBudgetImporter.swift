@@ -24,6 +24,7 @@ class YNABBudgetImporter {
     lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy"
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
         
         return formatter
     }()

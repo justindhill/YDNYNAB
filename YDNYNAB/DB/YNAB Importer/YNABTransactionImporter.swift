@@ -12,6 +12,7 @@ class YNABTransactionImporter {
     lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         
         return dateFormatter
     }()

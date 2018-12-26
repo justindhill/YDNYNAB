@@ -96,7 +96,13 @@ class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewContro
     }
     
     @objc func budgetCategoryWasRecalculated(_ notification: Notification) {
-        self.refreshData()
+        guard let subcategoryId = notification.recalculatedSubcategory else {
+            return
+        }
+        
+        self.budgetMonthSheets.forEach { sheet in
+            sheet.reloadData(forSubcategoryId: subcategoryId)
+        }
     }
     
     func refreshData() {

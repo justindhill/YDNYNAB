@@ -17,4 +17,12 @@ extension BudgetLine {
             .fetchAll(db)
     }
     
+    class func budgetLine(forSubcategory subcategoryId: Int64, month: Int, year: Int, inDb db: Database) throws -> BudgetLine? {
+        let month = DateUtils.date(withMonth: month, year: year)
+        return try BudgetLine
+            .filter(sql: "subcategory = ? AND month = ?",
+                    arguments: StatementArguments([subcategoryId, month]))
+            .fetchOne(db)
+    }
+    
 }

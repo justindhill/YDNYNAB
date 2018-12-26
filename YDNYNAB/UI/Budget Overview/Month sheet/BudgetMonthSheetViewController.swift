@@ -83,6 +83,10 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
         outlineView.addTableColumn(balance)
     }
     
+    func reloadData(forSubcategoryId subcategoryId: Int64) {
+        self.tableDataSource.reloadData(forSubcategoryId: subcategoryId, outlineView: self.budgetSheetView.outlineView)
+    }
+    
     // MARK: - NSOutlineViewDelegate
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         guard let item = item as? BudgetLine else {

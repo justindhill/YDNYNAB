@@ -12,6 +12,8 @@ class DateUtils: NSObject {
     fileprivate static var yearMonthDayFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
         return dateFormatter
     }()
     
@@ -34,7 +36,11 @@ class DateUtils: NSObject {
     }
     
     class func date(withMonth month: Int, year: Int) -> Date {
-        let components = DateComponents(calendar: Calendar.current, year: year, month: month, day: 1)
+        let components = DateComponents(calendar: Calendar.current,
+                                        timeZone: TimeZone(secondsFromGMT: 0),
+                                        year: year,
+                                        month: month,
+                                        day: 1)
         
         guard let date = components.date else {
             fatalError("Somehow this month and year don't produce a valid date.")

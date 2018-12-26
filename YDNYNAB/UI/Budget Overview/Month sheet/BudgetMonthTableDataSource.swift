@@ -12,6 +12,7 @@ import GRDB
 class BudgetMonthTableDataSource: NSObject, NSOutlineViewDataSource {
     
     var masterCategories: [BudgetMasterCategory]?
+    var subcategoryIdToMasterCategoryMap: [Int64: BudgetMasterCategory] = [:]
     var budgetLines: [BudgetMasterCategory: [BudgetLine]] = [:]
     
     let month: Int
@@ -57,6 +58,15 @@ class BudgetMonthTableDataSource: NSObject, NSOutlineViewDataSource {
             return category
         } else if let item = item as? BudgetMasterCategory {
             let masterCategoryBudgetLines = self.budgetLinesForVisibleSubcategories(ofMasterCategory: item, inMonth: self.month, year: self.year)
+            
+            masterCategoryBudgetLines.forEach { budgetLine in
+                guard let subcategoryId = budgetLine.subcategory else {
+                    return
+                }
+                
+                self.subcategoryIdToMasterCategoryMap[subcategoryId] = item
+            }
+            
             if 0..<masterCategoryBudgetLines.count ~= index {
                 return masterCategoryBudgetLines[index]
             }
@@ -73,6 +83,30 @@ class BudgetMonthTableDataSource: NSObject, NSOutlineViewDataSource {
             return results
         } else {
             return []
+        }
+    }
+    
+    func reloadData(forSubcategoryId subcategoryId: Int64, outlineView: NSOutlineView) {
+        guard let mc = self.subcategoryIdToMasterCategoryMap[subcategoryId],
+            var budgetLines = self.budgetLines[mc],
+            let index = budgetLines.firstIndex(where: { $0.subcategory == subcategoryId }) else {
+                return
+        }
+        
+        let newBudgetLine = self.dbQueue.read { db -> BudgetLine? in
+            do {
+                return try BudgetLine.budgetLine(forSubcategory: subcategoryId, month: self.month, year: self.year, inDb: db)
+            } catch {
+                return nil
+            }
+        }
+        
+        if let newBudgetLine = newBudgetLine {
+            let oldItem = budgetLines[index]
+            budgetLines[index] = newBudgetLine
+            self.budgetLines[mc] = budgetLines
+            
+            outlineView.reloadItem(oldItem)
         }
     }
     
