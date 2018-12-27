@@ -50,6 +50,8 @@ class YNABBudgetImporter {
         
         dbQueue.write { db in
             var skipLine = true
+            var previousMonthBudgetLines: [BudgetSubCategory: BudgetLine] = [:]
+            
             try! fileContents.split(separator: "\n").forEach { (line) in
                 if skipLine {
                     skipLine = false
@@ -63,6 +65,7 @@ class YNABBudgetImporter {
                 let budgetLine = BudgetLine()
 
                 var lineMasterCategory: BudgetMasterCategory?
+                var lineSubcategory: BudgetSubCategory?
 
                 try line.split(separator: ",", omittingEmptySubsequences: false).enumerated().forEach({ (index, value) in
                     let stringValue = String(value).trimmingCharacters(in: ["\""])
@@ -73,6 +76,7 @@ class YNABBudgetImporter {
                     switch field {
                     case .month:
                         budgetLine.month = self.dateFormatter.date(from: stringValue) ?? Date()
+                        print(budgetLine.month)
                     case .masterCategory:
                         if stringValue != "Hidden Categories" {
                             let masterCategory: BudgetMasterCategory
@@ -124,6 +128,7 @@ class YNABBudgetImporter {
                                 try subCategory.insert(db)
                             }
                             budgetLine.subcategory = subCategory.id
+                            lineSubcategory = subCategory
 
                         } else {
                             // regular category
@@ -139,17 +144,44 @@ class YNABBudgetImporter {
                                 try subCategory.insert(db)
                             }
                             budgetLine.subcategory = subCategory.id
+                            lineSubcategory = subCategory
                         }
                     case .budgeted:
                         budgetLine.budgeted = self.currencyFormatter.number(from: stringValue)?.doubleValue
                     case .outflows:
-                        budgetLine.outflows = self.currencyFormatter.number(from: stringValue)?.doubleValue
+                        let outflows = self.currencyFormatter.number(from: stringValue)?.doubleValue
+                        budgetLine.outflows = outflows
                     case .balance:
                         budgetLine.categoryBalance = self.currencyFormatter.number(from: stringValue)?.doubleValue ?? 0
                     case .category:
                         break
                     }
                 })
+                
+                if let lineSubcategory = lineSubcategory {
+                    if let previousBudgetLine = previousMonthBudgetLines[lineSubcategory] {
+                        let previousMonthBalance = previousBudgetLine.categoryBalance
+                        let currentMonthBudgeted = budgetLine.budgeted ?? 0
+                        let currentMonthOutflows = budgetLine.outflows ?? 0
+                        let currentMonthStartValue = budgetLine.categoryBalance + currentMonthOutflows - currentMonthBudgeted
+                        
+                        if previousMonthBalance < 0 {
+                            // cover any silly precision problems that nsnumber is giving us
+                            let carriesOverNegativeBalance = !(0..<0.001 ~= abs(currentMonthStartValue))
+                            
+                            budgetLine.carriesOverNegativeBalance = carriesOverNegativeBalance
+
+                            if previousBudgetLine.carriesOverNegativeBalance != carriesOverNegativeBalance {
+                                previousBudgetLine.carriesOverNegativeBalance = carriesOverNegativeBalance
+                                try previousBudgetLine.update(db)
+                            }
+                        } else {
+                            budgetLine.carriesOverNegativeBalance = previousBudgetLine.carriesOverNegativeBalance
+                        }
+                    }
+                    
+                    previousMonthBudgetLines[lineSubcategory] = budgetLine
+                }
 
                 try budgetLine.insert(db)
             }

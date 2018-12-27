@@ -50,6 +50,7 @@ class YDNDatabase: NSObject {
                              onUpdate: nil,
                              deferred: false)
                 t.column("subcategory", .integer)
+                t.column("carriesOverNegativeBalance", .boolean)
                 t.foreignKey(["subcategory"],
                              references: BudgetSubCategory.databaseTableName,
                              columns: ["id"],

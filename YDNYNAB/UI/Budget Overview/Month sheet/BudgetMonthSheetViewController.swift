@@ -103,6 +103,7 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
             cellView.delegate = self
         }
         
+        cellView.layer?.backgroundColor = item.carriesOverNegativeBalance ? NSColor.red.withAlphaComponent(0.3).cgColor : NSColor.clear.cgColor
         cellView.alignment = .right
         
         guard let tableColumn = tableColumn else {

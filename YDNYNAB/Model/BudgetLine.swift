@@ -21,5 +21,5 @@ class BudgetLine: NSObject, Codable, FetchableRecord, PersistableRecord {
     var budgeted: Double?
     var outflows: Double?
     var categoryBalance: Double = 0
-    
+    var carriesOverNegativeBalance = false
 }

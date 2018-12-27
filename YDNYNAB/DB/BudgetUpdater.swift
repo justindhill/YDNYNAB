@@ -27,15 +27,22 @@ class BudgetUpdater: NSObject {
             let budgetLines = try BudgetLine.budgetLines(forSubcategory: subcategoryId, inDb: db)
             
             var previousMonthBalance: Double = 0
-            for budgetLine in budgetLines {
-                if let outflows = budgetLine.outflows {
-                    let budgeted = budgetLine.budgeted ?? 0
-                    budgetLine.categoryBalance = previousMonthBalance - outflows + budgeted
-                    previousMonthBalance = budgetLine.categoryBalance
+            var previousMonthCarriesOverNegativeBalance = false
+            for budgetLine in budgetLines {                
+                let budgeted = budgetLine.budgeted ?? 0
+                let outflows = budgetLine.outflows ?? 0
+                
+                let zeroOutBalance = !previousMonthCarriesOverNegativeBalance && previousMonthBalance < 0
+
+                if zeroOutBalance {
+                    budgetLine.categoryBalance = budgeted - outflows
                 } else {
-                    budgetLine.categoryBalance = previousMonthBalance
+                    budgetLine.categoryBalance = previousMonthBalance - outflows + budgeted
                 }
                 
+                previousMonthBalance = budgetLine.categoryBalance
+                previousMonthCarriesOverNegativeBalance = budgetLine.carriesOverNegativeBalance
+
                 try budgetLine.save(db)
             }
             
