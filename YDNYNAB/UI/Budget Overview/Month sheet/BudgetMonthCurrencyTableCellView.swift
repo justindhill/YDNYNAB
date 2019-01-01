@@ -8,12 +8,12 @@
 
 import Cocoa
 
-protocol BudgetMonthCurrencyTableCellViewKeyViewProvider {
+protocol BudgetMonthCurrencyTableCellViewKeyViewProvider: class {
     func nextKeyView(for view: BudgetMonthCurrencyTableCellView) -> YDNTextField?
     func previousKeyView(for view: BudgetMonthCurrencyTableCellView) -> YDNTextField?
 }
 
-protocol BudgetMonthCurrencyTableCellViewDelegate {
+protocol BudgetMonthCurrencyTableCellViewDelegate: class {
     func budgetCurrencyCell(_ cell: BudgetMonthCurrencyTableCellView, didCommitValue value: Double?)
 }
 
@@ -24,7 +24,7 @@ class BudgetMonthCurrencyTableCellView: NSTableCellView {
     }
     
     var keyViewProvider: BudgetMonthCurrencyTableCellViewKeyViewProvider?
-    var delegate: BudgetMonthCurrencyTableCellViewDelegate?
+    weak var delegate: BudgetMonthCurrencyTableCellViewDelegate?
     
     lazy private var decimalNumberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -35,7 +35,7 @@ class BudgetMonthCurrencyTableCellView: NSTableCellView {
         return formatter
     }()
     
-    let editingTextField = YDNTextField.init(labelWithString: "")
+    let editingTextField = YDNTextField(labelWithString: "")
     var editable: Bool = false {
         didSet {
             self.editingTextField.ydn_isEditable = editable

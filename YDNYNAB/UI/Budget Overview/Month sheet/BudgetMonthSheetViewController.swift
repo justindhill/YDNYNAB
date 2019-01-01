@@ -137,8 +137,14 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
         return cellView
     }
     
-    func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {       
-        return BudgetMonthTableRowView(row: outlineView.row(forItem: item))
+    func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {
+        let reuseIdentifier = BudgetMonthTableRowView.Constant.reuseIdentifier
+        if let existingView = outlineView.makeView(withIdentifier: reuseIdentifier, owner: self) as? BudgetMonthTableRowView {
+            existingView.row = outlineView.row(forItem: item)
+            return existingView
+        } else {
+            return BudgetMonthTableRowView(row: outlineView.row(forItem: item))
+        }
     }
     
     func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {

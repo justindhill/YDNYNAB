@@ -10,11 +10,12 @@ import Cocoa
 
 class BudgetMonthTableRowView: NSTableRowView {
     
-    private enum Constant {
+    enum Constant {
         static let rowNumberKey = "BudgetMonthTableRowViewRowNumberKey"
+        static let reuseIdentifier = NSUserInterfaceItemIdentifier(rawValue: "BudgetMonthTableViewRowReuseIdentifier")
     }
     
-    let row: Int
+    var row: Int
 
     required init?(coder decoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     init(row: Int) {
@@ -22,6 +23,8 @@ class BudgetMonthTableRowView: NSTableRowView {
         super.init(frame: .zero)
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveMouseEnteredNotification(_:)), name: .budgetMonthTableRowViewMouseEntered, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveMouseExitedNotification(_:)), name: .budgetMonthTableRowViewMouseExited, object: nil)
+        
+        self.identifier = Constant.reuseIdentifier
     }
     
     override func updateTrackingAreas() {

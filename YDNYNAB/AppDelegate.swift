@@ -15,7 +15,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     var window: NSWindow!
-    var budgetContext: BudgetContext!
     var windowControllers: [BudgetWindowController] = []
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -23,6 +22,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             FileManager.default.fileExists(atPath: lastBudget) {
             self.openBudget(atPath: lastBudget)
         }
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(windowWillClose(_:)),
+                                               name: NSWindow.willCloseNotification,
+                                               object: nil)
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
@@ -44,7 +48,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         do {
             let budgetWrapper = try BudgetPackageWrapper(path: path)
-            self.budgetContext = BudgetContext(budgetWrapper: budgetWrapper)
             let windowController = BudgetWindowController(budgetWrapper: budgetWrapper)
             windowController.showWindow(self)
             self.windowControllers.append(windowController)
@@ -53,6 +56,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } catch {
             let alert = NSAlert(error: NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Couldn't open the budget"]))
             alert.runModal()
+        }
+    }
+    
+    @objc func windowWillClose(_ notification: Notification) {
+        if let window = notification.object as? NSWindow {
+            self.windowControllers = self.windowControllers.filter { $0.window != window }
         }
     }
 
