@@ -18,7 +18,7 @@ class BudgetOverviewView: NSView {
     
     var separator = DraggableSeparatorView()
     
-    let categoryList = BudgetCategoriesViewController()
+    let categoryListView: NSView
     
     let backButton = NSButton(title: "Back", target: nil, action: nil)
     let forwardButton = NSButton(title: "Forward", target: nil, action: nil)
@@ -28,13 +28,14 @@ class BudgetOverviewView: NSView {
     var budgetSheetWidthConstraints = [LayoutConstraint]()
         
     required init?(coder decoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    init(budgetMonthSheetViews: [NSView]) {
+    init(budgetMonthSheetViews: [NSView], categoryListView: NSView) {
         self.budgetMonthSheetViews = budgetMonthSheetViews
+        self.categoryListView = categoryListView
         
         super.init(frame: .zero)
         
-        self.addSubview(self.categoryList.view)
-        self.categoryList.view.snp.makeConstraints { (categoryListView) in
+        self.addSubview(self.categoryListView)
+        self.categoryListView.snp.makeConstraints { (categoryListView) in
             categoryListView.top.equalTo(self).offset(Constant.padding + Constant.directionButtonHeight)
             categoryListView.left.equalTo(self).offset(Constant.padding)
             categoryListView.width.equalTo(Constant.initialCategoryListWidth)
@@ -44,7 +45,7 @@ class BudgetOverviewView: NSView {
         self.addSubview(self.backButton)
         self.backButton.snp.makeConstraints { (backButton) in
             backButton.top.equalTo(self).offset(Constant.padding)
-            backButton.left.equalTo(self.categoryList.view.snp.right).offset(Constant.padding)
+            backButton.left.equalTo(self.categoryListView.snp.right).offset(Constant.padding)
             backButton.height.equalTo(Constant.directionButtonHeight)
         }
         
@@ -55,7 +56,7 @@ class BudgetOverviewView: NSView {
             forwardButton.height.equalTo(Constant.directionButtonHeight)
         }
         
-        var lastSheet: NSView = self.categoryList.view
+        var lastSheet: NSView = self.categoryListView
         self.budgetMonthSheetViews.forEach({ budgetMonthSheetView in
             self.addSubview(budgetMonthSheetView)
             

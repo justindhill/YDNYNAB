@@ -24,13 +24,9 @@ class YNABTransactionImporter {
         return formatter
     }()
     
-    init(csvFileUrl: URL) {
+    init(csvFileUrl: URL, budgetContext: BudgetContext) {
         guard let fileContents = try? String(contentsOf: csvFileUrl) else {
             fatalError("Couldn't get file contents")
-        }
-        
-        guard let dbQueue = try? DatabaseQueue(path: "/Users/justin/Desktop/test.db") else {
-            fatalError("Couldn't open the db queue")
         }
         
         enum Field: Int {
@@ -49,7 +45,7 @@ class YNABTransactionImporter {
             case runningBalance
         }
         
-        try! dbQueue.write { db in
+        try! budgetContext.database.queue.write { db in
             var skipLine = true
 
             var accounts: [String: Account] = [:]

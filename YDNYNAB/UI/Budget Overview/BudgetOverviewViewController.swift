@@ -11,7 +11,8 @@ import Cocoa
 class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewControllerDelegate {
     
     override func loadView() {
-        self.view = BudgetOverviewView(budgetMonthSheetViews: self.budgetMonthSheets.map { $0.view })
+        self.view = BudgetOverviewView(budgetMonthSheetViews: self.budgetMonthSheets.map { $0.view },
+                                       categoryListView: self.categoryListViewController.view)
     }
     
     var budgetOverviewView: BudgetOverviewView {
@@ -22,30 +23,32 @@ class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewContro
     
     var offsetFromCurrentMonth: Int = 0
     
+    lazy var categoryListViewController = BudgetCategoriesViewController(budgetContext: self.budgetContext)
+    
     lazy var budgetMonthSheets = [
-        BudgetMonthSheetViewController(appContext: self.appContext),
-        BudgetMonthSheetViewController(appContext: self.appContext),
-        BudgetMonthSheetViewController(appContext: self.appContext)
+        BudgetMonthSheetViewController(budgetContext: self.budgetContext),
+        BudgetMonthSheetViewController(budgetContext: self.budgetContext),
+        BudgetMonthSheetViewController(budgetContext: self.budgetContext)
     ]
     
-    let appContext: AppContext
+    let budgetContext: BudgetContext
     
     required init?(coder: NSCoder) { fatalError("not implemented") }
-    init(appContext: AppContext) {
-        self.appContext = appContext
+    init(budgetContext: BudgetContext) {
+        self.budgetContext = budgetContext
         super.init(nibName: nil, bundle: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.budgetOverviewView.categoryList.delegate = self
+        self.categoryListViewController.delegate = self
         self.budgetOverviewView.backButton.target = self
         self.budgetOverviewView.backButton.action = #selector(backButtonClicked)
         self.budgetOverviewView.forwardButton.target = self
         self.budgetOverviewView.forwardButton.action = #selector(forwardButtonClicked)
         
-        self.scrollViews.append(self.budgetOverviewView.categoryList.budgetCategoriesView.scrollView)
+        self.scrollViews.append(self.categoryListViewController.budgetCategoriesView.scrollView)
         self.scrollViews.append(contentsOf: self.budgetMonthSheets.map { $0.budgetSheetView.detailsTableScrollView })
         self.scrollViews.forEach { scrollView in
             scrollView.postsBoundsChangedNotifications = true

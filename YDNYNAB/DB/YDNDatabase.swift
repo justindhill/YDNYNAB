@@ -11,11 +11,21 @@ import GRDB
 
 class YDNDatabase: NSObject {
     
-    static let defaultQueue = try! DatabaseQueue(path: "/Users/justin/Desktop/test.db")
+    let budgetWrapper: BudgetPackageWrapper
+    lazy var queue = try! DatabaseQueue(path: self.budgetWrapper.mainDatabaseFileURL.path)
     
-    class func createTablesIfNeeded() {
-        let queue = YDNDatabase.defaultQueue
-        try! queue.write { db in
+    required init(coder: NSCoder) { fatalError("not implemented") }
+    init(budgetWrapper: BudgetPackageWrapper) {
+        self.budgetWrapper = budgetWrapper
+        super.init()
+        
+        if !FileManager.default.fileExists(atPath: self.budgetWrapper.mainDatabaseFileURL.path) {
+            self.createTables()
+        }
+    }
+    
+    func createTables() {
+        try! self.queue.write { db in
             try db.create(table: BudgetMasterCategory.databaseTableName) { t in
                 t.autoIncrementedPrimaryKey("id")
                 t.column("name", .text).notNull().defaults(to: "")

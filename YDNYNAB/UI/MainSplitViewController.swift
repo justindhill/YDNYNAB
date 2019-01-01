@@ -11,16 +11,16 @@ import Cocoa
 class MainSplitViewController: NSSplitViewController, SidebarViewControllerDelegate {
     
     let sidebarViewController = SidebarViewController()
-    lazy var contentViewController = BudgetOverviewViewController(appContext: self.appContext)
-    lazy var allTransactionsRegister = RegisterViewController(mode: .full)
+    lazy var contentViewController = BudgetOverviewViewController(budgetContext: self.budgetContext)
+    lazy var allTransactionsRegister = RegisterViewController(mode: .full, budgetContext: self.budgetContext)
     lazy var sidebarItem = NSSplitViewItem(sidebarWithViewController: self.sidebarViewController)
-    let appContext: AppContext
+    let budgetContext: BudgetContext
     
     private var lastSelection: SidebarViewController.SelectionIdentifier = .budget
     
     required init?(coder: NSCoder) { fatalError("not implemented") }
-    init(appContext: AppContext) {
-        self.appContext = appContext
+    init(budgetContext: BudgetContext) {
+        self.budgetContext = budgetContext
         super.init(nibName: nil, bundle: nil)
     }
     

@@ -41,12 +41,14 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
         return self.view as! RegisterView
     }
     
-    let dataSource = RegisterViewDataSource(dbQueue: YDNDatabase.defaultQueue)
+    lazy var dataSource: RegisterViewDataSource = RegisterViewDataSource(dbQueue: self.budgetContext.database.queue)
     
+    let budgetContext: BudgetContext
     let mode: Mode
     var focusedRow: Int? = nil
     
-    init(mode: Mode) {
+    init(mode: Mode, budgetContext: BudgetContext) {
+        self.budgetContext = budgetContext
         self.mode = mode
         super.init(nibName: nil, bundle: nil)
     }

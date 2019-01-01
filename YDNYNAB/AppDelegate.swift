@@ -9,41 +9,51 @@
 import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-    var window: NSWindow!
-    var appContext: AppContext!
-
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        self.appContext = AppContext()
-        self.window = NSWindow(contentRect: self.calculateInitialWindowFrame(),
-                               styleMask: [.closable, .miniaturizable, .resizable, .titled],
-                               backing: .buffered,
-                               defer: false)
-        self.window.title = "YDNYNAB"
-        self.window.contentViewController = MainSplitViewController(appContext: self.appContext)
-        self.window.setFrame(self.calculateInitialWindowFrame(), display: true)
-        self.window.makeKeyAndOrderFront(self)        
+    
+    enum Constant {
+        static let lastBudgetOpenedKey = "YDNLastBudgetOpened"
     }
 
-    func calculateInitialWindowFrame() -> CGRect {
-        guard let screen = NSScreen.main else {
-            return .zero
+    var window: NSWindow!
+    var budgetContext: BudgetContext!
+    var windowControllers: [BudgetWindowController] = []
+
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        if let lastBudget = UserDefaults.standard.string(forKey: Constant.lastBudgetOpenedKey),
+            FileManager.default.fileExists(atPath: lastBudget) {
+            self.openBudget(atPath: lastBudget)
         }
-        
-        let initialWindowWidth: CGFloat = 1200
-        let initialWindowHeight: CGFloat = 700
-        let initialWindowX = (screen.frame.size.width - initialWindowWidth) / 2
-        let initialWindowY = (screen.frame.size.height - initialWindowHeight) / 2
-        let initialWindowFrame = NSRect(
-            x: initialWindowX,
-            y: initialWindowY,
-            width: initialWindowWidth, height: initialWindowHeight)
-        
-        return initialWindowFrame
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
+    }
+    
+    func application(_ sender: NSApplication, openFile filename: String) -> Bool {
+        self.openBudget(atPath: filename)
+        return true
+    }
+    
+    func openBudget(atPath path: String) {
+        for windowController in self.windowControllers {
+            if windowController.budgetContext.budgetWrapper.fileUrl.path == path {
+                windowController.showWindow(self)
+                return
+            }
+        }
+        
+        do {
+            let budgetWrapper = try BudgetPackageWrapper(path: path)
+            self.budgetContext = BudgetContext(budgetWrapper: budgetWrapper)
+            let windowController = BudgetWindowController(budgetWrapper: budgetWrapper)
+            windowController.showWindow(self)
+            self.windowControllers.append(windowController)
+            
+            UserDefaults.standard.set(path, forKey: Constant.lastBudgetOpenedKey)
+        } catch {
+            let alert = NSAlert(error: NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Couldn't open the budget"]))
+            alert.runModal()
+        }
     }
 
 }

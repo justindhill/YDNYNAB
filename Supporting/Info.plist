@@ -4,6 +4,27 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>ydnbudget</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>budget-icon</string>
+			<key>CFBundleTypeName</key>
+			<string>YDNYNAB Budget</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.justinhill.ydnynab.budget</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<integer>1</integer>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
@@ -26,5 +47,27 @@
 	<string>Copyright © 2018 Justin Hill. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.package</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>YDNYNAB Budget</string>
+			<key>UTTypeIconFile</key>
+			<string>budget-icon</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.justinhill.ydnynab.budget</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>ydnbudget</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

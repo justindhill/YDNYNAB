@@ -16,7 +16,7 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
         static let balanceColumnIdentifier = NSUserInterfaceItemIdentifier(rawValue: "YDNBudgetMonthSheetViewBalanceColumnIdentifier")
     }
 
-    var tableDataSource = BudgetMonthTableDataSource(monthYear: .zero, dbQueue: YDNDatabase.defaultQueue)
+    lazy var tableDataSource = BudgetMonthTableDataSource(monthYear: .zero, dbQueue: self.budgetContext.database.queue)
     
     var month: MonthYear = .zero {
         didSet { self.updateForMonth(month: month) }
@@ -41,11 +41,11 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
         return formatter
     }()
     
-    let appContext: AppContext
+    let budgetContext: BudgetContext
 
     required init?(coder: NSCoder) { fatalError("not implemented") }
-    init(appContext: AppContext) {
-        self.appContext = appContext
+    init(budgetContext: BudgetContext) {
+        self.budgetContext = budgetContext
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -61,7 +61,7 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
     func updateForMonth(month: MonthYear) {
         self.budgetSheetView.summaryView.updateForMonth(month: month)
         
-        self.tableDataSource = BudgetMonthTableDataSource(monthYear: month, dbQueue: YDNDatabase.defaultQueue)
+        self.tableDataSource = BudgetMonthTableDataSource(monthYear: month, dbQueue: self.budgetContext.database.queue)
         self.budgetSheetView.outlineView.dataSource = self.tableDataSource
         self.budgetSheetView.outlineView.reloadData()
         self.budgetSheetView.outlineView.expandItem(nil, expandChildren: true)
@@ -189,7 +189,7 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
             let (startDate, endDate) = DateUtils.startAndEndDate(ofMonth: self.month.month, year: self.month.year)
             let filter = RegisterViewDataSource.Filter(startDate: startDate, endDate: endDate, subcategory: subcategory)
             
-            let register = RegisterViewController(mode: .popover)
+            let register = RegisterViewController(mode: .popover, budgetContext: self.budgetContext)
             register.dataSource.filter = filter
             
             let popover = NSPopover()
@@ -219,7 +219,7 @@ extension BudgetMonthSheetViewController: BudgetMonthCurrencyTableCellViewDelega
         budgetLine.budgeted = value
         
         do {
-            try self.appContext.budgetUpdater.updateBudgetLineAndRecalculateCategory(budgetLine)
+            try self.budgetContext.budgetUpdater.updateBudgetLineAndRecalculateCategory(budgetLine)
         } catch {
             Toaster.shared.enqueueDefaultErrorToast()
         }

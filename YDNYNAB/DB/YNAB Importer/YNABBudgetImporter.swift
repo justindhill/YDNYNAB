@@ -36,19 +36,15 @@ class YNABBudgetImporter {
         return formatter
     }()
     
-    init(csvFileUrl: URL) {
+    init(csvFileUrl: URL, budgetContext: BudgetContext) {
         guard let fileContents = try? String(contentsOf: csvFileUrl) else {
             fatalError("Couldn't get file contents")
-        }
-        
-        guard let dbQueue = try? DatabaseQueue(path: "/Users/justin/Desktop/test.db") else {
-            fatalError("Couldn't open the db queue")
         }
         
         var masterCategories: [String: BudgetMasterCategory] = [:]
         var subCategories: [String: BudgetSubCategory] = [:]
         
-        dbQueue.write { db in
+        budgetContext.database.queue.write { db in
             var skipLine = true
             var previousMonthBudgetLines: [BudgetSubCategory: BudgetLine] = [:]
             

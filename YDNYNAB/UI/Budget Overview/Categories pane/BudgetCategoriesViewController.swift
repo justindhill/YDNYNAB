@@ -20,10 +20,18 @@ class BudgetCategoriesViewController: NSViewController, NSOutlineViewDelegate {
     }
     
     weak var delegate: BudgetCategoriesViewControllerDelegate?
-    let dataSource = BudgetCategoriesViewDataSource(dbQueue: YDNDatabase.defaultQueue)
+    lazy var dataSource = BudgetCategoriesViewDataSource(dbQueue: self.budgetContext.database.queue)
     
     var budgetCategoriesView: BudgetCategoriesView {
         return self.view as! BudgetCategoriesView
+    }
+    
+    let budgetContext: BudgetContext
+    
+    required init(coder: NSCoder) { fatalError("not implemented") }
+    init(budgetContext: BudgetContext) {
+        self.budgetContext = budgetContext
+        super.init(nibName: nil, bundle: nil)
     }
     
     override func loadView() {

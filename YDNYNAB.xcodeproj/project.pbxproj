@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		68657771ACC7FE848B468C19 /* Pods_YDNYNAB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB2F171E43BDD6C24A9F8FCD /* Pods_YDNYNAB.framework */; };
+		D03714A921DBDBFA0093CFC0 /* BudgetPackageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03714A821DBDBFA0093CFC0 /* BudgetPackageWrapper.swift */; };
+		D03714AB21DBE1DC0093CFC0 /* BudgetWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03714AA21DBE1DC0093CFC0 /* BudgetWindowController.swift */; };
+		D03714AD21DC07F20093CFC0 /* budget-icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D03714AC21DC07F20093CFC0 /* budget-icon.icns */; };
 		D04FB0E621509E41008880B7 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04FB0E521509E41008880B7 /* Theme.swift */; };
 		D04FB0E92151F2BC008880B7 /* YDNTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04FB0E82151F2BC008880B7 /* YDNTextField.swift */; };
 		D04FB0EB215DC069008880B7 /* Toaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04FB0EA215DC069008880B7 /* Toaster.swift */; };
@@ -58,7 +61,7 @@
 		D0E4E3FA214F13AC006B4F6E /* RegisterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F9214F13AC006B4F6E /* RegisterRowView.swift */; };
 		D0F8F5DD21B31C6300D92316 /* BudgetMonthSheetKeyViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8F5DC21B31C6300D92316 /* BudgetMonthSheetKeyViewProvider.swift */; };
 		D0F8F5E021B3200800D92316 /* BudgetUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8F5DF21B3200800D92316 /* BudgetUpdater.swift */; };
-		D0F8F5E421B3204B00D92316 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8F5E321B3204B00D92316 /* AppContext.swift */; };
+		D0F8F5E421B3204B00D92316 /* BudgetContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8F5E321B3204B00D92316 /* BudgetContext.swift */; };
 		D0F8F5E621B323A500D92316 /* TransactionUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8F5E521B323A500D92316 /* TransactionUpdater.swift */; };
 		D0F8F5E821B324A900D92316 /* BudgetLine+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8F5E721B324A900D92316 /* BudgetLine+Queries.swift */; };
 		D0F8F5EA21B3252000D92316 /* MonthYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8F5E921B3252000D92316 /* MonthYear.swift */; };
@@ -67,6 +70,9 @@
 /* Begin PBXFileReference section */
 		810461D03022AF0A241B2E8B /* Pods-YDNYNAB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.debug.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.debug.xcconfig"; sourceTree = "<group>"; };
 		A40E7101E2D28CB42AB76692 /* Pods-YDNYNAB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.release.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.release.xcconfig"; sourceTree = "<group>"; };
+		D03714A821DBDBFA0093CFC0 /* BudgetPackageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetPackageWrapper.swift; sourceTree = "<group>"; };
+		D03714AA21DBE1DC0093CFC0 /* BudgetWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetWindowController.swift; sourceTree = "<group>"; };
+		D03714AC21DC07F20093CFC0 /* budget-icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "budget-icon.icns"; sourceTree = "<group>"; };
 		D04FB0E521509E41008880B7 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		D04FB0E82151F2BC008880B7 /* YDNTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNTextField.swift; sourceTree = "<group>"; };
 		D04FB0EA215DC069008880B7 /* Toaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toaster.swift; sourceTree = "<group>"; };
@@ -120,7 +126,7 @@
 		D0E4E3F9214F13AC006B4F6E /* RegisterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRowView.swift; sourceTree = "<group>"; };
 		D0F8F5DC21B31C6300D92316 /* BudgetMonthSheetKeyViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetMonthSheetKeyViewProvider.swift; sourceTree = "<group>"; };
 		D0F8F5DF21B3200800D92316 /* BudgetUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetUpdater.swift; sourceTree = "<group>"; };
-		D0F8F5E321B3204B00D92316 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
+		D0F8F5E321B3204B00D92316 /* BudgetContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetContext.swift; sourceTree = "<group>"; };
 		D0F8F5E521B323A500D92316 /* TransactionUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionUpdater.swift; sourceTree = "<group>"; };
 		D0F8F5E721B324A900D92316 /* BudgetLine+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BudgetLine+Queries.swift"; sourceTree = "<group>"; };
 		D0F8F5E921B3252000D92316 /* MonthYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYear.swift; sourceTree = "<group>"; };
@@ -191,8 +197,10 @@
 				D0E4E3CB21433640006B4F6E /* Model */,
 				D0E4E3E7214587C6006B4F6E /* Utils */,
 				D0510579213B5C3F008133B5 /* AppDelegate.swift */,
-				D0F8F5E321B3204B00D92316 /* AppContext.swift */,
+				D0F8F5E321B3204B00D92316 /* BudgetContext.swift */,
 				D0E4E3D8214355BC006B4F6E /* MenuBar.swift */,
+				D03714A821DBDBFA0093CFC0 /* BudgetPackageWrapper.swift */,
+				D03714AA21DBE1DC0093CFC0 /* BudgetWindowController.swift */,
 			);
 			path = YDNYNAB;
 			sourceTree = "<group>";
@@ -204,6 +212,7 @@
 				D051057B213B5C40008133B5 /* Assets.xcassets */,
 				D0510580213B5C40008133B5 /* Info.plist */,
 				D0510581213B5C40008133B5 /* YDNYNAB.entitlements */,
+				D03714AC21DC07F20093CFC0 /* budget-icon.icns */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -419,6 +428,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03714AD21DC07F20093CFC0 /* budget-icon.icns in Resources */,
 				D051057C213B5C40008133B5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,6 +500,7 @@
 				D0E4E3E2214459B7006B4F6E /* BudgetCategoriesViewController.swift in Sources */,
 				D0510588213B6230008133B5 /* MainSplitViewController.swift in Sources */,
 				D0CE3BE5213F728C00798CF5 /* main.swift in Sources */,
+				D03714AB21DBE1DC0093CFC0 /* BudgetWindowController.swift in Sources */,
 				D0E4E3DB214369FC006B4F6E /* BudgetMonthCurrencyTableCellView.swift in Sources */,
 				D051058A213B6A34008133B5 /* BudgetOverviewViewController.swift in Sources */,
 				D0E4E3E9214587D2006B4F6E /* DateUtils.swift in Sources */,
@@ -517,7 +528,7 @@
 				D0E4E3CF214336B7006B4F6E /* BudgetSubcategory.swift in Sources */,
 				D04FB0E621509E41008880B7 /* Theme.swift in Sources */,
 				D0AA34402173D36900E8A973 /* BudgetMonthTableDataSource.swift in Sources */,
-				D0F8F5E421B3204B00D92316 /* AppContext.swift in Sources */,
+				D0F8F5E421B3204B00D92316 /* BudgetContext.swift in Sources */,
 				D0E4E3F6214EFBD5006B4F6E /* YDNOutlineView.swift in Sources */,
 				D0F8F5E621B323A500D92316 /* TransactionUpdater.swift in Sources */,
 				D0CE3BED213F7C4A00798CF5 /* BudgetMonthSummaryView.swift in Sources */,
@@ -532,6 +543,7 @@
 				D0AA343F2173D32600E8A973 /* BudgetCategoriesViewDataSource.swift in Sources */,
 				D0AA344C2175A11000E8A973 /* BudgetSubCategory+Queries.swift in Sources */,
 				D0E4E3D3214349A7006B4F6E /* Account.swift in Sources */,
+				D03714A921DBDBFA0093CFC0 /* BudgetPackageWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
