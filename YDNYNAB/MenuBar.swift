@@ -85,7 +85,7 @@ class MenuBar: NSObject {
         
         self.addSeparator(to: fileMenu)
         
-        self.addItem(named: "Import YNAB Data", to: fileMenu) {
+        self.addItem(named: "Migrate from YNAB", to: fileMenu) {
             guard let budgetContext = self.currentBudgetWindowController?.budgetContext else {
                 Toaster.shared.enqueueDefaultErrorToast()
                 return
@@ -93,6 +93,15 @@ class MenuBar: NSObject {
             
             let _ = YNABBudgetImporter(csvFileUrl: URL(fileURLWithPath: "/Users/justin/Desktop/budget.csv"), budgetContext: budgetContext)
             let _ = YNABTransactionImporter(csvFileUrl: URL(fileURLWithPath: "/Users/justin/Desktop/transactions.csv"), budgetContext: budgetContext)
+        }
+        
+        self.addItem(named: "Import QFX/OFX", key: "i", keyModifier: [.command], to: fileMenu) {
+            guard let budgetContext = self.currentBudgetWindowController?.budgetContext else {
+                Toaster.shared.enqueueDefaultErrorToast()
+                return
+            }
+            
+            OFXImporter.import(budgetContext: budgetContext)
         }
     }
     

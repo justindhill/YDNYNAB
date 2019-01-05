@@ -12,16 +12,20 @@
 		D03714AB21DBE1DC0093CFC0 /* BudgetWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03714AA21DBE1DC0093CFC0 /* BudgetWindowController.swift */; };
 		D03714AD21DC07F20093CFC0 /* budget-icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D03714AC21DC07F20093CFC0 /* budget-icon.icns */; };
 		D03714B021DD64D50093CFC0 /* OFXImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03714AF21DD64D50093CFC0 /* OFXImporter.swift */; };
-		D03E98AA21DFCCF800FF5C12 /* liblibofx-ObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A3F1BF21DFCAC4001B24AA /* liblibofx-ObjC.a */; };
-		D03E98AF21DFD7C800FF5C12 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D03E98AD21DFD7BC00FF5C12 /* libxml2.tbd */; };
-		D03E98B121DFD81700FF5C12 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D03E98B021DFD81700FF5C12 /* libiconv.tbd */; };
-		D03E98B221DFD84C00FF5C12 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D03E98B021DFD81700FF5C12 /* libiconv.tbd */; };
-		D03E98B421DFD97400FF5C12 /* libosp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D03E98B321DFD97400FF5C12 /* libosp.a */; };
-		D03E98B521DFD9C800FF5C12 /* libofx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A3F1A421DFC880001B24AA /* libofx.a */; };
+		D03E98AA21DFCCF800FF5C12 /* libofx-ObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A3F1BF21DFCAC4001B24AA /* libofx-ObjC.a */; };
 		D03E98B921DFE83B00FF5C12 /* OFXReader.m in Sources */ = {isa = PBXBuildFile; fileRef = D03E98B721DFE83B00FF5C12 /* OFXReader.m */; };
 		D03E98BD21DFED4B00FF5C12 /* Module.modulemap in CopyFiles */ = {isa = PBXBuildFile; fileRef = D03E98BB21DFECAD00FF5C12 /* Module.modulemap */; };
 		D03E98BE21DFED6B00FF5C12 /* libofx-ObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = D03E98BA21DFEB2900FF5C12 /* libofx-ObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D03E98C021DFF13000FF5C12 /* OFXReader.h in Headers */ = {isa = PBXBuildFile; fileRef = D03E98B621DFE83B00FF5C12 /* OFXReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D03E98C321DFFB6B00FF5C12 /* OFXAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = D03E98C121DFFB6B00FF5C12 /* OFXAccount.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D03E98C421DFFB6B00FF5C12 /* OFXAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = D03E98C221DFFB6B00FF5C12 /* OFXAccount.m */; };
+		D03E98C721DFFB7900FF5C12 /* OFXStatement.h in Headers */ = {isa = PBXBuildFile; fileRef = D03E98C521DFFB7900FF5C12 /* OFXStatement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D03E98C821DFFB7900FF5C12 /* OFXStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = D03E98C621DFFB7900FF5C12 /* OFXStatement.m */; };
+		D03E98CB21DFFB8900FF5C12 /* OFXTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = D03E98C921DFFB8900FF5C12 /* OFXTransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D03E98CC21DFFB8900FF5C12 /* OFXTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = D03E98CA21DFFB8900FF5C12 /* OFXTransaction.m */; };
+		D03E98CE21E01A7100FF5C12 /* libosp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D03E98B321DFD97400FF5C12 /* libosp.a */; };
+		D03E98CF21E01A8E00FF5C12 /* libofx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A3F1A421DFC880001B24AA /* libofx.a */; };
+		D03E98D021E01A9700FF5C12 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D03E98B021DFD81700FF5C12 /* libiconv.tbd */; };
 		D04FB0E621509E41008880B7 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04FB0E521509E41008880B7 /* Theme.swift */; };
 		D04FB0E92151F2BC008880B7 /* YDNTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04FB0E82151F2BC008880B7 /* YDNTextField.swift */; };
 		D04FB0EB215DC069008880B7 /* Toaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04FB0EA215DC069008880B7 /* Toaster.swift */; };
@@ -34,7 +38,6 @@
 		D06C648621421004000EF618 /* MainSplitViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648521421004000EF618 /* MainSplitViewControllerView.swift */; };
 		D06C648A21421D0F000EF618 /* BudgetMonthTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648921421D0F000EF618 /* BudgetMonthTableRowView.swift */; };
 		D06C648E21432CC9000EF618 /* YNABBudgetImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648D21432CC9000EF618 /* YNABBudgetImporter.swift */; };
-		D0A3F1CB21DFCB64001B24AA /* libofx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A3F1A421DFC880001B24AA /* libofx.a */; };
 		D0AA343A21727BC100E8A973 /* Hoverable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA343921727BC100E8A973 /* Hoverable.swift */; };
 		D0AA343E2173D2BC00E8A973 /* RegisterViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3F1214DA22A006B4F6E /* RegisterViewDataSource.swift */; };
 		D0AA343F2173D32600E8A973 /* BudgetCategoriesViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4E3E5214469A8006B4F6E /* BudgetCategoriesViewDataSource.swift */; };
@@ -126,6 +129,12 @@
 		D03E98B721DFE83B00FF5C12 /* OFXReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OFXReader.m; sourceTree = "<group>"; };
 		D03E98BA21DFEB2900FF5C12 /* libofx-ObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libofx-ObjC.h"; sourceTree = "<group>"; };
 		D03E98BB21DFECAD00FF5C12 /* Module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = Module.modulemap; sourceTree = "<group>"; };
+		D03E98C121DFFB6B00FF5C12 /* OFXAccount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OFXAccount.h; sourceTree = "<group>"; };
+		D03E98C221DFFB6B00FF5C12 /* OFXAccount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OFXAccount.m; sourceTree = "<group>"; };
+		D03E98C521DFFB7900FF5C12 /* OFXStatement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OFXStatement.h; sourceTree = "<group>"; };
+		D03E98C621DFFB7900FF5C12 /* OFXStatement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OFXStatement.m; sourceTree = "<group>"; };
+		D03E98C921DFFB8900FF5C12 /* OFXTransaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OFXTransaction.h; sourceTree = "<group>"; };
+		D03E98CA21DFFB8900FF5C12 /* OFXTransaction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OFXTransaction.m; sourceTree = "<group>"; };
 		D04FB0E521509E41008880B7 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		D04FB0E82151F2BC008880B7 /* YDNTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNTextField.swift; sourceTree = "<group>"; };
 		D04FB0EA215DC069008880B7 /* Toaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toaster.swift; sourceTree = "<group>"; };
@@ -144,7 +153,7 @@
 		D06C648D21432CC9000EF618 /* YNABBudgetImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YNABBudgetImporter.swift; sourceTree = "<group>"; };
 		D06C648F21432CD3000EF618 /* YNABTransactionImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YNABTransactionImporter.swift; sourceTree = "<group>"; };
 		D0A3F1A421DFC880001B24AA /* libofx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libofx.a; path = ../../../../usr/local/Cellar/libofx/0.9.13/lib/libofx.a; sourceTree = "<group>"; };
-		D0A3F1BF21DFCAC4001B24AA /* liblibofx-ObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblibofx-ObjC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0A3F1BF21DFCAC4001B24AA /* libofx-ObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libofx-ObjC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0AA34362172693200E8A973 /* RegisterViewDataSourceFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewDataSourceFilter.swift; sourceTree = "<group>"; };
 		D0AA343921727BC100E8A973 /* Hoverable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hoverable.swift; sourceTree = "<group>"; };
 		D0AA34442173D51900E8A973 /* YDNDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNDatabase.swift; sourceTree = "<group>"; };
@@ -193,10 +202,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D03E98B521DFD9C800FF5C12 /* libofx.a in Frameworks */,
-				D03E98B421DFD97400FF5C12 /* libosp.a in Frameworks */,
-				D03E98B221DFD84C00FF5C12 /* libiconv.tbd in Frameworks */,
-				D03E98AA21DFCCF800FF5C12 /* liblibofx-ObjC.a in Frameworks */,
+				D03E98D021E01A9700FF5C12 /* libiconv.tbd in Frameworks */,
+				D03E98CF21E01A8E00FF5C12 /* libofx.a in Frameworks */,
+				D03E98CE21E01A7100FF5C12 /* libosp.a in Frameworks */,
+				D03E98AA21DFCCF800FF5C12 /* libofx-ObjC.a in Frameworks */,
 				68657771ACC7FE848B468C19 /* Pods_YDNYNAB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,9 +214,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D03E98B121DFD81700FF5C12 /* libiconv.tbd in Frameworks */,
-				D03E98AF21DFD7C800FF5C12 /* libxml2.tbd in Frameworks */,
-				D0A3F1CB21DFCB64001B24AA /* libofx.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +254,12 @@
 			children = (
 				D03E98B621DFE83B00FF5C12 /* OFXReader.h */,
 				D03E98B721DFE83B00FF5C12 /* OFXReader.m */,
+				D03E98C121DFFB6B00FF5C12 /* OFXAccount.h */,
+				D03E98C221DFFB6B00FF5C12 /* OFXAccount.m */,
+				D03E98C521DFFB7900FF5C12 /* OFXStatement.h */,
+				D03E98C621DFFB7900FF5C12 /* OFXStatement.m */,
+				D03E98C921DFFB8900FF5C12 /* OFXTransaction.h */,
+				D03E98CA21DFFB8900FF5C12 /* OFXTransaction.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -275,7 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				D0510576213B5C3F008133B5 /* YDNYNAB.app */,
-				D0A3F1BF21DFCAC4001B24AA /* liblibofx-ObjC.a */,
+				D0A3F1BF21DFCAC4001B24AA /* libofx-ObjC.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -478,6 +490,9 @@
 			files = (
 				D03E98C021DFF13000FF5C12 /* OFXReader.h in Headers */,
 				D03E98BE21DFED6B00FF5C12 /* libofx-ObjC.h in Headers */,
+				D03E98CB21DFFB8900FF5C12 /* OFXTransaction.h in Headers */,
+				D03E98C721DFFB7900FF5C12 /* OFXStatement.h in Headers */,
+				D03E98C321DFFB6B00FF5C12 /* OFXAccount.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,9 +520,9 @@
 			productReference = D0510576213B5C3F008133B5 /* YDNYNAB.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D0A3F1BE21DFCAC4001B24AA /* libofx-ObjC */ = {
+		D0A3F1BE21DFCAC4001B24AA /* ofx-ObjC */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D0A3F1C521DFCAC4001B24AA /* Build configuration list for PBXNativeTarget "libofx-ObjC" */;
+			buildConfigurationList = D0A3F1C521DFCAC4001B24AA /* Build configuration list for PBXNativeTarget "ofx-ObjC" */;
 			buildPhases = (
 				D0A3F1BB21DFCAC4001B24AA /* Headers */,
 				D0A3F1BC21DFCAC4001B24AA /* Sources */,
@@ -518,9 +533,9 @@
 			);
 			dependencies = (
 			);
-			name = "libofx-ObjC";
+			name = "ofx-ObjC";
 			productName = "libofx-Swift";
-			productReference = D0A3F1BF21DFCAC4001B24AA /* liblibofx-ObjC.a */;
+			productReference = D0A3F1BF21DFCAC4001B24AA /* libofx-ObjC.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -537,6 +552,11 @@
 					D0510575213B5C3F008133B5 = {
 						CreatedOnToolsVersion = 10.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 					D0A3F1BE21DFCAC4001B24AA = {
 						CreatedOnToolsVersion = 10.1;
@@ -558,7 +578,7 @@
 			projectRoot = "";
 			targets = (
 				D0510575213B5C3F008133B5 /* YDNYNAB */,
-				D0A3F1BE21DFCAC4001B24AA /* libofx-ObjC */,
+				D0A3F1BE21DFCAC4001B24AA /* ofx-ObjC */,
 			);
 		};
 /* End PBXProject section */
@@ -692,7 +712,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03E98C821DFFB7900FF5C12 /* OFXStatement.m in Sources */,
 				D03E98B921DFE83B00FF5C12 /* OFXReader.m in Sources */,
+				D03E98CC21DFFB8900FF5C12 /* OFXTransaction.m in Sources */,
+				D03E98C421DFFB6B00FF5C12 /* OFXAccount.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,7 +724,7 @@
 /* Begin PBXTargetDependency section */
 		D03E98AC21DFCCFF00FF5C12 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D0A3F1BE21DFCAC4001B24AA /* libofx-ObjC */;
+			target = D0A3F1BE21DFCAC4001B24AA /* ofx-ObjC */;
 			targetProxy = D03E98AB21DFCCFF00FF5C12 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -825,7 +848,6 @@
 			baseConfigurationReference = 810461D03022AF0A241B2E8B /* Pods-YDNYNAB.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "${SRCROOT}/YDNYNAB/Supporting/YDNYNAB.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = N3MXL5AYEW;
@@ -855,7 +877,6 @@
 			baseConfigurationReference = A40E7101E2D28CB42AB76692 /* Pods-YDNYNAB.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "${SRCROOT}/YDNYNAB/Supporting/YDNYNAB.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = N3MXL5AYEW;
@@ -888,6 +909,11 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = N3MXL5AYEW;
 				EXECUTABLE_PREFIX = lib;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"OFX_AQUAMANIAC_UGLY_HACK1=1",
+				);
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -897,6 +923,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/libofx/0.9.13/lib,
+					"/usr/local/Cellar/open-sp/1.5.2/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MODULEMAP_FILE = "$(SRCROOT)/libofx-Swift/Module.modulemap";
@@ -925,6 +952,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/libofx/0.9.13/lib,
+					"/usr/local/Cellar/open-sp/1.5.2/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MODULEMAP_FILE = "$(SRCROOT)/libofx-Swift/Module.modulemap";
@@ -956,7 +984,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D0A3F1C521DFCAC4001B24AA /* Build configuration list for PBXNativeTarget "libofx-ObjC" */ = {
+		D0A3F1C521DFCAC4001B24AA /* Build configuration list for PBXNativeTarget "ofx-ObjC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D0A3F1C621DFCAC4001B24AA /* Debug */,

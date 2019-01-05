@@ -10,5 +10,8 @@
 #define libofx_ObjC_h
 
 #import "OFXReader.h"
+#import "OFXTransaction.h"
+#import "OFXAccount.h"
+#import "OFXStatement.h"
 
 #endif /* libofx_ObjC_h */

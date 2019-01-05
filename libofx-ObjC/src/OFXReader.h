@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class OFXAccount;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OFXReader : NSObject
+
+@property (nonatomic, readonly) NSArray<OFXAccount *> *accounts;
 
 - (instancetype)initWithFileURL:(NSURL *)fileURL;
 
