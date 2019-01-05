@@ -38,6 +38,7 @@ typedef NS_ENUM(NSInteger, OFXTransactionCorrectionType) {
 @interface OFXTransaction : NSObject
 
 @property (nonnull, readonly, strong) NSString *accountId;
+@property (nonnull, readonly, strong) NSString *payeeName;
 @property (readonly, assign) OFXTransactionType transactionType;
 @property (readonly, assign) double amount;
 @property (nonnull, readonly, strong) NSString *transactionId;

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		68657771ACC7FE848B468C19 /* Pods_YDNYNAB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB2F171E43BDD6C24A9F8FCD /* Pods_YDNYNAB.framework */; };
+		D014C52521E14AC900B8D33D /* Transaction+OFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C52421E14AC900B8D33D /* Transaction+OFX.swift */; };
+		D014C52821E1674800B8D33D /* PayeeRenameRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C52721E1674800B8D33D /* PayeeRenameRule.swift */; };
+		D014C52A21E16C1E00B8D33D /* Payee+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C52921E16C1E00B8D33D /* Payee+Queries.swift */; };
 		D03714A921DBDBFA0093CFC0 /* BudgetPackageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03714A821DBDBFA0093CFC0 /* BudgetPackageWrapper.swift */; };
 		D03714AB21DBE1DC0093CFC0 /* BudgetWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03714AA21DBE1DC0093CFC0 /* BudgetWindowController.swift */; };
 		D03714AD21DC07F20093CFC0 /* budget-icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D03714AC21DC07F20093CFC0 /* budget-icon.icns */; };
@@ -118,6 +121,9 @@
 /* Begin PBXFileReference section */
 		810461D03022AF0A241B2E8B /* Pods-YDNYNAB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.debug.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.debug.xcconfig"; sourceTree = "<group>"; };
 		A40E7101E2D28CB42AB76692 /* Pods-YDNYNAB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.release.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.release.xcconfig"; sourceTree = "<group>"; };
+		D014C52421E14AC900B8D33D /* Transaction+OFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+OFX.swift"; sourceTree = "<group>"; };
+		D014C52721E1674800B8D33D /* PayeeRenameRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayeeRenameRule.swift; sourceTree = "<group>"; };
+		D014C52921E16C1E00B8D33D /* Payee+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Payee+Queries.swift"; sourceTree = "<group>"; };
 		D03714A821DBDBFA0093CFC0 /* BudgetPackageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetPackageWrapper.swift; sourceTree = "<group>"; };
 		D03714AA21DBE1DC0093CFC0 /* BudgetWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetWindowController.swift; sourceTree = "<group>"; };
 		D03714AC21DC07F20093CFC0 /* budget-icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "budget-icon.icns"; sourceTree = "<group>"; };
@@ -241,9 +247,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D014C52621E14ACF00B8D33D /* Model initializers */ = {
+			isa = PBXGroup;
+			children = (
+				D014C52421E14AC900B8D33D /* Transaction+OFX.swift */,
+			);
+			path = "Model initializers";
+			sourceTree = "<group>";
+		};
 		D03714AE21DD64C20093CFC0 /* OFX Importer */ = {
 			isa = PBXGroup;
 			children = (
+				D014C52621E14ACF00B8D33D /* Model initializers */,
 				D03714AF21DD64D50093CFC0 /* OFXImporter.swift */,
 			);
 			path = "OFX Importer";
@@ -367,6 +382,7 @@
 				D0AA34492175908A00E8A973 /* BudgetMasterCategory+Queries.swift */,
 				D0AA344B2175A11000E8A973 /* BudgetSubCategory+Queries.swift */,
 				D0F8F5E721B324A900D92316 /* BudgetLine+Queries.swift */,
+				D014C52921E16C1E00B8D33D /* Payee+Queries.swift */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -425,6 +441,7 @@
 				D0E4E3D0214336F1006B4F6E /* BudgetLine.swift */,
 				D0E4E3D2214349A7006B4F6E /* Account.swift */,
 				D0E4E3D421434A59006B4F6E /* Payee.swift */,
+				D014C52721E1674800B8D33D /* PayeeRenameRule.swift */,
 				D0E4E3D621434A67006B4F6E /* Transaction.swift */,
 			);
 			path = Model;
@@ -649,6 +666,7 @@
 			files = (
 				D0E4E3EE214D9D5A006B4F6E /* RegisterView.swift in Sources */,
 				D0CE3BEB213F7B8200798CF5 /* BudgetMonthSheetView.swift in Sources */,
+				D014C52A21E16C1E00B8D33D /* Payee+Queries.swift in Sources */,
 				D0E4E3E4214459C6006B4F6E /* BudgetCategoriesView.swift in Sources */,
 				D0AA343E2173D2BC00E8A973 /* RegisterViewDataSource.swift in Sources */,
 				D0E4E3F8214F0A71006B4F6E /* NSTableCellView+Extensions.swift in Sources */,
@@ -660,6 +678,7 @@
 				D0CE3BE5213F728C00798CF5 /* main.swift in Sources */,
 				D03714B021DD64D50093CFC0 /* OFXImporter.swift in Sources */,
 				D03714AB21DBE1DC0093CFC0 /* BudgetWindowController.swift in Sources */,
+				D014C52521E14AC900B8D33D /* Transaction+OFX.swift in Sources */,
 				D0E4E3DB214369FC006B4F6E /* BudgetMonthCurrencyTableCellView.swift in Sources */,
 				D051058A213B6A34008133B5 /* BudgetOverviewViewController.swift in Sources */,
 				D0E4E3E9214587D2006B4F6E /* DateUtils.swift in Sources */,
@@ -694,6 +713,7 @@
 				D0F8F5EA21B3252000D92316 /* MonthYear.swift in Sources */,
 				D04FB0E92151F2BC008880B7 /* YDNTextField.swift in Sources */,
 				D0510590213B6CAB008133B5 /* SidebarViewController.swift in Sources */,
+				D014C52821E1674800B8D33D /* PayeeRenameRule.swift in Sources */,
 				D0E4E3D1214336F1006B4F6E /* BudgetLine.swift in Sources */,
 				D04FB0EB215DC069008880B7 /* Toaster.swift in Sources */,
 				D0E4E3EC214D935F006B4F6E /* RegisterViewController.swift in Sources */,

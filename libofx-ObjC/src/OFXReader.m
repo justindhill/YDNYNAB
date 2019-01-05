@@ -64,9 +64,6 @@ int YDNOFXStatusProcCallback(const struct OfxStatusData data, void * status_data
 
 int YDNOFXAccountProcCallback(const struct OfxAccountData data, void * status_data) {
     OFXReader *reader = (__bridge OFXReader *)status_data;
-    NSLog(@"%@", reader);
-    NSLog(@"account: %s", data.account_name);
-    
     OFXAccount *newAccount = [[OFXAccount alloc] initWithAccountData:data];
     reader.currentAccount = newAccount;
     reader.accounts = [reader.accounts arrayByAddingObject:reader.currentAccount];
@@ -76,8 +73,6 @@ int YDNOFXAccountProcCallback(const struct OfxAccountData data, void * status_da
 
 int YDNOFXStatementProcCallback(const struct OfxStatementData data, void * status_data) {
     OFXReader *reader = (__bridge OFXReader *)status_data;
-    NSLog(@"statement: %s", data.account_ptr->account_name);
-    
     OFXStatement *newStatement = [[OFXStatement alloc] initWithStatementData:data];
     reader.currentStatement = newStatement;
     reader.currentAccount.statements = [reader.currentAccount.statements arrayByAddingObject:newStatement];
@@ -87,8 +82,6 @@ int YDNOFXStatementProcCallback(const struct OfxStatementData data, void * statu
 
 int YDNOFXTransactionProcCallback(const struct OfxTransactionData data, void * status_data) {
     OFXReader *reader = (__bridge OFXReader *)status_data;
-    NSLog(@"transaction: %s %s - %f", data.fi_id, data.name, data.amount);
-    
     OFXTransaction *newTransaction = [[OFXTransaction alloc] initWithTransactionData:data];
     reader.currentStatement.transactions = [reader.currentStatement.transactions arrayByAddingObject:newTransaction];
     

@@ -16,5 +16,5 @@ class Account: NSObject, Codable, FetchableRecord, PersistableRecord {
     
     var id: Int64?
     var name: String = ""
-    
+    var accountId: String?
 }

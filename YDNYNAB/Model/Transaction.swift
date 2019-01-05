@@ -8,17 +8,16 @@
 
 import GRDB
 
-extension FlagColor: DatabaseValueConvertible {}
-enum FlagColor: String, Codable {
-    case red
-    case orange
-    case yellow
-    case green
-    case blue
-    case purple
-}
-
 class Transaction: NSObject, Codable, FetchableRecord, PersistableRecord {
+    
+    enum FlagColor: String, Codable {
+        case red
+        case orange
+        case yellow
+        case green
+        case blue
+        case purple
+    }
 
     func didInsert(with rowID: Int64, for column: String?) {
         id = rowID
@@ -57,3 +56,5 @@ class Transaction: NSObject, Codable, FetchableRecord, PersistableRecord {
     var payeeDisplayName: String?
     var categoryDisplayName: String?
 }
+
+extension Transaction.FlagColor: DatabaseValueConvertible {}

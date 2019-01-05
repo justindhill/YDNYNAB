@@ -13,10 +13,11 @@
 
 - (instancetype)initWithTransactionData:(struct OfxTransactionData)transactionData {
     if (self = [self init]) {
-        _accountId = [NSString stringWithCString:transactionData.account_id encoding:NSUTF8StringEncoding];
+        _accountId = [NSString stringWithUTF8String:transactionData.account_id];
+        _payeeName = [NSString stringWithUTF8String:transactionData.name];
         _transactionType = (OFXTransactionType)transactionData.transactiontype;
         _amount = transactionData.amount;
-        _transactionId = [NSString stringWithCString:transactionData.fi_id encoding:NSUTF8StringEncoding];
+        _transactionId = [NSString stringWithUTF8String:transactionData.fi_id];
         
         if (transactionData.date_initiated != 0) {
             _dateInitiated = [NSDate dateWithTimeIntervalSince1970:transactionData.date_initiated];
@@ -27,20 +28,20 @@
         }
         
         if (transactionData.fi_id_corrected[0] != 0) {
-            _correctedTransactionId = [NSString stringWithCString:transactionData.fi_id_corrected encoding:NSUTF8StringEncoding];
+            _correctedTransactionId = [NSString stringWithUTF8String:transactionData.fi_id_corrected];
             _transactionCorrectionType = (OFXTransactionCorrectionType)transactionData.fi_id_correction_action;
         }
         
         if (transactionData.check_number[0] != 0) {
-            _checkNumber = [NSString stringWithCString:transactionData.check_number encoding:NSUTF8StringEncoding];
+            _checkNumber = [NSString stringWithUTF8String:transactionData.check_number];
         }
         
         if (transactionData.reference_number[0] != 0) {
-            _referenceNumber = [NSString stringWithCString:transactionData.reference_number encoding:NSUTF8StringEncoding];
+            _referenceNumber = [NSString stringWithUTF8String:transactionData.reference_number];
         }
         
         if (transactionData.memo[0] != 0) {
-            _memo = [NSString stringWithCString:transactionData.memo encoding:NSUTF8StringEncoding];
+            _memo = [NSString stringWithUTF8String:transactionData.memo];
         }
     }
     

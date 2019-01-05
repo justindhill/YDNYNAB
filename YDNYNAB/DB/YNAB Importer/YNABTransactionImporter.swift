@@ -79,7 +79,7 @@ class YNABTransactionImporter {
                         }
                         txn.account = account.id
                     case .flag:
-                        txn.flag = FlagColor(rawValue: stringValue)
+                        txn.flag = Transaction.FlagColor(rawValue: stringValue)
                     case .checkNumber:
                         txn.checkNumber = stringValue
                     case .date:

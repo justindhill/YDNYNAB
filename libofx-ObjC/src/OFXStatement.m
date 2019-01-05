@@ -19,8 +19,8 @@
 
 - (instancetype)initWithStatementData:(struct OfxStatementData)statementData {
     if (self = [self init]) {
-        _currency = [NSString stringWithCString:statementData.currency encoding:NSUTF8StringEncoding];
-        _accountId = [NSString stringWithCString:statementData.account_id encoding:NSUTF8StringEncoding];
+        _currency = [NSString stringWithUTF8String:statementData.currency];
+        _accountId = [NSString stringWithUTF8String:statementData.account_id];
         _ledgerBalance = statementData.ledger_balance;
         _ledgerBalanceDate = [NSDate dateWithTimeIntervalSince1970:statementData.ledger_balance_date];
         _availableBalance = statementData.available_balance;
