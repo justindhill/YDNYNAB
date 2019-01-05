@@ -33,26 +33,23 @@ class BudgetMonthSheetView: NSView {
         self.outlineView.floatsGroupRows = false
         self.outlineView.showsDisclosureIndicator = false
         
-        self.summaryView.snp.makeConstraints { (summaryView) in
-            summaryView.left.equalTo(self)
-            summaryView.right.equalTo(self)
-            summaryView.top.equalTo(self)
-            summaryView.height.equalTo(Constant.summaryViewHeight)
-        }
+        self.summaryView.translatesAutoresizingMaskIntoConstraints = false
+        self.summaryView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        self.summaryView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        self.summaryView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        self.summaryView.heightAnchor.constraint(equalToConstant: Constant.summaryViewHeight).isActive = true
         
-        self.totalsView.snp.makeConstraints { (totalsView) in
-            totalsView.left.equalTo(self)
-            totalsView.right.equalTo(self)
-            totalsView.top.equalTo(self.summaryView.snp.bottom)
-            totalsView.height.equalTo(Constant.totalsViewHeight)
-        }
+        self.totalsView.translatesAutoresizingMaskIntoConstraints = false
+        self.totalsView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        self.totalsView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        self.totalsView.topAnchor.constraint(equalTo: self.summaryView.bottomAnchor).isActive = true
+        self.totalsView.heightAnchor.constraint(equalToConstant: Constant.totalsViewHeight).isActive = true
         
-        self.detailsTableScrollView.snp.makeConstraints { (detailsTableScrollView) in
-            detailsTableScrollView.left.equalTo(self)
-            detailsTableScrollView.right.equalTo(self)
-            detailsTableScrollView.top.equalTo(self.totalsView.snp.bottom)
-            detailsTableScrollView.bottom.equalTo(self)
-        }
+        self.detailsTableScrollView.translatesAutoresizingMaskIntoConstraints = false
+        self.detailsTableScrollView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        self.detailsTableScrollView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        self.detailsTableScrollView.topAnchor.constraint(equalTo: self.totalsView.bottomAnchor).isActive = true
+        self.detailsTableScrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
     override func layout() {

@@ -6,7 +6,7 @@
 //  Copyright © 2018 Justin Hill. All rights reserved.
 //
 
-import SnapKit
+import AppKit
 
 class BudgetOverviewView: NSView {
     
@@ -25,7 +25,7 @@ class BudgetOverviewView: NSView {
     
 
     var budgetMonthSheetViews: [NSView]
-    var budgetSheetWidthConstraints = [LayoutConstraint]()
+    var budgetSheetWidthConstraints = [NSLayoutConstraint]()
         
     required init?(coder decoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     init(budgetMonthSheetViews: [NSView], categoryListView: NSView) {
@@ -35,43 +35,41 @@ class BudgetOverviewView: NSView {
         super.init(frame: .zero)
         
         self.addSubview(self.categoryListView)
-        self.categoryListView.snp.makeConstraints { (categoryListView) in
-            categoryListView.top.equalTo(self).offset(Constant.padding + Constant.directionButtonHeight)
-            categoryListView.left.equalTo(self).offset(Constant.padding)
-            categoryListView.width.equalTo(Constant.initialCategoryListWidth)
-            categoryListView.bottom.equalTo(self).offset(-Constant.padding)
-        }
+        categoryListView.translatesAutoresizingMaskIntoConstraints = false
+        categoryListView.topAnchor.constraint(equalTo: self.topAnchor, constant: Constant.padding + Constant.directionButtonHeight).isActive = true
+        categoryListView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: Constant.padding).isActive = true
+        categoryListView.widthAnchor.constraint(equalToConstant: Constant.initialCategoryListWidth).isActive = true
+        categoryListView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Constant.padding).isActive = true
         
         self.addSubview(self.backButton)
-        self.backButton.snp.makeConstraints { (backButton) in
-            backButton.top.equalTo(self).offset(Constant.padding)
-            backButton.left.equalTo(self.categoryListView.snp.right).offset(Constant.padding)
-            backButton.height.equalTo(Constant.directionButtonHeight)
-        }
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.topAnchor.constraint(equalTo: self.topAnchor, constant: Constant.padding).isActive = true
+        backButton.leftAnchor.constraint(equalTo: categoryListView.rightAnchor, constant: Constant.padding).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: Constant.directionButtonHeight).isActive = true
         
         self.addSubview(self.forwardButton)
-        self.forwardButton.snp.makeConstraints { (forwardButton) in
-            forwardButton.top.equalTo(self).offset(Constant.padding)
-            forwardButton.left.equalTo(self.backButton.snp.right).offset(Constant.padding)
-            forwardButton.height.equalTo(Constant.directionButtonHeight)
-        }
+        forwardButton.translatesAutoresizingMaskIntoConstraints = false
+        forwardButton.topAnchor.constraint(equalTo: self.topAnchor, constant: Constant.padding).isActive = true
+        forwardButton.leftAnchor.constraint(equalTo: backButton.rightAnchor, constant: Constant.padding).isActive = true
+        forwardButton.heightAnchor.constraint(equalToConstant: Constant.directionButtonHeight).isActive = true
         
         var lastSheet: NSView = self.categoryListView
         self.budgetMonthSheetViews.forEach({ budgetMonthSheetView in
             self.addSubview(budgetMonthSheetView)
             
-            budgetMonthSheetView.snp.makeConstraints({ (budgetMonthSheetMaker) in
-                if budgetMonthSheetView != self.budgetMonthSheetViews.first {
-                    budgetMonthSheetMaker.width.equalTo(lastSheet)
-                }
-                budgetMonthSheetMaker.top.equalTo(self).offset((2 * Constant.padding) + Constant.directionButtonHeight)
-                budgetMonthSheetMaker.left.equalTo(lastSheet.snp.right).offset(Constant.padding)
-                budgetMonthSheetMaker.bottom.equalTo(self).offset(-Constant.padding)
-                
-                if budgetMonthSheetView == self.budgetMonthSheetViews.last {
-                    budgetMonthSheetMaker.right.equalTo(self).offset(-Constant.padding)
-                }
-            })
+            budgetMonthSheetView.translatesAutoresizingMaskIntoConstraints = false
+            if budgetMonthSheetView != budgetMonthSheetViews.first {
+                budgetMonthSheetView.widthAnchor.constraint(equalTo: lastSheet.widthAnchor).isActive = true
+            }
+            
+            budgetMonthSheetView.topAnchor.constraint(equalTo: self.topAnchor,
+                                                      constant: (2 * Constant.padding) + Constant.directionButtonHeight).isActive = true
+            budgetMonthSheetView.leftAnchor.constraint(equalTo: lastSheet.rightAnchor, constant: Constant.padding).isActive = true
+            budgetMonthSheetView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Constant.padding).isActive = true
+
+            if budgetMonthSheetView == budgetMonthSheetViews.last {
+                budgetMonthSheetView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -Constant.padding).isActive = true
+            }
             
             lastSheet = budgetMonthSheetView
         })

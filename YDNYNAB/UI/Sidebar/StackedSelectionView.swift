@@ -36,9 +36,11 @@ class StackedSelectionView: NSView {
             self.titleLabel.stringValue = title
             
             self.addSubview(self.titleLabel)
-            self.titleLabel.snp.makeConstraints {
-                $0.edges.equalTo(self).inset(5)
-            }
+            self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            self.titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5).isActive = true
+            self.titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5).isActive = true
+            self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+            self.titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         }
         
         override func layout() {
@@ -66,7 +68,11 @@ class StackedSelectionView: NSView {
         super.init(frame: frameRect)
         self.addSubview(self.stackView)
         
-        self.stackView.snp.makeConstraints { $0.edges.equalTo(self) }
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        self.stackView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5).isActive = true
+        self.stackView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5).isActive = true
+        self.stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+        self.stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         self.updateItems()
     }
     
@@ -77,7 +83,7 @@ class StackedSelectionView: NSView {
                 item.addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(itemWasClicked(_:))))
             }
             self.stackView.addArrangedSubview(item)
-            item.snp.makeConstraints { $0.width.equalTo(self.stackView) }
+            item.widthAnchor.constraint(equalTo: self.stackView.widthAnchor).isActive = true
         }
     }
     

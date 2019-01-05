@@ -28,11 +28,11 @@ class BudgetCategoriesView: NSView {
         
         self.scrollView.documentView = self.outlineView
         self.addSubview(self.scrollView)
-        self.scrollView.snp.makeConstraints { (scrollView) in
-            scrollView.top.equalTo(self).offset(Constant.topOffset)
-            scrollView.left.equalTo(self)
-            scrollView.right.equalTo(self)
-            scrollView.bottom.equalTo(self)
-        }
+        
+        self.scrollView.translatesAutoresizingMaskIntoConstraints = false
+        self.scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: Constant.topOffset).isActive = true
+        self.scrollView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.scrollView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
     }
 }

@@ -22,9 +22,12 @@ class RegisterView: NSView {
         
         self.tableScrollView.documentView = self.tableView
         self.addSubview(self.tableScrollView)
-        self.tableScrollView.snp.makeConstraints { tableScrollView in
-            tableScrollView.edges.equalTo(self)
-        }
+        
+        self.tableScrollView.translatesAutoresizingMaskIntoConstraints = false
+        self.tableScrollView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        self.tableScrollView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        self.tableScrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.tableScrollView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
     }
     
 }

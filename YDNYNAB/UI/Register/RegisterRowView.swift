@@ -52,22 +52,19 @@ class RegisterRowView: NSTableRowView, YDNTextFieldDelegate, YDNTextFieldKeyView
             self.addSubview(cancelButton)
             self.addSubview(editingAreaBackground, positioned: .below, relativeTo: self.findBottomCellView())
             
-            cancelButton.snp.makeConstraints { cancelButton in
-                cancelButton.bottom.equalTo(self.snp.top).offset(Constant.expandedHeight - Constant.buttonPadding)
-                cancelButton.right.equalTo(self).offset(-4)
-            }
+            cancelButton.translatesAutoresizingMaskIntoConstraints = false
+            cancelButton.bottomAnchor.constraint(equalTo: self.topAnchor, constant: (Constant.expandedHeight - Constant.buttonPadding)).isActive = true
+            cancelButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -4).isActive = true
             
-            doneButton.snp.makeConstraints { doneButton in
-                doneButton.bottom.equalTo(self.snp.top).offset(Constant.expandedHeight - Constant.buttonPadding)
-                doneButton.right.equalTo(cancelButton.snp.left).offset(-Constant.buttonPadding)
-            }
+            doneButton.translatesAutoresizingMaskIntoConstraints = false
+            doneButton.bottomAnchor.constraint(equalTo: self.topAnchor, constant: (Constant.expandedHeight - Constant.buttonPadding)).isActive = true
+            doneButton.rightAnchor.constraint(equalTo: cancelButton.leftAnchor, constant: Constant.buttonPadding).isActive = true
             
-            editingAreaBackground.snp.makeConstraints { editingAreaBackground in
-                editingAreaBackground.left.equalTo(self)
-                editingAreaBackground.right.equalTo(self)
-                editingAreaBackground.top.equalTo(self).offset(1)
-                editingAreaBackground.height.equalTo(Constant.collapsedHeight)
-            }
+            editingAreaBackground.translatesAutoresizingMaskIntoConstraints = false
+            editingAreaBackground.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+            editingAreaBackground.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+            editingAreaBackground.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            editingAreaBackground.heightAnchor.constraint(equalToConstant: Constant.collapsedHeight).isActive = true
             
         } else if !self.isEditing && self.doneButton != nil {
             self.doneButton?.removeFromSuperview()

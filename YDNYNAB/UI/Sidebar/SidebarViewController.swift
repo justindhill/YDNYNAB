@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import SnapKit
 
 protocol SidebarViewControllerDelegate: class {
     func sidebarViewController(_ sidebarViewController: SidebarViewController,
@@ -31,6 +30,7 @@ class SidebarViewController: NSViewController, StackedSelectionViewDelegate {
     
     private lazy var modeSelector: StackedSelectionView = {
         let selectionView = StackedSelectionView()
+        selectionView.translatesAutoresizingMaskIntoConstraints = false
         selectionView.delegate = self
         selectionView.items = [
             StackedSelectionView.SelectableItem(title: "Budget", selectionIdentifier: SelectionIdentifier.budget),
@@ -53,11 +53,9 @@ class SidebarViewController: NSViewController, StackedSelectionViewDelegate {
         super.viewDidLoad()
         
         self.view.addSubview(modeSelector)
-        self.modeSelector.snp.makeConstraints {
-            $0.leading.equalTo(self.view).inset(Constant.contentInset)
-            $0.top.equalTo(self.view).inset(Constant.contentInset)
-            $0.right.equalTo(self.view).inset(Constant.contentInset)
-        }
+        self.modeSelector.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: Constant.contentInset).isActive = true
+        self.modeSelector.topAnchor.constraint(equalTo: self.view.topAnchor, constant: Constant.contentInset).isActive = true
+        self.modeSelector.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -Constant.contentInset).isActive = true
         
         self.visualEffectView.material = .sidebar
     }
