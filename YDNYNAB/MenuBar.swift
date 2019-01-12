@@ -85,6 +85,12 @@ class MenuBar: NSObject {
         
         self.addSeparator(to: fileMenu)
         
+        self.addItem(named: "Payee settings", key: "P", keyModifier: [.command], to: fileMenu) {
+            self.currentBudgetWindowController?.showPayeeSettings()
+        }
+        
+        self.addSeparator(to: fileMenu)
+        
         self.addItem(named: "Migrate from YNAB", to: fileMenu) {
             guard let budgetContext = self.currentBudgetWindowController?.budgetContext else {
                 Toaster.shared.enqueueDefaultErrorToast()

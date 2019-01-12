@@ -36,7 +36,7 @@ class MainSplitViewController: NSSplitViewController, SidebarViewControllerDeleg
         self.splitView.dividerStyle = .thin
         
         self.view.addSubview(self.splitView)
-        self.splitView.make([.leading, .trailing, .top, .bottom], equalTo: self.view)
+        self.splitView.makeEdgesEqual(to: self.view)
         
         self.view.wantsLayer = true
         

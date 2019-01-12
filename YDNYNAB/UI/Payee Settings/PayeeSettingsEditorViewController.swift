@@ -9,6 +9,15 @@
 import Cocoa
 
 class PayeeSettingsEditorViewController: NSViewController {
+    
+    required init?(coder: NSCoder) { fatalError("not implemented") }
+    init(payeeId: Int64, budgetContext: BudgetContext) {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    override func loadView() {
+        self.view = NSView()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

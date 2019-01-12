@@ -29,6 +29,12 @@ class BudgetWindowController: NSWindowController {
         window.setFrame(self.calculateInitialWindowFrame(), display: true)
     }
     
+    func showPayeeSettings() {
+        let payeeSettings = PayeeSettingsViewController(budgetContext: self.budgetContext)
+        let window = NSWindow(contentViewController: payeeSettings)
+        self.window?.beginSheet(window, completionHandler: nil)
+    }
+    
     func calculateInitialWindowFrame() -> CGRect {
         guard let screen = NSScreen.main else {
             return .zero

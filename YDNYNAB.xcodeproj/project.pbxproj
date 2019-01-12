@@ -11,10 +11,11 @@
 		D014C52521E14AC900B8D33D /* Transaction+OFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C52421E14AC900B8D33D /* Transaction+OFX.swift */; };
 		D014C52821E1674800B8D33D /* PayeeRenameRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C52721E1674800B8D33D /* PayeeRenameRule.swift */; };
 		D014C52A21E16C1E00B8D33D /* Payee+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C52921E16C1E00B8D33D /* Payee+Queries.swift */; };
-		D014C52D21EA5E5000B8D33D /* PayeeSettingsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C52C21EA5E5000B8D33D /* PayeeSettingsSplitViewController.swift */; };
-		D014C52F21EA5EB300B8D33D /* PayeeSettingsSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C52E21EA5EB300B8D33D /* PayeeSettingsSelectorViewController.swift */; };
-		D014C53221EA5EF000B8D33D /* PayeeSettingsEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C53021EA5EF000B8D33D /* PayeeSettingsEditorViewController.swift */; };
 		D014C53521EA5F2D00B8D33D /* NSView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C53421EA5F2D00B8D33D /* NSView+AutoLayout.swift */; };
+		D014C53721EA809900B8D33D /* PayeeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C53621EA809900B8D33D /* PayeeSettingsViewController.swift */; };
+		D014C53A21EA811600B8D33D /* PayeeSettingsSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C53821EA811600B8D33D /* PayeeSettingsSelectorViewController.swift */; };
+		D014C53B21EA811600B8D33D /* PayeeSettingsEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C53921EA811600B8D33D /* PayeeSettingsEditorViewController.swift */; };
+		D014C53D21EA8F6400B8D33D /* YDNTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C53C21EA8F6400B8D33D /* YDNTableCellView.swift */; };
 		D03714A921DBDBFA0093CFC0 /* BudgetPackageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03714A821DBDBFA0093CFC0 /* BudgetPackageWrapper.swift */; };
 		D03714AB21DBE1DC0093CFC0 /* BudgetWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03714AA21DBE1DC0093CFC0 /* BudgetWindowController.swift */; };
 		D03714AD21DC07F20093CFC0 /* budget-icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D03714AC21DC07F20093CFC0 /* budget-icon.icns */; };
@@ -128,10 +129,11 @@
 		D014C52421E14AC900B8D33D /* Transaction+OFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+OFX.swift"; sourceTree = "<group>"; };
 		D014C52721E1674800B8D33D /* PayeeRenameRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayeeRenameRule.swift; sourceTree = "<group>"; };
 		D014C52921E16C1E00B8D33D /* Payee+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Payee+Queries.swift"; sourceTree = "<group>"; };
-		D014C52C21EA5E5000B8D33D /* PayeeSettingsSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayeeSettingsSplitViewController.swift; sourceTree = "<group>"; };
-		D014C52E21EA5EB300B8D33D /* PayeeSettingsSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayeeSettingsSelectorViewController.swift; sourceTree = "<group>"; };
-		D014C53021EA5EF000B8D33D /* PayeeSettingsEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayeeSettingsEditorViewController.swift; sourceTree = "<group>"; };
 		D014C53421EA5F2D00B8D33D /* NSView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+AutoLayout.swift"; sourceTree = "<group>"; };
+		D014C53621EA809900B8D33D /* PayeeSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayeeSettingsViewController.swift; sourceTree = "<group>"; };
+		D014C53821EA811600B8D33D /* PayeeSettingsSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayeeSettingsSelectorViewController.swift; sourceTree = "<group>"; };
+		D014C53921EA811600B8D33D /* PayeeSettingsEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayeeSettingsEditorViewController.swift; sourceTree = "<group>"; };
+		D014C53C21EA8F6400B8D33D /* YDNTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNTableCellView.swift; sourceTree = "<group>"; };
 		D03714A821DBDBFA0093CFC0 /* BudgetPackageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetPackageWrapper.swift; sourceTree = "<group>"; };
 		D03714AA21DBE1DC0093CFC0 /* BudgetWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetWindowController.swift; sourceTree = "<group>"; };
 		D03714AC21DC07F20093CFC0 /* budget-icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "budget-icon.icns"; sourceTree = "<group>"; };
@@ -266,9 +268,9 @@
 		D014C52B21EA5D9300B8D33D /* Payee Settings */ = {
 			isa = PBXGroup;
 			children = (
-				D014C52C21EA5E5000B8D33D /* PayeeSettingsSplitViewController.swift */,
-				D014C52E21EA5EB300B8D33D /* PayeeSettingsSelectorViewController.swift */,
-				D014C53021EA5EF000B8D33D /* PayeeSettingsEditorViewController.swift */,
+				D014C53921EA811600B8D33D /* PayeeSettingsEditorViewController.swift */,
+				D014C53821EA811600B8D33D /* PayeeSettingsSelectorViewController.swift */,
+				D014C53621EA809900B8D33D /* PayeeSettingsViewController.swift */,
 			);
 			path = "Payee Settings";
 			sourceTree = "<group>";
@@ -512,6 +514,7 @@
 				D0CE3BDF213C375E00798CF5 /* Extensions */,
 				D0E4E3F5214EFBD5006B4F6E /* YDNOutlineView.swift */,
 				D0AD2DCE21AB1EA9009A62FA /* YDNTableView.swift */,
+				D014C53C21EA8F6400B8D33D /* YDNTableCellView.swift */,
 				D0510587213B6230008133B5 /* MainSplitViewController.swift */,
 				D06C648521421004000EF618 /* MainSplitViewControllerView.swift */,
 			);
@@ -691,7 +694,6 @@
 				D0AA343E2173D2BC00E8A973 /* RegisterViewDataSource.swift in Sources */,
 				D0E4E3F8214F0A71006B4F6E /* NSTableCellView+Extensions.swift in Sources */,
 				D0F8F5E021B3200800D92316 /* BudgetUpdater.swift in Sources */,
-				D014C52F21EA5EB300B8D33D /* PayeeSettingsSelectorViewController.swift in Sources */,
 				D0CE3BE3213F6B7B00798CF5 /* BudgetOverviewView.swift in Sources */,
 				D0E4E3D9214355BC006B4F6E /* MenuBar.swift in Sources */,
 				D014C53521EA5F2D00B8D33D /* NSView+AutoLayout.swift in Sources */,
@@ -700,11 +702,11 @@
 				D0CE3BE5213F728C00798CF5 /* main.swift in Sources */,
 				D03714B021DD64D50093CFC0 /* OFXImporter.swift in Sources */,
 				D03714AB21DBE1DC0093CFC0 /* BudgetWindowController.swift in Sources */,
-				D014C53221EA5EF000B8D33D /* PayeeSettingsEditorViewController.swift in Sources */,
+				D014C53721EA809900B8D33D /* PayeeSettingsViewController.swift in Sources */,
 				D014C52521E14AC900B8D33D /* Transaction+OFX.swift in Sources */,
 				D0E4E3DB214369FC006B4F6E /* BudgetMonthCurrencyTableCellView.swift in Sources */,
 				D051058A213B6A34008133B5 /* BudgetOverviewViewController.swift in Sources */,
-				D014C52D21EA5E5000B8D33D /* PayeeSettingsSplitViewController.swift in Sources */,
+				D014C53A21EA811600B8D33D /* PayeeSettingsSelectorViewController.swift in Sources */,
 				D0E4E3E9214587D2006B4F6E /* DateUtils.swift in Sources */,
 				D06C648421420667000EF618 /* BudgetMonthTotalsView.swift in Sources */,
 				D0CE3BE9213F7B7500798CF5 /* BudgetMonthSheetViewController.swift in Sources */,
@@ -712,9 +714,11 @@
 				D051057A213B5C3F008133B5 /* AppDelegate.swift in Sources */,
 				D0AA344A2175908A00E8A973 /* BudgetMasterCategory+Queries.swift in Sources */,
 				D0AD2DCF21AB1EA9009A62FA /* YDNTableView.swift in Sources */,
+				D014C53B21EA811600B8D33D /* PayeeSettingsEditorViewController.swift in Sources */,
 				D06C648E21432CC9000EF618 /* YNABBudgetImporter.swift in Sources */,
 				D0AA34412173D3BF00E8A973 /* RegisterViewDataSourceFilter.swift in Sources */,
 				D0E4E3DF21445853006B4F6E /* DraggableSeparatorView.swift in Sources */,
+				D014C53D21EA8F6400B8D33D /* YDNTableCellView.swift in Sources */,
 				D0F8F5E821B324A900D92316 /* BudgetLine+Queries.swift in Sources */,
 				D0CE3BDE213C359300798CF5 /* StackedSelectionView.swift in Sources */,
 				D0AA34422173D43500E8A973 /* YNABTransactionImporter.swift in Sources */,
