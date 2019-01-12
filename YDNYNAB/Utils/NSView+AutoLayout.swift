@@ -82,6 +82,7 @@ extension NSView {
 }
 
 extension NSEdgeInsets {
+    
     static var zero: NSEdgeInsets = NSEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
     static func with(top: CGFloat = 0, left: CGFloat = 0, bottom: CGFloat = 0, right: CGFloat = 0) -> NSEdgeInsets {
