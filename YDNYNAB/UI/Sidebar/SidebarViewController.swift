@@ -53,10 +53,7 @@ class SidebarViewController: NSViewController, StackedSelectionViewDelegate {
         super.viewDidLoad()
         
         self.view.addSubview(modeSelector)
-        self.modeSelector.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: Constant.contentInset).isActive = true
-        self.modeSelector.topAnchor.constraint(equalTo: self.view.topAnchor, constant: Constant.contentInset).isActive = true
-        self.modeSelector.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -Constant.contentInset).isActive = true
-        
+        self.modeSelector.make([.left, .top, .right], equalTo: self.view, insetBy: .equal(Constant.contentInset))
         self.visualEffectView.material = .sidebar
     }
     

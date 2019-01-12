@@ -55,16 +55,12 @@ class BudgetMonthSummaryView: NSView {
         self.layer?.borderWidth = 1
         
         self.addSubview(self.dateStackView)
-        self.dateStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.dateStackView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: Constant.padding).isActive = true
-        self.dateStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: Constant.padding).isActive = true
+        self.dateStackView.make([.left, .top], equalTo: self, insetBy: .equal(Constant.padding))
         
         self.addSubview(self.dateSeparator)
-        self.dateSeparator.translatesAutoresizingMaskIntoConstraints = false
-        self.dateSeparator.widthAnchor.constraint(equalToConstant: 1).isActive = true
-        self.dateSeparator.leftAnchor.constraint(equalTo: self.dateStackView.rightAnchor, constant: Constant.padding).isActive = true
-        self.dateSeparator.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.dateSeparator.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.dateSeparator.make(.width, equalTo: 1)
+        self.dateSeparator.make(.left, equalTo: .right, of: self.dateStackView, constant: Constant.padding)
+        self.dateSeparator.make([.top, .bottom], equalTo: self)
     }
     
     func updateForMonth(month: MonthYear) {

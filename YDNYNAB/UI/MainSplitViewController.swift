@@ -36,11 +36,7 @@ class MainSplitViewController: NSSplitViewController, SidebarViewControllerDeleg
         self.splitView.dividerStyle = .thin
         
         self.view.addSubview(self.splitView)
-        self.splitView.translatesAutoresizingMaskIntoConstraints = false
-        self.splitView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-        self.splitView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        self.splitView.topAnchor.constraint(equalTo: self.view.topAnchor)
-        self.splitView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        self.splitView.make([.leading, .trailing, .top, .bottom], equalTo: self.view)
         
         self.view.wantsLayer = true
         

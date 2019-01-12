@@ -35,23 +35,22 @@ class BudgetOverviewView: NSView {
         super.init(frame: .zero)
         
         self.addSubview(self.categoryListView)
-        categoryListView.translatesAutoresizingMaskIntoConstraints = false
-        categoryListView.topAnchor.constraint(equalTo: self.topAnchor, constant: Constant.padding + Constant.directionButtonHeight).isActive = true
-        categoryListView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: Constant.padding).isActive = true
-        categoryListView.widthAnchor.constraint(equalToConstant: Constant.initialCategoryListWidth).isActive = true
-        categoryListView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Constant.padding).isActive = true
+        categoryListView.make([.top, .left, .bottom],
+                              equalTo: self,
+                              insetBy: .with(top: Constant.padding + Constant.directionButtonHeight,
+                                             left: Constant.padding,
+                                             bottom: Constant.padding))
+        categoryListView.make(.width, equalTo: Constant.initialCategoryListWidth)
         
         self.addSubview(self.backButton)
-        backButton.translatesAutoresizingMaskIntoConstraints = false
-        backButton.topAnchor.constraint(equalTo: self.topAnchor, constant: Constant.padding).isActive = true
-        backButton.leftAnchor.constraint(equalTo: categoryListView.rightAnchor, constant: Constant.padding).isActive = true
-        backButton.heightAnchor.constraint(equalToConstant: Constant.directionButtonHeight).isActive = true
+        backButton.make(.top, equalTo: self, constant: Constant.padding)
+        backButton.make(.left, equalTo: .right, of: categoryListView, constant: Constant.padding)
+        backButton.make(.height, equalTo: Constant.directionButtonHeight)
         
         self.addSubview(self.forwardButton)
-        forwardButton.translatesAutoresizingMaskIntoConstraints = false
-        forwardButton.topAnchor.constraint(equalTo: self.topAnchor, constant: Constant.padding).isActive = true
-        forwardButton.leftAnchor.constraint(equalTo: backButton.rightAnchor, constant: Constant.padding).isActive = true
-        forwardButton.heightAnchor.constraint(equalToConstant: Constant.directionButtonHeight).isActive = true
+        forwardButton.make(.top, equalTo: self, constant: Constant.padding)
+        forwardButton.make(.left, equalTo: .right, of: backButton, constant: Constant.padding)
+        forwardButton.make(.height, equalTo: Constant.directionButtonHeight)
         
         var lastSheet: NSView = self.categoryListView
         self.budgetMonthSheetViews.forEach({ budgetMonthSheetView in
@@ -59,16 +58,15 @@ class BudgetOverviewView: NSView {
             
             budgetMonthSheetView.translatesAutoresizingMaskIntoConstraints = false
             if budgetMonthSheetView != budgetMonthSheetViews.first {
-                budgetMonthSheetView.widthAnchor.constraint(equalTo: lastSheet.widthAnchor).isActive = true
+                budgetMonthSheetView.make(.width, equalTo: lastSheet)
             }
             
-            budgetMonthSheetView.topAnchor.constraint(equalTo: self.topAnchor,
-                                                      constant: (2 * Constant.padding) + Constant.directionButtonHeight).isActive = true
-            budgetMonthSheetView.leftAnchor.constraint(equalTo: lastSheet.rightAnchor, constant: Constant.padding).isActive = true
-            budgetMonthSheetView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Constant.padding).isActive = true
+            budgetMonthSheetView.make(.top, equalTo: self, constant: (2 * Constant.padding) + Constant.directionButtonHeight)
+            budgetMonthSheetView.make(.left, equalTo: .right, of: lastSheet, constant: Constant.padding)
+            budgetMonthSheetView.make(.bottom, equalTo: self, constant: -Constant.padding)
 
             if budgetMonthSheetView == budgetMonthSheetViews.last {
-                budgetMonthSheetView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -Constant.padding).isActive = true
+                budgetMonthSheetView.make(.right, equalTo: self, constant: -Constant.padding)
             }
             
             lastSheet = budgetMonthSheetView

@@ -33,23 +33,15 @@ class BudgetMonthSheetView: NSView {
         self.outlineView.floatsGroupRows = false
         self.outlineView.showsDisclosureIndicator = false
         
-        self.summaryView.translatesAutoresizingMaskIntoConstraints = false
-        self.summaryView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        self.summaryView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        self.summaryView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.summaryView.heightAnchor.constraint(equalToConstant: Constant.summaryViewHeight).isActive = true
+        self.summaryView.make([.left, .right, .top], equalTo: self)
+        self.summaryView.make(.height, equalTo: Constant.summaryViewHeight)
         
-        self.totalsView.translatesAutoresizingMaskIntoConstraints = false
-        self.totalsView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        self.totalsView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        self.totalsView.topAnchor.constraint(equalTo: self.summaryView.bottomAnchor).isActive = true
-        self.totalsView.heightAnchor.constraint(equalToConstant: Constant.totalsViewHeight).isActive = true
+        self.totalsView.make([.left, .right], equalTo: self)
+        self.totalsView.make(.top, equalTo: .bottom, of: self.summaryView)
+        self.totalsView.make(.height, equalTo: Constant.totalsViewHeight)
         
-        self.detailsTableScrollView.translatesAutoresizingMaskIntoConstraints = false
-        self.detailsTableScrollView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        self.detailsTableScrollView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        self.detailsTableScrollView.topAnchor.constraint(equalTo: self.totalsView.bottomAnchor).isActive = true
-        self.detailsTableScrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.detailsTableScrollView.make([.left, .right, .bottom], equalTo: self)
+        self.detailsTableScrollView.make(.top, equalTo: .bottom, of: self.totalsView)
     }
     
     override func layout() {
