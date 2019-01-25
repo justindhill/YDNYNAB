@@ -33,10 +33,10 @@ class PayeeSettingsViewController: NSSplitViewController {
         self.splitView.dividerStyle = .thin
         self.view.addSubview(self.splitView)
         self.splitView.makeEdgesEqual(to: self.view)
-        
-        let contentItem = self.editorSplitViewItem(forPayeeId: 0)
-        self.splitViewItems = [self.selectorSplitItem, contentItem]
         self.preferredContentSize = NSSize(width: 800, height: 600)
+
+        // load the view, which will trigger the delegate call, setting the split view items
+        let _ = self.selectorSplitItem.viewController.view        
     }
     
     override func keyDown(with event: NSEvent) {
@@ -48,7 +48,6 @@ class PayeeSettingsViewController: NSSplitViewController {
     func editorSplitViewItem(forPayeeId id: Int64) -> NSSplitViewItem {
         let vc = PayeeSettingsEditorViewController(payeeId: id, budgetContext: self.budgetContext)
         let item = NSSplitViewItem(viewController: vc)
-        print(id)
         return item
     }
 
@@ -58,7 +57,8 @@ extension PayeeSettingsViewController: PayeeSettingsSelectorViewControllerDelega
     
     func payeeSelector(_ selector: PayeeSettingsSelectorViewController, didSelectPayee payeeId: Int64?) {
         if let payeeId = payeeId {
-            self.splitViewItems[1] = self.editorSplitViewItem(forPayeeId: payeeId)
+            let newItem = self.editorSplitViewItem(forPayeeId: payeeId)
+            self.splitViewItems = [self.selectorSplitItem, newItem]
         }
     }
     

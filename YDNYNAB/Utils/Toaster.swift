@@ -12,6 +12,7 @@ class Toaster: NSObject {
     static let shared = Toaster()
     
     func enqueueDefaultErrorToast() {
-        print("Something bad happened, but the toaster doesn't do anything yet!")
+        let alert = NSAlert()
+        alert.messageText = "That didn't work. Try again?"
     }
 }

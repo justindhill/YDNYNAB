@@ -45,13 +45,18 @@ class PayeeSettingsSelectorViewController: NSViewController {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.headerView = nil
         
         self.tableView.addTableColumn(withTitle: "Payees", identifier: Constant.columnIdentifier, resizingOptions: .autoresizingMask)
         
         if let payees = try? self.budgetContext.database.queue.read { (db) -> [Payee] in return try Payee.fetchAll(db) } {
             self.payees = payees
             self.tableView.reloadData()
-        }  else {
+            
+            if payees.count > 0 {
+                self.tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+            }
+        } else {
             
         }
     }
