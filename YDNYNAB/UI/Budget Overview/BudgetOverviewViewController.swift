@@ -37,6 +37,8 @@ class BudgetOverviewViewController: NSViewController, BudgetCategoriesViewContro
     init(budgetContext: BudgetContext) {
         self.budgetContext = budgetContext
         super.init(nibName: nil, bundle: nil)
+        
+        self.title = "Budget"
     }
     
     override func viewDidLoad() {

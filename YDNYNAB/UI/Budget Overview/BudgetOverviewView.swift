@@ -37,18 +37,16 @@ class BudgetOverviewView: NSView {
         self.addSubview(self.categoryListView)
         categoryListView.make([.top, .left, .bottom],
                               equalTo: self,
-                              insetBy: .with(top: Constant.padding + Constant.directionButtonHeight,
-                                             left: Constant.padding,
-                                             bottom: Constant.padding))
+                              insetBy: .with(top: Constant.directionButtonHeight))
         categoryListView.make(.width, equalTo: Constant.initialCategoryListWidth)
         
         self.addSubview(self.backButton)
-        backButton.make(.top, equalTo: self, constant: Constant.padding)
+        backButton.make(.top, equalTo: self)
         backButton.make(.left, equalTo: .right, of: categoryListView, constant: Constant.padding)
         backButton.make(.height, equalTo: Constant.directionButtonHeight)
         
         self.addSubview(self.forwardButton)
-        forwardButton.make(.top, equalTo: self, constant: Constant.padding)
+        forwardButton.make(.top, equalTo: self)
         forwardButton.make(.left, equalTo: .right, of: backButton, constant: Constant.padding)
         forwardButton.make(.height, equalTo: Constant.directionButtonHeight)
         
@@ -61,12 +59,12 @@ class BudgetOverviewView: NSView {
                 budgetMonthSheetView.make(.width, equalTo: lastSheet)
             }
             
-            budgetMonthSheetView.make(.top, equalTo: self, constant: (2 * Constant.padding) + Constant.directionButtonHeight)
+            budgetMonthSheetView.make(.top, equalTo: self, constant: Constant.padding + Constant.directionButtonHeight)
             budgetMonthSheetView.make(.left, equalTo: .right, of: lastSheet, constant: Constant.padding)
-            budgetMonthSheetView.make(.bottom, equalTo: self, constant: -Constant.padding)
+            budgetMonthSheetView.make(.bottom, equalTo: self)
 
             if budgetMonthSheetView == budgetMonthSheetViews.last {
-                budgetMonthSheetView.make(.right, equalTo: self, constant: -Constant.padding)
+                budgetMonthSheetView.make(.right, equalTo: self)
             }
             
             lastSheet = budgetMonthSheetView

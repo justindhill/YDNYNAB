@@ -10,7 +10,18 @@ import Cocoa
 
 class BudgetWindowController: NSWindowController {
     
+    enum Constant {
+        static let toolbarIdentifier = NSToolbar.Identifier("BudgetWindowToolbar")
+        static let budgetItemIdentifier = NSToolbarItem.Identifier("BudgetItem")
+    }
+    
     let budgetContext: BudgetContext
+    let tabViewController: NSTabViewController
+    
+    lazy var segmentedControl = NSSegmentedControl(labels: [""],
+                                                   trackingMode: .selectOne,
+                                                   target: self,
+                                                   action: #selector(selectedSegmentDidChange(_:)))
     
     required init(coder: NSCoder) { fatalError("not implemented") }
     init(budgetWrapper: BudgetPackageWrapper) {
@@ -21,11 +32,23 @@ class BudgetWindowController: NSWindowController {
                               backing: .buffered,
                               defer: false)
         
-        window.title = budgetWrapper.fileUrl.lastPathComponent
-        window.contentViewController = MainSplitViewController(budgetContext: self.budgetContext)
-        
-        super.init(window: window)
+        let mainViewController = MainTabViewController(budgetContext: self.budgetContext)
+        self.tabViewController = mainViewController
 
+        super.init(window: window)
+        
+        let toolbar = NSToolbar(identifier: Constant.toolbarIdentifier)
+        toolbar.allowsUserCustomization = false
+        toolbar.displayMode = .iconOnly
+        toolbar.delegate = self
+        
+        window.title = budgetWrapper.fileUrl.lastPathComponent
+        window.toolbar = toolbar
+        window.toolbar?.delegate = mainViewController
+        window.contentViewController = mainViewController
+        
+        mainViewController.delegate = self
+        
         window.setFrame(self.calculateInitialWindowFrame(), display: true)
     }
     
@@ -51,5 +74,44 @@ class BudgetWindowController: NSWindowController {
         
         return initialWindowFrame
     }
+    
+    func updateSegmentedControl() {
+        self.segmentedControl.segmentCount = self.tabViewController.tabViewItems.count
+        self.tabViewController.tabViewItems.enumerated().forEach { (offset, item) in
+            self.segmentedControl.setLabel(item.viewController?.title ?? "", forSegment: offset)
+        }
+        self.segmentedControl.selectedSegment = self.tabViewController.selectedTabViewItemIndex
+    }
+    
+    @objc func selectedSegmentDidChange(_ sender: NSSegmentedControl) {
+        self.tabViewController.selectedTabViewItemIndex = sender.selectedSegment
+    }
 
+}
+
+extension BudgetWindowController: NSToolbarDelegate {
+    
+    func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        
+        let item = NSToolbarItem(itemIdentifier: Constant.budgetItemIdentifier)
+        item.view = self.segmentedControl
+        return item
+    }
+    
+    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        return [ .flexibleSpace, Constant.budgetItemIdentifier, .flexibleSpace]
+    }
+    
+    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        return [ Constant.budgetItemIdentifier, .flexibleSpace ]
+    }
+    
+}
+
+extension BudgetWindowController: MainTabViewControllerDelegate {
+    
+    func mainTabViewControllerItemsDidChange(_ tabViewController: NSTabViewController) {
+        self.updateSegmentedControl()
+    }
+    
 }

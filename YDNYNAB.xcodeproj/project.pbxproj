@@ -39,9 +39,8 @@
 		D04FB0EB215DC069008880B7 /* Toaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04FB0EA215DC069008880B7 /* Toaster.swift */; };
 		D051057A213B5C3F008133B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0510579213B5C3F008133B5 /* AppDelegate.swift */; };
 		D051057C213B5C40008133B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D051057B213B5C40008133B5 /* Assets.xcassets */; };
-		D0510588213B6230008133B5 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0510587213B6230008133B5 /* MainSplitViewController.swift */; };
+		D0510588213B6230008133B5 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0510587213B6230008133B5 /* MainTabViewController.swift */; };
 		D051058A213B6A34008133B5 /* BudgetOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0510589213B6A34008133B5 /* BudgetOverviewViewController.swift */; };
-		D0510590213B6CAB008133B5 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051058F213B6CAB008133B5 /* SidebarViewController.swift */; };
 		D06C648421420667000EF618 /* BudgetMonthTotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648321420667000EF618 /* BudgetMonthTotalsView.swift */; };
 		D06C648621421004000EF618 /* MainSplitViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648521421004000EF618 /* MainSplitViewControllerView.swift */; };
 		D06C648A21421D0F000EF618 /* BudgetMonthTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648921421D0F000EF618 /* BudgetMonthTableRowView.swift */; };
@@ -56,7 +55,6 @@
 		D0AA344A2175908A00E8A973 /* BudgetMasterCategory+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA34492175908A00E8A973 /* BudgetMasterCategory+Queries.swift */; };
 		D0AA344C2175A11000E8A973 /* BudgetSubCategory+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA344B2175A11000E8A973 /* BudgetSubCategory+Queries.swift */; };
 		D0AD2DCF21AB1EA9009A62FA /* YDNTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AD2DCE21AB1EA9009A62FA /* YDNTableView.swift */; };
-		D0CE3BDE213C359300798CF5 /* StackedSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BDD213C359300798CF5 /* StackedSelectionView.swift */; };
 		D0CE3BE3213F6B7B00798CF5 /* BudgetOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */; };
 		D0CE3BE5213F728C00798CF5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE4213F728C00798CF5 /* main.swift */; };
 		D0CE3BE9213F7B7500798CF5 /* BudgetMonthSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE8213F7B7500798CF5 /* BudgetMonthSheetViewController.swift */; };
@@ -159,9 +157,8 @@
 		D051057B213B5C40008133B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0510580213B5C40008133B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0510581213B5C40008133B5 /* YDNYNAB.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YDNYNAB.entitlements; sourceTree = "<group>"; };
-		D0510587213B6230008133B5 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
+		D0510587213B6230008133B5 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		D0510589213B6A34008133B5 /* BudgetOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetOverviewViewController.swift; sourceTree = "<group>"; };
-		D051058F213B6CAB008133B5 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		D06C648321420667000EF618 /* BudgetMonthTotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetMonthTotalsView.swift; sourceTree = "<group>"; };
 		D06C648521421004000EF618 /* MainSplitViewControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewControllerView.swift; sourceTree = "<group>"; };
 		D06C648721421BF9000EF618 /* BudgetMonthTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetMonthTableDataSource.swift; sourceTree = "<group>"; };
@@ -176,7 +173,6 @@
 		D0AA34492175908A00E8A973 /* BudgetMasterCategory+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BudgetMasterCategory+Queries.swift"; sourceTree = "<group>"; };
 		D0AA344B2175A11000E8A973 /* BudgetSubCategory+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BudgetSubCategory+Queries.swift"; sourceTree = "<group>"; };
 		D0AD2DCE21AB1EA9009A62FA /* YDNTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNTableView.swift; sourceTree = "<group>"; };
-		D0CE3BDD213C359300798CF5 /* StackedSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedSelectionView.swift; sourceTree = "<group>"; };
 		D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetOverviewView.swift; sourceTree = "<group>"; };
 		D0CE3BE4213F728C00798CF5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D0CE3BE8213F7B7500798CF5 /* BudgetMonthSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetMonthSheetViewController.swift; sourceTree = "<group>"; };
@@ -407,15 +403,6 @@
 			path = Queries;
 			sourceTree = "<group>";
 		};
-		D0CE3BDC213C2F5300798CF5 /* Sidebar */ = {
-			isa = PBXGroup;
-			children = (
-				D051058F213B6CAB008133B5 /* SidebarViewController.swift */,
-				D0CE3BDD213C359300798CF5 /* StackedSelectionView.swift */,
-			);
-			path = Sidebar;
-			sourceTree = "<group>";
-		};
 		D0CE3BDF213C375E00798CF5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -509,13 +496,12 @@
 				D04FB0E72151F2A0008880B7 /* Controls */,
 				D0E4E3EA214D933D006B4F6E /* Register */,
 				D0CE3BE6213F7B4200798CF5 /* Budget Overview */,
-				D0CE3BDC213C2F5300798CF5 /* Sidebar */,
 				D0AA343821727BAD00E8A973 /* Protocols */,
 				D0CE3BDF213C375E00798CF5 /* Extensions */,
 				D0E4E3F5214EFBD5006B4F6E /* YDNOutlineView.swift */,
 				D0AD2DCE21AB1EA9009A62FA /* YDNTableView.swift */,
 				D014C53C21EA8F6400B8D33D /* YDNTableCellView.swift */,
-				D0510587213B6230008133B5 /* MainSplitViewController.swift */,
+				D0510587213B6230008133B5 /* MainTabViewController.swift */,
 				D06C648521421004000EF618 /* MainSplitViewControllerView.swift */,
 			);
 			path = UI;
@@ -698,7 +684,7 @@
 				D0E4E3D9214355BC006B4F6E /* MenuBar.swift in Sources */,
 				D014C53521EA5F2D00B8D33D /* NSView+AutoLayout.swift in Sources */,
 				D0E4E3E2214459B7006B4F6E /* BudgetCategoriesViewController.swift in Sources */,
-				D0510588213B6230008133B5 /* MainSplitViewController.swift in Sources */,
+				D0510588213B6230008133B5 /* MainTabViewController.swift in Sources */,
 				D0CE3BE5213F728C00798CF5 /* main.swift in Sources */,
 				D03714B021DD64D50093CFC0 /* OFXImporter.swift in Sources */,
 				D03714AB21DBE1DC0093CFC0 /* BudgetWindowController.swift in Sources */,
@@ -720,7 +706,6 @@
 				D0E4E3DF21445853006B4F6E /* DraggableSeparatorView.swift in Sources */,
 				D014C53D21EA8F6400B8D33D /* YDNTableCellView.swift in Sources */,
 				D0F8F5E821B324A900D92316 /* BudgetLine+Queries.swift in Sources */,
-				D0CE3BDE213C359300798CF5 /* StackedSelectionView.swift in Sources */,
 				D0AA34422173D43500E8A973 /* YNABTransactionImporter.swift in Sources */,
 				D06C648621421004000EF618 /* MainSplitViewControllerView.swift in Sources */,
 				D0F8F5DD21B31C6300D92316 /* BudgetMonthSheetKeyViewProvider.swift in Sources */,
@@ -740,7 +725,6 @@
 				D0CE3BED213F7C4A00798CF5 /* BudgetMonthSummaryView.swift in Sources */,
 				D0F8F5EA21B3252000D92316 /* MonthYear.swift in Sources */,
 				D04FB0E92151F2BC008880B7 /* YDNTextField.swift in Sources */,
-				D0510590213B6CAB008133B5 /* SidebarViewController.swift in Sources */,
 				D014C52821E1674800B8D33D /* PayeeRenameRule.swift in Sources */,
 				D0E4E3D1214336F1006B4F6E /* BudgetLine.swift in Sources */,
 				D04FB0EB215DC069008880B7 /* Toaster.swift in Sources */,

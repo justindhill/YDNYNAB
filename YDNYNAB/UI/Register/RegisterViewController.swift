@@ -51,6 +51,8 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
         self.budgetContext = budgetContext
         self.mode = mode
         super.init(nibName: nil, bundle: nil)
+        
+        self.title = "Accounts"
     }
     
     required init?(coder: NSCoder) {
