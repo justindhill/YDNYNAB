@@ -11,6 +11,9 @@ import GRDB
 
 class YDNDatabase: NSObject {
     
+    static let UncategorizedCategoryId: Int64 = 1
+    static let IncomeCategoryId: Int64 = 2
+    
     let budgetWrapper: BudgetPackageWrapper
     lazy var queue = try! DatabaseQueue(path: self.budgetWrapper.mainDatabaseFileURL.path)
     
@@ -93,6 +96,7 @@ class YDNDatabase: NSObject {
             t.column("flag", .text)
             t.column("checkNumber", .text)
             t.column("date", .date)
+            t.column("effectiveDate", .date)
             t.column("memo", .text)
             t.column("outflow", .integer)
             t.column("inflow", .integer)
@@ -136,7 +140,18 @@ class YDNDatabase: NSObject {
         let uncategorizedSubcategory = BudgetSubCategory()
         uncategorizedSubcategory.name = "No category"
         uncategorizedSubcategory.masterCategory = uncategorizedMasterCategory.id
+        uncategorizedSubcategory.isHidden = true
         try uncategorizedSubcategory.insert(db)
+        
+        let incomeMasterCategory = BudgetMasterCategory()
+        incomeMasterCategory.name = "Income"
+        try incomeMasterCategory.insert(db)
+        
+        let incomeSubcategory = BudgetSubCategory()
+        incomeSubcategory.name = ""
+        incomeSubcategory.masterCategory = incomeMasterCategory.id
+        incomeSubcategory.isHidden = true
+        try incomeSubcategory.insert(db)
         
         let defaultAccount = Account()
         defaultAccount.name = "Test account"

@@ -28,6 +28,7 @@ class Transaction: NSObject, Codable, FetchableRecord, PersistableRecord {
     var flag: FlagColor?
     var checkNumber: String?
     var date: Date = Date()
+    var effectiveDate: Date = Date()
     var payee: Int64?
     var masterCategory: Int64?
     var subCategory: Int64?
@@ -42,6 +43,7 @@ class Transaction: NSObject, Codable, FetchableRecord, PersistableRecord {
         container["flag"] = flag
         container["checkNumber"] = checkNumber
         container["date"] = date
+        container["effectiveDate"] = effectiveDate
         container["payee"] = payee
         container["masterCategory"] = masterCategory
         container["subCategory"] = subCategory

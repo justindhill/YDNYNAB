@@ -7,6 +7,7 @@
 //
 
 import GRDB
+import CSV
 
 class YNABTransactionImporter {
     lazy var dateFormatter: DateFormatter = {
@@ -25,9 +26,6 @@ class YNABTransactionImporter {
     }()
     
     init(csvFileUrl: URL, budgetContext: BudgetContext) {
-        guard let fileContents = try? String(contentsOf: csvFileUrl) else {
-            fatalError("Couldn't get file contents")
-        }
         
         enum Field: Int {
             case account
@@ -46,22 +44,20 @@ class YNABTransactionImporter {
         }
         
         try! budgetContext.database.queue.write { db in
-            var skipLine = true
 
             var accounts: [String: Account] = [:]
             var payees: [String: Payee] = [:]
-
-            try fileContents.split(separator: "\n").forEach { (line) in
-                if skipLine {
-                    skipLine = false
-                    return
-                }
-
+            
+            guard let stream = InputStream(url: csvFileUrl) else {
+                return
+            }
+            
+            let csv = try CSVReader(stream: stream, hasHeaderRow: true, trimFields: true)
+            
+            while let row = csv.next() {
                 let txn = Transaction()
 
-                let lineSplit = line.split(separator: ",", omittingEmptySubsequences: false)
-                try! lineSplit.enumerated().forEach { (index, value) in
-                    let stringValue = String(value).trimmingCharacters(in: ["\""])
+                try! row.enumerated().forEach { index, value in
                     guard let field = Field(rawValue: index) else {
                         return
                     }
@@ -69,46 +65,59 @@ class YNABTransactionImporter {
                     switch field {
                     case .account:
                         let account: Account
-                        if let existingAccount = accounts[stringValue] {
+                        if let existingAccount = accounts[value] {
                             account = existingAccount
                         } else {
                             account = Account()
-                            account.name = stringValue
+                            account.name = value
                             try account.insert(db)
-                            accounts[stringValue] = account
+                            accounts[value] = account
                         }
                         txn.account = account.id
                     case .flag:
-                        txn.flag = Transaction.FlagColor(rawValue: stringValue)
+                        txn.flag = Transaction.FlagColor(rawValue: value)
                     case .checkNumber:
-                        txn.checkNumber = stringValue
+                        txn.checkNumber = value
                     case .date:
-                        if let date = self.dateFormatter.date(from: stringValue) {
+                        if let date = self.dateFormatter.date(from: value) {
                             txn.date = date
+                            txn.effectiveDate = date
                         }
                     case .payee:
                         let payee: Payee
-                        if let existingPayee = payees[stringValue] {
+                        if let existingPayee = payees[value] {
                             payee = existingPayee
                         } else {
                             payee = Payee()
-                            payee.name = stringValue
+                            payee.name = value
                             try payee.insert(db)
-                            payees[stringValue] = payee
+                            payees[value] = payee
                         }
                         txn.payee = payee.id
+                    case .category:
+                        if value.starts(with: "Income") {
+                            print()
+                        }
                     case .masterCategory:
-                        txn.masterCategory = BudgetMasterCategory.first(withName: stringValue, inDb: db)?.id
+                        txn.masterCategory = BudgetMasterCategory.first(withName: value, inDb: db)?.id
                     case .subCategory:
-                        txn.subCategory = BudgetSubCategory.first(withName: stringValue, inDb: db)?.id
+                        if txn.masterCategory == YDNDatabase.IncomeCategoryId {
+                            if value == "Available next month" {
+                                let actualMonthYear = MonthYear(date: txn.date)
+                                txn.effectiveDate = actualMonthYear.incrementingMonth().date
+                            }
+                            txn.subCategory = YDNDatabase.IncomeCategoryId
+                        } else {
+                            txn.subCategory = BudgetSubCategory.first(withName: value, inDb: db)?.id
+                        }
                     case .memo:
-                        txn.memo = stringValue
+                        txn.memo = value
                     case .outflow:
-                        txn.outflow = self.currencyFormatter.number(from: stringValue)?.doubleValue
+                        txn.outflow = self.currencyFormatter.number(from: value)?.doubleValue
                     case .inflow:
-                        txn.inflow = self.currencyFormatter.number(from: stringValue)?.doubleValue
+                        txn.inflow = self.currencyFormatter.number(from: value)?.doubleValue
                     case .cleared:
-                        txn.cleared = (stringValue != "U")
+                        txn.cleared = (value != "U")
 
                     default:
                         break

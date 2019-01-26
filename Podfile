@@ -4,4 +4,5 @@ target 'YDNYNAB' do
     inhibit_all_warnings!
 
     pod 'GRDB.swift'
+    pod 'CSV.swift'
 end

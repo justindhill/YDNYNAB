@@ -6,9 +6,8 @@
 //  Copyright © 2018 Justin Hill. All rights reserved.
 //
 
-import Cocoa
 import GRDB
-
+import CSV
 
 class YNABBudgetImporter {
     enum Field: Int {
@@ -37,25 +36,23 @@ class YNABBudgetImporter {
     }()
     
     init(csvFileUrl: URL, budgetContext: BudgetContext) {
-        guard let fileContents = try? String(contentsOf: csvFileUrl) else {
-            fatalError("Couldn't get file contents")
+        guard let stream = InputStream(url: csvFileUrl) else {
+            return
         }
         
         var masterCategories: [String: BudgetMasterCategory] = [:]
         var subCategories: [String: BudgetSubCategory] = [:]
         
-        budgetContext.database.queue.write { db in
-            var skipLine = true
+        
+        try! budgetContext.database.queue.write { db in
             var previousMonthBudgetLines: [BudgetSubCategory: BudgetLine] = [:]
             
-            try! fileContents.split(separator: "\n").forEach { (line) in
-                if skipLine {
-                    skipLine = false
-                    return
-                }
+            let csv = try CSVReader(stream: stream, hasHeaderRow: true, trimFields: true)
+            
+            while let row = csv.next() {
 
-                if line.contains("Uncategorized Transactions") {
-                    return
+                if row.contains("Uncategorized Transactions") {
+                    continue
                 }
 
                 let budgetLine = BudgetLine()
@@ -63,7 +60,7 @@ class YNABBudgetImporter {
                 var lineMasterCategory: BudgetMasterCategory?
                 var lineSubcategory: BudgetSubCategory?
 
-                try line.split(separator: ",", omittingEmptySubsequences: false).enumerated().forEach({ (index, value) in
+                try! row.enumerated().forEach { index, value in
                     let stringValue = String(value).trimmingCharacters(in: ["\""])
                     guard let field = Field(rawValue: index) else {
                         return
@@ -72,7 +69,6 @@ class YNABBudgetImporter {
                     switch field {
                     case .month:
                         budgetLine.month = self.dateFormatter.date(from: stringValue) ?? Date()
-                        print(budgetLine.month)
                     case .masterCategory:
                         if stringValue != "Hidden Categories" {
                             let masterCategory: BudgetMasterCategory
@@ -152,7 +148,7 @@ class YNABBudgetImporter {
                     case .category:
                         break
                     }
-                })
+                }
                 
                 if let lineSubcategory = lineSubcategory {
                     if let previousBudgetLine = previousMonthBudgetLines[lineSubcategory] {
