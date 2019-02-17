@@ -10,7 +10,7 @@ import Cocoa
 
 protocol YDNTextFieldDelegate: NSTextFieldDelegate {
     func textFieldDidFocus(_ textField: YDNTextField)
-    func textFieldDidBlur(_ textField: YDNTextField, commit: Bool)
+    func textFieldDidBlur(_ textField: YDNTextField, commit: Bool, textMovement: NSTextMovement)
 }
 
 protocol YDNTextFieldKeyViewProvider: class {
@@ -114,7 +114,7 @@ class YDNTextField: NSTextField {
             self.stringValue = self.initialFocusedValue ?? ""
         }
         self.isFocused = false
-        self.focusDelegate?.textFieldDidBlur(self, commit: (self.committingMovements.contains(textMovement)))
+        self.focusDelegate?.textFieldDidBlur(self, commit: (self.committingMovements.contains(textMovement)), textMovement: textMovement)
 //        print("blur committed? \(self.committingMovements.contains(textMovement))")
         
         if let keyViewProvider = self.keyViewProvider {
@@ -131,7 +131,7 @@ class YDNTextField: NSTextField {
     override func doCommand(by selector: Selector) {
         if selector == #selector(cancelOperation(_:)) {
             self.isFocused = false
-            self.focusDelegate?.textFieldDidBlur(self, commit: false)
+            self.focusDelegate?.textFieldDidBlur(self, commit: false, textMovement: .other)
         }
                 
         super.doCommand(by: selector)

@@ -75,6 +75,12 @@ class RegisterRowView: NSTableRowView, YDNTextFieldDelegate, YDNTextFieldKeyView
                 columnView.isEditable = self.isEditing
                 columnView.inputTextField.focusDelegate = self.isEditing ? self : nil
                 columnView.inputTextField.keyViewProvider = self.isEditing ? self : nil
+                
+                if i == 0 && self.isEditing {
+                    DispatchQueue.main.async {
+                        columnView.inputTextField.selectAllAndEdit()
+                    }
+                }
             }
         }
         
@@ -122,7 +128,10 @@ class RegisterRowView: NSTableRowView, YDNTextFieldDelegate, YDNTextFieldKeyView
 //        }
     }
     
-    func textFieldDidBlur(_ textField: YDNTextField, commit: Bool) {
+    func textFieldDidBlur(_ textField: YDNTextField, commit: Bool, textMovement: NSTextMovement) {
+        if textMovement == .return {
+            self.delegate?.registerRowViewDidCommitChanges(self)
+        }
 //        print("\(textField.stringValue) blur - commit: \(commit)")
 
     }

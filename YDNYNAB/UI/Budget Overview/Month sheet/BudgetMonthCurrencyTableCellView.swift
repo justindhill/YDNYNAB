@@ -136,7 +136,7 @@ extension BudgetMonthCurrencyTableCellView: YDNTextFieldDelegate {
     
     func textFieldDidFocus(_ textField: YDNTextField) {} // do nothing
     
-    func textFieldDidBlur(_ textField: YDNTextField, commit: Bool) {
+    func textFieldDidBlur(_ textField: YDNTextField, commit: Bool, textMovement: NSTextMovement) {
         if !commit {
             return
         }

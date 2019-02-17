@@ -79,19 +79,16 @@ class RegisterViewDataSource: NSObject, NSTableViewDataSource {
             return transaction.payeeDisplayName
         case .category:
             return transaction.categoryDisplayName
-//            let masterName = "\(transaction.masterCategory)"
-//            let subName = "\(transaction.subCategory)"
-//            return "\(masterName): \(subName)"
         case .memo:
             return transaction.memo
         case .inflow:
-            if let inflow = transaction.inflow {
+            if let inflow = transaction.inflow, inflow > 0 {
                 return self.currencyFormatter.string(from: NSNumber(value: inflow))
             } else {
                 return ""
             }
         case .outflow:
-            if let outflow = transaction.outflow {
+            if let outflow = transaction.outflow, outflow > 0 {
                 return self.currencyFormatter.string(from: NSNumber(value: outflow))
             } else {
                 return ""
@@ -100,38 +97,32 @@ class RegisterViewDataSource: NSObject, NSTableViewDataSource {
     }
 
     func updateTransaction(forRow row: Int, inTableView tableView: NSTableView, withRowView rowView: NSTableRowView) throws {
-//        try Realm().write {
-//            guard let txn = self.resultSet?[row] else {
-//                throw NSError(domain: "", code: 0, userInfo: nil)
-//            }
-//
-//            try RegisterViewController.ColumnIdentifier.allCases.forEach { columnIdentifier in
-//                let columnIndex = tableView.column(withIdentifier: columnIdentifier.userInterfaceIdentifier)
-//                guard let cellView = rowView.view(atColumn: columnIndex) as? RegisterCell else {
-//                        throw NSError(domain: "", code: 0, userInfo: nil)
-//                }
-//
-//                switch columnIdentifier {
-//                case .memo:
-//                    txn.memo = cellView.inputTextField.stringValue
-//                case .inflow:
-//                    txn.inflow.value = cellView.inputTextField.doubleValue
-//                case .outflow:
-//                    txn.outflow.value = self.currencyFormatter.number(from: cellView.inputTextField.stringValue)?.doubleValue
-//                default:
-//                    break
-//                }
-//            }
-//        }
+        
+        guard let txn = self.resultSet?[row] else {
+            throw NSError(domain: "", code: 0, userInfo: nil)
+        }
+
+        try RegisterViewController.ColumnIdentifier.allCases.forEach { columnIdentifier in
+            let columnIndex = tableView.column(withIdentifier: columnIdentifier.userInterfaceIdentifier)
+            guard let cellView = rowView.view(atColumn: columnIndex) as? RegisterCell else {
+                throw NSError(domain: "", code: 0, userInfo: nil)
+            }
+
+            switch columnIdentifier {
+            case .memo:
+                txn.memo = cellView.inputTextField.stringValue
+            case .inflow:
+                txn.inflow = cellView.inputTextField.doubleValue
+            case .outflow:
+                txn.outflow = self.currencyFormatter.number(from: cellView.inputTextField.stringValue)?.doubleValue
+            default:
+                break
+            }
+        }
+        
+        try self.dbQueue.write { db -> Void in
+            try txn.update(db)
+        }
     }
-//
-//    // MARK: - Utils
-//    private func currencyStringForRealmOptionalDouble(_ number: RealmOptional<Double>) -> String {
-//        if let unwrappedNumber = number.value {
-//            return self.currencyFormatter.string(from: NSNumber(value: unwrappedNumber)) ?? ""
-//        } else {
-//            return ""
-//        }
-//    }
     
 }

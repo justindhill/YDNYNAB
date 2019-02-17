@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		68657771ACC7FE848B468C19 /* Pods_YDNYNAB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB2F171E43BDD6C24A9F8FCD /* Pods_YDNYNAB.framework */; };
+		D0144ADB2219EEE000BE33BD /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0144ADA2219EEE000BE33BD /* KeyCode.swift */; };
 		D014C52521E14AC900B8D33D /* Transaction+OFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C52421E14AC900B8D33D /* Transaction+OFX.swift */; };
 		D014C52821E1674800B8D33D /* PayeeRenameRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C52721E1674800B8D33D /* PayeeRenameRule.swift */; };
 		D014C52A21E16C1E00B8D33D /* Payee+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C52921E16C1E00B8D33D /* Payee+Queries.swift */; };
@@ -124,6 +125,7 @@
 /* Begin PBXFileReference section */
 		810461D03022AF0A241B2E8B /* Pods-YDNYNAB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.debug.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.debug.xcconfig"; sourceTree = "<group>"; };
 		A40E7101E2D28CB42AB76692 /* Pods-YDNYNAB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.release.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.release.xcconfig"; sourceTree = "<group>"; };
+		D0144ADA2219EEE000BE33BD /* KeyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
 		D014C52421E14AC900B8D33D /* Transaction+OFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+OFX.swift"; sourceTree = "<group>"; };
 		D014C52721E1674800B8D33D /* PayeeRenameRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayeeRenameRule.swift; sourceTree = "<group>"; };
 		D014C52921E16C1E00B8D33D /* Payee+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Payee+Queries.swift"; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 				D04FB0EA215DC069008880B7 /* Toaster.swift */,
 				D0F8F5E921B3252000D92316 /* MonthYear.swift */,
 				D014C53421EA5F2D00B8D33D /* NSView+AutoLayout.swift */,
+				D0144ADA2219EEE000BE33BD /* KeyCode.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -700,6 +703,7 @@
 				D0CE3BE9213F7B7500798CF5 /* BudgetMonthSheetViewController.swift in Sources */,
 				D06C648A21421D0F000EF618 /* BudgetMonthTableRowView.swift in Sources */,
 				D051057A213B5C3F008133B5 /* AppDelegate.swift in Sources */,
+				D0144ADB2219EEE000BE33BD /* KeyCode.swift in Sources */,
 				D0AA344A2175908A00E8A973 /* BudgetMasterCategory+Queries.swift in Sources */,
 				D0AD2DCF21AB1EA9009A62FA /* YDNTableView.swift in Sources */,
 				D014C53B21EA811600B8D33D /* PayeeSettingsEditorViewController.swift in Sources */,

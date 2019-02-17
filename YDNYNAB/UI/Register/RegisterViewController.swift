@@ -43,9 +43,29 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
     
     lazy var dataSource: RegisterViewDataSource = RegisterViewDataSource(dbQueue: self.budgetContext.database.queue)
     
+    var ignoreNextReturnKeyUp: Bool = false
     let budgetContext: BudgetContext
     let mode: Mode
-    var focusedRow: Int? = nil
+    var candidateEditRow: Int? = nil
+    var focusedRow: Int? = nil {
+        didSet {
+            var rowsWithChanges = IndexSet()
+            
+            if let oldValue = oldValue {
+                let rowView = self.registerView.tableView.rowView(atRow: oldValue, makeIfNecessary: false) as? RegisterRowView
+                rowView?.isEditing = false
+                rowsWithChanges.insert(oldValue)
+            }
+            
+            if let focusedRow = self.focusedRow {
+                let newSelectedRowView = self.registerView.tableView.rowView(atRow: focusedRow, makeIfNecessary: false) as? RegisterRowView
+                newSelectedRowView?.isEditing = true
+                rowsWithChanges.insert(focusedRow)
+            }
+            
+            self.registerView.tableView.noteHeightOfRows(withIndexesChanged: rowsWithChanges)
+        }
+    }
     
     init(mode: Mode, budgetContext: BudgetContext) {
         self.budgetContext = budgetContext
@@ -64,6 +84,9 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
         self.addColumnsToTableView()
         self.registerView.tableView.delegate = self
         self.registerView.tableView.dataSource = self.dataSource
+        
+        self.registerView.tableView.target = self
+        self.registerView.tableView.action = #selector(tableViewClicked)
         
         self.registerView.tableScrollView.hasVerticalScroller = true
     }
@@ -147,29 +170,11 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {
-        let newSelectedRow = self.registerView.tableView.selectedRow
-        var rows = IndexSet()
-        
-        if let focusedRow = self.focusedRow {
-            let rowView = self.registerView.tableView.rowView(atRow: focusedRow, makeIfNecessary: false) as? RegisterRowView
-            rowView?.isEditing = false
-            rows.insert(focusedRow)
-        }
-        
-        if newSelectedRow >= 0 {
-            let newSelectedRowView = self.registerView.tableView.rowView(atRow: newSelectedRow, makeIfNecessary: false) as? RegisterRowView
-            newSelectedRowView?.isEditing = true
-            rows.insert(newSelectedRow)
-            self.focusedRow = self.registerView.tableView.selectedRow
-        } else {
-            self.focusedRow = nil
-        }
-        
-        self.registerView.tableView.noteHeightOfRows(withIndexesChanged: rows)
+        self.focusedRow = nil
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        if row == self.registerView.tableView.selectedRow {
+        if row == self.focusedRow {
             return RegisterRowView.Constant.expandedHeight
         } else {
             return RegisterRowView.Constant.collapsedHeight
@@ -187,10 +192,6 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
     
     // MARK: - RegisterRowViewDelegate
     func registerRowViewDidCommitChanges(_ rowView: RegisterRowView) {
-        guard let focusedRow = self.focusedRow else {
-            return
-        }
-        
         let row = self.registerView.tableView.row(for: rowView)
         if row != -1 {
             do {
@@ -201,15 +202,51 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
             }
         }
         
-        self.registerView.tableView.deselectRow(focusedRow)
+        self.focusedRow = nil
+        self.ignoreNextReturnKeyUp = true
     }
     
     func registerRowViewDidClickCancel(_ rowView: RegisterRowView) {
-        guard let focusedRow = self.focusedRow else {
+        self.focusedRow = nil
+    }
+    
+    @objc func tableViewClicked() {
+        let clickedRow = self.registerView.tableView.clickedRow
+        if clickedRow == self.candidateEditRow {
+            if clickedRow >= 0 {
+                self.focusedRow = self.registerView.tableView.selectedRow
+                self.candidateEditRow = nil
+            }
+        } else {
+            self.candidateEditRow = clickedRow
+        }
+    }
+    
+    override func keyDown(with event: NSEvent) {
+        
+    }
+    
+    override func keyUp(with event: NSEvent) {
+        print(event.keyCode)
+        
+        let selectedRow = self.registerView.tableView.selectedRow
+        guard let keyCode = KeyCode(rawValue: event.keyCode), selectedRow != -1 else {
             return
         }
         
-        self.registerView.tableView.deselectRow(focusedRow)
+        switch keyCode {
+        case .return:
+            if self.ignoreNextReturnKeyUp {
+                self.ignoreNextReturnKeyUp = false
+                break
+            }
+            
+            if self.focusedRow == nil {
+                self.focusedRow = selectedRow
+            }
+        case .escape:
+            self.focusedRow = nil
+        }
     }
     
 }
