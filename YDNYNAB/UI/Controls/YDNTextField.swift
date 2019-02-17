@@ -62,7 +62,6 @@ class YDNTextField: NSTextField {
                     self.addGestureRecognizer(self.clickRecognizer)
                 }
                 
-//                print("\(self.stringValue) \(isFocused ? "focused" : "blurred")")
                 self.initialFocusedValue = isFocused ? self.stringValue : nil
             }
         }
@@ -115,7 +114,6 @@ class YDNTextField: NSTextField {
         }
         self.isFocused = false
         self.focusDelegate?.textFieldDidBlur(self, commit: (self.committingMovements.contains(textMovement)), textMovement: textMovement)
-//        print("blur committed? \(self.committingMovements.contains(textMovement))")
         
         if let keyViewProvider = self.keyViewProvider {
             if self.forwardMovements.contains(textMovement) {

@@ -121,19 +121,12 @@ class RegisterRowView: NSTableRowView, YDNTextFieldDelegate, YDNTextFieldKeyView
         return nil
     }
     
-    func textFieldDidFocus(_ textField: YDNTextField) {
-//        print("\(textField.stringValue) focus")
-//        DispatchQueue.main.async {
-//            textField.currentEditor()?.selectAll(self)
-//        }
-    }
+    func textFieldDidFocus(_ textField: YDNTextField) {}
     
     func textFieldDidBlur(_ textField: YDNTextField, commit: Bool, textMovement: NSTextMovement) {
         if textMovement == .return {
             self.delegate?.registerRowViewDidCommitChanges(self)
         }
-//        print("\(textField.stringValue) blur - commit: \(commit)")
-
     }
     
     func nextKeyView(for textField: YDNTextField) -> YDNTextField? {

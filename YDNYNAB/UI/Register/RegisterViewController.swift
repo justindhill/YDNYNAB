@@ -226,9 +226,7 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
         
     }
     
-    override func keyUp(with event: NSEvent) {
-        print(event.keyCode)
-        
+    override func keyUp(with event: NSEvent) {        
         let selectedRow = self.registerView.tableView.selectedRow
         guard let keyCode = KeyCode(rawValue: event.keyCode), selectedRow != -1 else {
             return

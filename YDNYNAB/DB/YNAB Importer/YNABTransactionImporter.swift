@@ -94,10 +94,6 @@ class YNABTransactionImporter {
                             payees[value] = payee
                         }
                         txn.payee = payee.id
-                    case .category:
-                        if value.starts(with: "Income") {
-                            print()
-                        }
                     case .masterCategory:
                         txn.masterCategory = BudgetMasterCategory.first(withName: value, inDb: db)?.id
                     case .subCategory:

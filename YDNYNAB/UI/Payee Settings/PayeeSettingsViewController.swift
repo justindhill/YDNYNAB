@@ -48,7 +48,6 @@ class PayeeSettingsViewController: NSSplitViewController {
     func editorSplitViewItem(forPayeeId id: Int64) -> NSSplitViewItem {
         let vc = PayeeSettingsEditorViewController(payeeId: id, budgetContext: self.budgetContext)
         let item = NSSplitViewItem(viewController: vc)
-        print(id)
         return item
     }
 
