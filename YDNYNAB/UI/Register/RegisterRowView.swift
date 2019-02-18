@@ -105,7 +105,7 @@ class RegisterRowView: NSTableRowView, YDNTextFieldDelegate, YDNTextFieldKeyView
         }
         
         if let originatingColumnViewIndex = originatingColumnViewIndex {
-                return (originatingColumnViewIndex, columnViews[originatingColumnViewIndex])
+            return (originatingColumnViewIndex, columnViews[originatingColumnViewIndex])
         }
         
         return nil

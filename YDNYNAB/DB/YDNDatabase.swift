@@ -13,6 +13,7 @@ class YDNDatabase: NSObject {
     
     static let UncategorizedCategoryId: Int64 = 1
     static let IncomeCategoryId: Int64 = 2
+    static let SplitCategoryId: Int64 = 3
     
     let budgetWrapper: BudgetPackageWrapper
     lazy var queue = try! DatabaseQueue(path: self.budgetWrapper.mainDatabaseFileURL.path)
@@ -129,6 +130,13 @@ class YDNDatabase: NSObject {
                          onDelete: .setNull,
                          onUpdate: nil,
                          deferred: false)
+            t.column("splitParent", .integer).indexed()
+            t.foreignKey(["splitParent"],
+                         references: Transaction.databaseTableName,
+                         columns: ["id"],
+                         onDelete: .cascade,
+                         onUpdate: nil,
+                         deferred: false)
         }
     }
     
@@ -152,6 +160,16 @@ class YDNDatabase: NSObject {
         incomeSubcategory.masterCategory = incomeMasterCategory.id
         incomeSubcategory.isHidden = true
         try incomeSubcategory.insert(db)
+        
+        let splitMasterCategory = BudgetMasterCategory()
+        splitMasterCategory.name = "Split"
+        try splitMasterCategory.insert(db)
+        
+        let splitSubcategory = BudgetSubCategory()
+        splitSubcategory.name = "(Multiple categories)"
+        splitSubcategory.masterCategory = splitMasterCategory.id
+        splitSubcategory.isHidden = true
+        try splitSubcategory.insert(db)
         
         let defaultAccount = Account()
         defaultAccount.name = "Test account"
