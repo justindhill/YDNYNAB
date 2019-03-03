@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRowViewDelegate {
+class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterRowViewDelegate {
     
     enum Constant {
         static let rowViewIdentifier = NSUserInterfaceItemIdentifier(rawValue: "rowViewIdentifier")
@@ -52,18 +52,18 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
             var rowsWithChanges = IndexSet()
             
             if let oldValue = oldValue {
-                let rowView = self.registerView.tableView.rowView(atRow: oldValue, makeIfNecessary: false) as? RegisterRowView
+                let rowView = self.registerView.outlineView.rowView(atRow: oldValue, makeIfNecessary: false) as? RegisterRowView
                 rowView?.isEditing = false
                 rowsWithChanges.insert(oldValue)
             }
             
             if let focusedRow = self.focusedRow {
-                let newSelectedRowView = self.registerView.tableView.rowView(atRow: focusedRow, makeIfNecessary: false) as? RegisterRowView
+                let newSelectedRowView = self.registerView.outlineView.rowView(atRow: focusedRow, makeIfNecessary: false) as? RegisterRowView
                 newSelectedRowView?.isEditing = true
                 rowsWithChanges.insert(focusedRow)
             }
             
-            self.registerView.tableView.noteHeightOfRows(withIndexesChanged: rowsWithChanges)
+            self.registerView.outlineView.noteHeightOfRows(withIndexesChanged: rowsWithChanges)
         }
     }
     
@@ -82,17 +82,18 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addColumnsToTableView()
-        self.registerView.tableView.delegate = self
-        self.registerView.tableView.dataSource = self.dataSource
+        self.registerView.outlineView.showsDisclosureIndicator = false
+        self.registerView.outlineView.delegate = self
+        self.registerView.outlineView.dataSource = self.dataSource
         
-        self.registerView.tableView.target = self
-        self.registerView.tableView.action = #selector(tableViewClicked)
+        self.registerView.outlineView.target = self
+        self.registerView.outlineView.action = #selector(outlineViewClicked)
         
-        self.registerView.tableScrollView.hasVerticalScroller = true
+        self.registerView.scrollView.hasVerticalScroller = true
     }
     
     func addColumnsToTableView() {
-        let tableView = self.registerView.tableView
+        let tableView = self.registerView.outlineView
         
         switch self.mode {
         case .full:
@@ -136,8 +137,8 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
         }
     }
     
-    func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-        if let rowView = tableView.makeView(withIdentifier: Constant.rowViewIdentifier, owner: self) as? NSTableRowView {
+    func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {
+        if let rowView = outlineView.makeView(withIdentifier: Constant.rowViewIdentifier, owner: self) as? NSTableRowView {
             return rowView
         } else {
             let rowView = RegisterRowView()
@@ -148,13 +149,13 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
         }
     }
     
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let tableColumn = tableColumn else {
+    func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
+        guard let tableColumn = tableColumn, let transaction = item as? Transaction else {
             return nil
         }
         
         let view: RegisterCell
-        if let reusedView = tableView.makeView(withIdentifier: tableColumn.identifier, owner: self) {
+        if let reusedView = outlineView.makeView(withIdentifier: tableColumn.identifier, owner: self) {
             view = reusedView as! RegisterCell
         } else {
             view = RegisterCell()
@@ -162,18 +163,26 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
         }
         
         if let columnIdentifier = ColumnIdentifier(rawValue: tableColumn.identifier.rawValue) {
-            view.text = self.dataSource.text(forColumn: columnIdentifier, row: row)
+            view.text = self.dataSource.text(forColumn: columnIdentifier, transaction: transaction)
             view.alignment = self.textAlignment(forColumnIdentifier: columnIdentifier)
+            
+            if columnIdentifier == ColumnIdentifier.category && transaction.isSplitParent {
+                view.expansionState = outlineView.isItemExpanded(item) ? .expanded : .collapsed
+            } else {
+                view.expansionState = .none
+            }
         }
         
         return view
     }
     
-    func tableViewSelectionDidChange(_ notification: Notification) {
+    func outlineViewSelectionDidChange(_ notification: Notification) {
         self.focusedRow = nil
     }
     
-    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+    func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
+        let row = outlineView.row(forItem: item)
+        
         if row == self.focusedRow {
             return RegisterRowView.Constant.expandedHeight
         } else {
@@ -192,11 +201,11 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
     
     // MARK: - RegisterRowViewDelegate
     func registerRowViewDidCommitChanges(_ rowView: RegisterRowView) {
-        let row = self.registerView.tableView.row(for: rowView)
+        let row = self.registerView.outlineView.row(for: rowView)
         if row != -1 {
             do {
-                try self.dataSource.updateTransaction(forRow: row, inTableView: self.registerView.tableView, withRowView: rowView)
-                self.registerView.tableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(0..<ColumnIdentifier.allCases.count))
+                try self.dataSource.updateTransaction(forRow: row, inTableView: self.registerView.outlineView, withRowView: rowView)
+                self.registerView.outlineView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(0..<ColumnIdentifier.allCases.count))
             } catch {
                 Toaster.shared.enqueueDefaultErrorToast()
             }
@@ -210,11 +219,11 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
         self.focusedRow = nil
     }
     
-    @objc func tableViewClicked() {
-        let clickedRow = self.registerView.tableView.clickedRow
+    @objc func outlineViewClicked() {
+        let clickedRow = self.registerView.outlineView.clickedRow
         if clickedRow == self.candidateEditRow {
             if clickedRow >= 0 {
-                self.focusedRow = self.registerView.tableView.selectedRow
+                self.focusedRow = self.registerView.outlineView.selectedRow
                 self.candidateEditRow = nil
             }
         } else {
@@ -227,7 +236,7 @@ class RegisterViewController: NSViewController, NSTableViewDelegate, RegisterRow
     }
     
     override func keyUp(with event: NSEvent) {        
-        let selectedRow = self.registerView.tableView.selectedRow
+        let selectedRow = self.registerView.outlineView.selectedRow
         guard let keyCode = KeyCode(rawValue: event.keyCode), selectedRow != -1 else {
             return
         }

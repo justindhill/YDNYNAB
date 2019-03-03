@@ -117,6 +117,10 @@ class Transaction: NSObject, Codable, FetchableRecord, PersistableRecord {
     private(set) var accountDisplayName: String?
     private(set) var payeeDisplayName: String?
     private(set) var categoryDisplayName: String?
+    
+    var isSplitParent: Bool {
+        get { return self.masterCategory == YDNDatabase.SplitCategoryId }
+    }
 }
 
 extension Transaction.FlagColor: DatabaseValueConvertible {}

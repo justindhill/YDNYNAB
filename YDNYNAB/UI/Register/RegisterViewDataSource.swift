@@ -9,12 +9,13 @@
 import GRDB
 import AppKit
 
-class RegisterViewDataSource: NSObject, NSTableViewDataSource {
+class RegisterViewDataSource: NSObject, NSOutlineViewDataSource {
     
     private var dbQueue: DatabaseQueue
     
-    var resultSet: [Transaction]?
-    var filter: Filter? {
+    var topLevelTransactions: [Transaction]?
+    var splitChildren: [Int64: [Transaction]] = [:]
+    var filter: Transaction.Filter? {
         didSet { self.updateResultSet() }
     }
 
@@ -36,47 +37,66 @@ class RegisterViewDataSource: NSObject, NSTableViewDataSource {
     }()
 
     func updateResultSet() {
-        var queryString =
-            "SELECT `transaction`.*, budgetMasterCategory.name || ': ' || budgetSubCategory.name as categoryDisplayName, account.name as accountDisplayName, payee.name as payeeDisplayName " +
-            "FROM `transaction` " +
-            "LEFT JOIN account on `transaction`.account = account.id " +
-            "LEFT JOIN payee on `transaction`.payee = payee.id " +
-            "LEFT JOIN budgetSubCategory on `transaction`.subCategory = budgetSubCategory.id " +
-            "LEFT JOIN budgetMasterCategory on `transaction`.masterCategory = budgetMasterCategory.id "
-
-        var arguments: [Any] = []
-        if let (filterString, filterArguments) = self.filter?.components {
-            queryString += "\(filterString) "
-            arguments = filterArguments
+        do {
+            let results = try self.dbQueue.read { try Transaction.allTransactionsAndSplits(filter: filter, db: $0) }
+            self.topLevelTransactions = results.transactions
+            self.splitChildren = results.splits
+        } catch {
+            Toaster.shared.enqueueDefaultErrorToast()
+        }
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
+        if item == nil {
+            return self.topLevelTransactions?.count ?? 0
+        } else if let transaction = item as? Transaction, let id = transaction.id {
+            return self.splitChildren[id]?.count ?? 0
+        } else {
+            return 0
+        }
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+        guard let transaction = item as? Transaction else {
+            return false
         }
         
-        queryString += "ORDER BY date(`transaction`.date) DESC"
+        if transaction.masterCategory == YDNDatabase.SplitCategoryId {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+        if item == nil, let transaction = self.topLevelTransactions?[index] {
+            return transaction
+        } else if let transaction = item as? Transaction, let id = transaction.id, let child = self.splitChildren[id]?[index] {
+            return child
+        }
         
-        self.resultSet = self.dbQueue.read { try! Transaction.fetchAll($0, queryString, arguments: StatementArguments(arguments)) }
+        assertionFailure("Something weird is going on with the data source")
+        return NSObject()
     }
 
     // MARK: - NSTableViewDataSource
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return self.resultSet?.count ?? 0
+        return self.topLevelTransactions?.count ?? 0
     }
 
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        return self.resultSet?[row]
+        return self.topLevelTransactions?[row]
     }
 
     // MARK: - RegisterViewController
-    func text(forColumn columnIdentifier: RegisterViewController.ColumnIdentifier, row: Int) -> String? {
-        guard let transaction = self.resultSet?[row] else {
-            return nil
-        }
-
+    func text(forColumn columnIdentifier: RegisterViewController.ColumnIdentifier, transaction: Transaction) -> String? {
         switch columnIdentifier {
         case .account:
-            return transaction.accountDisplayName
+            return transaction.splitParent == nil ? transaction.accountDisplayName : ""
         case .date:
-            return DateUtils.dateString(withDate: transaction.date)
+            return transaction.splitParent == nil ? DateUtils.dateString(withDate: transaction.date) : ""
         case .payee:
-            return transaction.payeeDisplayName
+            return transaction.splitParent == nil ? transaction.payeeDisplayName : ""
         case .category:
             return transaction.categoryDisplayName
         case .memo:
@@ -98,7 +118,7 @@ class RegisterViewDataSource: NSObject, NSTableViewDataSource {
 
     func updateTransaction(forRow row: Int, inTableView tableView: NSTableView, withRowView rowView: NSTableRowView) throws {
         
-        guard let txn = self.resultSet?[row] else {
+        guard let txn = self.topLevelTransactions?[row] else {
             throw NSError(domain: "", code: 0, userInfo: nil)
         }
 

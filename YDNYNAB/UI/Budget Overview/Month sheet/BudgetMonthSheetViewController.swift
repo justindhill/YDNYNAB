@@ -193,7 +193,7 @@ class BudgetMonthSheetViewController: NSViewController, NSOutlineViewDelegate {
         
         if let clickedCell = clickedCell, let subcategory = subcategory, column.identifier == Constant.outflowsColumnIdentifier {
             let (startDate, endDate) = DateUtils.startAndEndDate(ofMonth: self.month.month, year: self.month.year)
-            let filter = RegisterViewDataSource.Filter(startDate: startDate, endDate: endDate, subcategory: subcategory)
+            let filter = Transaction.Filter(startDate: startDate, endDate: endDate, subcategory: subcategory)
             
             let register = RegisterViewController(mode: .popover, budgetContext: self.budgetContext)
             register.dataSource.filter = filter

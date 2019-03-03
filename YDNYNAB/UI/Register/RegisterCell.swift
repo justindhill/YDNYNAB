@@ -10,6 +10,21 @@ import Cocoa
 
 class RegisterCell: NSTableCellView {
     
+    enum ExpansionState {
+        case none
+        case collapsed
+        case expanded
+        
+        fileprivate var disclosureTransform: CGAffineTransform {
+            switch self {
+            case .none, .collapsed:
+                return CGAffineTransform.identity
+            case .expanded:
+                return CGAffineTransform(rotationAngle: CGFloat.pi / 2)
+            }
+        }
+    }
+    
     enum Constant {
         static let collapsedHeight: CGFloat = RegisterRowView.Constant.collapsedHeight
         static let expandedHeight: CGFloat = RegisterRowView.Constant.expandedHeight
@@ -25,7 +40,11 @@ class RegisterCell: NSTableCellView {
         return true
     }
     
+    var expansionState: ExpansionState = .none
+    
     private let font = NSFont.systemFont(ofSize: 13)
+    
+    private let disclosureIndicatorView: NSImageView = NSImageView(image: #imageLiteral(resourceName: "disclosure-caret"))
     
     private(set) lazy var inputTextField: YDNTextField = {
         let textField = YDNTextField()
@@ -76,6 +95,7 @@ class RegisterCell: NSTableCellView {
         super.init(frame: frameRect)
         
         self.addSubview(self.inputTextField)
+        self.addSubview(self.disclosureIndicatorView)
         self.wantsLayer = true
     }
     
@@ -85,6 +105,18 @@ class RegisterCell: NSTableCellView {
         self.inputTextField.ydn_isEditable = self.isEditable
         self.inputTextField.textColor = Theme.Color.text
         let lineHeight = ceil(self.font.ascender + abs(self.font.descender) + self.font.leading)
+        
+        self.disclosureIndicatorView.isHidden = (self.expansionState == .none)
+        
+        var disclosureOffset: CGFloat = 0
+        if !self.disclosureIndicatorView.isHidden {
+            disclosureOffset = self.disclosureIndicatorView.image?.size.width ?? 0
+            self.disclosureIndicatorView.layer?.setAffineTransform(self.expansionState.disclosureTransform)
+            
+            self.disclosureIndicatorView.frame = CGRect(
+                origin: CGPoint(x: 0, y: (self.frame.size.height - disclosureOffset) / 2),
+                size: CGSize(width: disclosureOffset, height: disclosureOffset))
+        }
 
         var newFrame = NSRect(
             x: 0,
@@ -92,6 +124,9 @@ class RegisterCell: NSTableCellView {
             width: self.bounds.size.width,
             height: lineHeight)
         newFrame = newFrame.insetBy(dx: 3, dy: 0)
+        newFrame.origin.x += disclosureOffset
+        newFrame.size.width -= disclosureOffset
+        
         self.inputTextField.frame = newFrame
     }
     
@@ -102,8 +137,10 @@ class RegisterCell: NSTableCellView {
         
         if self.backgroundStyle == .dark {
             self.inputTextField.textColor = NSColor.white
+            self.disclosureIndicatorView.contentTintColor = NSColor.white
         } else if self.backgroundStyle == .light {
             self.inputTextField.textColor = Theme.Color.text
+            self.disclosureIndicatorView.contentTintColor = Theme.Color.text
         }
         
         CATransaction.commit()

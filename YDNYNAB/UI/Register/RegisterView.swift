@@ -10,20 +10,20 @@ import Cocoa
 
 class RegisterView: NSView {
 
-    let tableView = YDNTableView()
-    let tableScrollView = NSScrollView()
+    let outlineView = YDNOutlineView()
+    let scrollView = NSScrollView()
     
     required init?(coder decoder: NSCoder) { fatalError("Not implemented" )}
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         
-        self.tableView.usesAlternatingRowBackgroundColors = true
-        self.tableView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
+        self.outlineView.usesAlternatingRowBackgroundColors = true
+        self.outlineView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
         
-        self.tableScrollView.documentView = self.tableView
-        self.addSubview(self.tableScrollView)
+        self.scrollView.documentView = self.outlineView
+        self.addSubview(self.scrollView)
         
-        self.tableScrollView.make([.top, .left, .bottom, .right], equalTo: self)
+        self.scrollView.make([.top, .left, .bottom, .right], equalTo: self)
     }
     
 }
