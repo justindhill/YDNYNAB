@@ -164,10 +164,6 @@ class RegisterCell: NSTableCellView {
     
     
     func updateAppearance() {
-        guard let rowView = self.rowView else {
-            return
-        }
-        
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         
