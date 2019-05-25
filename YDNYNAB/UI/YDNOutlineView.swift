@@ -10,6 +10,7 @@ import Cocoa
 
 class YDNOutlineView: NSOutlineView {
 
+    var selectsChildrenOfSelectedExpandedParent: Bool = false
     var showsDisclosureIndicator: Bool = true
     private var hoveredView: Hoverable?
     
@@ -60,6 +61,28 @@ class YDNOutlineView: NSOutlineView {
             }
         } else {
             self.hoveredView?.leaveHoverState()
+        }
+    }
+    
+    override func expandItem(_ item: Any?) {
+        super.expandItem(item)
+        
+        if self.selectsChildrenOfSelectedExpandedParent && self.selectedRow == self.row(forItem: item) {
+            var indexesToSelect = IndexSet()
+            
+            for i in 0..<self.numberOfChildren(ofItem: item) {
+                if let childItem = self.child(i, ofItem: item) {
+                    let childItemIndex = self.row(forItem: childItem)
+                    
+                    if childItemIndex >= 0 {
+                        indexesToSelect.insert(childItemIndex)
+                    } else {
+                        print("Tried to select child, but childItemIndex was <0")
+                    }
+                }
+            }
+            
+            self.selectRowIndexes(indexesToSelect, byExtendingSelection: true)
         }
     }
     

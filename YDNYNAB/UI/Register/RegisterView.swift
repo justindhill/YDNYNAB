@@ -17,6 +17,7 @@ class RegisterView: NSView {
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         
+        self.outlineView.selectsChildrenOfSelectedExpandedParent = true
         self.outlineView.usesAlternatingRowBackgroundColors = true
         self.outlineView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
         

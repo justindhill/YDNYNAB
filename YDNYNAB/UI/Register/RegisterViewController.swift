@@ -209,6 +209,24 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         rowView.isExpanded = isExpanded
     }
     
+    func outlineView(_ outlineView: NSOutlineView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet {
+        guard let firstSelectionIndex = proposedSelectionIndexes.first, let item = outlineView.item(atRow: firstSelectionIndex) else {
+            return proposedSelectionIndexes
+        }
+        
+        var updatedSelection = proposedSelectionIndexes
+        
+        let childCount = outlineView.numberOfChildren(ofItem: item)
+        if childCount > 0 && outlineView.isItemExpanded(item) {
+            for i in 0..<childCount {
+                let childItem = outlineView.child(i, ofItem: item)
+                updatedSelection.insert(outlineView.row(forItem: childItem))
+            }
+        }
+        
+        return updatedSelection
+    }
+    
     func textAlignment(forColumnIdentifier columnIdentifier: ColumnIdentifier) -> NSTextAlignment {
         switch columnIdentifier {
         case .inflow, .outflow:
