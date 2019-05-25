@@ -102,7 +102,7 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
                                      initialWidth: 140)
             tableView.addTableColumn(withTitle: "Date",
                                      identifier: ColumnIdentifier.date.userInterfaceIdentifier,
-                                     initialWidth: 80)
+                                     initialWidth: 100)
             tableView.addTableColumn(withTitle: "Payee",
                                      identifier: ColumnIdentifier.payee.userInterfaceIdentifier,
                                      resizingOptions: .autoresizingMask)
