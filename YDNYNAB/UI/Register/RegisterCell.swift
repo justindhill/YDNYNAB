@@ -8,6 +8,10 @@
 
 import Cocoa
 
+protocol RegisterCellDelegate: class {
+    func registerCellDidClickDisclosureIndicator(_ cell: RegisterCell)
+}
+
 class RegisterCell: NSTableCellView {
     
     enum ExpansionState {
@@ -38,6 +42,8 @@ class RegisterCell: NSTableCellView {
         static let collapsedHeight: CGFloat = RegisterRowView.Constant.collapsedHeight
         static let expandedHeight: CGFloat = RegisterRowView.Constant.expandedHeight
     }
+    
+    weak var delegate: RegisterCellDelegate?
     
     var isEditable: Bool = false {
         didSet {
@@ -107,6 +113,9 @@ class RegisterCell: NSTableCellView {
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         
+        let disclosureClick = NSClickGestureRecognizer(target: self, action: #selector(disclosureIndicatorClicked))
+        self.disclosureIndicatorView.addGestureRecognizer(disclosureClick)
+        
         self.addSubview(self.inputTextField)
         self.addSubview(self.disclosureIndicatorView)
         self.wantsLayer = true
@@ -162,6 +171,11 @@ class RegisterCell: NSTableCellView {
         self.inputTextField.frame = newFrame
     }
     
+    override func resetCursorRects() {
+        super.resetCursorRects()
+        
+        self.addCursorRect(self.disclosureIndicatorView.frame, cursor: .pointingHand)
+    }
     
     func updateAppearance() {
         CATransaction.begin()
@@ -176,6 +190,10 @@ class RegisterCell: NSTableCellView {
         }
         
         CATransaction.commit()
+    }
+    
+    @objc func disclosureIndicatorClicked() {
+        self.delegate?.registerCellDidClickDisclosureIndicator(self)
     }
     
 }

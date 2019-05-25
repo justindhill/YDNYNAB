@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterRowViewDelegate {
+class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterRowViewDelegate, RegisterCellDelegate {
     
     enum Constant {
         static let rowViewIdentifier = NSUserInterfaceItemIdentifier(rawValue: "rowViewIdentifier")
@@ -160,6 +160,7 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         } else {
             view = RegisterCell()
             view.identifier = tableColumn.identifier
+            view.delegate = self
         }
         
         if let columnIdentifier = ColumnIdentifier(rawValue: tableColumn.identifier.rawValue) {
@@ -271,6 +272,14 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
             }
         case .escape:
             self.focusedRow = nil
+        }
+    }
+    
+    // MARK: - RegisterCellDelegate
+    func registerCellDidClickDisclosureIndicator(_ cell: RegisterCell) {
+        let row = self.registerView.outlineView.row(for: cell)
+        if let item = self.registerView.outlineView.item(atRow: row) {
+            self.registerView.outlineView.toggleExpansion(forItem: item)
         }
     }
     

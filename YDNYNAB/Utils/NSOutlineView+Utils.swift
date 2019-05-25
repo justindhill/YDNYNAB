@@ -12,4 +12,12 @@ extension NSOutlineView {
     func rowView(forItem item: Any, makeIfNecessary: Bool) -> NSTableRowView? {
         return self.rowView(atRow: self.row(forItem: item), makeIfNecessary: makeIfNecessary)
     }
+    
+    func toggleExpansion(forItem item: Any) {
+        if self.isItemExpanded(item) {
+            self.animator().collapseItem(item)
+        } else {
+            self.animator().expandItem(item)
+        }
+    }
 }
