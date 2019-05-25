@@ -51,6 +51,6 @@ typedef NS_ENUM(NSInteger, OFXTransactionCorrectionType) {
 @property (nullable, readonly, strong) NSString *referenceNumber;
 @property (nullable, readonly, strong) NSString *memo;
 
-- (instancetype)initWithTransactionData:(struct OfxTransactionData)transactionData;
+- (nonnull instancetype)initWithTransactionData:(struct OfxTransactionData)transactionData;
 
 @end

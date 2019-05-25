@@ -34,6 +34,6 @@ struct OfxAccountData;
 
 @property (nonnull, readonly, strong) NSArray<OFXStatement *> *statements;
 
-- (instancetype)initWithAccountData:(struct OfxAccountData)accountData;
+- (nonnull instancetype)initWithAccountData:(struct OfxAccountData)accountData;
 
 @end

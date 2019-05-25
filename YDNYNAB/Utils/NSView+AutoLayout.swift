@@ -30,6 +30,8 @@ extension NSView {
                 constant = -insets.bottom
             case .width, .height, .centerX, .centerY, .firstBaseline, .lastBaseline, .notAnAttribute:
                 constant = 0
+            @unknown default:
+                fatalError()
             }
             
             self.make(edge, equalTo: edge, of: otherView, multiplier: 1, constant: constant)

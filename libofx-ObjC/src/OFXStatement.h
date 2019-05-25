@@ -14,7 +14,7 @@ struct OfxStatementData;
 
 @interface OFXStatement : NSObject
 
-- (instancetype)initWithStatementData:(struct OfxStatementData)statementData;
+- (nonnull instancetype)initWithStatementData:(struct OfxStatementData)statementData;
 
 @property (nonnull, readonly, strong) NSString *currency;
 @property (nonnull, readonly, strong) NSString *accountId;

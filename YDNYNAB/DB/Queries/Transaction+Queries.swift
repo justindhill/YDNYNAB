@@ -13,6 +13,10 @@ typealias TransactionsAndSplits = (transactions: [Transaction], splits: [Int64: 
 
 extension Transaction {
     
+    enum QueryError: Error {
+        case invalidArguments
+    }
+    
     class func allTransactionsAndSplits(filter: Filter? = nil, db: Database) throws -> TransactionsAndSplits {
         var queryString =
             "SELECT `transaction`.*, budgetMasterCategory.name || ': ' || budgetSubCategory.name as categoryDisplayName, account.name as accountDisplayName, payee.name as payeeDisplayName " +
@@ -33,8 +37,12 @@ extension Transaction {
         
         var topLevelTransactions: [Transaction] = []
         var splitChildren: [Int64: [Transaction]] = [:]
+        
+        guard let statementArguments = StatementArguments(arguments) else {
+            throw QueryError.invalidArguments
+        }
 
-        try Transaction.fetchCursor(db, queryString, arguments: StatementArguments(arguments)).forEach { transaction in
+        try Transaction.fetchCursor(db, sql: queryString, arguments: statementArguments).forEach { transaction in
             if let splitParent = transaction.splitParent {
                 var splitList = splitChildren[splitParent] ?? []
                 splitList.append(transaction)

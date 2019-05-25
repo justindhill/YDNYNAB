@@ -86,6 +86,8 @@ class RegisterCell: NSTableCellView {
                 self.inputTextField.alignment = .justified
             case .natural:
                 self.inputTextField.alignment = .natural
+            @unknown default:
+                fatalError()
             }
         }
     }

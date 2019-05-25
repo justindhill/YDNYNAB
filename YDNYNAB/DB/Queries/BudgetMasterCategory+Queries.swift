@@ -37,8 +37,9 @@ extension BudgetMasterCategory {
             return []
         }
         
-        return try? BudgetSubCategory.fetchAll(db,
-            """
+        return try? BudgetSubCategory.fetchAll(
+            db,
+            sql: """
             SELECT * from budgetSubCategory
             WHERE isHidden = false AND masterCategory = ?
             ORDER BY sortOrder ASC
@@ -46,17 +47,18 @@ extension BudgetMasterCategory {
     }
     
     func budgetLinesForVisibleSubcategories(inMonth month: Int, year: Int, db: Database) -> [BudgetLine]? {
-        guard let id = self.id else {
+        guard let id = self.id, let arguments = StatementArguments([DateUtils.dateString(withMonth: month, year: year), id]) else {
             return []
         }
         
-        return try? BudgetLine.fetchAll(db,
-            """
+        return try? BudgetLine.fetchAll(
+            db,
+            sql: """
             SELECT budgetLine.*, date(budgetLine.month) as monthDate from budgetLine
             LEFT JOIN budgetSubCategory ON budgetSubCategory.id = budgetLine.subcategory
             WHERE monthDate = date(?) AND budgetLine.masterCategory = ? AND budgetSubCategory.isHidden = false
             ORDER BY budgetSubCategory.sortOrder ASC
-            """, arguments: StatementArguments([DateUtils.dateString(withMonth: month, year: year), id]))
+            """, arguments: arguments)
     }
     
 }

@@ -1,6 +1,8 @@
 PODS:
-  - CSV.swift (2.3.1)
-  - GRDB.swift (3.6.2)
+  - CSV.swift (2.4.0)
+  - GRDB.swift (4.0.0):
+    - GRDB.swift/standard (= 4.0.0)
+  - GRDB.swift/standard (4.0.0)
 
 DEPENDENCIES:
   - CSV.swift
@@ -12,9 +14,9 @@ SPEC REPOS:
     - GRDB.swift
 
 SPEC CHECKSUMS:
-  CSV.swift: d16f671b3090a2c0525d5f2165b18319074aae2b
-  GRDB.swift: e10787d857b6b8135354b9e08fb23b4bb8e2fab7
+  CSV.swift: 947283699fe698d08a4d675d9e642c2bf32418a8
+  GRDB.swift: 30cf6c14fea491549b654d7649493320ed7e93ed
 
 PODFILE CHECKSUM: e206bfe3357f5ef0dfdd2ee862e5df154302e811
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.7.0

@@ -586,6 +586,7 @@
 				TargetAttributes = {
 					D0510575213B5C3F008133B5 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
@@ -637,18 +638,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CSV.swift/CSV.framework",
-				"${BUILT_PRODUCTS_DIR}/GRDB.swift/GRDB.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CSV.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -896,8 +890,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = N3MXL5AYEW;
 				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CSV.swift/CSV.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GRDB.swift/GRDB.framework/Headers\"",
+					"${CONFIGURATION_BUILD_DIR}/usr/local/include",
 					/usr/local/include,
-					"$(CONFIGURATION_BUILD_DIR)/usr/local/include",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/YDNYNAB/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -912,7 +909,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinhill.YDNYNAB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -925,8 +922,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = N3MXL5AYEW;
 				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CSV.swift/CSV.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GRDB.swift/GRDB.framework/Headers\"",
+					"${CONFIGURATION_BUILD_DIR}/usr/local/include",
 					/usr/local/include,
-					"$(CONFIGURATION_BUILD_DIR)/usr/local/include",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/YDNYNAB/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -941,7 +941,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinhill.YDNYNAB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
