@@ -190,6 +190,24 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         }
     }
     
+    func outlineViewItemWillExpand(_ notification: Notification) {
+        self.updateRowExpansionState(notification: notification, isExpanded: true)
+    }
+    
+    func outlineViewItemWillCollapse(_ notification: Notification) {
+        self.updateRowExpansionState(notification: notification, isExpanded: false)
+    }
+    
+    func updateRowExpansionState(notification: Notification, isExpanded: Bool) {
+        guard
+            let transaction = notification.userInfo?["NSObject"] as? Transaction,
+            let rowView = self.registerView.outlineView.rowView(forItem: transaction, makeIfNecessary: false) as? RegisterRowView else {
+                return
+        }
+        
+        rowView.isExpanded = isExpanded
+    }
+    
     func textAlignment(forColumnIdentifier columnIdentifier: ColumnIdentifier) -> NSTextAlignment {
         switch columnIdentifier {
         case .inflow, .outflow:

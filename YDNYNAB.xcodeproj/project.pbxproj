@@ -58,6 +58,7 @@
 		D0AA344A2175908A00E8A973 /* BudgetMasterCategory+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA34492175908A00E8A973 /* BudgetMasterCategory+Queries.swift */; };
 		D0AA344C2175A11000E8A973 /* BudgetSubCategory+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA344B2175A11000E8A973 /* BudgetSubCategory+Queries.swift */; };
 		D0AD2DCF21AB1EA9009A62FA /* YDNTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AD2DCE21AB1EA9009A62FA /* YDNTableView.swift */; };
+		D0C4BFC62299A22A00F297F6 /* NSOutlineView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C4BFC52299A22A00F297F6 /* NSOutlineView+Utils.swift */; };
 		D0CE3BE3213F6B7B00798CF5 /* BudgetOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */; };
 		D0CE3BE5213F728C00798CF5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE4213F728C00798CF5 /* main.swift */; };
 		D0CE3BE9213F7B7500798CF5 /* BudgetMonthSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE3BE8213F7B7500798CF5 /* BudgetMonthSheetViewController.swift */; };
@@ -179,6 +180,7 @@
 		D0AA34492175908A00E8A973 /* BudgetMasterCategory+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BudgetMasterCategory+Queries.swift"; sourceTree = "<group>"; };
 		D0AA344B2175A11000E8A973 /* BudgetSubCategory+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BudgetSubCategory+Queries.swift"; sourceTree = "<group>"; };
 		D0AD2DCE21AB1EA9009A62FA /* YDNTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNTableView.swift; sourceTree = "<group>"; };
+		D0C4BFC52299A22A00F297F6 /* NSOutlineView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSOutlineView+Utils.swift"; sourceTree = "<group>"; };
 		D0CE3BE2213F6B7B00798CF5 /* BudgetOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetOverviewView.swift; sourceTree = "<group>"; };
 		D0CE3BE4213F728C00798CF5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D0CE3BE8213F7B7500798CF5 /* BudgetMonthSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetMonthSheetViewController.swift; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 				D04FB0EA215DC069008880B7 /* Toaster.swift */,
 				D0F8F5E921B3252000D92316 /* MonthYear.swift */,
 				D014C53421EA5F2D00B8D33D /* NSView+AutoLayout.swift */,
+				D0C4BFC52299A22A00F297F6 /* NSOutlineView+Utils.swift */,
 				D0144ADA2219EEE000BE33BD /* KeyCode.swift */,
 			);
 			path = Utils;
@@ -732,6 +735,7 @@
 				D0F8F5E621B323A500D92316 /* TransactionUpdater.swift in Sources */,
 				D0CE3BED213F7C4A00798CF5 /* BudgetMonthSummaryView.swift in Sources */,
 				D0F8F5EA21B3252000D92316 /* MonthYear.swift in Sources */,
+				D0C4BFC62299A22A00F297F6 /* NSOutlineView+Utils.swift in Sources */,
 				D04FB0E92151F2BC008880B7 /* YDNTextField.swift in Sources */,
 				D014C52821E1674800B8D33D /* PayeeRenameRule.swift in Sources */,
 				D0E4E3D1214336F1006B4F6E /* BudgetLine.swift in Sources */,

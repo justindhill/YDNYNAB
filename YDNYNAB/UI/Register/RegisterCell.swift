@@ -15,12 +15,21 @@ class RegisterCell: NSTableCellView {
         case collapsed
         case expanded
         
-        fileprivate var disclosureTransform: CGAffineTransform {
+        fileprivate var disclosureTransform: CATransform3D {
             switch self {
             case .none, .collapsed:
-                return CGAffineTransform.identity
+                return CATransform3DIdentity
             case .expanded:
-                return CGAffineTransform(rotationAngle: CGFloat.pi / 2)
+                return CATransform3DMakeAffineTransform(CGAffineTransform(rotationAngle: CGFloat.pi / 2))
+            }
+        }
+        
+        fileprivate var rotationAngle: CGFloat {
+            switch self {
+            case .none, .collapsed:
+                return 0
+            case .expanded:
+                return 90
             }
         }
     }
@@ -40,7 +49,9 @@ class RegisterCell: NSTableCellView {
         return true
     }
     
-    var expansionState: ExpansionState = .none
+    var expansionState: ExpansionState = .none {
+        didSet { self.needsLayout = true }
+    }
     
     private let font = NSFont.systemFont(ofSize: 13)
     
@@ -113,11 +124,30 @@ class RegisterCell: NSTableCellView {
         var disclosureOffset: CGFloat = 0
         if !self.disclosureIndicatorView.isHidden {
             disclosureOffset = self.disclosureIndicatorView.image?.size.width ?? 0
-            self.disclosureIndicatorView.layer?.setAffineTransform(self.expansionState.disclosureTransform)
             
             self.disclosureIndicatorView.frame = CGRect(
-                origin: CGPoint(x: 0, y: (self.frame.size.height - disclosureOffset) / 2),
+                origin: CGPoint(x: 0, y: (Constant.collapsedHeight - disclosureOffset) / 2),
                 size: CGSize(width: disclosureOffset, height: disclosureOffset))
+            
+            if let layer = self.disclosureIndicatorView.layer {
+                layer.position = CGPoint(x: layer.frame.midX, y: layer.frame.midY)
+                layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+
+ 
+                CATransaction.begin()
+                CATransaction.setCompletionBlock {
+                    layer.transform = self.expansionState.disclosureTransform
+                }
+                
+                let animation = CABasicAnimation(keyPath: "transform")
+                animation.duration = 0.2
+                animation.toValue = self.expansionState.disclosureTransform
+                animation.fillMode = .forwards
+                animation.isRemovedOnCompletion = false
+                layer.add(animation, forKey: nil)
+                
+                CATransaction.commit()
+            }
         }
 
         var newFrame = NSRect(
@@ -134,6 +164,10 @@ class RegisterCell: NSTableCellView {
     
     
     func updateAppearance() {
+        guard let rowView = self.rowView else {
+            return
+        }
+        
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         

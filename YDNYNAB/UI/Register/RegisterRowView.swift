@@ -24,6 +24,14 @@ class RegisterRowView: NSTableRowView, YDNTextFieldDelegate, YDNTextFieldKeyView
     var isEditing: Bool = false {
         didSet { self.updateEditingState() }
     }
+    
+    var isExpanded: Bool = false {
+        didSet { self.columnViews.forEach { registerCell in
+            if registerCell.expansionState != .none {
+                registerCell.expansionState = isExpanded ? .expanded : .collapsed }
+            }
+        }
+    }
 
     enum Constant {
         static let buttonPadding: CGFloat = 4
