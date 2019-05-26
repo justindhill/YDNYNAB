@@ -209,7 +209,7 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         rowView.isExpanded = isExpanded
     }
     
-    var previousProposedFirstRow: Int = -1
+    private var previousProposedFirstRow: Int = -1
     func outlineView(_ outlineView: NSOutlineView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet {
         guard let firstSelectionIndex = proposedSelectionIndexes.first, let item = outlineView.item(atRow: firstSelectionIndex) else {
             return proposedSelectionIndexes
