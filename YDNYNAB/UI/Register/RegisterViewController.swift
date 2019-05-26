@@ -218,10 +218,6 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         return view
     }
     
-    func outlineViewSelectionDidChange(_ notification: Notification) {
-//        self.editingTransaction = nil
-    }
-    
     func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
         guard let transaction = item as? Transaction else {
             fatalError("RegisterViewController only shows transactions.")
