@@ -57,6 +57,10 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         return self.view as! RegisterView
     }
     
+    var outlineView: YDNOutlineView {
+        return self.outlineView
+    }
+    
     lazy var dataSource: RegisterViewDataSource = RegisterViewDataSource(dbQueue: self.budgetContext.database.queue)
     
     var ignoreNextReturnKeyUp: Bool = false
@@ -68,18 +72,18 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
             var rowsWithChanges = IndexSet()
             
             if let oldValue = oldValue {
-                let rowView = self.registerView.outlineView.rowView(atRow: oldValue, makeIfNecessary: false) as? RegisterRowView
+                let rowView = self.outlineView.rowView(atRow: oldValue, makeIfNecessary: false) as? RegisterRowView
                 rowView?.isEditing = false
                 rowsWithChanges.insert(oldValue)
             }
             
             if let focusedRow = self.focusedRow {
-                let newSelectedRowView = self.registerView.outlineView.rowView(atRow: focusedRow, makeIfNecessary: false) as? RegisterRowView
+                let newSelectedRowView = self.outlineView.rowView(atRow: focusedRow, makeIfNecessary: false) as? RegisterRowView
                 newSelectedRowView?.isEditing = true
                 rowsWithChanges.insert(focusedRow)
             }
             
-            self.registerView.outlineView.noteHeightOfRows(withIndexesChanged: rowsWithChanges)
+            self.outlineView.noteHeightOfRows(withIndexesChanged: rowsWithChanges)
         }
     }
     
@@ -98,18 +102,18 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addColumnsToTableView()
-        self.registerView.outlineView.showsDisclosureIndicator = false
-        self.registerView.outlineView.delegate = self
-        self.registerView.outlineView.dataSource = self.dataSource
+        self.outlineView.showsDisclosureIndicator = false
+        self.outlineView.delegate = self
+        self.outlineView.dataSource = self.dataSource
         
-        self.registerView.outlineView.target = self
-        self.registerView.outlineView.action = #selector(outlineViewClicked)
+        self.outlineView.target = self
+        self.outlineView.action = #selector(outlineViewClicked)
         
         self.registerView.scrollView.hasVerticalScroller = true
     }
     
     func addColumnsToTableView() {
-        let tableView = self.registerView.outlineView
+        let tableView = self.outlineView
         
         switch self.mode {
         case .full:
@@ -218,7 +222,7 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     func updateRowExpansionState(notification: Notification, isExpanded: Bool) {
         guard
             let transaction = notification.userInfo?["NSObject"] as? Transaction,
-            let rowView = self.registerView.outlineView.rowView(forItem: transaction, makeIfNecessary: false) as? RegisterRowView else {
+            let rowView = self.outlineView.rowView(forItem: transaction, makeIfNecessary: false) as? RegisterRowView else {
                 return
         }
         
@@ -279,11 +283,11 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     
     // MARK: - RegisterRowViewDelegate
     func registerRowViewDidCommitChanges(_ rowView: RegisterRowView) {
-        let row = self.registerView.outlineView.row(for: rowView)
+        let row = self.outlineView.row(for: rowView)
         if row != -1 {
             do {
-                try self.dataSource.updateTransaction(forRow: row, inTableView: self.registerView.outlineView, withRowView: rowView)
-                self.registerView.outlineView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(0..<ColumnIdentifier.allCases.count))
+                try self.dataSource.updateTransaction(forRow: row, inTableView: self.outlineView, withRowView: rowView)
+                self.outlineView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(0..<ColumnIdentifier.allCases.count))
             } catch {
                 Toaster.shared.enqueueDefaultErrorToast()
             }
@@ -298,10 +302,10 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     }
     
     @objc func outlineViewClicked() {
-        let clickedRow = self.registerView.outlineView.clickedRow
+        let clickedRow = self.outlineView.clickedRow
         if clickedRow == self.candidateEditRow {
             if clickedRow >= 0 {
-                self.focusedRow = self.registerView.outlineView.selectedRow
+                self.focusedRow = self.outlineView.selectedRow
                 self.candidateEditRow = nil
             }
         } else {
@@ -314,7 +318,7 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     }
     
     override func keyUp(with event: NSEvent) {
-        let selectedRow = self.registerView.outlineView.selectedRow
+        let selectedRow = self.outlineView.selectedRow
         guard let keyCode = KeyCode(rawValue: event.keyCode), selectedRow != -1 else {
             return
         }
@@ -336,9 +340,9 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     
     // MARK: - RegisterCellDelegate
     func registerCellDidClickDisclosureIndicator(_ cell: RegisterCell) {
-        let row = self.registerView.outlineView.row(for: cell)
-        if let item = self.registerView.outlineView.item(atRow: row) {
-            self.registerView.outlineView.toggleExpansion(forItem: item)
+        let row = self.outlineView.row(for: cell)
+        if let item = self.outlineView.item(atRow: row) {
+            self.outlineView.toggleExpansion(forItem: item)
         }
     }
     
