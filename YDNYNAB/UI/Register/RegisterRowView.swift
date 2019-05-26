@@ -15,11 +15,29 @@ protocol RegisterRowViewDelegate: class {
 
 class RegisterRowView: NSTableRowView, YDNTextFieldDelegate, YDNTextFieldKeyViewProvider {
     
+    enum RowType {
+        case transaction
+        case splitChild
+        
+        var immutableColumns: [RegisterViewController.ColumnIdentifier] {
+            switch self {
+            case .transaction:
+                return []
+            case .splitChild:
+                return [.date, .account, .payee]
+            }
+        }
+    }
+    
     private var doneButton: NSButton?
     private var cancelButton: NSButton?
     private var editingAreaBackground: NSView?
     
     weak var delegate: RegisterRowViewDelegate?
+    
+    var rowType: RowType = .transaction {
+        didSet { self.updateEditingState() }
+    }
     
     var isEditing: Bool = false {
         didSet { self.updateEditingState() }
@@ -79,25 +97,14 @@ class RegisterRowView: NSTableRowView, YDNTextFieldDelegate, YDNTextFieldKeyView
         }
         
         for i in 0..<self.numberOfColumns {
-            if let columnView = self.view(atColumn: i) as? RegisterCell {
-                columnView.isEditable = self.isEditing
+            if let columnView = self.view(atColumn: i) as? RegisterCell, let columnIdentifier = columnView.columnIdentifier {
+                columnView.isEditable = self.isEditing && !self.rowType.immutableColumns.contains(columnIdentifier)
                 columnView.inputTextField.focusDelegate = self.isEditing ? self : nil
                 columnView.inputTextField.keyViewProvider = self.isEditing ? self : nil
                 
-                if i == 0 && self.isEditing {
-                    DispatchQueue.main.async {
-                        columnView.inputTextField.selectAllAndEdit()
-                    }
-                }
             }
         }
         
-    }
-    
-    override func layout() {
-        super.layout()
-        
-        self.editingAreaBackground?.layer?.backgroundColor = NSColor.textBackgroundColor.cgColor
     }
     
     func findRegisterCellContaining(view: NSView) -> (Int, RegisterCell)? {

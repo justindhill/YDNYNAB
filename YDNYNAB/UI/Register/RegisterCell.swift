@@ -44,6 +44,7 @@ class RegisterCell: NSTableCellView {
     }
     
     weak var delegate: RegisterCellDelegate?
+    var columnIdentifier: RegisterViewController.ColumnIdentifier?
     
     var isEditable: Bool = false {
         didSet {

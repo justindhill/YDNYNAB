@@ -179,15 +179,22 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     }
     
     func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {
-        if let rowView = outlineView.makeView(withIdentifier: Constant.rowViewIdentifier, owner: self) as? NSTableRowView {
-            return rowView
-        } else {
-            let rowView = RegisterRowView()
-            rowView.delegate = self
-            rowView.identifier = Constant.rowViewIdentifier
-            
-            return rowView
+        guard let transaction = item as? Transaction else {
+            fatalError("RegisterViewController only displays transactions")
         }
+        
+        let rowView: RegisterRowView
+        if let existingRowView = outlineView.makeView(withIdentifier: Constant.rowViewIdentifier, owner: self) as? RegisterRowView {
+            rowView = existingRowView
+        } else {
+            let newRowView = RegisterRowView()
+            newRowView.delegate = self
+            newRowView.identifier = Constant.rowViewIdentifier
+            rowView = newRowView
+        }
+        
+        rowView.rowType = (transaction.splitParent == nil) ? .transaction : .splitChild
+        return rowView
     }
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
@@ -207,6 +214,7 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         if let columnIdentifier = ColumnIdentifier(rawValue: tableColumn.identifier.rawValue) {
             view.text = self.dataSource.text(forColumn: columnIdentifier, transaction: transaction)
             view.alignment = self.textAlignment(forColumnIdentifier: columnIdentifier)
+            view.columnIdentifier = columnIdentifier
             
             if columnIdentifier == ColumnIdentifier.category && transaction.isSplitParent {
                 view.expansionState = outlineView.isItemExpanded(item) ? .expanded : .collapsed
