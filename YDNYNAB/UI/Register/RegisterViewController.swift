@@ -58,7 +58,7 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     }
     
     var outlineView: YDNOutlineView {
-        return self.outlineView
+        return self.registerView.outlineView
     }
     
     lazy var dataSource: RegisterViewDataSource = RegisterViewDataSource(dbQueue: self.budgetContext.database.queue)
@@ -219,16 +219,6 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         self.updateRowExpansionState(notification: notification, isExpanded: false)
     }
     
-    func updateRowExpansionState(notification: Notification, isExpanded: Bool) {
-        guard
-            let transaction = notification.userInfo?["NSObject"] as? Transaction,
-            let rowView = self.outlineView.rowView(forItem: transaction, makeIfNecessary: false) as? RegisterRowView else {
-                return
-        }
-        
-        rowView.isExpanded = isExpanded
-    }
-    
     private var previousProposedFirstRow: Int = -1
     func outlineView(_ outlineView: NSOutlineView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet {
         guard
@@ -237,21 +227,12 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
                 return proposedSelectionIndexes
         }
         
+        let updatedSelection = self.rows(forItem: item)
         let movementType = MovementType(previousFirstRow: self.previousProposedFirstRow, proposedFirstRow: firstSelectionIndex)
         if movementType != .endcap {
             self.previousProposedFirstRow = firstSelectionIndex
         }
         
-        let topLevelItem = outlineView.parent(forItem: item) ?? item
-        var updatedSelection = IndexSet(integer: outlineView.row(forItem: topLevelItem))
-        let childCount = outlineView.numberOfChildren(ofItem: topLevelItem)
-        
-        if childCount > 0 && outlineView.isItemExpanded(topLevelItem) {
-            for i in 0..<childCount {
-                let childItem = outlineView.child(i, ofItem: topLevelItem)
-                updatedSelection.insert(outlineView.row(forItem: childItem))
-            }
-        }
         
         if outlineView.selectedRowIndexes == updatedSelection {
             if let firstRowInSelection = updatedSelection.first, case .up = movementType, firstRowInSelection != 0 {
@@ -270,6 +251,44 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         }
         
         return updatedSelection
+    }
+    
+    // MARK: - Utils
+    func topLevelItem(forItem item: Any) -> Any {
+        if let parent = self.outlineView.parent(forItem: item) {
+            return parent
+        }
+        
+        return item
+    }
+    
+    /**
+     Rows in the outline view associated with the item. If the item is currently expanded, this includes the item's
+     children. If it is collapsed, it does not. If the item is a child, the rows include its parent and its siblings.
+     */
+    func rows(forItem item: Any) -> IndexSet {
+        let topLevelItem = self.topLevelItem(forItem: item)
+        var rows = IndexSet(integer: outlineView.row(forItem: topLevelItem))
+        let childCount = outlineView.numberOfChildren(ofItem: topLevelItem)
+        
+        if childCount > 0 && outlineView.isItemExpanded(topLevelItem) {
+            for i in 0..<childCount {
+                let childItem = outlineView.child(i, ofItem: topLevelItem)
+                rows.insert(outlineView.row(forItem: childItem))
+            }
+        }
+        
+        return rows
+    }
+    
+    func updateRowExpansionState(notification: Notification, isExpanded: Bool) {
+        guard
+            let transaction = notification.userInfo?["NSObject"] as? Transaction,
+            let rowView = self.outlineView.rowView(forItem: transaction, makeIfNecessary: false) as? RegisterRowView else {
+                return
+        }
+        
+        rowView.isExpanded = isExpanded
     }
     
     func textAlignment(forColumnIdentifier columnIdentifier: ColumnIdentifier) -> NSTextAlignment {
