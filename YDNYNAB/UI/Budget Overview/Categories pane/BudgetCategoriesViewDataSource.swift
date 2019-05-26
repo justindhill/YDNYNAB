@@ -23,7 +23,9 @@ class BudgetCategoriesViewDataSource: NSObject, NSOutlineViewDataSource {
         super.init()
         
         self.masterCategories = dbQueue.read { (db) -> [BudgetMasterCategory]? in
-            return try? BudgetMasterCategory.fetchAll(db)
+            return try? BudgetMasterCategory
+                .filter(Column("isHidden") == false)
+                .fetchAll(db)
         }
     }
 

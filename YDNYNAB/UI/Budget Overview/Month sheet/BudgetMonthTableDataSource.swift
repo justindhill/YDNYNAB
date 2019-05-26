@@ -27,7 +27,10 @@ class BudgetMonthTableDataSource: NSObject, NSOutlineViewDataSource {
         
         super.init()
         
-        masterCategories = self.dbQueue.read{ try? BudgetMasterCategory.order(sql: "sortOrder ASC").fetchAll($0) }
+        masterCategories = self.dbQueue.read{
+            try? BudgetMasterCategory
+                .filter(Column("isHidden") == false)
+                .order(sql: "sortOrder ASC").fetchAll($0) }
     }
 
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
