@@ -19,6 +19,22 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         case full
     }
     
+    enum MovementType {
+        case up
+        case down
+        case endcap
+        
+        init(previousFirstRow: Int, proposedFirstRow: Int) {
+            if previousFirstRow < proposedFirstRow {
+                self = .down
+            } else if proposedFirstRow < previousFirstRow {
+                self = .up
+            } else {
+                self = .endcap
+            }
+        }
+    }
+    
     enum ColumnIdentifier: String, CaseIterable {
         case account = "YDNMonthRegisterViewAccountColumnIdentifier"
         case date = "YDNMonthRegisterViewDateColumnIdentifier"
@@ -71,7 +87,7 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         self.budgetContext = budgetContext
         self.mode = mode
         super.init(nibName: nil, bundle: nil)
-        
+                
         self.title = "Accounts"
     }
     
@@ -211,12 +227,16 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     
     private var previousProposedFirstRow: Int = -1
     func outlineView(_ outlineView: NSOutlineView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet {
-        guard let firstSelectionIndex = proposedSelectionIndexes.first, let item = outlineView.item(atRow: firstSelectionIndex) else {
-            return proposedSelectionIndexes
+        guard
+            let firstSelectionIndex = proposedSelectionIndexes.first,
+            let item = outlineView.item(atRow: firstSelectionIndex) else {
+                return proposedSelectionIndexes
         }
         
-        let isUpMovement = (self.previousProposedFirstRow > firstSelectionIndex)
-        self.previousProposedFirstRow = firstSelectionIndex
+        let movementType = MovementType(previousFirstRow: self.previousProposedFirstRow, proposedFirstRow: firstSelectionIndex)
+        if movementType != .endcap {
+            self.previousProposedFirstRow = firstSelectionIndex
+        }
         
         let topLevelItem = outlineView.parent(forItem: item) ?? item
         var updatedSelection = IndexSet(integer: outlineView.row(forItem: topLevelItem))
@@ -230,13 +250,19 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         }
         
         if outlineView.selectedRowIndexes == updatedSelection {
-            if let firstItemInSelection = updatedSelection.first, isUpMovement {
-                let newProposedRow = max(outlineView.row(forItem: firstItemInSelection) - 1, 0)
+            if let firstRowInSelection = updatedSelection.first, case .up = movementType, firstRowInSelection != 0 {
+                let newProposedRow = max(firstRowInSelection - 1, 0)
                 return self.outlineView(outlineView, selectionIndexesForProposedSelection: IndexSet(integer: newProposedRow))
-            } else if let lastItemInSelection = updatedSelection.last, !isUpMovement {
-                let newProposedRow = min(outlineView.row(forItem: lastItemInSelection) + 1, outlineView.numberOfRows - 1)
+            } else if let lastRowInSelection = updatedSelection.last, case .down = movementType, lastRowInSelection != outlineView.numberOfRows - 1 {
+                let newProposedRow = min(lastRowInSelection + 1, outlineView.numberOfRows - 1)
                 return self.outlineView(outlineView, selectionIndexesForProposedSelection: IndexSet(integer: newProposedRow))
+            } else {
+                return outlineView.selectedRowIndexes
             }
+        } else if let firstRowInSelection = updatedSelection.first, movementType == .up {
+            outlineView.scrollRowToVisible(firstRowInSelection)
+        } else if let lastRowInSelection = updatedSelection.last, movementType == .down {
+            outlineView.scrollRowToVisible(lastRowInSelection)
         }
         
         return updatedSelection
