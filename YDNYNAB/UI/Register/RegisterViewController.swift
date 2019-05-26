@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterRowViewDelegate, RegisterCellDelegate {
+class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterCellDelegate, RegisterEditControllerDelegate {
     
     enum Constant {
         static let rowViewIdentifier = NSUserInterfaceItemIdentifier(rawValue: "rowViewIdentifier")
@@ -67,37 +67,15 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     let budgetContext: BudgetContext
     let mode: Mode
     var candidateEditRow: Int? = nil
-    var editingTransaction: Transaction? = nil {
+    var editController: RegisterEditController? {
         didSet {
-            if oldValue == editingTransaction {
+            if oldValue == editController {
                 return
             }
             
-            if editingTransaction?.splitParent != nil {
-                fatalError("Only top-level transactions can be considered as editing transactions")
-            }
-            
-            if let oldValue = oldValue {
-                self.updateRowEditingState(forRows: self.rows(forItem: oldValue), editing: false)
-                
-                if self.outlineView.isItemExpanded(oldValue) {
-                    self.outlineView.collapseItem(oldValue, collapseChildren: true)
-                }
-            }
-            
-            if let editingTransaction = editingTransaction {
-                if !self.outlineView.isItemExpanded(editingTransaction) {
-                    self.outlineView.expandItem(editingTransaction, expandChildren: true)
-                }
-                
-                let newRows = self.rows(forItem: editingTransaction)
-                self.updateRowEditingState(forRows: newRows, editing: true)
-                
-                CATransaction.begin()
-                CATransaction.setAnimationDuration(0)
-                self.outlineView.noteHeightOfRows(withIndexesChanged: newRows)
-                CATransaction.commit()
-            }
+            oldValue?.endEditing()
+            editController?.delegate = self
+            editController?.beginEditing()
         }
     }
     
@@ -181,7 +159,6 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
             rowView = existingRowView
         } else {
             let newRowView = RegisterRowView()
-            newRowView.delegate = self
             newRowView.identifier = Constant.rowViewIdentifier
             rowView = newRowView
         }
@@ -224,10 +201,8 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
             fatalError("RegisterViewController only shows transactions.")
         }
         
-        if let editingTransaction = editingTransaction,
-            transaction.splitParent == editingTransaction.id &&
-            outlineView.childIndex(forItem: transaction) == outlineView.numberOfChildren(ofItem: editingTransaction) - 1 {
-            
+        let controlRowTransaction = self.editController?.splitChildren.last ?? self.editController?.transaction
+        if transaction == controlRowTransaction {
             return RegisterRowView.Constant.expandedHeight
         } else {
             return RegisterRowView.Constant.collapsedHeight
@@ -250,7 +225,7 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
                 return proposedSelectionIndexes
         }
         
-        let updatedSelection = self.rows(forItem: item)
+        let updatedSelection = self.outlineView.rows(forItem: item)
         let movementType = MovementType(previousFirstRow: self.previousProposedFirstRow, proposedFirstRow: firstSelectionIndex)
         if movementType != .endcap {
             self.previousProposedFirstRow = firstSelectionIndex
@@ -277,48 +252,6 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     }
     
     // MARK: - Utils
-    func topLevelItem(forRow row: Int) -> Any? {
-        guard let item = self.outlineView.item(atRow: row) else {
-            return nil
-        }
-        
-        return self.topLevelItem(forItem: item)
-    }
-    
-    func topLevelItem(forItem item: Any) -> Any {
-        if let parent = self.outlineView.parent(forItem: item) {
-            return parent
-        }
-        
-        return item
-    }
-    
-    /**
-     Rows in the outline view associated with the item. If the item is currently expanded, this includes the item's
-     children. If it is collapsed, it does not. If the item is a child, the rows include its parent and its siblings.
-     */
-    func rows(forItem item: Any) -> IndexSet {
-        let topLevelItem = self.topLevelItem(forItem: item)
-        var rows = IndexSet(integer: outlineView.row(forItem: topLevelItem))
-        let childCount = outlineView.numberOfChildren(ofItem: topLevelItem)
-        
-        if childCount > 0 && outlineView.isItemExpanded(topLevelItem) {
-            for i in 0..<childCount {
-                let childItem = outlineView.child(i, ofItem: topLevelItem)
-                rows.insert(outlineView.row(forItem: childItem))
-            }
-        }
-        
-        return rows
-    }
-    
-    func updateRowEditingState(forRows rows: IndexSet, editing: Bool) {
-        rows.forEach { row in
-            let rowView = self.outlineView.rowView(atRow: row, makeIfNecessary: false) as? RegisterRowView
-            rowView?.isEditing = editing
-        }
-    }
-    
     func updateRowExpansionState(notification: Notification, isExpanded: Bool) {
         guard
             let transaction = notification.userInfo?["NSObject"] as? Transaction,
@@ -338,37 +271,21 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         }
     }
     
-    // MARK: - RegisterRowViewDelegate
-    func registerRowViewDidCommitChanges(_ rowView: RegisterRowView) {
-        let row = self.outlineView.row(for: rowView)
-        if row != -1 {
-            do {
-                try self.dataSource.updateTransaction(forRow: row, inTableView: self.outlineView, withRowView: rowView)
-                self.outlineView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(0..<ColumnIdentifier.allCases.count))
-            } catch {
-                Toaster.shared.enqueueDefaultErrorToast()
-            }
-        }
-        
-        self.editingTransaction = nil
-        self.ignoreNextReturnKeyUp = true
-    }
-    
-    func registerRowViewDidClickCancel(_ rowView: RegisterRowView) {
-        self.editingTransaction = nil
-    }
-    
+    // MARK: - Actions
     @objc func outlineViewClicked() {
         let clickedRow = self.outlineView.clickedRow
-        let topLevelTransaction = self.topLevelItem(forRow: clickedRow) as? Transaction
+        let topLevelTransaction = self.outlineView.topLevelItem(forRow: clickedRow) as? Transaction
         
         if clickedRow == self.candidateEditRow {
-            if clickedRow >= 0, let transaction = self.topLevelItem(forRow: clickedRow) as? Transaction {
-                self.editingTransaction = transaction
+            if clickedRow >= 0,
+                let transaction = self.outlineView.topLevelItem(forRow: clickedRow) as? Transaction,
+                let editController = try? RegisterEditController(dataSource: self.dataSource, outlineView: self.outlineView, transaction: transaction) {
+                
+                self.editController = editController
                 self.candidateEditRow = nil
             }
-        } else if topLevelTransaction != self.editingTransaction {
-            self.editingTransaction = nil
+        } else if topLevelTransaction != self.editController?.transaction {
+            self.editController = nil
             self.candidateEditRow = clickedRow
         }
     }
@@ -390,11 +307,14 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
                 break
             }
             
-            if self.editingTransaction == nil, let transaction = self.topLevelItem(forRow: selectedRow) as? Transaction {
-                self.editingTransaction = transaction
+            if self.editController == nil,
+                let transaction = self.outlineView.topLevelItem(forRow: selectedRow) as? Transaction,
+                let editController = try? RegisterEditController(dataSource: self.dataSource, outlineView: self.outlineView, transaction: transaction) {
+                
+                self.editController = editController
             }
         case .escape:
-            self.editingTransaction = nil
+            self.editController = nil
         }
     }
     
@@ -404,6 +324,15 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         if let item = self.outlineView.item(atRow: row) {
             self.outlineView.toggleExpansion(forItem: item)
         }
+    }
+    
+    // MARK: - RegisterEditControllerDelegate
+    func registerEditControllerDidEndEditing(committedEdit: Bool) {
+        if committedEdit {
+            self.ignoreNextReturnKeyUp = true
+        }
+        
+        self.editController = nil
     }
     
 }

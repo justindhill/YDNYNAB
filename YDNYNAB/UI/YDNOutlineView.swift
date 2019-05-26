@@ -86,4 +86,39 @@ class YDNOutlineView: NSOutlineView {
         }
     }
     
+    func topLevelItem(forRow row: Int) -> Any? {
+        guard let item = self.item(atRow: row) else {
+            return nil
+        }
+        
+        return self.topLevelItem(forItem: item)
+    }
+    
+    func topLevelItem(forItem item: Any) -> Any {
+        if let parent = self.parent(forItem: item) {
+            return parent
+        }
+        
+        return item
+    }
+    
+    /**
+     Rows in the outline view associated with the item. If the item is currently expanded, this includes the item's
+     children. If it is collapsed, it does not. If the item is a child, the rows include its parent and its siblings.
+     */
+    func rows(forItem item: Any) -> IndexSet {
+        let topLevelItem = self.topLevelItem(forItem: item)
+        var rows = IndexSet(integer: self.row(forItem: topLevelItem))
+        let childCount = self.numberOfChildren(ofItem: topLevelItem)
+        
+        if childCount > 0 && self.isItemExpanded(topLevelItem) {
+            for i in 0..<childCount {
+                let childItem = self.child(i, ofItem: topLevelItem)
+                rows.insert(self.row(forItem: childItem))
+            }
+        }
+        
+        return rows
+    }
+    
 }
