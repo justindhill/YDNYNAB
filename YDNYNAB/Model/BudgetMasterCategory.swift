@@ -16,5 +16,5 @@ class BudgetMasterCategory: NSObject, Codable, FetchableRecord, PersistableRecor
     
     var id: Int64?
     var name: String = ""
-    
+    var isHidden: Bool = false
 }

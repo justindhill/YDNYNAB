@@ -36,6 +36,7 @@ class YDNDatabase: NSObject {
             t.autoIncrementedPrimaryKey("id")
             t.column("name", .text).notNull().defaults(to: "")
             t.column("sortOrder").notNull().defaults(to: "-1")
+            t.column("isHidden").notNull().defaults(to: false)
         }
         
         try db.create(table: BudgetSubCategory.databaseTableName) { t in
@@ -143,6 +144,7 @@ class YDNDatabase: NSObject {
     func primeTables(inDb db: Database) throws {
         let uncategorizedMasterCategory = BudgetMasterCategory()
         uncategorizedMasterCategory.name = "Uncategorized Transactions"
+        uncategorizedMasterCategory.isHidden = true
         try uncategorizedMasterCategory.insert(db)
         
         let uncategorizedSubcategory = BudgetSubCategory()
@@ -153,6 +155,7 @@ class YDNDatabase: NSObject {
         
         let incomeMasterCategory = BudgetMasterCategory()
         incomeMasterCategory.name = "Income"
+        incomeMasterCategory.isHidden = true
         try incomeMasterCategory.insert(db)
         
         let incomeSubcategory = BudgetSubCategory()
@@ -163,6 +166,7 @@ class YDNDatabase: NSObject {
         
         let splitMasterCategory = BudgetMasterCategory()
         splitMasterCategory.name = "Split"
+        splitMasterCategory.isHidden = true
         try splitMasterCategory.insert(db)
         
         let splitSubcategory = BudgetSubCategory()
