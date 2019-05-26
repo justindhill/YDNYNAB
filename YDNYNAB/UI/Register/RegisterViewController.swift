@@ -78,11 +78,7 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
             }
             
             if let oldValue = oldValue {
-                let oldRows = self.rows(forItem: oldValue)
-                
-                if let lastOldRow = oldRows.last {
-                    self.updateRowEditingState(forRow: lastOldRow, editing: false)
-                }
+                self.updateRowEditingState(forRows: self.rows(forItem: oldValue), editing: false)
                 
                 if self.outlineView.isItemExpanded(oldValue) {
                     self.outlineView.collapseItem(oldValue, collapseChildren: true)
@@ -95,10 +91,7 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
                 }
                 
                 let newRows = self.rows(forItem: editingTransaction)
-                
-                if let lastNewRow = newRows.last {
-                    self.updateRowEditingState(forRow: lastNewRow, editing: true)
-                }
+                self.updateRowEditingState(forRows: newRows, editing: true)
                 
                 CATransaction.begin()
                 CATransaction.setAnimationDuration(0)
@@ -319,9 +312,11 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         return rows
     }
     
-    func updateRowEditingState(forRow row: Int, editing: Bool) {
-        let rowView = self.outlineView.rowView(atRow: row, makeIfNecessary: false) as? RegisterRowView
-        rowView?.isEditing = editing
+    func updateRowEditingState(forRows rows: IndexSet, editing: Bool) {
+        rows.forEach { row in
+            let rowView = self.outlineView.rowView(atRow: row, makeIfNecessary: false) as? RegisterRowView
+            rowView?.isEditing = editing
+        }
     }
     
     func updateRowExpansionState(notification: Notification, isExpanded: Bool) {
