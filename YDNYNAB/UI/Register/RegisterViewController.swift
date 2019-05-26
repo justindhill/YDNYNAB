@@ -209,18 +209,33 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         rowView.isExpanded = isExpanded
     }
     
+    var previousProposedFirstRow: Int = -1
     func outlineView(_ outlineView: NSOutlineView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet {
         guard let firstSelectionIndex = proposedSelectionIndexes.first, let item = outlineView.item(atRow: firstSelectionIndex) else {
             return proposedSelectionIndexes
         }
         
-        var updatedSelection = proposedSelectionIndexes
+        let isUpMovement = (self.previousProposedFirstRow > firstSelectionIndex)
+        self.previousProposedFirstRow = firstSelectionIndex
         
-        let childCount = outlineView.numberOfChildren(ofItem: item)
-        if childCount > 0 && outlineView.isItemExpanded(item) {
+        let topLevelItem = outlineView.parent(forItem: item) ?? item
+        var updatedSelection = IndexSet(integer: outlineView.row(forItem: topLevelItem))
+        let childCount = outlineView.numberOfChildren(ofItem: topLevelItem)
+        
+        if childCount > 0 && outlineView.isItemExpanded(topLevelItem) {
             for i in 0..<childCount {
-                let childItem = outlineView.child(i, ofItem: item)
+                let childItem = outlineView.child(i, ofItem: topLevelItem)
                 updatedSelection.insert(outlineView.row(forItem: childItem))
+            }
+        }
+        
+        if outlineView.selectedRowIndexes == updatedSelection {
+            if let firstItemInSelection = updatedSelection.first, isUpMovement {
+                let newProposedRow = max(outlineView.row(forItem: firstItemInSelection) - 1, 0)
+                return self.outlineView(outlineView, selectionIndexesForProposedSelection: IndexSet(integer: newProposedRow))
+            } else if let lastItemInSelection = updatedSelection.last, !isUpMovement {
+                let newProposedRow = min(outlineView.row(forItem: lastItemInSelection) + 1, outlineView.numberOfRows - 1)
+                return self.outlineView(outlineView, selectionIndexesForProposedSelection: IndexSet(integer: newProposedRow))
             }
         }
         
@@ -269,10 +284,10 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     }
     
     override func keyDown(with event: NSEvent) {
-        
+        // intentionally empty to prevent beeps
     }
     
-    override func keyUp(with event: NSEvent) {        
+    override func keyUp(with event: NSEvent) {
         let selectedRow = self.registerView.outlineView.selectedRow
         guard let keyCode = KeyCode(rawValue: event.keyCode), selectedRow != -1 else {
             return

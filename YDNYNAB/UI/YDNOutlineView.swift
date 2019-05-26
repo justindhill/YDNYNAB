@@ -64,8 +64,8 @@ class YDNOutlineView: NSOutlineView {
         }
     }
     
-    override func expandItem(_ item: Any?) {
-        super.expandItem(item)
+    override func expandItem(_ item: Any?, expandChildren: Bool) {
+        super.expandItem(item, expandChildren: expandChildren)
         
         if self.selectsChildrenOfSelectedExpandedParent && self.selectedRow == self.row(forItem: item) {
             var indexesToSelect = IndexSet()
