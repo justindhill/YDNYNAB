@@ -67,23 +67,44 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     let budgetContext: BudgetContext
     let mode: Mode
     var candidateEditRow: Int? = nil
-    var focusedRow: Int? = nil {
+    var editingTransaction: Transaction? = nil {
         didSet {
-            var rowsWithChanges = IndexSet()
+            if oldValue == editingTransaction {
+                return
+            }
+            
+            if editingTransaction?.splitParent != nil {
+                fatalError("Only top-level transactions can be considered as editing transactions")
+            }
             
             if let oldValue = oldValue {
-                let rowView = self.outlineView.rowView(atRow: oldValue, makeIfNecessary: false) as? RegisterRowView
-                rowView?.isEditing = false
-                rowsWithChanges.insert(oldValue)
+                let oldRows = self.rows(forItem: oldValue)
+                
+                if let lastOldRow = oldRows.last {
+                    self.updateRowEditingState(forRow: lastOldRow, editing: false)
+                }
+                
+                if self.outlineView.isItemExpanded(oldValue) {
+                    self.outlineView.collapseItem(oldValue, collapseChildren: true)
+                }
             }
             
-            if let focusedRow = self.focusedRow {
-                let newSelectedRowView = self.outlineView.rowView(atRow: focusedRow, makeIfNecessary: false) as? RegisterRowView
-                newSelectedRowView?.isEditing = true
-                rowsWithChanges.insert(focusedRow)
+            if let editingTransaction = editingTransaction {
+                if !self.outlineView.isItemExpanded(editingTransaction) {
+                    self.outlineView.expandItem(editingTransaction, expandChildren: true)
+                }
+                
+                let newRows = self.rows(forItem: editingTransaction)
+                
+                if let lastNewRow = newRows.last {
+                    self.updateRowEditingState(forRow: lastNewRow, editing: true)
+                }
+                
+                CATransaction.begin()
+                CATransaction.setAnimationDuration(0)
+                self.outlineView.noteHeightOfRows(withIndexesChanged: newRows)
+                CATransaction.commit()
             }
-            
-            self.outlineView.noteHeightOfRows(withIndexesChanged: rowsWithChanges)
         }
     }
     
@@ -198,13 +219,18 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     }
     
     func outlineViewSelectionDidChange(_ notification: Notification) {
-        self.focusedRow = nil
+//        self.editingTransaction = nil
     }
     
     func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
-        let row = outlineView.row(forItem: item)
+        guard let transaction = item as? Transaction else {
+            fatalError("RegisterViewController only shows transactions.")
+        }
         
-        if row == self.focusedRow {
+        if let editingTransaction = editingTransaction,
+            transaction.splitParent == editingTransaction.id &&
+            outlineView.childIndex(forItem: transaction) == outlineView.numberOfChildren(ofItem: editingTransaction) - 1 {
+            
             return RegisterRowView.Constant.expandedHeight
         } else {
             return RegisterRowView.Constant.collapsedHeight
@@ -254,6 +280,14 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
     }
     
     // MARK: - Utils
+    func topLevelItem(forRow row: Int) -> Any? {
+        guard let item = self.outlineView.item(atRow: row) else {
+            return nil
+        }
+        
+        return self.topLevelItem(forItem: item)
+    }
+    
     func topLevelItem(forItem item: Any) -> Any {
         if let parent = self.outlineView.parent(forItem: item) {
             return parent
@@ -279,6 +313,11 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
         }
         
         return rows
+    }
+    
+    func updateRowEditingState(forRow row: Int, editing: Bool) {
+        let rowView = self.outlineView.rowView(atRow: row, makeIfNecessary: false) as? RegisterRowView
+        rowView?.isEditing = editing
     }
     
     func updateRowExpansionState(notification: Notification, isExpanded: Bool) {
@@ -312,22 +351,25 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
             }
         }
         
-        self.focusedRow = nil
+        self.editingTransaction = nil
         self.ignoreNextReturnKeyUp = true
     }
     
     func registerRowViewDidClickCancel(_ rowView: RegisterRowView) {
-        self.focusedRow = nil
+        self.editingTransaction = nil
     }
     
     @objc func outlineViewClicked() {
         let clickedRow = self.outlineView.clickedRow
+        let topLevelTransaction = self.topLevelItem(forRow: clickedRow) as? Transaction
+        
         if clickedRow == self.candidateEditRow {
-            if clickedRow >= 0 {
-                self.focusedRow = self.outlineView.selectedRow
+            if clickedRow >= 0, let transaction = self.topLevelItem(forRow: clickedRow) as? Transaction {
+                self.editingTransaction = transaction
                 self.candidateEditRow = nil
             }
-        } else {
+        } else if topLevelTransaction != self.editingTransaction {
+            self.editingTransaction = nil
             self.candidateEditRow = clickedRow
         }
     }
@@ -349,11 +391,11 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterR
                 break
             }
             
-            if self.focusedRow == nil {
-                self.focusedRow = selectedRow
+            if self.editingTransaction == nil, let transaction = self.topLevelItem(forRow: selectedRow) as? Transaction {
+                self.editingTransaction = transaction
             }
         case .escape:
-            self.focusedRow = nil
+            self.editingTransaction = nil
         }
     }
     
