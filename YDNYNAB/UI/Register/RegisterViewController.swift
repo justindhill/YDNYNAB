@@ -66,7 +66,7 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterC
     var ignoreNextReturnKeyUp: Bool = false
     let budgetContext: BudgetContext
     let mode: Mode
-    var candidateEditRow: Int? = nil
+    var candidateEditRows: IndexSet? = nil
     var editController: RegisterEditController? {
         didSet {
             if oldValue == editController {
@@ -182,7 +182,7 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterC
         }
         
         if let columnIdentifier = ColumnIdentifier(rawValue: tableColumn.identifier.rawValue) {
-            view.text = self.dataSource.text(forColumn: columnIdentifier, transaction: transaction)
+            view.text = self.dataSource.text(forColumn: columnIdentifier, transaction: transaction) ?? ""
             view.alignment = self.textAlignment(forColumnIdentifier: columnIdentifier)
             view.columnIdentifier = columnIdentifier
             
@@ -288,17 +288,23 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterC
         let clickedRow = self.outlineView.clickedRow
         let topLevelTransaction = self.outlineView.topLevelItem(forRow: clickedRow) as? Transaction
         
-        if clickedRow == self.candidateEditRow {
+        if self.candidateEditRows?.contains(clickedRow) ?? false {
             if clickedRow >= 0,
+                let clickedCell = self.outlineView.view(atColumn: self.outlineView.clickedColumn,
+                                                         row: self.outlineView.clickedRow,
+                                                         makeIfNecessary: false) as? RegisterCell,
                 let transaction = self.outlineView.topLevelItem(forRow: clickedRow) as? Transaction,
-                let editController = try? RegisterEditController(dataSource: self.dataSource, outlineView: self.outlineView, transaction: transaction) {
+                let editController = try? RegisterEditController(dataSource: self.dataSource,
+                                                                 outlineView: self.outlineView,
+                                                                 transaction: transaction,
+                                                                 initialCell: clickedCell) {
                 
                 self.editController = editController
-                self.candidateEditRow = nil
+                self.candidateEditRows = nil
             }
         } else if topLevelTransaction != self.editController?.transaction {
             self.editController = nil
-            self.candidateEditRow = clickedRow
+            self.candidateEditRows = self.outlineView.selectedRowIndexes
         }
     }
     

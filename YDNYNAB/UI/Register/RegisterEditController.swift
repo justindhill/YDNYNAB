@@ -23,15 +23,21 @@ class RegisterEditController: NSObject, RegisterRowViewDelegate {
     let dataSource: RegisterViewDataSource
     let outlineView: YDNOutlineView
     let transaction: Transaction
+    weak var initialCell: RegisterCell?
     private(set) var splitChildren: [Transaction]
     private var collapseTransactionOnEndEditing: Bool = false
     
     weak var delegate: RegisterEditControllerDelegate?
     
-    init(dataSource: RegisterViewDataSource, outlineView: YDNOutlineView, transaction: Transaction) throws {
+    init(dataSource: RegisterViewDataSource,
+         outlineView: YDNOutlineView,
+         transaction: Transaction,
+         initialCell: RegisterCell? = nil) throws {
+        
         self.dataSource = dataSource
         self.outlineView = outlineView
         self.transaction = transaction
+        self.initialCell = initialCell
         
         guard let transactionId = transaction.id, transaction.splitParent == nil else {
             throw RegisterEditControllerError.invalidTransaction
@@ -49,15 +55,21 @@ class RegisterEditController: NSObject, RegisterRowViewDelegate {
         }
 
         let newRows = self.outlineView.rows(forItem: self.transaction)
-        newRows
-            .map({ self.outlineView.rowView(atRow: $0, makeIfNecessary: false) as? RegisterRowView })
-            .forEach({ $0?.delegate = self })
+        let newRowViews = newRows.map({ self.outlineView.rowView(atRow: $0, makeIfNecessary: false) as? RegisterRowView })
+        newRowViews.forEach({ $0?.delegate = self })
+        
         self.updateRowEditingState(forRows: newRows, editing: true)
 
         CATransaction.begin()
         CATransaction.setAnimationDuration(0)
         self.outlineView.noteHeightOfRows(withIndexesChanged: newRows)
         CATransaction.commit()
+        
+        if let initialCell = self.initialCell {
+            initialCell.inputTextField.selectAllAndEdit()
+        } else if let firstRowView = newRowViews.first, let firstRowViewDoubleUnwrap = firstRowView {
+            firstRowViewDoubleUnwrap.firstKeyView()?.selectAllAndEdit()
+        }
     }
     
     func endEditing() {
@@ -75,6 +87,8 @@ class RegisterEditController: NSObject, RegisterRowViewDelegate {
         self.outlineView.noteHeightOfRows(withIndexesChanged: transactionRows)
         
         CATransaction.commit()
+        
+        self.outlineView.window?.makeFirstResponder(self.outlineView)
     }
     
     func updateRowEditingState(forRows rows: IndexSet, editing: Bool) {
@@ -101,6 +115,27 @@ class RegisterEditController: NSObject, RegisterRowViewDelegate {
     
     func registerRowViewDidClickCancel(_ rowView: RegisterRowView) {
         self.delegate?.registerEditControllerDidEndEditing(committedEdit: false)
+    }
+    
+    func registerRowViewNextRowView(_ rowView: RegisterRowView) -> RegisterRowView? {
+        return self.rowView(forRowView: rowView) {$0 + 1}
+    }
+    
+    func registerRowViewPreviousRowView(_ rowView: RegisterRowView) -> RegisterRowView? {
+        return self.rowView(forRowView: rowView) {$0 - 1}
+    }
+    
+    func rowView(forRowView rowView: RegisterRowView, indexTransform: (Int) -> Int) -> RegisterRowView? {
+        let editingRows = self.outlineView.rows(forItem: self.transaction)
+        let row = self.outlineView.row(for: rowView)
+        let candidateRow = indexTransform(row)
+        
+        if row != -1 && editingRows.contains(candidateRow),
+            let candidateRowView = self.outlineView.rowView(atRow: candidateRow, makeIfNecessary: false) as? RegisterRowView {
+            return candidateRowView
+        }
+        
+        return nil
     }
 
 }

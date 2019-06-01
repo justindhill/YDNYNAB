@@ -48,6 +48,7 @@ class RegisterCell: NSTableCellView {
     
     var isEditable: Bool = false {
         didSet {
+            self.inputTextField.ydn_isEditable = self.isEditable
             self.needsLayout = true
         }
     }
@@ -125,7 +126,6 @@ class RegisterCell: NSTableCellView {
     override func layout() {
         super.layout()
         
-        self.inputTextField.ydn_isEditable = self.isEditable
         self.inputTextField.textColor = Theme.Color.text
         let lineHeight = ceil(self.font.ascender + abs(self.font.descender) + self.font.leading)
         

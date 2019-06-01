@@ -11,6 +11,8 @@ import Cocoa
 protocol RegisterRowViewDelegate: class {
     func registerRowViewDidCommitChanges(_ rowView: RegisterRowView)
     func registerRowViewDidClickCancel(_ rowView: RegisterRowView)
+    func registerRowViewNextRowView(_ rowView: RegisterRowView) -> RegisterRowView?
+    func registerRowViewPreviousRowView(_ rowView: RegisterRowView) -> RegisterRowView?
 }
 
 class RegisterRowView: NSTableRowView, YDNTextFieldDelegate, YDNTextFieldKeyViewProvider {
@@ -104,7 +106,6 @@ class RegisterRowView: NSTableRowView, YDNTextFieldDelegate, YDNTextFieldKeyView
                 
             }
         }
-        
     }
     
     func findRegisterCellContaining(view: NSView) -> (Int, RegisterCell)? {
@@ -144,24 +145,51 @@ class RegisterRowView: NSTableRowView, YDNTextFieldDelegate, YDNTextFieldKeyView
         }
     }
     
-    func nextKeyView(for textField: YDNTextField) -> YDNTextField? {
-        if let originatingColumnViewIndex = self.findRegisterCellContaining(view: textField)?.0 {
-            let index = min(originatingColumnViewIndex + 1, self.columnViews.count - 1)
-            let cellView = self.columnViews[index]
-            return cellView.inputTextField
+    func firstKeyView() -> YDNTextField? {
+        if let firstEditableView = self.columnViews.first(where: { $0.isEditable }) {
+            return firstEditableView.inputTextField
         }
         
         return nil
     }
     
-    func previousKeyView(for textField: YDNTextField) -> YDNTextField? {
+    func nextKeyView(for textField: YDNTextField) -> YDNTextField? {
         if let originatingColumnViewIndex = self.findRegisterCellContaining(view: textField)?.0 {
-            let index = max(originatingColumnViewIndex - 1, 0)
-            let cellView = self.columnViews[index]
-            return cellView.inputTextField
+            let index = originatingColumnViewIndex + 1
+            
+            if index < self.columnViews.count {
+                let cellView = self.columnViews[index]
+                return cellView.inputTextField
+            }
+            
+            if let nextRowView = self.delegate?.registerRowViewNextRowView(self),
+                let firstEditableField = nextRowView.columnViews.first(where: { $0.isEditable }) {
+                
+                return firstEditableField.inputTextField
+            }
         }
         
-        return nil
+        return textField
+    }
+    
+    func previousKeyView(for textField: YDNTextField) -> YDNTextField? {
+        if let originatingColumnViewIndex = self.findRegisterCellContaining(view: textField)?.0 {
+            let lowerBound = self.columnViews.firstIndex(where: { $0.isEditable }) ?? 0
+            let index = originatingColumnViewIndex - 1
+            
+            if index >= lowerBound {
+                let cellView = self.columnViews[index]
+                return cellView.inputTextField
+            }
+            
+            if let previousRowView = self.delegate?.registerRowViewPreviousRowView(self),
+                let lastEditableField = previousRowView.columnViews.last(where: { $0.isEditable }) {
+                
+                return lastEditableField.inputTextField
+            }
+        }
+        
+        return textField
     }
     
     @objc func commitChanges() {
