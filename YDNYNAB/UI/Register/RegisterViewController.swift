@@ -209,6 +209,14 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterC
         }
     }
     
+    func outlineView(_ outlineView: NSOutlineView, shouldCollapseItem item: Any) -> Bool {
+        if let transaction = item as? Transaction, let editController = self.editController {
+            return transaction != editController.transaction
+        }
+        
+        return true
+    }
+    
     func outlineViewItemWillExpand(_ notification: Notification) {
         self.updateRowExpansionState(notification: notification, isExpanded: true)
     }
@@ -219,6 +227,10 @@ class RegisterViewController: NSViewController, NSOutlineViewDelegate, RegisterC
     
     private var previousProposedFirstRow: Int = -1
     func outlineView(_ outlineView: NSOutlineView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet {
+        guard self.editController == nil else {
+            return self.outlineView.selectedRowIndexes
+        }
+        
         guard
             let firstSelectionIndex = proposedSelectionIndexes.first,
             let item = outlineView.item(atRow: firstSelectionIndex) else {

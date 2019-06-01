@@ -24,6 +24,7 @@ class RegisterEditController: NSObject, RegisterRowViewDelegate {
     let outlineView: YDNOutlineView
     let transaction: Transaction
     private(set) var splitChildren: [Transaction]
+    private var collapseTransactionOnEndEditing: Bool = false
     
     weak var delegate: RegisterEditControllerDelegate?
     
@@ -41,7 +42,9 @@ class RegisterEditController: NSObject, RegisterRowViewDelegate {
     }
     
     func beginEditing() {
-        if !self.outlineView.isItemExpanded(self.transaction) {
+        let itemCurrentlyExpanded = self.outlineView.isItemExpanded(self.transaction)
+        self.collapseTransactionOnEndEditing = !itemCurrentlyExpanded
+        if !itemCurrentlyExpanded {
             self.outlineView.expandItem(self.transaction, expandChildren: true)
         }
 
@@ -58,12 +61,19 @@ class RegisterEditController: NSObject, RegisterRowViewDelegate {
     }
     
     func endEditing() {
-        self.updateRowEditingState(forRows: self.outlineView.rows(forItem: self.transaction), editing: false)
-        self.outlineView.collapseItem(self.transaction, collapseChildren: true)
+        let transactionRows = self.outlineView.rows(forItem: self.transaction)
+        self.updateRowEditingState(forRows: transactionRows, editing: false)
+        
+        if self.collapseTransactionOnEndEditing {
+            self.outlineView.collapseItem(self.transaction, collapseChildren: true)
+            
+        }
         
         CATransaction.begin()
         CATransaction.setAnimationDuration(0)
-        self.outlineView.noteHeightOfRows(withIndexesChanged: IndexSet(integer: self.outlineView.row(forItem: self.transaction)))
+        
+        self.outlineView.noteHeightOfRows(withIndexesChanged: transactionRows)
+        
         CATransaction.commit()
     }
     
