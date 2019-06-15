@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		68657771ACC7FE848B468C19 /* Pods_YDNYNAB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB2F171E43BDD6C24A9F8FCD /* Pods_YDNYNAB.framework */; };
+		716FB20B686554338A6BCD4B /* Pods_YDNYNAB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8641886E2129C92915A78 /* Pods_YDNYNAB.framework */; };
 		D0144ADB2219EEE000BE33BD /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0144ADA2219EEE000BE33BD /* KeyCode.swift */; };
 		D0144ADD222C563900BE33BD /* Transaction+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0144ADC222C563900BE33BD /* Transaction+Queries.swift */; };
 		D0144ADF222C591200BE33BD /* Transaction+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0144ADE222C591200BE33BD /* Transaction+Filter.swift */; };
@@ -127,8 +127,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		810461D03022AF0A241B2E8B /* Pods-YDNYNAB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.debug.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.debug.xcconfig"; sourceTree = "<group>"; };
-		A40E7101E2D28CB42AB76692 /* Pods-YDNYNAB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.release.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.release.xcconfig"; sourceTree = "<group>"; };
+		65D8641886E2129C92915A78 /* Pods_YDNYNAB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YDNYNAB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C30E68D14AC51E317BFB6F54 /* Pods-YDNYNAB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.release.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.release.xcconfig"; sourceTree = "<group>"; };
 		D0144ADA2219EEE000BE33BD /* KeyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
 		D0144ADC222C563900BE33BD /* Transaction+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+Queries.swift"; sourceTree = "<group>"; };
 		D0144ADE222C591200BE33BD /* Transaction+Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+Filter.swift"; sourceTree = "<group>"; };
@@ -216,7 +216,7 @@
 		D0F8F5E521B323A500D92316 /* TransactionUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionUpdater.swift; sourceTree = "<group>"; };
 		D0F8F5E721B324A900D92316 /* BudgetLine+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BudgetLine+Queries.swift"; sourceTree = "<group>"; };
 		D0F8F5E921B3252000D92316 /* MonthYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYear.swift; sourceTree = "<group>"; };
-		DB2F171E43BDD6C24A9F8FCD /* Pods_YDNYNAB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YDNYNAB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECC156D8CFE8298E675E7BFF /* Pods-YDNYNAB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.debug.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,7 +228,7 @@
 				D03E98CF21E01A8E00FF5C12 /* libofx.a in Frameworks */,
 				D03E98CE21E01A7100FF5C12 /* libosp.a in Frameworks */,
 				D03E98AA21DFCCF800FF5C12 /* libofx-ObjC.a in Frameworks */,
-				68657771ACC7FE848B468C19 /* Pods_YDNYNAB.framework in Frameworks */,
+				716FB20B686554338A6BCD4B /* Pods_YDNYNAB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,8 +245,8 @@
 		6D497F3165AF91A06EBC673B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				810461D03022AF0A241B2E8B /* Pods-YDNYNAB.debug.xcconfig */,
-				A40E7101E2D28CB42AB76692 /* Pods-YDNYNAB.release.xcconfig */,
+				ECC156D8CFE8298E675E7BFF /* Pods-YDNYNAB.debug.xcconfig */,
+				C30E68D14AC51E317BFB6F54 /* Pods-YDNYNAB.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -258,7 +258,7 @@
 				D03E98B021DFD81700FF5C12 /* libiconv.tbd */,
 				D03E98AD21DFD7BC00FF5C12 /* libxml2.tbd */,
 				D0A3F1A421DFC880001B24AA /* libofx.a */,
-				DB2F171E43BDD6C24A9F8FCD /* Pods_YDNYNAB.framework */,
+				65D8641886E2129C92915A78 /* Pods_YDNYNAB.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -544,12 +544,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0510584213B5C40008133B5 /* Build configuration list for PBXNativeTarget "YDNYNAB" */;
 			buildPhases = (
-				50EF46EA1EA46F8B57756B66 /* [CP] Check Pods Manifest.lock */,
+				22FB3F488A754147DA05998D /* [CP] Check Pods Manifest.lock */,
 				D0510572213B5C3F008133B5 /* Sources */,
 				D0510573213B5C3F008133B5 /* Frameworks */,
 				D0510574213B5C3F008133B5 /* Resources */,
-				0BF99C4AEDD5DA4042931074 /* [CP] Embed Pods Frameworks */,
 				D0A3F1B821DFCA24001B24AA /* Embed Frameworks */,
+				35973557E9695A808D81C651 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -638,33 +638,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0BF99C4AEDD5DA4042931074 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CSV.swift/CSV.framework",
-				"${BUILT_PRODUCTS_DIR}/GRDB.swift/GRDB.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CSV.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		50EF46EA1EA46F8B57756B66 /* [CP] Check Pods Manifest.lock */ = {
+		22FB3F488A754147DA05998D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -684,6 +658,30 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		35973557E9695A808D81C651 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CSV.swift/CSV.framework",
+				"${BUILT_PRODUCTS_DIR}/GRDB.swift/GRDB.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CSV.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -900,7 +898,7 @@
 		};
 		D0510585213B5C40008133B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 810461D03022AF0A241B2E8B /* Pods-YDNYNAB.debug.xcconfig */;
+			baseConfigurationReference = ECC156D8CFE8298E675E7BFF /* Pods-YDNYNAB.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -932,7 +930,7 @@
 		};
 		D0510586213B5C40008133B5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A40E7101E2D28CB42AB76692 /* Pods-YDNYNAB.release.xcconfig */;
+			baseConfigurationReference = C30E68D14AC51E317BFB6F54 /* Pods-YDNYNAB.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
