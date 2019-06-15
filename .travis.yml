@@ -1,0 +1,15 @@
+language: objective-c
+osx_image: xcode10.2
+xcode_workspace: YDNYNAB.xcworkspace
+xcode_scheme: YDNYNAB
+
+before_install:
+  pod repo update master --silent && pod install
+
+addons:
+  homebrew:
+    packages:
+      - libofx
+
+script:
+  xcodebuild -workspace "YDNYNAB.xcworkspace" -scheme "YDNYNAB" clean build | xcpretty
