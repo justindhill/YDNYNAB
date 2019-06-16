@@ -14,5 +14,4 @@ addons:
 
 jobs:
   include:
-    script: set -o pipefail && xcodebuild -workspace "YDNYNAB.xcworkspace" -scheme "YDNYNAB" clean build | xcpretty
-    script: ./.bundle-and-upload.sh
+    script: ./.travis-build.sh

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -o pipefail && xcodebuild -workspace "YDNYNAB.xcworkspace" -scheme "YDNYNAB" clean build | xcpretty
+
 # if [ "$TRAVIS_EVENT_TYPE" != "cron" ]; then
 #     echo "Not a nightly build, skipping upload to GitHub."
 #     exit 0
@@ -12,6 +14,11 @@ SHORT_HASH=`echo $TRAVIS_COMMIT | cut -c-6 -`
 APP_ARCHIVE_NAME="YDNYNAB-$SHORT_HASH.zip"
 DSYM_ARCHIVE_NAME="YDNYNAB-dSYM-$SHORT_HASH.zip"
 RELEASE_NAME="nightly-travis-$TRAVIS_JOB_NUMBER"
+
+if [[ ! -d "YDNYNAB.app" || ! -d "YDNYNAB.app.dSYM" ]]; then
+  echo "App or dSYM bundle is missing"
+  exit 1
+fi
 
 zip -r "$TRAVIS_BUILD_DIR/build-out/Package/$APP_ARCHIVE_NAME" "YDNYNAB.app"
 zip -r "$TRAVIS_BUILD_DIR/build-out/Package/$DSYM_ARCHIVE_NAME" "YDNYNAB.app.dSYM"
