@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -o pipefail && xcodebuild -workspace "YDNYNAB.xcworkspace" -scheme "YDNYNAB" -configuration "Release" clean build | xcpretty
+set -o pipefail && xcodebuild -workspace "YDNYNAB.xcworkspace" -scheme "YDNYNAB" -configuration "Release" -derivedDataPath "$TRAVIS_BUILD_DIR/build-out" clean build | xcpretty
 
 # if [ "$TRAVIS_EVENT_TYPE" != "cron" ]; then
 #     echo "Not a nightly build, skipping upload to GitHub."
