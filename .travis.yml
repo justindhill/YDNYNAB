@@ -14,8 +14,5 @@ addons:
 
 jobs:
   include:
-    - stage: "Build"
-      script: set -o pipefail && xcodebuild -workspace "YDNYNAB.xcworkspace" -scheme "YDNYNAB" clean build | xcpretty
-
-    - stage: "Release if needed"
-      script: ./.bundle-and-upload.sh
+    script: set -o pipefail && xcodebuild -workspace "YDNYNAB.xcworkspace" -scheme "YDNYNAB" clean build | xcpretty
+    script: ./.bundle-and-upload.sh
