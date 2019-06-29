@@ -919,8 +919,8 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/usr/local/Cellar/open-sp/1.5.2/lib",
-					/usr/local/Cellar/libofx/0.9.13/lib,
+					"/usr/local/opt/open-sp/lib",
+					/usr/local/opt/libofx/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinhill.YDNYNAB;
@@ -951,8 +951,8 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/usr/local/Cellar/open-sp/1.5.2/lib",
-					/usr/local/Cellar/libofx/0.9.13/lib,
+					"/usr/local/opt/open-sp/lib",
+					/usr/local/opt/libofx/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinhill.YDNYNAB;
