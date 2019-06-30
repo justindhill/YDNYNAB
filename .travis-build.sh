@@ -1,5 +1,15 @@
 #!/bin/sh
 
+TAGS_RESPONSE=`curl -X GET \
+    -H "Authorization: token $GITHUB_TOKEN" \
+    "https://api.github.com/repos/justindhill/YDNYNAB/releases"`
+
+LATEST_TAG_SHA=`echo $TAGS_RESPONSE | jq -r '.[0].commit.sha'`
+if [[ "$TRAVIS_COMMIT" -eq "$LATEST_TAG_SHA" ]]; then
+    echo "This commit has already been built. Bailing."
+fi
+
+
 set -o pipefail && xcodebuild -workspace "YDNYNAB.xcworkspace" -scheme "YDNYNAB" -configuration "Release" -derivedDataPath "$TRAVIS_BUILD_DIR/build-out" clean build | xcpretty
 
 # if [ "$TRAVIS_EVENT_TYPE" != "cron" ]; then
