@@ -5,18 +5,17 @@ TAGS_RESPONSE=`curl -X GET \
     "https://api.github.com/repos/justindhill/YDNYNAB/tags"`
 
 LATEST_TAG_SHA=`echo $TAGS_RESPONSE | jq -r '.[0].commit.sha'`
-if [[ "$TRAVIS_COMMIT" == "$LATEST_TAG_SHA" ]]; then
+if [[ "$TRAVIS_COMMIT" == "$LATEST_TAG_SHA" && "$TRAVIS_EVENT_TYPE" == "cron" ]]; then
     echo "This commit has already been built. Bailing."
     exit 0
 fi
 
-
 set -o pipefail && xcodebuild -workspace "YDNYNAB.xcworkspace" -scheme "YDNYNAB" -configuration "Release" -derivedDataPath "$TRAVIS_BUILD_DIR/build-out" clean build | xcpretty
 
-# if [ "$TRAVIS_EVENT_TYPE" != "cron" ]; then
-#     echo "Not a nightly build, skipping upload to GitHub."
-#     exit 0
-# fi
+if [ "$TRAVIS_EVENT_TYPE" != "cron" ]; then
+    echo "Not a nightly build, skipping upload to GitHub."
+    exit 0
+fi
 
 mkdir "$TRAVIS_BUILD_DIR/build-out/Package"
 cd "$TRAVIS_BUILD_DIR/build-out/Build/Products/Release"
