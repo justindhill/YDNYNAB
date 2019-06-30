@@ -267,6 +267,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D013888322C922E9005FA1D8 /* libofx */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = libofx;
+			sourceTree = "<group>";
+		};
 		D014C52621E14ACF00B8D33D /* Model initializers */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +385,7 @@
 		D07FF53E21DFC76300E531E1 /* libofx-ObjC */ = {
 			isa = PBXGroup;
 			children = (
+				D013888322C922E9005FA1D8 /* libofx */,
 				D03E98BF21DFF0FD00FF5C12 /* src */,
 				D03E98BA21DFEB2900FF5C12 /* libofx-ObjC.h */,
 				D03E98BB21DFECAD00FF5C12 /* Module.modulemap */,
@@ -933,7 +941,6 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/CSV.swift/CSV.framework/Headers\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GRDB.swift/GRDB.framework/Headers\"",
 					"${CONFIGURATION_BUILD_DIR}/usr/local/include",
-					/usr/local/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/YDNYNAB/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -964,7 +971,6 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/CSV.swift/CSV.framework/Headers\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GRDB.swift/GRDB.framework/Headers\"",
 					"${CONFIGURATION_BUILD_DIR}/usr/local/include",
-					/usr/local/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/YDNYNAB/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -994,7 +1000,7 @@
 					"$(inherited)",
 					"OFX_AQUAMANIAC_UGLY_HACK1=1",
 				);
-				HEADER_SEARCH_PATHS = /usr/local/include;
+				HEADER_SEARCH_PATHS = "${SRCROOT}/libofx-ObjC";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1022,7 +1028,7 @@
 					"$(inherited)",
 					"OFX_AQUAMANIAC_UGLY_HACK1=1",
 				);
-				HEADER_SEARCH_PATHS = /usr/local/include;
+				HEADER_SEARCH_PATHS = "${SRCROOT}/libofx-ObjC";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
