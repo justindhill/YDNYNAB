@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		716FB20B686554338A6BCD4B /* Pods_YDNYNAB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8641886E2129C92915A78 /* Pods_YDNYNAB.framework */; };
+		D013887D22C90E05005FA1D8 /* libofx.7.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = D013887A22C90DF9005FA1D8 /* libofx.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D013887E22C90E05005FA1D8 /* libosp.5.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = D013887922C90DF9005FA1D8 /* libosp.5.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D013888022C90F8C005FA1D8 /* libofx.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D013887A22C90DF9005FA1D8 /* libofx.7.dylib */; };
+		D013888122C90F8C005FA1D8 /* libosp.5.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D013887922C90DF9005FA1D8 /* libosp.5.0.0.dylib */; };
 		D0144ADB2219EEE000BE33BD /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0144ADA2219EEE000BE33BD /* KeyCode.swift */; };
 		D0144ADD222C563900BE33BD /* Transaction+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0144ADC222C563900BE33BD /* Transaction+Queries.swift */; };
 		D0144ADF222C591200BE33BD /* Transaction+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0144ADE222C591200BE33BD /* Transaction+Filter.swift */; };
@@ -34,8 +38,6 @@
 		D03E98C821DFFB7900FF5C12 /* OFXStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = D03E98C621DFFB7900FF5C12 /* OFXStatement.m */; };
 		D03E98CB21DFFB8900FF5C12 /* OFXTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = D03E98C921DFFB8900FF5C12 /* OFXTransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D03E98CC21DFFB8900FF5C12 /* OFXTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = D03E98CA21DFFB8900FF5C12 /* OFXTransaction.m */; };
-		D03E98CE21E01A7100FF5C12 /* libosp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D03E98B321DFD97400FF5C12 /* libosp.a */; };
-		D03E98CF21E01A8E00FF5C12 /* libofx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A3F1A421DFC880001B24AA /* libofx.a */; };
 		D03E98D021E01A9700FF5C12 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D03E98B021DFD81700FF5C12 /* libiconv.tbd */; };
 		D04FB0E621509E41008880B7 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04FB0E521509E41008880B7 /* Theme.swift */; };
 		D04FB0E92151F2BC008880B7 /* YDNTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04FB0E82151F2BC008880B7 /* YDNTextField.swift */; };
@@ -104,6 +106,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		D013887F22C90E05005FA1D8 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D013887E22C90E05005FA1D8 /* libosp.5.0.0.dylib in Embed Libraries */,
+				D013887D22C90E05005FA1D8 /* libofx.7.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D03E98BC21DFED3C00FF5C12 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -114,21 +128,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D0A3F1B821DFCA24001B24AA /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		65D8641886E2129C92915A78 /* Pods_YDNYNAB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YDNYNAB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30E68D14AC51E317BFB6F54 /* Pods-YDNYNAB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.release.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.release.xcconfig"; sourceTree = "<group>"; };
+		D013887922C90DF9005FA1D8 /* libosp.5.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libosp.5.0.0.dylib; path = "libofx-ObjC/libosp.5.0.0.dylib"; sourceTree = "<group>"; };
+		D013887A22C90DF9005FA1D8 /* libofx.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libofx.7.dylib; path = "libofx-ObjC/libofx.7.dylib"; sourceTree = "<group>"; };
 		D0144ADA2219EEE000BE33BD /* KeyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
 		D0144ADC222C563900BE33BD /* Transaction+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+Queries.swift"; sourceTree = "<group>"; };
 		D0144ADE222C591200BE33BD /* Transaction+Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+Filter.swift"; sourceTree = "<group>"; };
@@ -146,7 +152,6 @@
 		D03714AF21DD64D50093CFC0 /* OFXImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFXImporter.swift; sourceTree = "<group>"; };
 		D03E98AD21DFD7BC00FF5C12 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		D03E98B021DFD81700FF5C12 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
-		D03E98B321DFD97400FF5C12 /* libosp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libosp.a; path = "../../../../usr/local/Cellar/open-sp/1.5.2/lib/libosp.a"; sourceTree = "<group>"; };
 		D03E98B621DFE83B00FF5C12 /* OFXReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OFXReader.h; sourceTree = "<group>"; };
 		D03E98B721DFE83B00FF5C12 /* OFXReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OFXReader.m; sourceTree = "<group>"; };
 		D03E98BA21DFEB2900FF5C12 /* libofx-ObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libofx-ObjC.h"; sourceTree = "<group>"; };
@@ -173,7 +178,6 @@
 		D06C648921421D0F000EF618 /* BudgetMonthTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetMonthTableRowView.swift; sourceTree = "<group>"; };
 		D06C648D21432CC9000EF618 /* YNABBudgetImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YNABBudgetImporter.swift; sourceTree = "<group>"; };
 		D06C648F21432CD3000EF618 /* YNABTransactionImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YNABTransactionImporter.swift; sourceTree = "<group>"; };
-		D0A3F1A421DFC880001B24AA /* libofx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libofx.a; path = ../../../../usr/local/Cellar/libofx/0.9.13/lib/libofx.a; sourceTree = "<group>"; };
 		D0A3F1BF21DFCAC4001B24AA /* libofx-ObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libofx-ObjC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0AA34362172693200E8A973 /* RegisterViewDataSourceFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewDataSourceFilter.swift; sourceTree = "<group>"; };
 		D0AA343921727BC100E8A973 /* Hoverable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hoverable.swift; sourceTree = "<group>"; };
@@ -224,9 +228,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D013888022C90F8C005FA1D8 /* libofx.7.dylib in Frameworks */,
+				D013888122C90F8C005FA1D8 /* libosp.5.0.0.dylib in Frameworks */,
 				D03E98D021E01A9700FF5C12 /* libiconv.tbd in Frameworks */,
-				D03E98CF21E01A8E00FF5C12 /* libofx.a in Frameworks */,
-				D03E98CE21E01A7100FF5C12 /* libosp.a in Frameworks */,
 				D03E98AA21DFCCF800FF5C12 /* libofx-ObjC.a in Frameworks */,
 				716FB20B686554338A6BCD4B /* Pods_YDNYNAB.framework in Frameworks */,
 			);
@@ -254,10 +258,10 @@
 		945AE8E97AEF5D9F71B638B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D03E98B321DFD97400FF5C12 /* libosp.a */,
+				D013887A22C90DF9005FA1D8 /* libofx.7.dylib */,
+				D013887922C90DF9005FA1D8 /* libosp.5.0.0.dylib */,
 				D03E98B021DFD81700FF5C12 /* libiconv.tbd */,
 				D03E98AD21DFD7BC00FF5C12 /* libxml2.tbd */,
-				D0A3F1A421DFC880001B24AA /* libofx.a */,
 				65D8641886E2129C92915A78 /* Pods_YDNYNAB.framework */,
 			);
 			name = Frameworks;
@@ -548,7 +552,8 @@
 				D0510572213B5C3F008133B5 /* Sources */,
 				D0510573213B5C3F008133B5 /* Frameworks */,
 				D0510574213B5C3F008133B5 /* Resources */,
-				D0A3F1B821DFCA24001B24AA /* Embed Frameworks */,
+				D013887F22C90E05005FA1D8 /* Embed Libraries */,
+				D013888222C9124C005FA1D8 /* Fix load paths of libofx dylibs */,
 				35973557E9695A808D81C651 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -683,6 +688,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		D013888222C9124C005FA1D8 /* Fix load paths of libofx dylibs */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Fix load paths of libofx dylibs";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "install_name_tool -change /usr/local/Cellar/open-sp/1.5.2/lib/libosp.5.dylib @rpath/libosp.5.0.0.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\ninstall_name_tool -change /usr/local/opt/libofx/lib/libofx.7.dylib @rpath/libofx.7.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -919,8 +942,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/usr/local/opt/open-sp/lib",
-					/usr/local/opt/libofx/lib,
+					"$(PROJECT_DIR)/libofx-ObjC",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinhill.YDNYNAB;
@@ -951,8 +973,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/usr/local/opt/open-sp/lib",
-					/usr/local/opt/libofx/lib,
+					"$(PROJECT_DIR)/libofx-ObjC",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinhill.YDNYNAB;
@@ -978,11 +999,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/Cellar/libofx/0.9.13/lib,
-					"/usr/local/Cellar/open-sp/1.5.2/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MODULEMAP_FILE = "$(SRCROOT)/libofx-Swift/Module.modulemap";
@@ -1011,11 +1027,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/Cellar/libofx/0.9.13/lib,
-					"/usr/local/Cellar/open-sp/1.5.2/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MODULEMAP_FILE = "$(SRCROOT)/libofx-Swift/Module.modulemap";
