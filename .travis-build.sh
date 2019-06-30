@@ -2,11 +2,12 @@
 
 TAGS_RESPONSE=`curl -X GET \
     -H "Authorization: token $GITHUB_TOKEN" \
-    "https://api.github.com/repos/justindhill/YDNYNAB/releases"`
+    "https://api.github.com/repos/justindhill/YDNYNAB/tags"`
 
 LATEST_TAG_SHA=`echo $TAGS_RESPONSE | jq -r '.[0].commit.sha'`
-if [[ "$TRAVIS_COMMIT" -eq "$LATEST_TAG_SHA" ]]; then
+if [[ "$TRAVIS_COMMIT" == "$LATEST_TAG_SHA" ]]; then
     echo "This commit has already been built. Bailing."
+    exit 0
 fi
 
 
