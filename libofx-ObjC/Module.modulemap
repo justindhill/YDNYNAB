@@ -1,4 +1,4 @@
 module libofx {
-    header "usr/local/include/libofx-ObjC.h"
+    header "libofx-ObjC.h"
     export *
 }

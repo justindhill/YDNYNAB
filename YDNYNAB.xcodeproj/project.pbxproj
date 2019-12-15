@@ -600,7 +600,7 @@
 			attributes = {
 				CLASSPREFIX = YDN;
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Justin Hill";
 				TargetAttributes = {
 					D0510575213B5C3F008133B5 = {
@@ -679,18 +679,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CSV.swift/CSV.framework",
-				"${BUILT_PRODUCTS_DIR}/GRDB.swift/GRDB.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CSV.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -933,6 +926,7 @@
 			baseConfigurationReference = ECC156D8CFE8298E675E7BFF /* Pods-YDNYNAB.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = N3MXL5AYEW;
@@ -954,6 +948,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinhill.YDNYNAB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/libofx-ObjC";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -963,6 +958,7 @@
 			baseConfigurationReference = C30E68D14AC51E317BFB6F54 /* Pods-YDNYNAB.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = N3MXL5AYEW;
@@ -984,6 +980,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinhill.YDNYNAB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/libofx-ObjC";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

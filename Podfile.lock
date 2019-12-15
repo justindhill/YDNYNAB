@@ -9,7 +9,7 @@ DEPENDENCIES:
   - GRDB.swift
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - CSV.swift
     - GRDB.swift
 
@@ -19,4 +19,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: e206bfe3357f5ef0dfdd2ee862e5df154302e811
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4
