@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import UniformTypeIdentifiers
 
 class MenuBar: NSObject {
     static let shared = MenuBar()
@@ -48,12 +49,13 @@ class MenuBar: NSObject {
     }
     
     private func populateFileMenu() {
+        let budgetType = UTType("com.justinhill.ydnynab.budget")!
         let fileMenu = self.getOrAddMenu(named: "File")
         
         self.addItem(named: "Create new budget", key: "N", keyModifier: [.command, .shift], to: fileMenu) {
             let savePanel = NSSavePanel()
             savePanel.title = "New budget"
-            savePanel.allowedFileTypes = ["ydnbudget"]
+            savePanel.allowedContentTypes = [budgetType]
             savePanel.nameFieldStringValue = "My budget.ydnbudget"
             savePanel.isExtensionHidden = true
             savePanel.begin { response in
@@ -74,7 +76,7 @@ class MenuBar: NSObject {
         
         self.addItem(named: "Open...", key: "o", keyModifier: [.command], to: fileMenu) {
             let openPanel = NSOpenPanel()
-            openPanel.allowedFileTypes = ["ydnbudget"]
+            openPanel.allowedContentTypes = [budgetType]
             openPanel.allowsMultipleSelection = false
             openPanel.begin { response in
                 if let url = openPanel.url, response == .OK {

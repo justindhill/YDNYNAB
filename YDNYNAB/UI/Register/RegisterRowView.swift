@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol RegisterRowViewDelegate: class {
+protocol RegisterRowViewDelegate: AnyObject {
     func registerRowViewDidCommitChanges(_ rowView: RegisterRowView)
     func registerRowViewDidClickCancel(_ rowView: RegisterRowView)
     func registerRowViewNextRowView(_ rowView: RegisterRowView) -> RegisterRowView?

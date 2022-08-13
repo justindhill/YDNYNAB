@@ -9,13 +9,20 @@
 import Cocoa
 import libofx
 import GRDB
+import UniformTypeIdentifiers
 
 class OFXImporter: NSObject {
 
     class func `import`(budgetContext: BudgetContext) {
+        guard let qfx = UTType("com.justinhill.ydnynab.qfx"),
+              let ofx = UTType("com.justinhill.ydnynab.ofx"),
+              let qif = UTType("com.justinhill.ydnynab.qif") else {
+            return
+        }
+        
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = false
-        openPanel.allowedFileTypes = ["qfx", "ofx", "qif"]
+        openPanel.allowedContentTypes = [qfx, ofx, qif]
         openPanel.begin { response in
             guard response == .OK, let fileURL = openPanel.url, fileURL.isFileURL else {
                 return

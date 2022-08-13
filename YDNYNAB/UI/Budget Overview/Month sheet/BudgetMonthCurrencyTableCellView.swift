@@ -8,12 +8,12 @@
 
 import Cocoa
 
-protocol BudgetMonthCurrencyTableCellViewKeyViewProvider: class {
+protocol BudgetMonthCurrencyTableCellViewKeyViewProvider: AnyObject {
     func nextKeyView(for view: BudgetMonthCurrencyTableCellView) -> YDNTextField?
     func previousKeyView(for view: BudgetMonthCurrencyTableCellView) -> YDNTextField?
 }
 
-protocol BudgetMonthCurrencyTableCellViewDelegate: class {
+protocol BudgetMonthCurrencyTableCellViewDelegate: AnyObject {
     func budgetCurrencyCell(_ cell: BudgetMonthCurrencyTableCellView, didCommitValue value: Double?)
 }
 

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol PayeeSettingsSelectorViewControllerDelegate: class {
+protocol PayeeSettingsSelectorViewControllerDelegate: AnyObject {
     func payeeSelector(_ selector: PayeeSettingsSelectorViewController, didSelectPayee: Int64?)
 }
 
@@ -48,7 +48,7 @@ class PayeeSettingsSelectorViewController: NSViewController {
         
         self.tableView.addTableColumn(withTitle: "Payees", identifier: Constant.columnIdentifier, resizingOptions: .autoresizingMask)
         
-        if let payees = try? self.budgetContext.database.queue.read { (db) -> [Payee] in return try Payee.fetchAll(db) } {
+        if let payees = try? self.budgetContext.database.queue.read({ (db) -> [Payee] in return try Payee.fetchAll(db) }) {
             self.payees = payees
             self.tableView.reloadData()
         }  else {

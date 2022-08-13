@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol BudgetCategoriesViewControllerDelegate: class {
+protocol BudgetCategoriesViewControllerDelegate: AnyObject {
     func budgetCategoriesViewController(_ viewController: BudgetCategoriesViewController, willExpandRow row: Int)
     func budgetCategoriesViewController(_ viewController: BudgetCategoriesViewController, willCollapseRow row: Int)
 }

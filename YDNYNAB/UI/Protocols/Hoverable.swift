@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol Hoverable: class {
+protocol Hoverable: AnyObject {
     func enterHoverState()
     func leaveHoverState()
 }

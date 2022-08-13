@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol MainTabViewControllerDelegate: class {
+protocol MainTabViewControllerDelegate: AnyObject {
     func mainTabViewControllerItemsDidChange(_ tabViewController: NSTabViewController)
 }
 

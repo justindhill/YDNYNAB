@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol RegisterEditControllerDelegate: class {
+protocol RegisterEditControllerDelegate: AnyObject {
     func registerEditControllerDidEndEditing(committedEdit: Bool)
 }
 

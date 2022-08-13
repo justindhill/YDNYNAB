@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol RegisterCellDelegate: class {
+protocol RegisterCellDelegate: AnyObject {
     func registerCellDidClickDisclosureIndicator(_ cell: RegisterCell)
 }
 

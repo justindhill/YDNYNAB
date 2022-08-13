@@ -13,7 +13,7 @@ protocol YDNTextFieldDelegate: NSTextFieldDelegate {
     func textFieldDidBlur(_ textField: YDNTextField, commit: Bool, textMovement: NSTextMovement)
 }
 
-protocol YDNTextFieldKeyViewProvider: class {
+protocol YDNTextFieldKeyViewProvider: AnyObject {
     func nextKeyView(for textField: YDNTextField) -> YDNTextField?
     func previousKeyView(for textField: YDNTextField) -> YDNTextField?
 }

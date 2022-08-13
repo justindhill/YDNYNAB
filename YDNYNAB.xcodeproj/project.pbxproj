@@ -3,15 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		716FB20B686554338A6BCD4B /* Pods_YDNYNAB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8641886E2129C92915A78 /* Pods_YDNYNAB.framework */; };
 		D013887D22C90E05005FA1D8 /* libofx.7.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = D013887A22C90DF9005FA1D8 /* libofx.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		D013887E22C90E05005FA1D8 /* libosp.5.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = D013887922C90DF9005FA1D8 /* libosp.5.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D013888022C90F8C005FA1D8 /* libofx.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D013887A22C90DF9005FA1D8 /* libofx.7.dylib */; };
-		D013888122C90F8C005FA1D8 /* libosp.5.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D013887922C90DF9005FA1D8 /* libosp.5.0.0.dylib */; };
 		D0144ADB2219EEE000BE33BD /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0144ADA2219EEE000BE33BD /* KeyCode.swift */; };
 		D0144ADD222C563900BE33BD /* Transaction+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0144ADC222C563900BE33BD /* Transaction+Queries.swift */; };
 		D0144ADF222C591200BE33BD /* Transaction+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0144ADE222C591200BE33BD /* Transaction+Filter.swift */; };
@@ -54,7 +52,7 @@
 		D051058A213B6A34008133B5 /* BudgetOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0510589213B6A34008133B5 /* BudgetOverviewViewController.swift */; };
 		D066477825B39BC000B113E0 /* libofx-ObjC.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D03E98BA21DFEB2900FF5C12 /* libofx-ObjC.h */; };
 		D066477B25B39C6E00B113E0 /* libofx.7.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = D013887A22C90DF9005FA1D8 /* libofx.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		D066477C25B39C7400B113E0 /* libosp.5.0.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = D013887922C90DF9005FA1D8 /* libosp.5.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D066477C25B39C7400B113E0 /* libosp.4.0.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = D013887922C90DF9005FA1D8 /* libosp.4.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D066477D25B39C7C00B113E0 /* libiconv.tbd in CopyFiles */ = {isa = PBXBuildFile; fileRef = D03E98B021DFD81700FF5C12 /* libiconv.tbd */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D066478025B39C7F00B113E0 /* libxml2.tbd in CopyFiles */ = {isa = PBXBuildFile; fileRef = D03E98AD21DFD7BC00FF5C12 /* libxml2.tbd */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D06C648421420667000EF618 /* BudgetMonthTotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C648321420667000EF618 /* BudgetMonthTotalsView.swift */; };
@@ -113,7 +111,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D013887E22C90E05005FA1D8 /* libosp.5.0.0.dylib in Embed Libraries */,
 				D013887D22C90E05005FA1D8 /* libofx.7.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
@@ -127,7 +124,7 @@
 			files = (
 				D066478025B39C7F00B113E0 /* libxml2.tbd in CopyFiles */,
 				D066477D25B39C7C00B113E0 /* libiconv.tbd in CopyFiles */,
-				D066477C25B39C7400B113E0 /* libosp.5.0.0.dylib in CopyFiles */,
+				D066477C25B39C7400B113E0 /* libosp.4.0.0.dylib in CopyFiles */,
 				D066477B25B39C6E00B113E0 /* libofx.7.dylib in CopyFiles */,
 				D066477825B39BC000B113E0 /* libofx-ObjC.h in CopyFiles */,
 				D03E98BD21DFED4B00FF5C12 /* Module.modulemap in CopyFiles */,
@@ -139,7 +136,7 @@
 /* Begin PBXFileReference section */
 		65D8641886E2129C92915A78 /* Pods_YDNYNAB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YDNYNAB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30E68D14AC51E317BFB6F54 /* Pods-YDNYNAB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.release.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.release.xcconfig"; sourceTree = "<group>"; };
-		D013887922C90DF9005FA1D8 /* libosp.5.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libosp.5.0.0.dylib; path = "libofx-ObjC/libosp.5.0.0.dylib"; sourceTree = "<group>"; };
+		D013887922C90DF9005FA1D8 /* libosp.4.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libosp.4.0.0.dylib; path = "libofx-ObjC/libosp.4.0.0.dylib"; sourceTree = "<group>"; };
 		D013887A22C90DF9005FA1D8 /* libofx.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libofx.7.dylib; path = "libofx-ObjC/libofx.7.dylib"; sourceTree = "<group>"; };
 		D0144ADA2219EEE000BE33BD /* KeyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
 		D0144ADC222C563900BE33BD /* Transaction+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+Queries.swift"; sourceTree = "<group>"; };
@@ -250,7 +247,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D013888022C90F8C005FA1D8 /* libofx.7.dylib in Frameworks */,
-				D013888122C90F8C005FA1D8 /* libosp.5.0.0.dylib in Frameworks */,
 				D03E98D021E01A9700FF5C12 /* libiconv.tbd in Frameworks */,
 				D03E98AA21DFCCF800FF5C12 /* libofx-ObjC.a in Frameworks */,
 				716FB20B686554338A6BCD4B /* Pods_YDNYNAB.framework in Frameworks */,
@@ -280,7 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				D013887A22C90DF9005FA1D8 /* libofx.7.dylib */,
-				D013887922C90DF9005FA1D8 /* libosp.5.0.0.dylib */,
+				D013887922C90DF9005FA1D8 /* libosp.4.0.0.dylib */,
 				D03E98B021DFD81700FF5C12 /* libiconv.tbd */,
 				D03E98AD21DFD7BC00FF5C12 /* libxml2.tbd */,
 				65D8641886E2129C92915A78 /* Pods_YDNYNAB.framework */,
@@ -661,7 +657,7 @@
 			attributes = {
 				CLASSPREFIX = YDN;
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = "Justin Hill";
 				TargetAttributes = {
 					D03570AB23A6BBF2001D660E = {
@@ -767,6 +763,7 @@
 		};
 		D013888222C9124C005FA1D8 /* Fix load paths of libofx dylibs */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -781,7 +778,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "install_name_tool -change /usr/local/Cellar/open-sp/1.5.2/lib/libosp.5.dylib @rpath/libosp.5.0.0.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\ninstall_name_tool -change /usr/local/opt/libofx/lib/libofx.7.dylib @rpath/libofx.7.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\n";
+			shellScript = "install_name_tool -change /usr/local/Cellar/open-sp/1.5.2/lib/libosp.4.dylib @rpath/libosp.4.0.0.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\ninstall_name_tool -change /usr/local/opt/libofx/lib/libofx.7.dylib @rpath/libofx.7.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -967,6 +964,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -975,6 +973,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -992,7 +991,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1027,6 +1026,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1035,6 +1035,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1047,7 +1048,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -1064,6 +1065,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = N3MXL5AYEW;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1077,7 +1079,6 @@
 					"@executable_path/../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "${CONFIGURATION_BUILD_DIR}";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinhill.YDNYNAB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1092,6 +1093,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = N3MXL5AYEW;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1105,7 +1107,6 @@
 					"@executable_path/../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "${CONFIGURATION_BUILD_DIR}";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinhill.YDNYNAB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1117,6 +1118,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = N3MXL5AYEW;
 				EXECUTABLE_PREFIX = lib;
@@ -1130,7 +1132,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MODULEMAP_FILE = "$(SRCROOT)/libofx-Swift/Module.modulemap";
 				PRODUCT_MODULE_NAME = libofx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1145,6 +1146,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = N3MXL5AYEW;
 				EXECUTABLE_PREFIX = lib;
@@ -1158,7 +1160,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MODULEMAP_FILE = "$(SRCROOT)/libofx-Swift/Module.modulemap";
 				PRODUCT_MODULE_NAME = libofx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
