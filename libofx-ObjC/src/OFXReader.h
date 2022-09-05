@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) NSArray<OFXAccount *> *accounts;
 
++ (void)setDTDPath:(NSString *)path;
 - (instancetype)initWithFileURL:(NSURL *)fileURL;
 
 @end

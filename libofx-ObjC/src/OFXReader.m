@@ -36,9 +36,16 @@ int YDNOFXStatementProcCallback(const struct OfxStatementData data, void * statu
 
 @implementation OFXReader
 
+static NSString *OFXReaderDTDDir = @".";
+
++ (void)setDTDPath:(NSString *)path {
+    OFXReaderDTDDir = path;
+}
+
 - (instancetype)initWithFileURL:(NSURL *)fileURL {
     if (self = [self init]) {
         LibofxContextPtr context = libofx_get_new_context();
+        libofx_set_dtd_dir(context, [OFXReaderDTDDir cStringUsingEncoding:NSUTF8StringEncoding]);
         
         _accounts = @[];
         

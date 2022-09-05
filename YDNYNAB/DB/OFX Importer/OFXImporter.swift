@@ -14,9 +14,9 @@ import UniformTypeIdentifiers
 class OFXImporter: NSObject {
 
     class func `import`(budgetContext: BudgetContext) {
-        guard let qfx = UTType("com.justinhill.ydnynab.qfx"),
-              let ofx = UTType("com.justinhill.ydnynab.ofx"),
-              let qif = UTType("com.justinhill.ydnynab.qif") else {
+        guard let qfx = UTType(filenameExtension: "qfx"),
+              let ofx = UTType(filenameExtension: "ofx"),
+              let qif = UTType(filenameExtension: "qif") else {
             return
         }
         

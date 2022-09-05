@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import libofx
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     
@@ -18,6 +19,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var windowControllers: [BudgetWindowController] = []
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        guard let dtdPath = Bundle.main.path(forResource: "dtd", ofType: nil) else {
+            fatalError("Failed to get dtd path which is crucial for setup.")
+        }
+        OFXReader.setDTDPath(dtdPath)
+        
         if let lastBudget = UserDefaults.standard.string(forKey: Constant.lastBudgetOpenedKey),
             FileManager.default.fileExists(atPath: lastBudget) {
             self.openBudget(atPath: lastBudget)

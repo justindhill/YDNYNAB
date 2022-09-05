@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3BDA5CA928A8622B00E739E0 /* ofx201.dtd in Copy DTD files */ = {isa = PBXBuildFile; fileRef = 3BDA5CA528A8622B00E739E0 /* ofx201.dtd */; };
+		3BDA5CAA28A8622B00E739E0 /* ofx160.dtd in Copy DTD files */ = {isa = PBXBuildFile; fileRef = 3BDA5CA628A8622B00E739E0 /* ofx160.dtd */; };
+		3BDA5CAB28A8622B00E739E0 /* ofc.dtd in Copy DTD files */ = {isa = PBXBuildFile; fileRef = 3BDA5CA728A8622B00E739E0 /* ofc.dtd */; };
+		3BDA5CAC28A8622B00E739E0 /* opensp.dcl in Copy DTD files */ = {isa = PBXBuildFile; fileRef = 3BDA5CA828A8622B00E739E0 /* opensp.dcl */; };
+		3BF97D6128A8529500729F9D /* libosp.4.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D013887922C90DF9005FA1D8 /* libosp.4.0.0.dylib */; };
+		3BF97D6228A852DB00729F9D /* libosp.4.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = D013887922C90DF9005FA1D8 /* libosp.4.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		716FB20B686554338A6BCD4B /* Pods_YDNYNAB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8641886E2129C92915A78 /* Pods_YDNYNAB.framework */; };
 		D013887D22C90E05005FA1D8 /* libofx.7.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = D013887A22C90DF9005FA1D8 /* libofx.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D013888022C90F8C005FA1D8 /* libofx.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D013887A22C90DF9005FA1D8 /* libofx.7.dylib */; };
@@ -21,12 +27,6 @@
 		D014C53A21EA811600B8D33D /* PayeeSettingsSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C53821EA811600B8D33D /* PayeeSettingsSelectorViewController.swift */; };
 		D014C53B21EA811600B8D33D /* PayeeSettingsEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C53921EA811600B8D33D /* PayeeSettingsEditorViewController.swift */; };
 		D014C53D21EA8F6400B8D33D /* YDNTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014C53C21EA8F6400B8D33D /* YDNTableCellView.swift */; };
-		D03570AF23A6BBF2001D660E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03570AE23A6BBF2001D660E /* AppDelegate.swift */; };
-		D03570B123A6BBF2001D660E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03570B023A6BBF2001D660E /* SceneDelegate.swift */; };
-		D03570B323A6BBF2001D660E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03570B223A6BBF2001D660E /* ContentView.swift */; };
-		D03570B523A6BBF4001D660E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03570B423A6BBF4001D660E /* Assets.xcassets */; };
-		D03570B823A6BBF4001D660E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03570B723A6BBF4001D660E /* Preview Assets.xcassets */; };
-		D03570BB23A6BBF4001D660E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03570B923A6BBF4001D660E /* LaunchScreen.storyboard */; };
 		D03714A921DBDBFA0093CFC0 /* BudgetPackageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03714A821DBDBFA0093CFC0 /* BudgetPackageWrapper.swift */; };
 		D03714AB21DBE1DC0093CFC0 /* BudgetWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03714AA21DBE1DC0093CFC0 /* BudgetWindowController.swift */; };
 		D03714AD21DC07F20093CFC0 /* budget-icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D03714AC21DC07F20093CFC0 /* budget-icon.icns */; };
@@ -105,12 +105,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		3BDA5CAD28A8660400E739E0 /* Copy DTD files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = dtd;
+			dstSubfolderSpec = 7;
+			files = (
+				3BDA5CAA28A8622B00E739E0 /* ofx160.dtd in Copy DTD files */,
+				3BDA5CAB28A8622B00E739E0 /* ofc.dtd in Copy DTD files */,
+				3BDA5CAC28A8622B00E739E0 /* opensp.dcl in Copy DTD files */,
+				3BDA5CA928A8622B00E739E0 /* ofx201.dtd in Copy DTD files */,
+			);
+			name = "Copy DTD files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D013887F22C90E05005FA1D8 /* Embed Libraries */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3BF97D6228A852DB00729F9D /* libosp.4.0.0.dylib in Embed Libraries */,
 				D013887D22C90E05005FA1D8 /* libofx.7.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
@@ -134,6 +149,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3BDA5CA528A8622B00E739E0 /* ofx201.dtd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ofx201.dtd; sourceTree = "<group>"; };
+		3BDA5CA628A8622B00E739E0 /* ofx160.dtd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ofx160.dtd; sourceTree = "<group>"; };
+		3BDA5CA728A8622B00E739E0 /* ofc.dtd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ofc.dtd; sourceTree = "<group>"; };
+		3BDA5CA828A8622B00E739E0 /* opensp.dcl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = opensp.dcl; sourceTree = "<group>"; };
 		65D8641886E2129C92915A78 /* Pods_YDNYNAB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YDNYNAB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30E68D14AC51E317BFB6F54 /* Pods-YDNYNAB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YDNYNAB.release.xcconfig"; path = "Target Support Files/Pods-YDNYNAB/Pods-YDNYNAB.release.xcconfig"; sourceTree = "<group>"; };
 		D013887922C90DF9005FA1D8 /* libosp.4.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libosp.4.0.0.dylib; path = "libofx-ObjC/libosp.4.0.0.dylib"; sourceTree = "<group>"; };
@@ -149,14 +168,6 @@
 		D014C53821EA811600B8D33D /* PayeeSettingsSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayeeSettingsSelectorViewController.swift; sourceTree = "<group>"; };
 		D014C53921EA811600B8D33D /* PayeeSettingsEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayeeSettingsEditorViewController.swift; sourceTree = "<group>"; };
 		D014C53C21EA8F6400B8D33D /* YDNTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YDNTableCellView.swift; sourceTree = "<group>"; };
-		D03570AC23A6BBF2001D660E /* YDNYNAB-UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "YDNYNAB-UIKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D03570AE23A6BBF2001D660E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D03570B023A6BBF2001D660E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D03570B223A6BBF2001D660E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		D03570B423A6BBF4001D660E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D03570B723A6BBF4001D660E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D03570BA23A6BBF4001D660E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D03570BC23A6BBF4001D660E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D03714A821DBDBFA0093CFC0 /* BudgetPackageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetPackageWrapper.swift; sourceTree = "<group>"; };
 		D03714AA21DBE1DC0093CFC0 /* BudgetWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetWindowController.swift; sourceTree = "<group>"; };
 		D03714AC21DC07F20093CFC0 /* budget-icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "budget-icon.icns"; sourceTree = "<group>"; };
@@ -235,13 +246,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D03570A923A6BBF2001D660E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D0510573213B5C3F008133B5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -249,6 +253,7 @@
 				D013888022C90F8C005FA1D8 /* libofx.7.dylib in Frameworks */,
 				D03E98D021E01A9700FF5C12 /* libiconv.tbd in Frameworks */,
 				D03E98AA21DFCCF800FF5C12 /* libofx-ObjC.a in Frameworks */,
+				3BF97D6128A8529500729F9D /* libosp.4.0.0.dylib in Frameworks */,
 				716FB20B686554338A6BCD4B /* Pods_YDNYNAB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,6 +268,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3BDA5CA428A8622B00E739E0 /* dtd */ = {
+			isa = PBXGroup;
+			children = (
+				3BDA5CA528A8622B00E739E0 /* ofx201.dtd */,
+				3BDA5CA628A8622B00E739E0 /* ofx160.dtd */,
+				3BDA5CA728A8622B00E739E0 /* ofc.dtd */,
+				3BDA5CA828A8622B00E739E0 /* opensp.dcl */,
+			);
+			path = dtd;
+			sourceTree = "<group>";
+		};
 		6D497F3165AF91A06EBC673B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,28 +325,6 @@
 			path = "Payee Settings";
 			sourceTree = "<group>";
 		};
-		D03570AD23A6BBF2001D660E /* YDNYNAB-UIKit */ = {
-			isa = PBXGroup;
-			children = (
-				D03570AE23A6BBF2001D660E /* AppDelegate.swift */,
-				D03570B023A6BBF2001D660E /* SceneDelegate.swift */,
-				D03570B223A6BBF2001D660E /* ContentView.swift */,
-				D03570B423A6BBF4001D660E /* Assets.xcassets */,
-				D03570B923A6BBF4001D660E /* LaunchScreen.storyboard */,
-				D03570BC23A6BBF4001D660E /* Info.plist */,
-				D03570B623A6BBF4001D660E /* Preview Content */,
-			);
-			path = "YDNYNAB-UIKit";
-			sourceTree = "<group>";
-		};
-		D03570B623A6BBF4001D660E /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				D03570B723A6BBF4001D660E /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
 		D03714AE21DD64C20093CFC0 /* OFX Importer */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,7 +362,6 @@
 			children = (
 				D0510578213B5C3F008133B5 /* YDNYNAB */,
 				D07FF53E21DFC76300E531E1 /* libofx-ObjC */,
-				D03570AD23A6BBF2001D660E /* YDNYNAB-UIKit */,
 				D0510577213B5C3F008133B5 /* Products */,
 				6D497F3165AF91A06EBC673B /* Pods */,
 				945AE8E97AEF5D9F71B638B8 /* Frameworks */,
@@ -380,7 +373,6 @@
 			children = (
 				D0510576213B5C3F008133B5 /* YDNYNAB.app */,
 				D0A3F1BF21DFCAC4001B24AA /* libofx-ObjC.a */,
-				D03570AC23A6BBF2001D660E /* YDNYNAB-UIKit.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -426,6 +418,7 @@
 		D07FF53E21DFC76300E531E1 /* libofx-ObjC */ = {
 			isa = PBXGroup;
 			children = (
+				3BDA5CA428A8622B00E739E0 /* dtd */,
 				D013888322C922E9005FA1D8 /* libofx */,
 				D03E98BF21DFF0FD00FF5C12 /* src */,
 				D03E98BA21DFEB2900FF5C12 /* libofx-ObjC.h */,
@@ -593,23 +586,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D03570AB23A6BBF2001D660E /* YDNYNAB-UIKit */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D03570BD23A6BBF4001D660E /* Build configuration list for PBXNativeTarget "YDNYNAB-UIKit" */;
-			buildPhases = (
-				D03570A823A6BBF2001D660E /* Sources */,
-				D03570A923A6BBF2001D660E /* Frameworks */,
-				D03570AA23A6BBF2001D660E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "YDNYNAB-UIKit";
-			productName = "YDNYNAB-UIKit";
-			productReference = D03570AC23A6BBF2001D660E /* YDNYNAB-UIKit.app */;
-			productType = "com.apple.product-type.application";
-		};
 		D0510575213B5C3F008133B5 /* YDNYNAB */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0510584213B5C40008133B5 /* Build configuration list for PBXNativeTarget "YDNYNAB" */;
@@ -618,6 +594,7 @@
 				D0510572213B5C3F008133B5 /* Sources */,
 				D0510573213B5C3F008133B5 /* Frameworks */,
 				D0510574213B5C3F008133B5 /* Resources */,
+				3BDA5CAD28A8660400E739E0 /* Copy DTD files */,
 				D013887F22C90E05005FA1D8 /* Embed Libraries */,
 				D013888222C9124C005FA1D8 /* Fix load paths of libofx dylibs */,
 				35973557E9695A808D81C651 /* [CP] Embed Pods Frameworks */,
@@ -660,9 +637,6 @@
 				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = "Justin Hill";
 				TargetAttributes = {
-					D03570AB23A6BBF2001D660E = {
-						CreatedOnToolsVersion = 11.3;
-					};
 					D0510575213B5C3F008133B5 = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1020;
@@ -694,22 +668,11 @@
 			targets = (
 				D0510575213B5C3F008133B5 /* YDNYNAB */,
 				D0A3F1BE21DFCAC4001B24AA /* ofx-ObjC */,
-				D03570AB23A6BBF2001D660E /* YDNYNAB-UIKit */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D03570AA23A6BBF2001D660E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D03570BB23A6BBF4001D660E /* LaunchScreen.storyboard in Resources */,
-				D03570B823A6BBF4001D660E /* Preview Assets.xcassets in Resources */,
-				D03570B523A6BBF4001D660E /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D0510574213B5C3F008133B5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -778,21 +741,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "install_name_tool -change /usr/local/Cellar/open-sp/1.5.2/lib/libosp.4.dylib @rpath/libosp.4.0.0.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\ninstall_name_tool -change /usr/local/opt/libofx/lib/libofx.7.dylib @rpath/libofx.7.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\n";
+			shellScript = "install_name_tool -change /usr/local/Cellar/open-sp/1.5.2/lib/libosp.4.dylib @rpath/libosp.4.0.0.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\ninstall_name_tool -change /usr/local/lib/libofx.7.dylib @rpath/libofx.7.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D03570A823A6BBF2001D660E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D03570AF23A6BBF2001D660E /* AppDelegate.swift in Sources */,
-				D03570B123A6BBF2001D660E /* SceneDelegate.swift in Sources */,
-				D03570B323A6BBF2001D660E /* ContentView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D0510572213B5C3F008133B5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -880,65 +833,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		D03570B923A6BBF4001D660E /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D03570BA23A6BBF4001D660E /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		D03570BE23A6BBF4001D660E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"YDNYNAB-UIKit/Preview Content\"";
-				DEVELOPMENT_TEAM = N3MXL5AYEW;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "YDNYNAB-UIKit/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.justinhill.YDNYNAB-UIKit";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		D03570BF23A6BBF4001D660E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"YDNYNAB-UIKit/Preview Content\"";
-				DEVELOPMENT_TEAM = N3MXL5AYEW;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "YDNYNAB-UIKit/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.justinhill.YDNYNAB-UIKit";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		D0510582213B5C40008133B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -991,7 +886,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1048,7 +943,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -1078,7 +973,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "${CONFIGURATION_BUILD_DIR}";
+				LIBRARY_SEARCH_PATHS = (
+					"${CONFIGURATION_BUILD_DIR}",
+					"$(PROJECT_DIR)/libofx-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinhill.YDNYNAB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1106,7 +1004,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "${CONFIGURATION_BUILD_DIR}";
+				LIBRARY_SEARCH_PATHS = (
+					"${CONFIGURATION_BUILD_DIR}",
+					"$(PROJECT_DIR)/libofx-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinhill.YDNYNAB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1171,15 +1072,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D03570BD23A6BBF4001D660E /* Build configuration list for PBXNativeTarget "YDNYNAB-UIKit" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D03570BE23A6BBF4001D660E /* Debug */,
-				D03570BF23A6BBF4001D660E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		D0510571213B5C3F008133B5 /* Build configuration list for PBXProject "YDNYNAB" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

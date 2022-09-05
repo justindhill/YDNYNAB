@@ -1,5 +1,5 @@
 target 'YDNYNAB' do
-    platform :macos, "12.0"
+    platform :macos, "12.3"
     use_frameworks!
     inhibit_all_warnings!
 
